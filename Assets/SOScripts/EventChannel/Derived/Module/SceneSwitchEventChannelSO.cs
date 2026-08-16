@@ -25,9 +25,9 @@ namespace Game.SO.EventChannel.Context
     }
 }
 
-namespace Game.SO.EventChannel.Derived
+namespace Game.SO.EventChannel
 {
-    [CreateAssetMenu(fileName = "SceneSwitchEvent_Channel", menuName = "Scriptable Objects/EventChannel/SceneSwitchEventChannelSO")]
+    [CreateAssetMenu(fileName = "SceneSwitchEvent_Channel", menuName = "Scriptable Objects/EventChannel/Module/SceneSwitchEventChannelSO")]
     public class SceneSwitchEventChannelSO : EventChannelSO<SceneSwitchEventContext>
     {
 

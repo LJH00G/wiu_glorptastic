@@ -1,6 +1,5 @@
 using Game.SO.EventChannel.Context;
-using Game.SO.EventChannel.Derived;
-using Game.SO.EventChannel.Derived.Basic;
+using Game.SO.EventChannel;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -13,7 +12,7 @@ public class SceneSwitchController : MonoBehaviour
     [SerializeField] DelayedCallbackEventChannelSO delayedCallbackEventChannel;
     [SerializeField] PlayMusicEventChannelSO playMusicEventChannel;
 
-    void HandleSceneSwitchEvent(SceneSwitchEventContext context)
+    public void SwitchScene(SceneSwitchEventContext context)
     {
         Time.timeScale = 0f;
 
@@ -45,25 +44,13 @@ public class SceneSwitchController : MonoBehaviour
 
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void OnEnable()
     {
-        sceneSwitchEventChannel.Subscribe(HandleSceneSwitchEvent);
+        sceneSwitchEventChannel.Subscribe(SwitchScene);
     }
 
     private void OnDisable()
     {
-        sceneSwitchEventChannel.Unsubscribe(HandleSceneSwitchEvent);
+        sceneSwitchEventChannel.Unsubscribe(SwitchScene);
     }
 }

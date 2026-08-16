@@ -25,9 +25,9 @@ namespace Game.SO.EventChannel.Context
     }
 }
 
-namespace Game.SO.EventChannel.Derived
+namespace Game.SO.EventChannel
 {
-    [CreateAssetMenu(fileName = "PlaySFXEvent_Channel", menuName = "Scriptable Objects/EventChannel/PlaySFXEventChannelSO")]
+    [CreateAssetMenu(fileName = "PlaySFXEvent_Channel", menuName = "Scriptable Objects/EventChannel/Module/PlaySFXEventChannelSO")]
     public class PlaySFXEventChannelSO : EventChannelSO<PlaySFXEventContext>
     {
 

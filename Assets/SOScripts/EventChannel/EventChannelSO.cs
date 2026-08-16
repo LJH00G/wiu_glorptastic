@@ -21,30 +21,4 @@ namespace Game.SO.EventChannel
         public bool Lock { get; set; } = false;
     }
 
-    public abstract class StructReturnChannelSO<Return, T> : ScriptableObject
-        where Return : struct
-    {
-        Func<T, Return> listener = null;
-        public void Subscribe(Func<T, Return> method) => listener = method;
-        public Return? Raise(T args) { if (!Lock) return listener?.Invoke(args); return null; }
-        public bool Lock { get; set; } = false;
-    }
-
-    public abstract class StructReturnChannelSO<Return> : ScriptableObject
-        where Return : struct
-    {
-        Func<Return> listener = null;
-        public void Subscribe(Func<Return> method) => listener = method;
-        public Return? Raise() { if (!Lock) return listener?.Invoke(); return null; }
-        public bool Lock { get; set; } = false;
-    }
-
-    public abstract class ClassReturnChannelSO<Return> : ScriptableObject
-        where Return : class
-    {
-        Func<Return> listener = null;
-        public void Subscribe(Func<Return> method) => listener = method;
-        public Return Raise() { if (!Lock) return listener?.Invoke(); return null; }
-        public bool Lock { get; set; } = false;
-    }
 }

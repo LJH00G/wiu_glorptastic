@@ -1,8 +1,9 @@
 using Game.SO.EventChannel.Context;
-using Game.SO.EventChannel.Derived;
+using Game.SO.EventChannel;
 
 using UnityEngine;
 
+[RequireComponent(typeof(AudioSource))]
 public class SFXPlayer : MonoBehaviour
 {
     [Header("Event Listening Channel")]
@@ -27,16 +28,11 @@ public class SFXPlayer : MonoBehaviour
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    void Awake()
     {
         SFXSource = GetComponent<AudioSource>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //SFXSource.outputAudioMixerGroup;
-    }
 
     private void OnEnable()
     {

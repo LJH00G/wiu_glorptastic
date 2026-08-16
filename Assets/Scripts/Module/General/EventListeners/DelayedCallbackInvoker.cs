@@ -1,9 +1,10 @@
 
 using Game.SO.EventChannel.Context;
-using Game.SO.EventChannel.Derived;
+using Game.SO.EventChannel;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.LightTransport;
 
 public class DelayedCallbackInvoker : MonoBehaviour
 {
@@ -15,11 +16,13 @@ public class DelayedCallbackInvoker : MonoBehaviour
     {
         public Action method;
         public float timer;
+        public bool dtScaledOrUnscaled;
 
-        public DelayedCallback(Action method, float delay)
+        public DelayedCallback(Action method, float delay, bool dtScaledOrUnscaled)
         {
             this.method = method;
             timer = delay;
+            this.dtScaledOrUnscaled = dtScaledOrUnscaled;
         }
     }
 
@@ -30,7 +33,7 @@ public class DelayedCallbackInvoker : MonoBehaviour
     void HandleDelayedCallbackEvent(DelayedCallbackEventContext context)
     {
         if (context.addOrRemove)
-            InvokeDelayed(context.method, context.delay);
+            InvokeDelayed(context.method, context.delay, context.dtScaledOrUnscaled);
         else
             Withdraw(context.method);
     }
@@ -45,13 +48,13 @@ public class DelayedCallbackInvoker : MonoBehaviour
     /// );
     /// </code>
     /// </summary>
-    public void InvokeDelayed(Action method, float delay)
+    public void InvokeDelayed(Action method, float delay, bool dtScaledOrUnscaled = true)
     {
         if (!locked)
-            delayedCallbacks.Add(new DelayedCallback(method, delay));
+            delayedCallbacks.Add(new DelayedCallback(method, delay, dtScaledOrUnscaled));
         else
             iterationBuffer.Add(
-                () => delayedCallbacks.Add(new DelayedCallback(method, delay))
+                () => delayedCallbacks.Add(new DelayedCallback(method, delay, dtScaledOrUnscaled))
                 );
     }
 
@@ -74,29 +77,36 @@ public class DelayedCallbackInvoker : MonoBehaviour
 
     void Update()
     {
-        float dt = Time.unscaledDeltaTime;
+        float dt = Time.deltaTime;
+        float unscaledDT = Time.unscaledDeltaTime;
 
         locked = true;
-        try
+        foreach (var delayedCallback in delayedCallbacks)
         {
-            foreach (var delayedCallback in delayedCallbacks)
-            {
+            if (delayedCallback.dtScaledOrUnscaled)
                 delayedCallback.timer -= dt;
+            else
+                delayedCallback.timer -= unscaledDT;
 
+            try
+            {
                 if (delayedCallback.timer <= 0)
                     delayedCallback.method?.Invoke();
             }
+            catch (Exception e)
+            {
+                Debug.LogException(e);
+            }
+
         }
-        finally { locked = false; }
+        locked = false;
 
         delayedCallbacks.RemoveAll(
             delayedCallback => delayedCallback.timer <= 0
-            );
+        );
 
         foreach (var buffer in iterationBuffer)
-        {
             buffer.Invoke();
-        }
         iterationBuffer.Clear();
 
     }

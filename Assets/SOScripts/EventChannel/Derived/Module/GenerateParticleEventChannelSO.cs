@@ -31,9 +31,9 @@ namespace Game.SO.EventChannel.Context
     }
 }
 
-namespace Game.SO.EventChannel.Derived
+namespace Game.SO.EventChannel
 {
-    [CreateAssetMenu(fileName = "GenerateParticleEvent_Channel", menuName = "Scriptable Objects/EventChannel/GenerateParticleEventChannelSO")]
+    [CreateAssetMenu(fileName = "GenerateParticleEvent_Channel", menuName = "Scriptable Objects/EventChannel/Module/GenerateParticleEventChannelSO")]
     public class GenerateParticleEventChannelSO : EventChannelSO<GenerateParticleEventContext>
     {
         

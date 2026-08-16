@@ -1,6 +1,6 @@
 using Game;
 using Game.SO.EventChannel.Context;
-using Game.SO.EventChannel.Derived;
+using Game.SO.EventChannel;
 
 using UnityEngine;
 

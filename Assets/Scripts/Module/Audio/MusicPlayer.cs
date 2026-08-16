@@ -1,17 +1,25 @@
 using Game.SO.EventChannel.Context;
-using Game.SO.EventChannel.Derived;
+using Game.SO.EventChannel;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using Utility.Math;
 
 public class MusicPlayer : MonoBehaviour
 {
+
     [Serializable]
     public struct AudioSourceInfo
     {
+        /// <summary>
+        /// this field must always be filled
+        /// </summary>
         [SerializeField] public AudioSource source;
         [SerializeField] public bool allowSound, fade;
-        [SerializeField] public float fadeTime, fadeTime_inv, fadeTimer;
+        [SerializeField] public float fadeTime;
+        [SerializeField, DisplayOnly] public float fadeTime_inv;
+        [SerializeField] public float fadeTimer;
 
         public AudioSourceInfo(AudioSource source)
         {
@@ -22,26 +30,52 @@ public class MusicPlayer : MonoBehaviour
 
         public void StopAndClear()
         {
-            if (source)
-                source.Pause();
-
+            source.Stop();
             source.clip = null;
+
             fade = allowSound = false;
             fadeTime = fadeTime_inv = fadeTimer = 0;
         }
 
+        /// <param name="forceSetVolume">whether the volume is forcefully set as 0 or 1 based on fade direction</param>
         public void SetFade(float time, bool fadeInOrOut, bool forceSetVolume)
         {
-            fade = true;
+            if (time <= 0)
+                return;
+
             allowSound = fadeInOrOut;
+
+            if (forceSetVolume) {
+                source.volume = allowSound ? 0 : 1;
+                fadeTimer = allowSound ? 0 : time;
+            }
+            else
+            {
+                if (fade)
+                    fadeTimer = fadeTimer * fadeTime_inv * time;
+                else
+                    fadeTimer = allowSound ? 0 : time;
+            }
+
             fadeTime = time;
             fadeTime_inv = 1 / fadeTime;
 
-            Debug.Log($"forceSetVolume: {forceSetVolume}");
-            if (forceSetVolume)
-            {
-                source.volume = allowSound ? 0 : 1;
-            }
+            fade = true;
+
+            if (allowSound)
+                source.Play();
+        }
+
+        public void Play()
+        {
+            fade = false;
+            allowSound = true;
+            fadeTimer = 0;
+            fadeTime = 0;
+            fadeTime_inv = 0;
+            source.volume = 1;
+
+            source.Play();
         }
 
         public bool HasFaded()
@@ -62,35 +96,38 @@ public class MusicPlayer : MonoBehaviour
     [Header("Music")]
     [SerializeField] AudioSourceInfo[] sourceInfos;
 
-    void HandlePlayMusicEvent(PlayMusicEventContext context)
+    uint currentCallbackID = 0;
+
+    public void PlayMusicWithContext(PlayMusicEventContext context)
     {
         AudioSourceInfo sourceInfoWithMusic = new(null), freeSourceInfo = new(null);
-        int? sourceInfoWithMusic_index = null, freeSourceInfo_index = null;
+        int sourceInfoWithMusic_index = -1, freeSourceInfo_index = -1;
 
         for (int i = 0; i < sourceInfos.Length; i++)
         {
             var sourceInfo = sourceInfos[i];
+            if (!sourceInfo.source)
+                continue;
 
-            if (context.music)
+            if (context.music) // set sourceInfoWithMusic and freeSourceInfo
             {
-                if (!sourceInfoWithMusic_index.HasValue && sourceInfo.source.clip == context.music)
+                if (sourceInfoWithMusic_index == -1 && sourceInfo.source.clip == context.music)
                 {
                     sourceInfoWithMusic_index = i;
                     sourceInfoWithMusic = sourceInfo;
                 }
-                else if (!freeSourceInfo_index.HasValue && !sourceInfo.source.clip)
+                else if (freeSourceInfo_index == -1 && !sourceInfo.source.clip)
                 {
                     freeSourceInfo_index = i;
                     freeSourceInfo = sourceInfo;
                 }
             }
 
-            if (sourceInfo.source.clip && sourceInfo.source.clip != context.music)
+            if (sourceInfo.source.clip && sourceInfo.source.clip != context.music) // turn off music that are already playing
             {
                 if (context.turnOffOther)
                 {
                     sourceInfo.StopAndClear();
-
                 }
                 else if (context.fadeOffOther)
                 {
@@ -101,74 +138,86 @@ public class MusicPlayer : MonoBehaviour
             }
         }
 
-        if (context.music)
+
+        if (!context.music)
         {
-            if (context.playOrPause) // play music
-            {
-
-                void TestPlayMusic()
-                {
-                    ref AudioSourceInfo usingSourceInfo = ref sourceInfoWithMusic;
-                    if (!usingSourceInfo.source)
-                        usingSourceInfo = ref freeSourceInfo;
-
-                    if (context.restartIfPlay || !usingSourceInfo.source.isPlaying)
-                    {
-                        usingSourceInfo.source.clip = context.music;
-                        usingSourceInfo.source.Play();
-
-                        usingSourceInfo.SetFade(context.fadeThis_Time, true, context.fadeForceSetVolume);
-
-                        if (sourceInfoWithMusic_index.HasValue)
-                            sourceInfos[sourceInfoWithMusic_index.Value] = sourceInfoWithMusic;
-                        if (freeSourceInfo_index.HasValue)
-                            sourceInfos[freeSourceInfo_index.Value] = freeSourceInfo;
-                    }
-                }
-
-
-                if (sourceInfoWithMusic.source || freeSourceInfo_index.HasValue)
-                {
-                    if (context.delayToPlay >= 0)
-                        delayedCallbackEventChannel.Raise(new DelayedCallbackEventContext(
-                            TestPlayMusic,
-                            context.delayToPlay
-                            ));
-                    else
-                        TestPlayMusic();
-                }
-
-            }
-            else // pause music
-            {
-
-                if (sourceInfoWithMusic.source)
-                {
-                    if (context.fadeThis)
-                    {
-                        sourceInfoWithMusic.SetFade(context.fadeThis_Time, false, context.fadeForceSetVolume);
-                    }
-                    else
-                    {
-                        sourceInfoWithMusic.StopAndClear();
-                    }
-
-                    sourceInfos[sourceInfoWithMusic_index.Value] = sourceInfoWithMusic;
-                }
-            }
+            Debug.Log($"MusicPlayer.HandlePlayMusicEvent() | handled {context}");
+            return;
         }
+
+
+        currentCallbackID++;
+        uint thisCallbackID = currentCallbackID;
+
+        if (context.playOrStop) // play music
+        {
+
+            if (sourceInfoWithMusic_index == -1 && freeSourceInfo_index == -1)
+            {
+                Debug.Log($"MusicPlayer.HandlePlayMusicEvent() | handled {context}, tried to play but no audio source can be used / is playing the same music");
+                return;
+            }
+
+            if (context.delayToPlay > 0)
+                delayedCallbackEventChannel.Raise(new DelayedCallbackEventContext(
+                    TestPlayMusic,
+                    context.delayToPlay
+                    ));
+            else
+                TestPlayMusic();
+
+            Debug.Log($"MusicPlayer.HandlePlayMusicEvent() | handled {context}");
+            return;
+
+
+            void TestPlayMusic()
+            {
+                // ignore if another music callback is scheduled
+                if (thisCallbackID != currentCallbackID)
+                    return;
+
+                // the if statement at 114 made sure either sourceInfoWithMusic exist, or freeSourceInfo exist
+                ref AudioSourceInfo usingSourceInfo = ref (sourceInfoWithMusic_index != -1 ?
+                    ref sourceInfoWithMusic : ref freeSourceInfo);
+
+
+                if (usingSourceInfo.source.isPlaying && !context.restartIfPlay)
+                    return;
+
+
+                usingSourceInfo.source.clip = context.music;
+
+                if (context.fadeThis)
+                    usingSourceInfo.SetFade(context.fadeThis_Time, true, context.fadeForceSetVolume);
+                else
+                    usingSourceInfo.Play();
+
+                if (sourceInfoWithMusic_index != -1)
+                    sourceInfos[sourceInfoWithMusic_index] = sourceInfoWithMusic;
+                if (freeSourceInfo_index != -1)
+                    sourceInfos[freeSourceInfo_index] = freeSourceInfo;
+
+            }
+
+        }
+        else if (!sourceInfoWithMusic.source)
+        {
+            Debug.Log($"MusicPlayer.HandlePlayMusicEvent() | handled {context}, tried to pause but there isnt any audio source currently playing the same music");
+            return;
+        }
+
+        // pause music
+        if (context.fadeThis)
+            sourceInfoWithMusic.SetFade(context.fadeThis_Time, false, context.fadeForceSetVolume);
+        else
+            sourceInfoWithMusic.StopAndClear();
+
+        sourceInfos[sourceInfoWithMusic_index] = sourceInfoWithMusic;
 
         Debug.Log($"MusicPlayer.HandlePlayMusicEvent() | handled {context}");
     }
 
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         float dt = Time.unscaledDeltaTime;
@@ -177,19 +226,25 @@ public class MusicPlayer : MonoBehaviour
         {
             var sourceInfo = sourceInfos[i];
 
-            if (sourceInfo.fadeTime == 0)
+            if (!sourceInfo.fade)
                 continue;
-            if (sourceInfo.HasFaded()) {
+
+            if (sourceInfo.allowSound)
+                sourceInfo.fadeTimer += dt;
+            else
+                sourceInfo.fadeTimer -= dt;
+
+            if (sourceInfo.HasFaded())
+            {
                 if (!sourceInfo.allowSound)
                     sourceInfo.StopAndClear();
+                else
+                    sourceInfo.fade = false;
+
+                sourceInfo.source.volume = sourceInfo.allowSound ? 1 : 0;
             }
             else
             {
-                if (sourceInfo.allowSound)
-                    sourceInfo.fadeTimer += dt;
-                else
-                    sourceInfo.fadeTimer -= dt;
-
                 sourceInfo.source.volume = Mathf.Lerp(
                     0,
                     1,
@@ -207,11 +262,56 @@ public class MusicPlayer : MonoBehaviour
 
     private void OnEnable()
     {
-        playMusicChannel.Subscribe(HandlePlayMusicEvent);
+        playMusicChannel.Subscribe(PlayMusicWithContext);
     }
 
     private void OnDisable()
     {
-        playMusicChannel.Unsubscribe(HandlePlayMusicEvent);
+        playMusicChannel.Unsubscribe(PlayMusicWithContext);
     }
+
+
+#if UNITY_EDITOR
+
+    private void OnValidate()
+    {
+        HashSet<AudioSource> usedAudioSources = new();
+        AudioMixerGroup usingAudioMixerGroup = null;
+
+        for (int i = 0; i < sourceInfos.Length; ++i)
+        {
+            var sourceInfo = sourceInfos[i];
+            if (!sourceInfo.source)
+            {
+                Debug.LogError($"MusicPlayer | sourceInfos[{i}] has no AudioSource assigned", this);
+                continue;
+            }
+
+            if (usedAudioSources.Contains(sourceInfo.source))
+            {
+                Debug.LogError($"MusicPlayer | sourceInfos[{i}].source is repeated with one of the previous sources", this);
+                continue;
+            }
+
+            usedAudioSources.Add(sourceInfo.source);
+            sourceInfo.source.playOnAwake = false;
+            sourceInfo.source.loop = true;
+
+
+            if (!sourceInfo.source.outputAudioMixerGroup)
+            {
+                Debug.LogError($"MusicPlayer | sourceInfos[{i}].source has no output assigned", this);
+                continue;
+            }
+
+            if (usingAudioMixerGroup != null && usingAudioMixerGroup != sourceInfo.source.outputAudioMixerGroup)
+            {
+                Debug.LogError($"MusicPlayer | sourceInfos[{i}].source.outputAudioMixerGroup must use the same output as the previous sources", this);
+                continue;
+            }
+
+            usingAudioMixerGroup = sourceInfo.source.outputAudioMixerGroup;
+        }
+    }
+#endif
 }

@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace Game.SO.ActionFn
 {
-    public abstract class ActionSO<P> : ScriptableObject
+    public abstract class ActionSO<T> : ScriptableObject
     {
-        public abstract void Invoke(P param);
+        public abstract void Invoke(T param);
     }
     public abstract class ActionSO : ScriptableObject
     {
