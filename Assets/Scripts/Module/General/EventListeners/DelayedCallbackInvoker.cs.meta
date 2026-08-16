@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: 908cb34b6946f744494c5f4fb2fe79fe
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - DelayedCallbackEventChannel: {fileID: 11400000, guid: f657aa2dfb0d6be4c8a6401eda5e217c, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

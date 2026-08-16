@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: ce5e06a2e66b4cb4996be6cdf131e27f
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - playSFXEventChannel: {fileID: 11400000, guid: 692bad48a20fddf448c41da6c0212144, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

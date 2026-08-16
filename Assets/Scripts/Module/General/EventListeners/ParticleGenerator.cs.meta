@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: 20d868b1df81d3044874f03a5644f39b
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - GenerateParticleEventChannel: {fileID: 11400000, guid: 079ef489a58d7934cbb8c3b5b5f132be, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
