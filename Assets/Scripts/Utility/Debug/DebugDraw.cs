@@ -4,7 +4,7 @@ using UnityEngine;
 public class DebugDraw
 {
 
-    public enum CIRCLE_SIDES : int {
+    public enum SIDES : int {
         S8 = 8,
         S12 = 12,
         S16 = 16,
@@ -12,16 +12,16 @@ public class DebugDraw
         S32 = 32
     }
 
-    static float GetAngleDelta(CIRCLE_SIDES sides)
+    static float GetAngleDelta(SIDES sides)
     {
         switch (sides)
         {
             default:
-            case CIRCLE_SIDES.S8: return 45f;
-            case CIRCLE_SIDES.S12: return 30f;
-            case CIRCLE_SIDES.S16: return 22.5f;
-            case CIRCLE_SIDES.S24: return 15f;
-            case CIRCLE_SIDES.S32: return 11.25f;
+            case SIDES.S8: return 45f;
+            case SIDES.S12: return 30f;
+            case SIDES.S16: return 22.5f;
+            case SIDES.S24: return 15f;
+            case SIDES.S32: return 11.25f;
         }
     }
 
@@ -48,7 +48,7 @@ public class DebugDraw
     }
 
 
-    public static void Circle(Vector2 center, float radius, CIRCLE_SIDES sides = CIRCLE_SIDES.S16)
+    static public void Circle(Vector2 center, float radius, SIDES sides = SIDES.S16)
     {
         if (!Enabled)
             return;

@@ -5,8 +5,8 @@ MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - sceneSwitchEventChannel: {fileID: 11400000, guid: d99eee56572e0f540b7dc2913fe66e56, type: 2}
-  - screenBlockerEventChannel: {fileID: 11400000, guid: 09e92440dd095d54384e75b21c35a8a6, type: 2}
   - delayedCallbackEventChannel: {fileID: 11400000, guid: f657aa2dfb0d6be4c8a6401eda5e217c, type: 2}
+  - playMusicEventChannel: {fileID: 11400000, guid: 29bc08d3cdf6f4f44b394bf310f101f0, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
