@@ -1,8 +1,10 @@
-using UnityEngine;
-using UnityEngine.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 namespace Puzzle
 {
@@ -14,13 +16,19 @@ namespace Puzzle
         [SerializeField] private RectTransform trayContainer;
         [SerializeField] private GameObject draggableShapePrefab;
         [SerializeField] private Button submitButton;
+        
 
         private ShapeFitPuzzleData _data;
         private List<DraggableShape> _shapes = new();
-
+        private Canvas canvas;
+        public void Awake()
+        {
+            canvas = GetComponentInParent<Canvas>();
+        }
         public void Load(PuzzleData data)
         {
             _data = data as ShapeFitPuzzleData;
+            
             gridRenderer.RenderGrid(_data.rows, _data.cols, _data.rowRuns, _data.colRuns);
 
             foreach (Transform child in trayContainer)
@@ -34,11 +42,22 @@ namespace Puzzle
             {
                 var obj = Instantiate(draggableShapePrefab, trayContainer);
                 var draggable = obj.GetComponent<DraggableShape>();
-                draggable.Init(shapeDef, gridRenderer, this);
+                draggable.Init(shapeDef, gridRenderer, this, trayContainer);
                 _shapes.Add(draggable);
             }
 
             submitButton.onClick.AddListener(OnSubmit);
+        }
+
+        public Vector2Int ScreenPointToGridCoord(PointerEventData eventData)
+        {
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                gridRenderer.shapeContainer,
+                eventData.position,
+                canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : canvas.worldCamera,
+                out Vector2 localPoint);
+
+            return gridRenderer.LocalPositionToGrid(localPoint);
         }
 
         public bool TryPlace(DraggableShape shape, Vector2Int anchor, int rotation)
@@ -56,14 +75,11 @@ namespace Puzzle
             return PlacementValidator.BuildFilledGrid(placements, _data.availableShapes, _data.rows, _data.cols) ?? new bool[_data.rows, _data.cols]; 
         }
 
-        public void ShowGhostPreview(DraggableShape shape, Vector2 screenPos)
+        public void ShowGhostPreview(DraggableShape shape, PointerEventData eventData)
         {
-            var localPos = gridRenderer.shapeContainer.InverseTransformPoint(screenPos);
-            var anchor = gridRenderer.LocalPositionToGrid(localPos);
+            var anchor = ScreenPointToGridCoord(eventData);
             var offsets = shape.shapeData.Rotated(shape.rotation);
-
-            bool isValid = TryPlace(shape, anchor, shape.rotation); 
-
+            bool isValid = TryPlace(shape, anchor, shape.rotation);
             gridRenderer.ShowGhost(anchor, offsets, isValid);
         }
 

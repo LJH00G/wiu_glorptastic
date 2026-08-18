@@ -1,18 +1,21 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 namespace Puzzle
 {
     [CreateAssetMenu(fileName = "ShapeFitPuzzleData", menuName = "PuzzleData/ShapeFit")]
+
+    
     public class ShapeFitPuzzleData : PuzzleData
     {
         public int rows;
         public int cols;
 
         public List<PolyominoShape> availableShapes = new();
-        public int[][] rowRuns; 
-        public int[][] colRuns;
-
+        public Clue[] rowRuns; 
+        public Clue[] colRuns;
+       
         public bool RequireAllShapesPlaced = true;
 
         public override bool CheckSolution(object attempt)
@@ -42,7 +45,7 @@ namespace Puzzle
                     rowFilled.Add(filled[r, c]);
                 }
                 
-                if (!RunClueChecker.Matches(rowFilled, rowRuns[r]))
+                if (!RunClueChecker.Matches(rowFilled, rowRuns[r].run))
                 {
                     return false;
                 }
@@ -57,7 +60,7 @@ namespace Puzzle
                     colFilled.Add(filled[r, c]);
                 }
                 
-                if (!RunClueChecker.Matches(colFilled, colRuns[c]))
+                if (!RunClueChecker.Matches(colFilled, colRuns[c].run))
                 {
                     return false;
                 }

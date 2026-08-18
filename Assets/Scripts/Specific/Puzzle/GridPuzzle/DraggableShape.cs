@@ -20,15 +20,16 @@ namespace Puzzle
         private ShapeFitPuzzleView _owner;
         private Vector2 _trayPosition;
         private Vector2Int? _placedAnchor;
-        
+        private RectTransform _trayContainer;
 
         private List<GameObject> _cellVisuals = new();
-        public void Init(PolyominoShape data, GridRenderer gridRenderer, ShapeFitPuzzleView owner)
+        public void Init(PolyominoShape data, GridRenderer gridRenderer, ShapeFitPuzzleView owner, RectTransform trayContainer)
         {
             shapeData = data;
             _gridRenderer = gridRenderer;
             _owner = owner;
             _rect = GetComponent<RectTransform>();
+            _trayContainer = trayContainer;
             _trayPosition = _rect.anchoredPosition;
             RenderShapeCells();
         }
@@ -52,22 +53,23 @@ namespace Puzzle
         public void OnDrag(PointerEventData eventData)
         {
             _rect.position = eventData.position;
-            _owner.ShowGhostPreview(this, eventData.position);
+            _owner.ShowGhostPreview(this, eventData);
         }
 
         public void OnEndDrag(PointerEventData eventData)
         {
-            var localPos = _gridRenderer.shapeContainer.InverseTransformPoint(eventData.position);
-            var gridCoord = _gridRenderer.LocalPositionToGrid(localPos);
+            var gridCoord = _owner.ScreenPointToGridCoord(eventData);
 
             if (_owner.TryPlace(this, gridCoord, rotation))
             {
                 _placedAnchor = gridCoord;
+                _rect.SetParent(_gridRenderer.shapeContainer, worldPositionStays: false);
                 _rect.anchoredPosition = _gridRenderer.GridToLocalPosition(gridCoord);
             }
             else
             {
                 _placedAnchor = null;
+                _rect.SetParent(_trayContainer, worldPositionStays: false);
                 _rect.anchoredPosition = _trayPosition;
             }
             _owner.HideGhostPreview();

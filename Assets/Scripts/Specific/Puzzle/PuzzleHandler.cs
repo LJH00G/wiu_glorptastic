@@ -11,7 +11,8 @@ namespace Puzzle
     public enum PuzzleType
     {
         None,
-        Base
+        Base,
+        ShapeFit
     }
 
     public class PuzzleHandler : MonoBehaviour

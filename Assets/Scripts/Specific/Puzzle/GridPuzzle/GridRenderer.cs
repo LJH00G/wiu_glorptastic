@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Puzzle;
 
 namespace Puzzle
 {
@@ -22,7 +23,7 @@ namespace Puzzle
         private List<GameObject> _ghostCells = new();
 
 
-        public void RenderGrid(int rows, int cols, int[][] rowRuns, int[][] colRuns)
+        public void RenderGrid(int rows, int cols, Clue[] rowRuns, Clue[] colRuns)
         {
             foreach (Transform child in gridContainer) Destroy(child.gameObject);
             for (int i = 0; i < rows * cols; i++)
@@ -32,13 +33,15 @@ namespace Puzzle
             RenderClues(colClueContainer, colRuns);
         }
 
-        private void RenderClues(RectTransform container, int[][] runs)
+        private void RenderClues(RectTransform container, Clue[] clues)
         {
+            
+
             foreach (Transform child in container) Destroy(child.gameObject);
-            foreach (var run in runs)
+            foreach (var clue in clues)
             {
-                var label = Instantiate(clueLabelPrefab, container).GetComponent<TMP_Text>();
-                label.text = string.Join(" ", run);
+                var label = Instantiate(clueLabelPrefab, container).GetComponentInChildren<TMP_Text>();
+                label.text = string.Join(" ", clue.run); 
             }
         }
 
