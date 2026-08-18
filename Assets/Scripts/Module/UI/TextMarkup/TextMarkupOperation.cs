@@ -1,11 +1,18 @@
-using Game.SO.Data.Dialogue;
+
 using System.Collections.Generic;
 using UnityEngine;
 using Utility.String;
 
+
 namespace Game.TextMarkup
 {
-    public class TextMarkupChecker
+    public enum TEXT_MARKUP_TYPE : byte
+    {
+        COMMAND,
+        EFFECT
+    }
+
+    public class TextMarkupOperation
     {
         enum VALIDATION_STATE : byte
         {
@@ -17,9 +24,16 @@ namespace Game.TextMarkup
             CHECK_MARKUP_PARAM_PENDING
         }
 
+        public enum CHECK_TYPE : byte
+        {
+            ALL,
+            ONLY_COMMAND,
+            ONLY_EFFECT
+        }
 
+        static public string ErrorMsg { get; private set; }
 
-        static public bool CheckAllMarkup(string textStr, GameObject owner)
+        static public bool CheckMarkup(string textStr, CHECK_TYPE checkType = CHECK_TYPE.ALL)
         {
             VALIDATION_STATE state = VALIDATION_STATE.GENERAL;
             VALIDATION_STATE prevState = state;
@@ -30,10 +44,12 @@ namespace Game.TextMarkup
             string perStateString = "";
 
             bool hasContinue = false;
-            MARKUP_TYPE markupType = MARKUP_TYPE.COMMAND;
+            if (checkType == CHECK_TYPE.ONLY_EFFECT)
+                hasContinue = true;
+            TEXT_MARKUP_TYPE markupType = TEXT_MARKUP_TYPE.COMMAND;
 
             bool checkingMarkup = false;
-            bool isCheckingEndParkup = false;
+            bool isCheckingEndMarkup = false;
             string markupString = "";
 
             string markupName = "";
@@ -43,18 +59,21 @@ namespace Game.TextMarkup
             string markupParamValue = "";
             bool checkingParamValue = false;
 
-            string formatErrorText = "";
+            bool isCheckClosingMarkup = false;
+
+            string errorText = "";
             bool formatError = false;
+            bool checkTypeError = false;
 
 
             foreach (var char_ in textStr)
             {
 
-                if (formatError)
+                if (formatError || checkTypeError)
                 {
-                    formatErrorText += char_;
+                    errorText += char_;
 
-                    if (formatErrorText.Length >= 16) break;
+                    if (errorText.Length >= 16) break;
                     else continue;
                 }
 
@@ -69,25 +88,38 @@ namespace Game.TextMarkup
 
                         if (char_ == '>')
                         {
-                            formatErrorText += char_;
+                            errorText += char_;
                             formatError = true;
                         }
                         if (char_ == '<')
                         {
                             state = VALIDATION_STATE.CHECK_MARKUP_NAME;
                             checkingMarkup = true;
-                            isCheckingEndParkup = false;
+                            isCheckingEndMarkup = false;
                         }
                         break;
 
 
                     case VALIDATION_STATE.CHECK_MARKUP_NAME:
 
-                        formatErrorText += char_;
+                        errorText += char_;
+
+                        if (isCheckClosingMarkup)
+                        {
+                            isCheckClosingMarkup = false;
+
+                            if (char_ != '>')
+                                formatError = true;
+                            else if (!CheckMarkupFormat())
+                                formatError = true;
+
+                            ClearAndSetStateToGeneral();
+                            break;
+                        }
 
                         if (perStateString == "</")
                         {
-                            isCheckingEndParkup = true;
+                            isCheckingEndMarkup = true;
                             break;
                         }
 
@@ -105,9 +137,9 @@ namespace Game.TextMarkup
                             if (!CheckMarkupFormat())
                                 formatError = true;
 
-                            if (markupType == MARKUP_TYPE.EFFECT)
+                            if (markupType == TEXT_MARKUP_TYPE.EFFECT)
                             {
-                                if (!isCheckingEndParkup)
+                                if (!isCheckingEndMarkup)
                                     effectStack.Push(markupName);
                                 else if (effectStack.Count == 0)
                                     formatError = true;
@@ -123,14 +155,9 @@ namespace Game.TextMarkup
                             break;
                         }
 
-                        if (perStateString.Length >= 3 && perStateString[^3..] == "/>")
+                        if (char_ == '/')
                         {
-                            markupName = markupName[..^1];
-
-                            if (!CheckMarkupFormat())
-                                formatError = true;
-
-                            ClearAndSetStateToGeneral();
+                            isCheckClosingMarkup = true;
                             break;
                         }
 
@@ -140,7 +167,7 @@ namespace Game.TextMarkup
 
                     case VALIDATION_STATE.CHECK_MARKUP_PARAM:
 
-                        formatErrorText += char_;
+                        errorText += char_;
 
                         if (char_ == '=')
                         {
@@ -160,7 +187,7 @@ namespace Game.TextMarkup
 
                     case VALIDATION_STATE.CHECK_MARKUP_PARAM_VALUE:
 
-                        formatErrorText += char_;
+                        errorText += char_;
 
                         if (!checkingParamValue)
                         {
@@ -191,6 +218,25 @@ namespace Game.TextMarkup
 
                     case VALIDATION_STATE.CHECK_MARKUP_PARAM_PENDING:
 
+                        if (isCheckClosingMarkup)
+                        {
+                            isCheckClosingMarkup = false;
+
+                            if (char_ != '>')
+                                formatError = true;
+                            else if (!CheckMarkupFormat())
+                                formatError = true;
+
+                            ClearAndSetStateToGeneral();
+                            break;
+                        }
+
+                        if (char_ == '/')
+                        {
+                            isCheckClosingMarkup = true;
+                            break;
+                        }
+
                         if (char_ == ' ')
                         {
                             if (!CheckMarkupFormat())
@@ -205,22 +251,12 @@ namespace Game.TextMarkup
                             if (!CheckMarkupFormat())
                                 formatError = true;
 
-                            if (markupType == MARKUP_TYPE.EFFECT)
+                            if (markupType == TEXT_MARKUP_TYPE.EFFECT)
                                 effectStack.Push(markupName);
                             else
                                 formatError = true;
 
-                            if (isCheckingEndParkup)
-                                formatError = true;
-
-                            ClearAndSetStateToGeneral();
-                            break;
-                        }
-
-                        if (perStateString.Length >= 3 && perStateString[^3..] == "/>")
-                        {
-
-                            if (!CheckMarkupFormat())
+                            if (isCheckingEndMarkup)
                                 formatError = true;
 
                             ClearAndSetStateToGeneral();
@@ -244,22 +280,31 @@ namespace Game.TextMarkup
 
             }
 
-
-            if (state != VALIDATION_STATE.GENERAL)
+            if (checkTypeError)
             {
-                Debug.LogError($"DialogueSO.OnValidate() | Dialogues[{i}] markup contains format error at around \"...{formatErrorText}...\"", this);
+                if (checkType == CHECK_TYPE.ONLY_COMMAND)
+                    ErrorMsg = $"must not contain effect markup, found at around \"...{errorText}...\"";
+                else
+                    ErrorMsg = $"must not contain command markup, found at around \"...{errorText}...\"";
+                return false;
+            }
+
+            if (formatError || state != VALIDATION_STATE.GENERAL)
+            {
+                Debug.Log($"formatError: {formatError}, state is general: {state != VALIDATION_STATE.GENERAL} ");
+                ErrorMsg = $"markup contains format error at around \"...{errorText}...\"";
                 return false;
             }
 
             if (!hasContinue)
             {
-                Debug.LogError($"DialogueSO.OnValidate() | Dialogues[{i}] must contain a <continue/> markup", this);
+                ErrorMsg = "must contain a <continue/> markup";
                 return false;
             }
 
             if (effectStack.Count != 0)
             {
-                Debug.LogError($"DialogueSO.OnValidate() | Dialogues[{i}] must close all effect markups", this);
+                ErrorMsg = "must close all effect markups";
                 return false;
             }
 
@@ -267,7 +312,7 @@ namespace Game.TextMarkup
 
             void ClearAndSetStateToGeneral()
             {
-                markupName = formatErrorText = "";
+                markupName = errorText = "";
                 state = VALIDATION_STATE.GENERAL;
                 usedParams.Clear();
                 checkingMarkup = false;
@@ -275,8 +320,6 @@ namespace Game.TextMarkup
 
             bool CheckMarkupFormat()
             {
-                // check if is command markup
-                markupType = MARKUP_TYPE.COMMAND;
                 switch (markupName)
                 {
                     case "br":
@@ -285,16 +328,17 @@ namespace Game.TextMarkup
                     case "input":
                     case "sfx":
                     case "unmark":
-                        return true;
                     case "continue":
-                        hasContinue = true;
-                        return true;
-                }
+                        markupType = TEXT_MARKUP_TYPE.COMMAND;
 
-                // check if is effect markup
-                markupType = MARKUP_TYPE.EFFECT;
-                switch (markupName)
-                {
+                        if (checkType == CHECK_TYPE.ONLY_EFFECT)
+                            checkTypeError = true;
+
+                        if (markupName == "continue")
+                            hasContinue = true;
+
+                        return true;
+
                     case "speech":
                     case "color":
                     case "offset":
@@ -302,7 +346,13 @@ namespace Game.TextMarkup
                     case "shake":
                     case "oscillate":
                     case "rainbow":
+                        markupType = TEXT_MARKUP_TYPE.EFFECT;
+
+                        if (checkType == CHECK_TYPE.ONLY_COMMAND)
+                            checkTypeError = true;
+
                         return true;
+
                     default:
                         return false;
                 }
@@ -321,7 +371,7 @@ namespace Game.TextMarkup
                         return
                             markupParam == "time" && StringOperation.TryParseFloat(markupParamValue, out _);
                     case "interval":
-                        return markupParam == "value" && StringOperation.TryParseFloat(markupParamValue, out _);
+                        return markupParam == "time" && StringOperation.TryParseFloat(markupParamValue, out _);
                     case "sfx":
                         return markupParam == "name";
                     case "unmark":
@@ -351,7 +401,44 @@ namespace Game.TextMarkup
                             (markupParam == "offset" && StringOperation.TryParseFloat(markupParamValue, out _));
                 }
             }
+        }
+
+
+        static public List<TextMarkupCommand> ProccessMarkup(ref string textStr)
+        {
+            List<TextMarkupCommand> commandList;
+
 
         }
     }
+
+
+
+    /*
+     * markup definition:
+     * 
+     * | command markups
+     * <br/> // new line
+     * <wait time="1"/> // wait for amount of time
+     * <interval time="0.2f"/> // time between printing each character
+     * <continue/> // page break
+     * <input/> // wait for player input to continue
+     * <sfx name="name"/> // play a sfx
+     * <unmark text="</>"/> // whatever between " will not be checked for marking
+     * 
+     * | effect markups
+     * <speech name="name"></speech> // change speech sound
+     * <color value="color" fadeValue="color"></color> // set color, fadeValue sets te bottom vertice color
+     * <offset value="1,1"></offset> // sets the offset (this is technically size multiplier)
+     * <size value="1,1"></size> // sets the size (this is technically size multiplier)
+     * <shake maxNormalTime="1" persistTime="0.1" offsetRange="1,1"></shake> // set shake, maxNormalTime is max time for shake to no appear, persistTime is how long the offset persist, offsetRange is how much away is shaked from original position (as a multiplier)
+     * <oscillate Strength="1,1" offset="1"></oscillate> // set oscillation, Strength is multiplier on respective axis, offset is how much difference between oscillation per character passed
+     * <rainbow speed="1" offset="0.1"></rainbow> // set rainbow effect, speed is how fast it changes color, offset is how much difference between color per character passed (as a percentage)
+     * 
+     * 
+     * note:
+     * markup should be read right after the character before it is printed
+     * 
+     * 
+     */
 }

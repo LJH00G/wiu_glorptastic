@@ -4,10 +4,10 @@ using UnityEngine;
 using System.Collections.Generic;
 
 
-namespace Game.SO.Data.Dialogue
+namespace Game.SO.Data.TextMarkup.Dialogue
 {
 
-    [CreateAssetMenu(fileName = "DialogueAudioPreset_Data", menuName = "Scriptable Objects/Data/Dialogue/DialogueAudioPresetSO")]
+    [CreateAssetMenu(fileName = "DialogueAudioPreset_Data", menuName = "Scriptable Objects/Data/TextMarkup/Dialogue/DialogueAudioPresetSO")]
     public class DialogueAudioPresetSO : ScriptableObject
     {
         [SerializeField] List<DictEntry<string, AudioClip>> dialogueAudioPresets;
