@@ -1,4 +1,6 @@
 
+using Game.SO.Data.TextMarkup;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Utility.String;
@@ -31,7 +33,42 @@ namespace Game.TextMarkup
             ONLY_EFFECT
         }
 
+        [Serializable]
+        public struct IndexedCommand
+        {
+            public int index;
+            public TextMarkupCommand command;
+
+            public IndexedCommand(int index, TextMarkupCommand command)
+            {
+                this.index = index;
+                this.command = command;
+            }
+        }
+
+        [Serializable]
+        public struct IndexedEffect
+        {
+            public int index;
+            public int endIndex;
+            public TextMarkupEffect effect;
+
+            public IndexedEffect(int index, TextMarkupEffect effect)
+            {
+                this.index = index;
+                endIndex = this.index;
+                this.effect = effect;
+            }
+        }
+
+
+
         static public string ErrorMsg { get; private set; }
+
+
+        static public TextMarkupAudioPresetSO SpeechPresets { get; set; }
+        static public TextMarkupAudioPresetSO SFXPresets { get; set; }
+
 
         static public bool CheckMarkup(string textStr, CHECK_TYPE checkType = CHECK_TYPE.ALL)
         {
@@ -393,7 +430,9 @@ namespace Game.TextMarkup
                             (markupParam == "offsetRange" && StringOperation.TryParseVector2(markupParamValue, out _));
                     case "oscillate":
                         return
-                            (markupParam == "strength" && StringOperation.TryParseVector2(markupParamValue, out _)) ||
+                            (markupParam == "frequency" && StringOperation.TryParseVector2(markupParamValue, out _)) ||
+                            (markupParam == "amplitude" && StringOperation.TryParseVector2(markupParamValue, out _)) ||
+                            (markupParam == "oscillateOffset" && StringOperation.TryParseVector2(markupParamValue, out _)) ||
                             (markupParam == "offset" && StringOperation.TryParseFloat(markupParamValue, out _));
                     case "rainbow":
                         return
@@ -404,9 +443,366 @@ namespace Game.TextMarkup
         }
 
 
-        static public List<TextMarkupCommand> ProccessMarkup(ref string textStr)
+        static public void ProccessMarkup(ref string textStr, out List<IndexedCommand> commandList, out List<IndexedEffect> effectList, out List<int> effectPopList)
         {
-            List<TextMarkupCommand> commandList;
+            commandList = new();
+            commandList.Capacity = 8;
+            effectList = new();
+            effectList.Capacity = 8;
+            effectPopList = new();
+            effectPopList.Capacity = 8;
+
+
+            string textStrCopy = textStr;
+            textStr = "";
+            int charatcerIndexOfMarkup = 0;
+
+
+            VALIDATION_STATE state = VALIDATION_STATE.GENERAL;
+            VALIDATION_STATE prevState = state;
+
+            string perStateString = "";
+
+            bool checkingMarkup = false;
+            bool isCheckingEndMarkup = false;
+            string markupString = "";
+
+            string markupName = "";
+
+            string markupParam = "";
+
+            string markupParamValue = "";
+            bool checkingParamValue = false;
+
+            bool isCheckClosingMarkup = false;
+
+
+            foreach (var char_ in textStrCopy)
+            {
+
+                perStateString += char_;
+
+                if (checkingMarkup)
+                    markupString += char_;
+
+                switch (state)
+                {
+                    case VALIDATION_STATE.GENERAL:
+
+                        if (char_ == '<')
+                        {
+                            state = VALIDATION_STATE.CHECK_MARKUP_NAME;
+                            checkingMarkup = true;
+                            isCheckingEndMarkup = false;
+
+                            charatcerIndexOfMarkup  = textStr.Length;
+
+                            break;
+                        }
+                        else
+                            textStr += char_;
+                        
+                        break;
+
+
+                    case VALIDATION_STATE.CHECK_MARKUP_NAME:
+
+                        if (isCheckClosingMarkup)
+                        {
+                            isCheckClosingMarkup = false;
+
+                            ClearAndSetStateToGeneral();
+                            break;
+                        }
+
+                        if (perStateString == "</")
+                        {
+                            isCheckingEndMarkup = true;
+                            break;
+                        }
+
+                        if (char_ == ' ')
+                        {
+                            AddToList(commandList, effectList);
+
+                            state = VALIDATION_STATE.CHECK_MARKUP_PARAM;
+                            break;
+                        }
+
+                        if (char_ == '>')
+                        {
+
+                            if (!isCheckingEndMarkup)
+                                AddToList(commandList, effectList);
+                            else
+                                effectPopList.Add(charatcerIndexOfMarkup );
+
+                            ClearAndSetStateToGeneral();
+                            break;
+                        }
+
+                        if (char_ == '/')
+                        {
+                            isCheckClosingMarkup = true;
+                            break;
+                        }
+
+                        markupName += char_;
+                        break;
+
+
+                    case VALIDATION_STATE.CHECK_MARKUP_PARAM:
+
+
+                        if (char_ == '=')
+                        {
+                            state = VALIDATION_STATE.CHECK_MARKUP_PARAM_VALUE;
+                            break;
+                        }
+
+                        markupParam += char_;
+                        break;
+
+
+                    case VALIDATION_STATE.CHECK_MARKUP_PARAM_VALUE:
+
+                        if (!checkingParamValue)
+                        {
+                            if (perStateString == "=\"")
+                                checkingParamValue = true;
+                            break;
+                        }
+
+                        if (char_ == '"')
+                        {
+                            checkingParamValue = false;
+
+                            SetMarkupValue(commandList, effectList, ref textStr);
+
+                            markupParamValue = "";
+                            markupParam = "";
+                            state = VALIDATION_STATE.CHECK_MARKUP_PARAM_PENDING;
+                            break;
+                        }
+
+                        markupParamValue += char_;
+                        break;
+
+
+                    case VALIDATION_STATE.CHECK_MARKUP_PARAM_PENDING:
+
+                        if (isCheckClosingMarkup)
+                        {
+                            isCheckClosingMarkup = false;
+                            ClearAndSetStateToGeneral();
+                            break;
+                        }
+
+                        if (char_ == '/')
+                        {
+                            isCheckClosingMarkup = true;
+                            break;
+                        }
+
+                        if (char_ == ' ')
+                        {
+                            AddToList(commandList, effectList);
+
+                            state = VALIDATION_STATE.CHECK_MARKUP_PARAM;
+                            break;
+                        }
+
+                        if (char_ == '>')
+                        {
+                            AddToList(commandList, effectList);
+
+                            ClearAndSetStateToGeneral();
+                            break;
+                        }
+
+                        break;
+                }
+
+
+                if (prevState != state)
+                {
+                    prevState = state;
+                    perStateString = "";
+                    perStateString += char_;
+
+                    if (checkingMarkup)
+                        markupString += char_;
+                }
+
+            }
+
+
+            void ClearAndSetStateToGeneral()
+            {
+                markupName = "";
+                state = VALIDATION_STATE.GENERAL;
+                checkingMarkup = false;
+            }
+
+            void AddToList(List<IndexedCommand> commandList, List<IndexedEffect> effectList)
+            {
+                switch (markupName)
+                {
+                    case "br":
+                        commandList.Add(new IndexedCommand(charatcerIndexOfMarkup , new BrTextMarkupCommand()));
+                        return;
+                    case "wait":
+                        commandList.Add(new IndexedCommand(charatcerIndexOfMarkup , new WaitTextMarkupCommand()));
+                        return;
+                    case "interval":
+                        commandList.Add(new IndexedCommand(charatcerIndexOfMarkup , new IntervalTextMarkupCommand()));
+                        return;
+                    case "input":
+                        commandList.Add(new IndexedCommand(charatcerIndexOfMarkup , new InputTextMarkupCommand()));
+                        return;
+                    case "sfx":
+                        commandList.Add(new IndexedCommand(charatcerIndexOfMarkup , new SFXTextMarkupCommand()));
+                        return;
+                    case "unmark":
+                        //commandList.Add(new IndexedCommand(charatcerIndexOfMarkup , new UnmarkTextMarkupCommand()));
+                        return;
+                    case "continue":
+                        commandList.Add(new IndexedCommand(charatcerIndexOfMarkup , new ContinueTextMarkupCommand()));
+                        return;
+
+                    case "speech":
+                        effectList.Add(new IndexedEffect(charatcerIndexOfMarkup , new SpeechTextMarkupEffect()));
+                        return;
+                    case "color":
+                        effectList.Add(new IndexedEffect(charatcerIndexOfMarkup , new ColorTextMarkupEffect()));
+                        return;
+                    case "offset":
+                        effectList.Add(new IndexedEffect(charatcerIndexOfMarkup , new OffsetTextMarkupEffect()));
+                        return;
+                    case "size":
+                        effectList.Add(new IndexedEffect(charatcerIndexOfMarkup , new SizeTextMarkupEffect()));
+                        return;
+                    case "shake":
+                        effectList.Add(new IndexedEffect(charatcerIndexOfMarkup , new ShakeTextMarkupEffect()));
+                        return;
+                    case "oscillate":
+                        effectList.Add(new IndexedEffect(charatcerIndexOfMarkup , new OscillateTextMarkupEffect()));
+                        return;
+                    case "rainbow":
+                        effectList.Add(new IndexedEffect(charatcerIndexOfMarkup , new RainbowTextMarkupEffect()));
+                        return;
+
+                    default:
+                        return;
+                }
+            }
+
+            void SetMarkupValue(List<IndexedCommand> commandList, List<IndexedEffect> effectList, ref string textStr)
+            {
+                var indexedCommand = commandList[^1];
+                var indexedEffect = effectList[^1];
+
+                switch (markupName)
+                {
+                    case "br":
+                    case "continue":
+                    case "input":
+                    default:
+                        break;
+                    case "wait":
+                        if (indexedCommand.command is WaitTextMarkupCommand command_wait)
+                            if (markupParam == "time")
+                                StringOperation.TryParseFloat(markupParamValue, out command_wait.time);
+                        break;
+                    case "interval":
+                        if (indexedCommand.command is IntervalTextMarkupCommand command_interval)
+                            if (markupParam == "time")
+                                StringOperation.TryParseFloat(markupParamValue, out command_interval.time);
+                        break;
+                    case "sfx":
+                        if (indexedCommand.command is SFXTextMarkupCommand command_sfx)
+                            if (markupParam == "name")
+                                command_sfx.sfx = SFXPresets.TextMarkupAudioPresets[markupParamValue];
+                        break;
+                    case "unmark":
+                        if (markupParam == "text")
+                            textStr += markupParamValue;
+                        break;
+
+
+                    case "speech":
+                        if (indexedEffect.effect is SpeechTextMarkupEffect effect_speech)
+                            if (markupParam == "name")
+                                effect_speech.speechSFX = SpeechPresets.TextMarkupAudioPresets[markupParamValue];
+                        break;
+                    case "color":
+                        if (indexedEffect.effect is ColorTextMarkupEffect effect_color)
+                        {
+                            if (markupParam == "value")
+                            {
+                                StringOperation.TryParseHexColor(markupParamValue, out effect_color.color);
+                                effect_color.fadeColor = effect_color.color;
+                            }
+                            else if (markupParam == "fadeValue")
+                                StringOperation.TryParseHexColor(markupParamValue, out effect_color.fadeColor);
+                        }
+                        break;
+                    case "offset":
+                        if (indexedEffect.effect is OffsetTextMarkupEffect effect_offset)
+                            if (markupParam == "value")
+                                StringOperation.TryParseVector2(markupParamValue, out effect_offset.offset);
+                        break;
+                    case "size":
+                        if (indexedEffect.effect is SizeTextMarkupEffect effect_size)
+                            if (markupParam == "value")
+                                StringOperation.TryParseVector2(markupParamValue, out effect_size.size);
+                        break;
+                    case "shake":
+                        if (indexedEffect.effect is ShakeTextMarkupEffect effect_shake)
+                        {
+                            if (markupParam == "maxNormalTime")
+                                StringOperation.TryParseFloat(markupParamValue, out effect_shake.maxNormalTime);
+                            else if (markupParam == "persistTime")
+                                StringOperation.TryParseFloat(markupParamValue, out effect_shake.persistTime);
+                            else if (markupParam == "offsetRange")
+                                StringOperation.TryParseVector2(markupParamValue, out effect_shake.offsetRange);
+                        }
+                        break;
+                    case "oscillate":
+                        if (indexedEffect.effect is OscillateTextMarkupEffect effect_oscillate)
+                        {
+                            if (markupParam == "frequency")
+                                StringOperation.TryParseVector2(markupParamValue, out effect_oscillate.frequency);
+                            else if (markupParam == "amplitude")
+                                StringOperation.TryParseVector2(markupParamValue, out effect_oscillate.amplitude);
+                            else if (markupParam == "oscillateOffset")
+                                StringOperation.TryParseVector2(markupParamValue, out effect_oscillate.oscillateOffset);
+                            else if (markupParam == "offset")
+                            {
+                                StringOperation.TryParseFloat(markupParamValue, out effect_oscillate.offset);
+                                effect_oscillate.offset *= textStr.Length;
+                            }
+                        }
+                        break;
+                    case "rainbow":
+                        if (indexedEffect.effect is RainbowTextMarkupEffect effect_rainbow)
+                        {
+                            if (markupParam == "speed")
+                                StringOperation.TryParseFloat(markupParamValue, out effect_rainbow.speed);
+                            else if (markupParam == "offset")
+                            {
+                                StringOperation.TryParseFloat(markupParamValue, out effect_rainbow.offset);
+                                effect_rainbow.offset *= textStr.Length;
+                            }
+                        }
+                        break;
+                }
+
+
+                commandList[^1] = indexedCommand;
+                effectList[^1] = indexedEffect;
+            }
+
 
 
         }
@@ -432,7 +828,7 @@ namespace Game.TextMarkup
      * <offset value="1,1"></offset> // sets the offset (this is technically size multiplier)
      * <size value="1,1"></size> // sets the size (this is technically size multiplier)
      * <shake maxNormalTime="1" persistTime="0.1" offsetRange="1,1"></shake> // set shake, maxNormalTime is max time for shake to no appear, persistTime is how long the offset persist, offsetRange is how much away is shaked from original position (as a multiplier)
-     * <oscillate Strength="1,1" offset="1"></oscillate> // set oscillation, Strength is multiplier on respective axis, offset is how much difference between oscillation per character passed
+     * <oscillate frequency="1,1" amplitude="1,1" oscillateOffset="0,0" offset="0.1"></oscillate> // set oscillation, strength is multiplier on respective axis, offset is how much difference between oscillation per character passed
      * <rainbow speed="1" offset="0.1"></rainbow> // set rainbow effect, speed is how fast it changes color, offset is how much difference between color per character passed (as a percentage)
      * 
      * 

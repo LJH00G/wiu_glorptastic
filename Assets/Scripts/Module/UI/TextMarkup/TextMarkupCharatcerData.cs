@@ -20,6 +20,8 @@ namespace Game.TextMarkup
 
     public struct CharacterData
     {
+        public bool show;
+
         public int materialIndex;
         public int vertexIndex;
         public CharacterVertex[] originalVertices;
@@ -33,6 +35,7 @@ namespace Game.TextMarkup
             this.vertexIndex = vertexIndex;
             this.originalVertices = originalVertices;
             this.effects = new(effects);
+            show = false;
         }
     }
 
