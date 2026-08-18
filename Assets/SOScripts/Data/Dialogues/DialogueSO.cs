@@ -50,6 +50,22 @@ namespace Game.SO.Data.Dialogue
         // scrap this into state machine
         private void OnValidate()
         {
+            enum VALIDATION_STATE
+            {
+                GENERAL,
+                
+                CHECK_MARKUP_NAME,
+                CHECK_MARKUP_PARAM,
+                CHECK_MARKUP_PARAM_VALUE,
+                CHECK_MARKUP_PARAM_PENDING,
+                
+                FORMAT_ERROR
+            }
+            
+            VALIDATION_STATE state = VALIDATION_STATE.GENERAL;
+            VALIDATION_STATE prevState = state;
+            string perStateString = "";
+
             Stack<string> effectStack = new();
             for (int i = 0; i < Dialogues.Length; i++)
             {
@@ -62,6 +78,7 @@ namespace Game.SO.Data.Dialogue
                 bool markupIsCommandOrEffect = true;
 
                 bool checkingMarkup = false;
+                bool markupString = "";
 
                 string markupName = "";
                 bool checkMarkupName = false;
@@ -83,6 +100,41 @@ namespace Game.SO.Data.Dialogue
 
                 foreach (var char_ in dialogue.text)
                 {
+
+                    if (prevState != state)
+                    {
+                        prevState = state;
+                        perStateString = "";
+                    }
+
+                    perStateString += char_;
+
+                    if (checkingMarkup)
+                        markupString += char_;
+
+                    switch (state)
+                    {
+                        case VALIDATION_STATE.GENERAL:
+
+
+                        case VALIDATION_STATE.CHECK_MARKUP_NAME:
+
+
+                        case VALIDATION_STATE.CHECK_MARKUP_PARAM:
+
+
+
+                        case VALIDATION_STATE.CHECK_MARKUP_PARAM_VALUE:
+
+
+                        case VALIDATION_STATE.CHECK_MARKUP_PARAM_PENDING:
+
+
+                        case VALIDATION_STATE.FORMAT_ERROR:
+                    }
+
+
+
                     // push char_ to formatErrorText so it can be printed
                     if (formatError)
                     {
@@ -228,7 +280,7 @@ namespace Game.SO.Data.Dialogue
                 }
 
 
-                if (formatError || checkMarkupName || checkMarkupParam || checkMarkupParamValue)
+                if (state != VALIDATION_STATE.GENERAL)
                 {
                     Debug.LogError($"DialogueSO.OnValidate() | Dialogues[{i}] markup contains format error at around \"...{formatErrorText}...\"", this);
                     return;
