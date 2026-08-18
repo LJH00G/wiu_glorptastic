@@ -80,9 +80,9 @@ namespace Game.TextMarkup
 
             string perStateString = "";
 
-            bool hasContinue = false;
+            bool hasEndCommand = false;
             if (checkType == CHECK_TYPE.ONLY_EFFECT)
-                hasContinue = true;
+                hasEndCommand = true;
             TEXT_MARKUP_TYPE markupType = TEXT_MARKUP_TYPE.COMMAND;
 
             bool checkingMarkup = false;
@@ -328,14 +328,13 @@ namespace Game.TextMarkup
 
             if (formatError || state != VALIDATION_STATE.GENERAL)
             {
-                Debug.Log($"formatError: {formatError}, state is general: {state != VALIDATION_STATE.GENERAL} ");
                 ErrorMsg = $"markup contains format error at around \"...{errorText}...\"";
                 return false;
             }
 
-            if (!hasContinue)
+            if (!hasEndCommand)
             {
-                ErrorMsg = "must contain a <continue/> markup";
+                ErrorMsg = "must contain a <end/> markup";
                 return false;
             }
 
@@ -365,14 +364,14 @@ namespace Game.TextMarkup
                     case "input":
                     case "sfx":
                     case "unmark":
-                    case "continue":
+                    case "end":
                         markupType = TEXT_MARKUP_TYPE.COMMAND;
 
                         if (checkType == CHECK_TYPE.ONLY_EFFECT)
                             checkTypeError = true;
 
-                        if (markupName == "continue")
-                            hasContinue = true;
+                        if (markupName == "end")
+                            hasEndCommand = true;
 
                         return true;
 
@@ -400,7 +399,7 @@ namespace Game.TextMarkup
                 switch (markupName)
                 {
                     case "br":
-                    case "continue":
+                    case "end":
                     case "input":
                     default:
                         return false;
@@ -457,7 +456,6 @@ namespace Game.TextMarkup
             textStr = "";
             int charatcerIndexOfMarkup = 0;
 
-
             VALIDATION_STATE state = VALIDATION_STATE.GENERAL;
             VALIDATION_STATE prevState = state;
 
@@ -479,7 +477,6 @@ namespace Game.TextMarkup
 
             foreach (var char_ in textStrCopy)
             {
-
                 perStateString += char_;
 
                 if (checkingMarkup)
@@ -495,7 +492,7 @@ namespace Game.TextMarkup
                             checkingMarkup = true;
                             isCheckingEndMarkup = false;
 
-                            charatcerIndexOfMarkup  = textStr.Length;
+                            charatcerIndexOfMarkup = textStr.Length;
 
                             break;
                         }
@@ -507,9 +504,11 @@ namespace Game.TextMarkup
 
                     case VALIDATION_STATE.CHECK_MARKUP_NAME:
 
-                        if (isCheckClosingMarkup)
+                        if (isCheckClosingMarkup) // for commands
                         {
                             isCheckClosingMarkup = false;
+
+                            AddToList(commandList, effectList, ref textStr);
 
                             ClearAndSetStateToGeneral();
                             break;
@@ -523,7 +522,7 @@ namespace Game.TextMarkup
 
                         if (char_ == ' ')
                         {
-                            AddToList(commandList, effectList);
+                            AddToList(commandList, effectList, ref textStr);
 
                             state = VALIDATION_STATE.CHECK_MARKUP_PARAM;
                             break;
@@ -533,9 +532,9 @@ namespace Game.TextMarkup
                         {
 
                             if (!isCheckingEndMarkup)
-                                AddToList(commandList, effectList);
+                                AddToList(commandList, effectList, ref textStr);
                             else
-                                effectPopList.Add(charatcerIndexOfMarkup );
+                                effectPopList.Add(charatcerIndexOfMarkup);
 
                             ClearAndSetStateToGeneral();
                             break;
@@ -591,7 +590,7 @@ namespace Game.TextMarkup
 
                     case VALIDATION_STATE.CHECK_MARKUP_PARAM_PENDING:
 
-                        if (isCheckClosingMarkup)
+                        if (isCheckClosingMarkup) // for commands
                         {
                             isCheckClosingMarkup = false;
                             ClearAndSetStateToGeneral();
@@ -606,16 +605,12 @@ namespace Game.TextMarkup
 
                         if (char_ == ' ')
                         {
-                            AddToList(commandList, effectList);
-
                             state = VALIDATION_STATE.CHECK_MARKUP_PARAM;
                             break;
                         }
 
                         if (char_ == '>')
                         {
-                            AddToList(commandList, effectList);
-
                             ClearAndSetStateToGeneral();
                             break;
                         }
@@ -644,12 +639,14 @@ namespace Game.TextMarkup
                 checkingMarkup = false;
             }
 
-            void AddToList(List<IndexedCommand> commandList, List<IndexedEffect> effectList)
+            void AddToList(List<IndexedCommand> commandList, List<IndexedEffect> effectList, ref string textStr)
             {
+
                 switch (markupName)
                 {
                     case "br":
-                        commandList.Add(new IndexedCommand(charatcerIndexOfMarkup , new BrTextMarkupCommand()));
+                        //commandList.Add(new IndexedCommand(charatcerIndexOfMarkup , new BrTextMarkupCommand()));
+                        textStr += '\n';
                         return;
                     case "wait":
                         commandList.Add(new IndexedCommand(charatcerIndexOfMarkup , new WaitTextMarkupCommand()));
@@ -666,8 +663,8 @@ namespace Game.TextMarkup
                     case "unmark":
                         //commandList.Add(new IndexedCommand(charatcerIndexOfMarkup , new UnmarkTextMarkupCommand()));
                         return;
-                    case "continue":
-                        commandList.Add(new IndexedCommand(charatcerIndexOfMarkup , new ContinueTextMarkupCommand()));
+                    case "end":
+                        commandList.Add(new IndexedCommand(charatcerIndexOfMarkup , new EndTextMarkupCommand()));
                         return;
 
                     case "speech":
@@ -699,108 +696,124 @@ namespace Game.TextMarkup
 
             void SetMarkupValue(List<IndexedCommand> commandList, List<IndexedEffect> effectList, ref string textStr)
             {
-                var indexedCommand = commandList[^1];
-                var indexedEffect = effectList[^1];
+                bool notCommand = true;
 
-                switch (markupName)
+                if (commandList.Count > 0)
                 {
-                    case "br":
-                    case "continue":
-                    case "input":
-                    default:
-                        break;
-                    case "wait":
-                        if (indexedCommand.command is WaitTextMarkupCommand command_wait)
-                            if (markupParam == "time")
-                                StringOperation.TryParseFloat(markupParamValue, out command_wait.time);
-                        break;
-                    case "interval":
-                        if (indexedCommand.command is IntervalTextMarkupCommand command_interval)
-                            if (markupParam == "time")
-                                StringOperation.TryParseFloat(markupParamValue, out command_interval.time);
-                        break;
-                    case "sfx":
-                        if (indexedCommand.command is SFXTextMarkupCommand command_sfx)
-                            if (markupParam == "name")
-                                command_sfx.sfx = SFXPresets.TextMarkupAudioPresets[markupParamValue];
-                        break;
-                    case "unmark":
-                        if (markupParam == "text")
-                            textStr += markupParamValue;
-                        break;
+                    var indexedCommand = commandList[^1];
+                    notCommand = false;
 
+                    switch (markupName)
+                    {
+                        case "br":
+                        case "end":
+                        case "input":
+                            break;
+                        case "wait":
+                            if (indexedCommand.command is WaitTextMarkupCommand command_wait)
+                                if (markupParam == "time")
+                                    StringOperation.TryParseFloat(markupParamValue, out command_wait.time);
+                            break;
+                        case "interval":
+                            if (indexedCommand.command is IntervalTextMarkupCommand command_interval)
+                                if (markupParam == "time")
+                                    StringOperation.TryParseFloat(markupParamValue, out command_interval.time);
+                            break;
+                        case "sfx":
+                            if (indexedCommand.command is SFXTextMarkupCommand command_sfx)
+                                if (markupParam == "name")
+                                    command_sfx.sfx = SFXPresets.TextMarkupAudioPresets[markupParamValue];
+                            break;
+                        case "unmark":
+                            if (markupParam == "text")
+                                textStr += markupParamValue;
+                            break;
+                        default:
+                            notCommand = true;
+                            break;
+                    }
 
-                    case "speech":
-                        if (indexedEffect.effect is SpeechTextMarkupEffect effect_speech)
-                            if (markupParam == "name")
-                                effect_speech.speechSFX = SpeechPresets.TextMarkupAudioPresets[markupParamValue];
-                        break;
-                    case "color":
-                        if (indexedEffect.effect is ColorTextMarkupEffect effect_color)
-                        {
-                            if (markupParam == "value")
-                            {
-                                StringOperation.TryParseHexColor(markupParamValue, out effect_color.color);
-                                effect_color.fadeColor = effect_color.color;
-                            }
-                            else if (markupParam == "fadeValue")
-                                StringOperation.TryParseHexColor(markupParamValue, out effect_color.fadeColor);
-                        }
-                        break;
-                    case "offset":
-                        if (indexedEffect.effect is OffsetTextMarkupEffect effect_offset)
-                            if (markupParam == "value")
-                                StringOperation.TryParseVector2(markupParamValue, out effect_offset.offset);
-                        break;
-                    case "size":
-                        if (indexedEffect.effect is SizeTextMarkupEffect effect_size)
-                            if (markupParam == "value")
-                                StringOperation.TryParseVector2(markupParamValue, out effect_size.size);
-                        break;
-                    case "shake":
-                        if (indexedEffect.effect is ShakeTextMarkupEffect effect_shake)
-                        {
-                            if (markupParam == "maxNormalTime")
-                                StringOperation.TryParseFloat(markupParamValue, out effect_shake.maxNormalTime);
-                            else if (markupParam == "persistTime")
-                                StringOperation.TryParseFloat(markupParamValue, out effect_shake.persistTime);
-                            else if (markupParam == "offsetRange")
-                                StringOperation.TryParseVector2(markupParamValue, out effect_shake.offsetRange);
-                        }
-                        break;
-                    case "oscillate":
-                        if (indexedEffect.effect is OscillateTextMarkupEffect effect_oscillate)
-                        {
-                            if (markupParam == "frequency")
-                                StringOperation.TryParseVector2(markupParamValue, out effect_oscillate.frequency);
-                            else if (markupParam == "amplitude")
-                                StringOperation.TryParseVector2(markupParamValue, out effect_oscillate.amplitude);
-                            else if (markupParam == "oscillateOffset")
-                                StringOperation.TryParseVector2(markupParamValue, out effect_oscillate.oscillateOffset);
-                            else if (markupParam == "offset")
-                            {
-                                StringOperation.TryParseFloat(markupParamValue, out effect_oscillate.offset);
-                                effect_oscillate.offset *= textStr.Length;
-                            }
-                        }
-                        break;
-                    case "rainbow":
-                        if (indexedEffect.effect is RainbowTextMarkupEffect effect_rainbow)
-                        {
-                            if (markupParam == "speed")
-                                StringOperation.TryParseFloat(markupParamValue, out effect_rainbow.speed);
-                            else if (markupParam == "offset")
-                            {
-                                StringOperation.TryParseFloat(markupParamValue, out effect_rainbow.offset);
-                                effect_rainbow.offset *= textStr.Length;
-                            }
-                        }
-                        break;
+                    commandList[^1] = indexedCommand;
                 }
 
 
-                commandList[^1] = indexedCommand;
-                effectList[^1] = indexedEffect;
+                if (notCommand && effectList.Count > 0)
+                {
+                    var indexedEffect = effectList[^1];
+
+                    switch (markupName)
+                    {
+                        case "speech":
+                            if (indexedEffect.effect is SpeechTextMarkupEffect effect_speech)
+                                if (markupParam == "name")
+                                    effect_speech.speechSFX = SpeechPresets.TextMarkupAudioPresets[markupParamValue];
+                            break;
+                        case "color":
+                            if (indexedEffect.effect is ColorTextMarkupEffect effect_color)
+                            {
+                                if (markupParam == "value")
+                                {
+                                    StringOperation.TryParseHexColor(markupParamValue, out effect_color.color);
+                                    effect_color.fadeColor = effect_color.color;
+                                }
+                                else if (markupParam == "fadeValue")
+                                {
+                                    StringOperation.TryParseHexColor(markupParamValue, out effect_color.fadeColor);
+                                }
+                            }
+                            break;
+                        case "offset":
+                            if (indexedEffect.effect is OffsetTextMarkupEffect effect_offset)
+                                if (markupParam == "value")
+                                    StringOperation.TryParseVector2(markupParamValue, out effect_offset.offset);
+                            break;
+                        case "size":
+                            if (indexedEffect.effect is SizeTextMarkupEffect effect_size)
+                                if (markupParam == "value")
+                                    StringOperation.TryParseVector2(markupParamValue, out effect_size.size);
+                            break;
+                        case "shake":
+                            if (indexedEffect.effect is ShakeTextMarkupEffect effect_shake)
+                            {
+                                if (markupParam == "maxNormalTime")
+                                    StringOperation.TryParseFloat(markupParamValue, out effect_shake.maxNormalTime);
+                                else if (markupParam == "persistTime")
+                                    StringOperation.TryParseFloat(markupParamValue, out effect_shake.persistTime);
+                                else if (markupParam == "offsetRange")
+                                    StringOperation.TryParseVector2(markupParamValue, out effect_shake.offsetRange);
+                            }
+                            break;
+                        case "oscillate":
+                            if (indexedEffect.effect is OscillateTextMarkupEffect effect_oscillate)
+                            {
+                                if (markupParam == "frequency")
+                                    StringOperation.TryParseVector2(markupParamValue, out effect_oscillate.frequency);
+                                else if (markupParam == "amplitude")
+                                    StringOperation.TryParseVector2(markupParamValue, out effect_oscillate.amplitude);
+                                else if (markupParam == "oscillateOffset")
+                                    StringOperation.TryParseVector2(markupParamValue, out effect_oscillate.oscillateOffset);
+                                else if (markupParam == "offset")
+                                {
+                                    StringOperation.TryParseFloat(markupParamValue, out effect_oscillate.offset);
+                                }
+                            }
+                            break;
+                        case "rainbow":
+                            if (indexedEffect.effect is RainbowTextMarkupEffect effect_rainbow)
+                            {
+                                if (markupParam == "speed")
+                                    StringOperation.TryParseFloat(markupParamValue, out effect_rainbow.speed);
+                                else if (markupParam == "offset")
+                                {
+                                    StringOperation.TryParseFloat(markupParamValue, out effect_rainbow.offset);
+                                }
+                            }
+                            break;
+                    }
+
+                    effectList[^1] = indexedEffect;
+                }
+
             }
 
 
@@ -816,8 +829,8 @@ namespace Game.TextMarkup
      * | command markups
      * <br/> // new line
      * <wait time="1"/> // wait for amount of time
-     * <interval time="0.2f"/> // time between printing each character
-     * <continue/> // page break
+     * <interval time="0.2"/> // time between printing each character
+     * <end/> // ends text scrolling
      * <input/> // wait for player input to continue
      * <sfx name="name"/> // play a sfx
      * <unmark text="</>"/> // whatever between " will not be checked for marking

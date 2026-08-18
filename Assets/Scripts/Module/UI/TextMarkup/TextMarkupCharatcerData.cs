@@ -20,6 +20,7 @@ namespace Game.TextMarkup
 
     public struct CharacterData
     {
+        public bool isVisible;
         public bool show;
 
         public int materialIndex;
@@ -31,11 +32,21 @@ namespace Game.TextMarkup
 
         public CharacterData(int materialIndex, int vertexIndex, CharacterVertex[] originalVertices, List<TextMarkupEffect> effects)
         {
+            isVisible = true;
             this.materialIndex = materialIndex;
             this.vertexIndex = vertexIndex;
             this.originalVertices = originalVertices;
-            this.effects = new(effects);
+            this.effects = effects;
             show = false;
+        }
+
+        public CharacterData(bool _ = false)
+        {
+            isVisible = false;
+            show = false;
+            materialIndex = vertexIndex = 0;
+            originalVertices = null;
+            effects = null;
         }
     }
 

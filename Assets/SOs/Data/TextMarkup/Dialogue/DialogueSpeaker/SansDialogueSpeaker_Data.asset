@@ -15,6 +15,7 @@ MonoBehaviour:
   <Name>k__BackingField: Sans
   <DefaultSpeechSFX>k__BackingField:
     speechSFX: {fileID: 8300000, guid: f4219ad9d433c1d49bda1656847c6b8f, type: 3}
-  <DefaultColor>k__BackingField:
+    played: 0
+  <DefaultTextColor>k__BackingField:
     color: {r: 1, g: 1, b: 1, a: 1}
-    fadeColor: {r: 1, g: 1, b: 1, a: 1}
+    fadeColor: {r: 0, g: 1, b: 0.9970696, a: 1}

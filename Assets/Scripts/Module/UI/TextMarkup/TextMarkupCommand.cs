@@ -1,3 +1,4 @@
+using Game.SO.EventChannel.Context;
 using System;
 using UnityEngine;
 
@@ -14,7 +15,7 @@ namespace Game.TextMarkup
     {
         public override void TriggerCommand(TextMarkupTypeWriter writer)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
     }
 
@@ -26,7 +27,7 @@ namespace Game.TextMarkup
 
         public override void TriggerCommand(TextMarkupTypeWriter writer)
         {
-            throw new System.NotImplementedException();
+            writer.WaitTime = time;
         }
 
     }
@@ -35,23 +36,26 @@ namespace Game.TextMarkup
     [Serializable]
     public class IntervalTextMarkupCommand : TextMarkupCommand
     {
-        public float time = 0.2f;
+        static public readonly float DEFAULT_INTERVAL = 0.075f;
+
+        public float time = DEFAULT_INTERVAL;
 
         public override void TriggerCommand(TextMarkupTypeWriter writer)
         {
-            throw new System.NotImplementedException();
+            writer.PrintInterval = time;
         }
 
     }
 
 
     [Serializable]
-    public class ContinueTextMarkupCommand : TextMarkupCommand
+    public class EndTextMarkupCommand : TextMarkupCommand
     {
 
         public override void TriggerCommand(TextMarkupTypeWriter writer)
         {
-            throw new System.NotImplementedException();
+            Debug.Log("triggered end command");
+            writer.ReachedEnd = true;
         }
 
     }
@@ -63,7 +67,7 @@ namespace Game.TextMarkup
 
         public override void TriggerCommand(TextMarkupTypeWriter writer)
         {
-            throw new System.NotImplementedException();
+            writer.WaitForInput = true;
         }
 
     }
@@ -76,7 +80,8 @@ namespace Game.TextMarkup
 
         public override void TriggerCommand(TextMarkupTypeWriter writer)
         {
-            throw new System.NotImplementedException();
+            if (sfx)
+                writer.SFXEventChannel.Raise(new PlaySFXEventContext(sfx));
         }
 
     }
@@ -89,7 +94,7 @@ namespace Game.TextMarkup
 
         public override void TriggerCommand(TextMarkupTypeWriter writer)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
     }
