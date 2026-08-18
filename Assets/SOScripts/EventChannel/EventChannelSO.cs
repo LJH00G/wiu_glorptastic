@@ -12,6 +12,7 @@ namespace Game.SO.EventChannel
         public bool Lock { get; set; } = false;
     }
 
+    [CreateAssetMenu(fileName = "Event_Channel", menuName = "Scriptable Objects/EventChannel/EventChannelSO")]
     public abstract class EventChannelSO : ScriptableObject
     {
         Action listeners = null;
