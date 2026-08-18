@@ -2,6 +2,7 @@ using UnityEngine;
 using Utility.DictionaryEntry;
 using System.Collections.Generic;
 using System;
+using Game.SO.EventChannel;
 
 
 namespace Puzzle
@@ -18,11 +19,12 @@ namespace Puzzle
 
         [SerializeField] Transform container;
         [SerializeField] List<DictEntry<PuzzleType, GameObject>> viewRegistry = new();
-        
+        [SerializeField] EventChannelSO OnCompletePuzzle;
 
         private IPuzzleView _activeView;
         private GameObject _activeViewInstance;
         private Dictionary<PuzzleType, GameObject> _viewDict = new();
+
         private void Awake()
         {
             BuildViewDict();
@@ -89,7 +91,12 @@ namespace Puzzle
 
         private void HandleResult(bool correct)
         {
-
+            if(correct)
+            {
+                UnloadCurrentView();
+                OnCompletePuzzle.Raise();
+                return;
+            }
         }
 
         private void OnDestroy()
