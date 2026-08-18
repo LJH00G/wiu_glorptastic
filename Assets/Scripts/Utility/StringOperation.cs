@@ -1,6 +1,5 @@
 using System.Globalization;
 using UnityEngine;
-using System.Text.RegularExpressions;
 
 
 namespace Utility.String

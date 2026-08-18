@@ -12,6 +12,7 @@ namespace Game.SO.EventChannel
         public bool Lock { get; set; } = false;
     }
 
+
     public abstract class EventChannelSO : ScriptableObject
     {
         Action listeners = null;
