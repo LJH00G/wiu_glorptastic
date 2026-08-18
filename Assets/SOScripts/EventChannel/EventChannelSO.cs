@@ -13,7 +13,7 @@ namespace Game.SO.EventChannel
     }
 
     [CreateAssetMenu(fileName = "Event_Channel", menuName = "Scriptable Objects/EventChannel/EventChannelSO")]
-    public abstract class EventChannelSO : ScriptableObject
+    public class EventChannelSO : ScriptableObject
     {
         Action listeners = null;
         public void Subscribe(Action method) => listeners += method;
