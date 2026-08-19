@@ -1,7 +1,6 @@
 
-using Utility.VisualDictionary;
 using UnityEngine;
-using System.Collections.Generic;
+using Utility.VisualizableDictionary;
 
 
 namespace Game.SO.Data.TextMarkup
@@ -11,7 +10,7 @@ namespace Game.SO.Data.TextMarkup
     public class TextMarkupAudioPresetSO : ScriptableObject
     {
         [field: SerializeField]
-        public VisualDict<string, AudioClip> Presets { get; private set; } = new();
+        public VisualizableDict<string, AudioClip> Presets { get; private set; } = new();
 
 
 #if UNITY_EDITOR

@@ -12,5 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f445e8de8fd518499776aceb868153b, type: 3}
   m_Name: ShopPreset_Data
   m_EditorClassIdentifier: Assembly-CSharp::Game.SO.Data.Shop.ShopPresetSO
-  <SellTable>k__BackingField:
-  - {fileID: 11400000, guid: 08f5f7aef061cf44cae8944c3d97d854, type: 2}
+  <TradeTable>k__BackingField:
+  - product:
+      itemStacks: []
+      useShell: 0
+      shell: 0
+    cost:
+      itemStacks: []
+      useShell: 0
+      shell: 0

@@ -27,7 +27,7 @@ using UnityEngine;
 namespace Game.SO.EventChannel
 {
     [CreateAssetMenu(fileName = "ShopPurchaseEvent_Channel", menuName = "Scriptable Objects/EventChannel/Inventory/ShopPurchaseEventChannelSO")]
-    public class ShopPurchaseEventChannelSO : EventChannelSO<SellCostPairSO>
+    public class ShopPurchaseEventChannelSO : EventChannelSO<ShopTrade>
     {
 
     }

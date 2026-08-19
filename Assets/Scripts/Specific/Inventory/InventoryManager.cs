@@ -13,16 +13,54 @@ namespace Game.Inventory
         [Header("Event Lisening Channel")]
         [SerializeField] ShopPurchaseEventChannelSO shopPurchaseEventChannel;
 
+        [Header("Event Broadcasting Channel")]
+        //[SerializeField] StringEventChannelSO ; // toast notif event
+
         [Header("Inventory")]
         [SerializeField] Inventory inventory = null;
 
 
 
-        public void HandleShopPurchase(SellCostPairSO sellCostPair)
+        public void HandleShopPurchase(ShopTrade trade)
         {
+            ref Shopable cost = ref trade.cost;
 
 
+            // check can buy
+            bool canBuy = true;
 
+            if (cost.useShell && cost.shell > inventory.ShellCurrency)
+                canBuy = false;
+
+            foreach (var stack in cost.itemStacks)
+            {
+                if (!HasItemInList(stack.item, out uint amount) || amount < stack.count)
+                {
+                    canBuy = false;
+                    break;
+                }
+            }
+
+            if (!canBuy)
+            {
+                // toast notif event
+                return;
+            }
+
+
+            // remove resource
+            if (cost.useShell)
+                DeductShell(cost.shell);
+            foreach (var stack in cost.itemStacks)
+                RemoveItem(stack.item, stack.count);
+
+
+            // add resource
+            ref Shopable product = ref trade.product;
+            if (product.useShell)
+                RecieveShell(product.shell);
+            foreach (var stack in product.itemStacks)
+                AddItem(stack.item, stack.count);
         }
 
 
@@ -138,7 +176,7 @@ namespace Game.Inventory
             inventory.ShellCurrency -= amount;
         }
 
-        public void AddShell(int amount)
+        public void RecieveShell(int amount)
         {
             inventory.ShellCurrency += amount;
         }

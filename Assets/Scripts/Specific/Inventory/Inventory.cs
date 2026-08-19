@@ -10,10 +10,16 @@ namespace Game.Inventory
     [Serializable]
     public class Inventory
     {
+        [field: Header("Items")]
         [field: SerializeField]
         public List<ItemStack> ItemList { get; set; } = new();
+
+
+        [field: Header("Currency")]
         [field: SerializeField]
         public int ShellCurrency { get; set; } = 0;
+
+
         [field: Header("Equiped")]
         [field: SerializeField]
         public WeaponItemSO EquipedWeapon { get; set; } = null;

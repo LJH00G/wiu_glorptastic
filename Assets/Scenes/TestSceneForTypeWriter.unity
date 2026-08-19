@@ -1132,7 +1132,7 @@ MonoBehaviour:
   dialogueConversationEventChannel: {fileID: 11400000, guid: 44508743f5b9d8341ab1fa10572170f0, type: 2}
   sceneSwitchEventChannel: {fileID: 11400000, guid: d99eee56572e0f540b7dc2913fe66e56, type: 2}
   sceneSwitchContext:
-    loadScene: TestSwitchScene
+    loadScene: TestSceneForOverworld
     delay: 0
     playMusicContext:
       music: {fileID: 0}

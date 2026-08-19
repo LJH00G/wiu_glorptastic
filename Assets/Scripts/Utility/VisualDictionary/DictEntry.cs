@@ -1,6 +1,6 @@
 using System;
 
-namespace Utility.VisualDictionary
+namespace Utility.VisualizableDictionary
 {
     /// <summary>
     /// use a List<> to store this with types, this can be serialise and edited in the inspector, useful for making a dictionary

@@ -2,10 +2,10 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Utility.VisualDictionary
+namespace Utility.VisualizableDictionary
 {
     [Serializable]
-    public class VisualDict<K, V>
+    public class VisualizableDict<K, V>
     {
         
         public Dictionary<K, V> dict = new();
@@ -18,8 +18,8 @@ namespace Utility.VisualDictionary
 
         public int Count => dict.Count;
 
-        public VisualDict() { }
-        public VisualDict(VisualDict<K, V> other)
+        public VisualizableDict() { }
+        public VisualizableDict(VisualizableDict<K, V> other)
         {
             dict = new(other.dict);
 

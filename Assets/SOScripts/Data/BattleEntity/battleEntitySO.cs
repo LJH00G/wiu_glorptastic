@@ -1,9 +1,9 @@
 using UnityEngine;
 
 
-namespace Game.SO.Data.battleEntity
+namespace Game.SO.Data.BattleEntity
 {
-    public abstract class battleEntitySO : ScriptableObject
+    public abstract class BattleEntitySO : ScriptableObject
     {
 
 

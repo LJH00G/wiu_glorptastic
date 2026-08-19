@@ -1,8 +1,8 @@
 
+using Game.Inventory;
 using System;
 using UnityEngine;
-using Utility.VisualDictionary;
-using Game.Inventory;
+using Utility.VisualizableDictionary;
 
 
 [Serializable]
@@ -16,12 +16,12 @@ public class UserData
 
     [field: Header("Flags")]
     [field: SerializeField]
-    public VisualDict<string, bool> Flags { get; set; }
+    public VisualizableDict<string, bool> Flags { get; set; }
 
 
     [field: Header("Statistics")]
     [field: SerializeField]
-    public VisualDict<string, int> Statistics { get; set; }
+    public VisualizableDict<string, int> Statistics { get; set; }
 
 
 #if UNITY_EDITOR
