@@ -40,11 +40,6 @@ public class SceneSwitchController : MonoBehaviour
             SceneManager.sceneLoaded += OnSceneLoaded;
             SceneManager.LoadSceneAsync(context.loadScene, LoadSceneMode.Additive);
             Camera.main.tag = "Untagged";
-
-
-            Debug.Log(SceneManager.GetActiveScene());
-            Scene oldScene = SceneManager.GetActiveScene();
-            SceneManager.UnloadSceneAsync(oldScene);
         },
             context.delay
         ));
