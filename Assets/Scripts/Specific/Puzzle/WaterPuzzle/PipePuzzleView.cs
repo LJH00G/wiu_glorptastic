@@ -52,7 +52,7 @@ namespace Puzzle
             markerRect.anchorMin = new Vector2(0f, 1f);
             markerRect.anchorMax = new Vector2(0f, 1f);
             markerRect.pivot = new Vector2(0f, 1f);
-            markerRect.sizeDelta = cellSize;
+            markerRect.sizeDelta = new Vector2(gridRenderer.CellSize, gridRenderer.CellSize);
             markerRect.anchoredPosition = gridRenderer.GridToLocalPosition(_data.sourceCell);
             _sourceMarkerInstance.transform.SetAsFirstSibling();
 
@@ -62,7 +62,7 @@ namespace Puzzle
             markerRect.anchorMin = new Vector2(0f, 1f);
             markerRect.anchorMax = new Vector2(0f, 1f);
             markerRect.pivot = new Vector2(0f, 1f);
-            markerRect.sizeDelta = cellSize;
+            markerRect.sizeDelta = new Vector2(gridRenderer.CellSize, gridRenderer.CellSize);
             markerRect.anchoredPosition = gridRenderer.GridToLocalPosition(_data.targetCell);
             _targetMarkerInstance.transform.SetAsFirstSibling();
         }
@@ -124,7 +124,7 @@ namespace Puzzle
 
             if (statusText != null)
                 statusText.text = solved ? "Connected!" : "";
-
+                
             if (solved)
                 OnSolutionSubmitted?.Invoke(true);
         }
