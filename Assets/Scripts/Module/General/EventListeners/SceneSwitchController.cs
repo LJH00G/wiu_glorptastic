@@ -22,7 +22,6 @@ public class SceneSwitchController : MonoBehaviour
             () =>
         {
             Scene oldScene = SceneManager.GetActiveScene();
-            SceneManager.UnloadSceneAsync(oldScene);
 
             void OnSceneLoaded(Scene scene, LoadSceneMode mode)
             {
@@ -33,6 +32,8 @@ public class SceneSwitchController : MonoBehaviour
 
                 SceneManager.SetActiveScene(scene);
                 Time.timeScale = 1f;
+
+                SceneManager.UnloadSceneAsync(oldScene);
             }
 
             SceneManager.sceneLoaded += OnSceneLoaded;

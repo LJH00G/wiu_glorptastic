@@ -54,7 +54,6 @@ namespace Game.TextMarkup
 
         public override void TriggerCommand(TextMarkupTypeWriter writer)
         {
-            Debug.Log("triggered end command");
             writer.ReachedEnd = true;
         }
 

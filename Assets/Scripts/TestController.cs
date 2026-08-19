@@ -1,5 +1,6 @@
 using Game.SO.Data.TextMarkup.Dialogue;
 using Game.SO.EventChannel;
+using Game.SO.EventChannel.Context;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,6 +10,10 @@ public class TestController : MonoBehaviour
     [SerializeField] EventChannelSO dialogueInputEventChannel;
     [SerializeField] EventChannelSO skipDialogueScrollingEventChannel;
     [SerializeField] DialogueConversationEventChannelSO dialogueConversationEventChannel;
+    [SerializeField] SceneSwitchEventChannelSO sceneSwitchEventChannel;
+
+    [Header("SceneSwitch")]
+    [SerializeField] SceneSwitchEventContext sceneSwitchContext;
 
     [Header("Text Convo")]
     [SerializeField] DialogueConversationSO testConvo1;
@@ -34,6 +39,8 @@ public class TestController : MonoBehaviour
             dialogueConversationEventChannel.Raise(testConvo3);
         if (Keyboard.current[Key.Digit4].wasPressedThisFrame)
             dialogueConversationEventChannel.Raise(testConvo4);
+        if (Keyboard.current[Key.Digit0].wasPressedThisFrame)
+            sceneSwitchEventChannel.Raise(sceneSwitchContext);
 
     }
 }
