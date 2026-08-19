@@ -9,7 +9,8 @@ namespace Game.SO.Data.Item
         public string Name { get; private set; }
         [field: SerializeField]
         public Texture2D Texture { get; private set; }
-
+        [field: SerializeField]
+        public string Description { get; private set; }
 
     }
 }
