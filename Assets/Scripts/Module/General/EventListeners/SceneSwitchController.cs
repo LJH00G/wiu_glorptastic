@@ -2,6 +2,7 @@ using Game.SO.EventChannel.Context;
 using Game.SO.EventChannel;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class SceneSwitchController : MonoBehaviour
 {
