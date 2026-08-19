@@ -12,7 +12,10 @@ namespace Puzzle
     {
         None,
         Base,
-        ShapeFit
+        ShapeFit,
+        Constraint,
+        Water
+
     }
 
     public class PuzzleHandler : MonoBehaviour

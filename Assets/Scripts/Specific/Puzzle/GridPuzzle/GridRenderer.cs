@@ -8,13 +8,15 @@ namespace Puzzle
 {
     public class GridRenderer : MonoBehaviour
     {
+        [SerializeField] private GridLayoutGroup gridLayoutGroup;
+        [SerializeField] private RectTransform gridContainerRect;
         [SerializeField] private RectTransform gridContainer;
         [SerializeField] private GameObject cellBackgroundPrefab;
         public RectTransform shapeContainer;
         [SerializeField] private RectTransform rowClueContainer;
         [SerializeField] private RectTransform colClueContainer;
         [SerializeField] private GameObject clueLabelPrefab;
-        public float cellSize = 64f;
+        private float cellSize;
 
         [SerializeField] private GameObject ghostCellPrefab;
         [SerializeField] private Color validColor = new Color(0, 1, 0, 0.4f);
@@ -22,9 +24,13 @@ namespace Puzzle
 
         private List<GameObject> _ghostCells = new();
 
+        public RectTransform ShapeContainer => shapeContainer;
+        public float CellSize => cellSize;
 
         public void RenderGrid(int rows, int cols, Clue[] rowRuns, Clue[] colRuns)
         {
+            ApplyDynamicCellSize(rows, cols);
+
             foreach (Transform child in gridContainer) Destroy(child.gameObject);
             for (int i = 0; i < rows * cols; i++)
                 Instantiate(cellBackgroundPrefab, gridContainer);
@@ -33,15 +39,36 @@ namespace Puzzle
             RenderClues(colClueContainer, colRuns);
         }
 
+        private void ApplyDynamicCellSize(int rows, int cols)
+        {
+            float availableWidth = gridContainerRect.rect.width;
+            float availableHeight = gridContainerRect.rect.height;
+
+            float cellWidthFit = availableWidth / cols;
+            float cellHeightFit = availableHeight / rows;
+
+            cellSize = Mathf.Min(cellWidthFit, cellHeightFit);
+            gridLayoutGroup.cellSize = new Vector2(cellSize, cellSize);
+        }
+
         private void RenderClues(RectTransform container, Clue[] clues)
         {
+            if (container == null) { Debug.LogError($"[{name}] RenderClues: container is null", this); return; }
+            if (clueLabelPrefab == null) { Debug.LogError($"[{name}] RenderClues: clueLabelPrefab not assigned", this); return; }
+            if (clues == null) { Debug.LogError($"[{name}] RenderClues: clues array is null", this); return; }
+
             
 
-            foreach (Transform child in container) Destroy(child.gameObject);
+            foreach (Transform child in container) 
+                Destroy(child.gameObject);
+
+            if (clues == null)
+                return;
+
             foreach (var clue in clues)
             {
-                var label = Instantiate(clueLabelPrefab, container).GetComponentInChildren<TMP_Text>();
-                label.text = string.Join(" ", clue.run); 
+                var label = Instantiate(clueLabelPrefab, container).GetComponent<TMP_Text>();
+                label.text = string.Join(" ", clue.run);
             }
         }
 
@@ -54,6 +81,7 @@ namespace Puzzle
                 var ghostGO = Instantiate(ghostCellPrefab, shapeContainer);
                 var rect = ghostGO.GetComponent<RectTransform>();
                 rect.anchoredPosition = GridToLocalPosition(cell);
+                rect.sizeDelta = new Vector2(cellSize, cellSize);
                 ghostGO.GetComponent<Image>().color = isValid ? validColor : invalidColor;
                 _ghostCells.Add(ghostGO);
             }
@@ -69,14 +97,8 @@ namespace Puzzle
             _ghostCells.Clear();
         }
 
-        public Vector2 GridToLocalPosition(Vector2Int gridCoord)
-        {
-            return new Vector2(gridCoord.x * cellSize, -gridCoord.y * cellSize);
-        }
+        public Vector2 GridToLocalPosition(Vector2Int gridCoord) => new Vector2(gridCoord.x * cellSize, -gridCoord.y * cellSize);
 
-        public Vector2Int LocalPositionToGrid(Vector2 localPos)
-        {
-            return new Vector2Int(Mathf.RoundToInt(localPos.x / cellSize), Mathf.RoundToInt(-localPos.y / cellSize));
-        }
+        public Vector2Int LocalPositionToGrid(Vector2 localPos) => new Vector2Int(Mathf.RoundToInt(localPos.x / cellSize), Mathf.RoundToInt(-localPos.y / cellSize));
     }       
 }

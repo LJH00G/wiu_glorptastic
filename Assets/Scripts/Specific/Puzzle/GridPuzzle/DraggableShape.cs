@@ -39,11 +39,14 @@ namespace Puzzle
             foreach (var go in _cellVisuals) Destroy(go);
             _cellVisuals.Clear();
 
+            float size = _gridRenderer != null ? _gridRenderer.CellSize : cellSize;
+
             foreach (var offset in shapeData.Rotated(rotation))
             {
                 var cellGO = Instantiate(cellSpritePrefab, transform);
                 var rect = cellGO.GetComponent<RectTransform>();
-                rect.anchoredPosition = new Vector2(offset.x * cellSize, -offset.y * cellSize);
+                rect.anchoredPosition = new Vector2(offset.x * size, -offset.y * size);
+                rect.sizeDelta = new Vector2(size, size);
                 _cellVisuals.Add(cellGO);
             }
         }
