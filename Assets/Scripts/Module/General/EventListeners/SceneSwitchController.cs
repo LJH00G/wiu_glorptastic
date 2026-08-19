@@ -2,6 +2,7 @@ using Game.SO.EventChannel.Context;
 using Game.SO.EventChannel;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
 
 public class SceneSwitchController : MonoBehaviour
 {
@@ -21,8 +22,7 @@ public class SceneSwitchController : MonoBehaviour
         delayedCallbackEventChannel.Raise(new DelayedCallbackEventContext(
             () =>
         {
-            Scene oldScene = SceneManager.GetActiveScene();
-            SceneManager.UnloadSceneAsync(oldScene);
+            
 
             void OnSceneLoaded(Scene scene, LoadSceneMode mode)
             {
@@ -38,6 +38,11 @@ public class SceneSwitchController : MonoBehaviour
             SceneManager.sceneLoaded += OnSceneLoaded;
             SceneManager.LoadSceneAsync(context.loadScene, LoadSceneMode.Additive);
             Camera.main.tag = "Untagged";
+
+
+            Debug.Log(SceneManager.GetActiveScene());
+            Scene oldScene = SceneManager.GetActiveScene();
+            SceneManager.UnloadSceneAsync(oldScene);
         },
             context.delay
         ));

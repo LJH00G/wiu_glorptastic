@@ -17,13 +17,20 @@ public class MainMenuUIFluff : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q)) Cycle(-1);
-        if (Input.GetKeyDown(KeyCode.E)) Cycle(1);
-        if (Input.GetKeyDown(KeyCode.Space)) TriggerCurrent();
-
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Cycle(-1);
+        }
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            Cycle(1);
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            TriggerCurrent();
+        }
         float z = transform.eulerAngles.z;
-        transform.rotation = Quaternion.Euler(0f, 0f,
-            Mathf.LerpAngle(z, targetAngle, Time.deltaTime * rotationSpeed));
+        transform.rotation = Quaternion.Euler(0f, 0f, Mathf.LerpAngle(z, targetAngle, Time.deltaTime * rotationSpeed));
     }
 
     void Cycle(int direction)
@@ -37,12 +44,17 @@ public class MainMenuUIFluff : MonoBehaviour
     {
         var button = buttons[currentIndex].GetComponent<Button>();
         if (button != null && button.interactable)
+        {
             button.onClick.Invoke();
+        }
     }
 
     void ShowOnly(int index)
     {
         for (int i = 0; i < buttons.Length; i++)
+        {
             buttons[i].SetActive(i == index);
+
+        }
     }
 }
