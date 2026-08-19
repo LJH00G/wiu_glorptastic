@@ -22,7 +22,7 @@ public class SceneSwitchController : MonoBehaviour
         delayedCallbackEventChannel.Raise(new DelayedCallbackEventContext(
             () =>
         {
-            
+            Scene oldScene = SceneManager.GetActiveScene();
 
             void OnSceneLoaded(Scene scene, LoadSceneMode mode)
             {
@@ -33,6 +33,8 @@ public class SceneSwitchController : MonoBehaviour
 
                 SceneManager.SetActiveScene(scene);
                 Time.timeScale = 1f;
+
+                SceneManager.UnloadSceneAsync(oldScene);
             }
 
             SceneManager.sceneLoaded += OnSceneLoaded;
