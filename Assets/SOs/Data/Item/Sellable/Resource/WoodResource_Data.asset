@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.SO.Data.Item.Sellable.ResourceSO
   <Name>k__BackingField: Wood
   <Texture>k__BackingField: {fileID: 0}
-  <Description>k__BackingField: a piece of wood
-  <SellValue>k__BackingField: 1
+  <Description>k__BackingField: a piece of soked wood
+  <SellValue>k__BackingField: 4

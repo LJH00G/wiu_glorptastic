@@ -722,7 +722,7 @@ namespace Game.TextMarkup
                         case "sfx":
                             if (indexedCommand.command is SFXTextMarkupCommand command_sfx)
                                 if (markupParam == "name")
-                                    command_sfx.sfx = SFXPresets.TextMarkupAudioPresets[markupParamValue];
+                                    command_sfx.sfx = SFXPresets.Presets[markupParamValue];
                             break;
                         case "unmark":
                             if (markupParam == "text")
@@ -746,7 +746,7 @@ namespace Game.TextMarkup
                         case "speech":
                             if (indexedEffect.effect is SpeechTextMarkupEffect effect_speech)
                                 if (markupParam == "name")
-                                    effect_speech.speechSFX = SpeechPresets.TextMarkupAudioPresets[markupParamValue];
+                                    effect_speech.speechSFX = SpeechPresets.Presets[markupParamValue];
                             break;
                         case "color":
                             if (indexedEffect.effect is ColorTextMarkupEffect effect_color)

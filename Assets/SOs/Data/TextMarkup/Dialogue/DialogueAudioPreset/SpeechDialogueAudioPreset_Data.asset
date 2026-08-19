@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a69ece137c674d6428d0affb5b067a43, type: 3}
   m_Name: SpeechDialogueAudioPreset_Data
   m_EditorClassIdentifier: Assembly-CSharp::Game.SO.Data.Dialogue.DialogueAudioPresetSO
-  textMarkupAudioPresets:
-  - key: Player
-    value: {fileID: 8300000, guid: 53ed08031de58534d9eafd1c8ab15dc8, type: 3}
-  - key: Sans
-    value: {fileID: 8300000, guid: f4219ad9d433c1d49bda1656847c6b8f, type: 3}
+  <Presets>k__BackingField:
+    visual:
+    - key: Player
+      value: {fileID: 8300000, guid: 53ed08031de58534d9eafd1c8ab15dc8, type: 3}
+    - key: Sans
+      value: {fileID: 8300000, guid: f4219ad9d433c1d49bda1656847c6b8f, type: 3}

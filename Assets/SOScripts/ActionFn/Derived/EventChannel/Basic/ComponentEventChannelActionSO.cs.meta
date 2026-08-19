@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 7312cefb1cd98c44c8c23cfa021f2494
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - sceneSwitchEventChannel: {fileID: 11400000, guid: d99eee56572e0f540b7dc2913fe66e56,
+      type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
