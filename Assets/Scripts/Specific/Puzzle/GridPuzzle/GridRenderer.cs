@@ -49,6 +49,12 @@ namespace Puzzle
 
             cellSize = Mathf.Min(cellWidthFit, cellHeightFit);
             gridLayoutGroup.cellSize = new Vector2(cellSize, cellSize);
+
+            gridLayoutGroup.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+            gridLayoutGroup.constraintCount = cols;
+
+            rowClueContainer.sizeDelta = new Vector2(rowClueContainer.sizeDelta.x, rows * cellSize);
+            colClueContainer.sizeDelta = new Vector2(cols * cellSize, colClueContainer.sizeDelta.y);
         }
 
         private void RenderClues(RectTransform container, Clue[] clues)
@@ -67,7 +73,7 @@ namespace Puzzle
 
             foreach (var clue in clues)
             {
-                var label = Instantiate(clueLabelPrefab, container).GetComponent<TMP_Text>();
+                var label = Instantiate(clueLabelPrefab, container).GetComponentInChildren<TMP_Text>();
                 label.text = string.Join(" ", clue.run);
             }
         }
@@ -82,6 +88,7 @@ namespace Puzzle
                 var rect = ghostGO.GetComponent<RectTransform>();
                 rect.anchoredPosition = GridToLocalPosition(cell);
                 rect.sizeDelta = new Vector2(cellSize, cellSize);
+                rect.anchorMin = rect.anchorMax = new Vector2(0, 1);
                 ghostGO.GetComponent<Image>().color = isValid ? validColor : invalidColor;
                 _ghostCells.Add(ghostGO);
             }
@@ -99,6 +106,6 @@ namespace Puzzle
 
         public Vector2 GridToLocalPosition(Vector2Int gridCoord) => new Vector2(gridCoord.x * cellSize, -gridCoord.y * cellSize);
 
-        public Vector2Int LocalPositionToGrid(Vector2 localPos) => new Vector2Int(Mathf.RoundToInt(localPos.x / cellSize), Mathf.RoundToInt(-localPos.y / cellSize));
+        public Vector2Int LocalPositionToGrid(Vector2 localPos) => new Vector2Int(Mathf.FloorToInt(localPos.x / cellSize), Mathf.FloorToInt(-localPos.y / cellSize));
     }       
 }

@@ -49,11 +49,11 @@ namespace Puzzle
             submitButton.onClick.AddListener(OnSubmit);
         }
 
-        public Vector2Int ScreenPointToGridCoord(PointerEventData eventData)
+        public Vector2Int ScreenPointToGridCoord(Vector2 screenPoint)
         {
             RectTransformUtility.ScreenPointToLocalPointInRectangle(
                 gridRenderer.shapeContainer,
-                eventData.position,
+                screenPoint,
                 canvas.renderMode == RenderMode.ScreenSpaceOverlay ? null : canvas.worldCamera,
                 out Vector2 localPoint);
 
@@ -75,9 +75,9 @@ namespace Puzzle
             return PlacementValidator.BuildFilledGrid(placements, _data.availableShapes, _data.rows, _data.cols) ?? new bool[_data.rows, _data.cols]; 
         }
 
-        public void ShowGhostPreview(DraggableShape shape, PointerEventData eventData)
+        public void ShowGhostPreview(DraggableShape shape, Vector2 screenPoint)
         {
-            var anchor = ScreenPointToGridCoord(eventData);
+            var anchor = ScreenPointToGridCoord(screenPoint);
             var offsets = shape.shapeData.Rotated(shape.rotation);
             bool isValid = TryPlace(shape, anchor, shape.rotation);
             gridRenderer.ShowGhost(anchor, offsets, isValid);
