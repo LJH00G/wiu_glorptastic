@@ -8,7 +8,7 @@ namespace Game.SO.Behaviour.EntityOverworld.InstanceData
 {
     public class PlayerOverworldBehaviourInstanceData : EntityOverworldBehaviourInstanceData
     {
-        public Transform targetForm;
+
     }
 }
 

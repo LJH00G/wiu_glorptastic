@@ -12,6 +12,8 @@ namespace Game.SO.Behaviour.EntityOverworld.InstanceData
 {
     public abstract class EntityOverworldBehaviourSO : ScriptableObject
     {
+        [SerializeField] float speed;
+
         public abstract void BehaviourStart(EntityOverworldController controller);
         public abstract void BehaviourUpdate(EntityOverworldController controller, float dt);
 
