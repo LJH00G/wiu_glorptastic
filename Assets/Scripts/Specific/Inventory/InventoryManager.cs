@@ -2,6 +2,7 @@ using Game.SO.Data.Item;
 using Game.SO.Data.Item.Sellable.Battle;
 using Game.SO.Data.Shop;
 using Game.SO.EventChannel;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,18 +20,20 @@ namespace Game.Inventory
         [Header("Inventory")]
         [SerializeField] Inventory inventory = null;
 
+        //made it subscribe based
+        public event Action OnInventoryChanged;
 
 
         public void HandleShopPurchase(ShopTrade trade)
         {
             ref Shopable cost = ref trade.cost;
 
-
-            // check can buy
             bool canBuy = true;
 
             if (cost.useShell && cost.shell > inventory.ShellCurrency)
+            {    
                 canBuy = false;
+            }
 
             foreach (var stack in cost.itemStacks)
             {
@@ -50,23 +53,31 @@ namespace Game.Inventory
 
             // remove resource
             if (cost.useShell)
+            {
                 DeductShell(cost.shell);
+            }
             foreach (var stack in cost.itemStacks)
+            {
                 RemoveItem(stack.item, stack.count);
-
+            }
 
             // add resource
             ref Shopable product = ref trade.product;
             if (product.useShell)
+            {
                 RecieveShell(product.shell);
+            }
             foreach (var stack in product.itemStacks)
+            {
                 AddItem(stack.item, stack.count);
+            }
         }
 
 
         public void ManageInventory(Inventory inv)
         {
             inventory = inv;
+            OnInventoryChanged?.Invoke();
         }
 
 
@@ -82,12 +93,13 @@ namespace Game.Inventory
                 {
                     itemStack.count += amount;
                     itemList[i] = itemStack;
+                    OnInventoryChanged?.Invoke();
                     return;
                 }
             }
 
             itemList.Add(new(item, amount));
-
+            OnInventoryChanged?.Invoke();
         }
 
 
@@ -113,12 +125,19 @@ namespace Game.Inventory
             amount = 0;
 
             if (inventory.EquipedWeapon == item)
+            {
                 amount++;
+            } 
             else
+            {
                 foreach (var accessory in inventory.EquipedAccessoryList)
+                {
                     if (accessory == item)
+                    {
                         amount++;
-
+                    }
+                }
+            }
             return amount != 0;
         }
 
@@ -157,6 +176,7 @@ namespace Game.Inventory
                         itemStack.count -= amount;
                         itemList[i] = itemStack;
                     }
+                    OnInventoryChanged?.Invoke();
                     return;
                 }
             }
@@ -174,16 +194,19 @@ namespace Game.Inventory
         public void DeductShell(int amount)
         {
             inventory.ShellCurrency -= amount;
+            OnInventoryChanged?.Invoke();
         }
 
         public void RecieveShell(int amount)
         {
             inventory.ShellCurrency += amount;
+            OnInventoryChanged?.Invoke();
         }
 
         public void SetShell(int amount)
         {
             inventory.ShellCurrency = amount;
+            OnInventoryChanged?.Invoke();
         }
 
 
@@ -215,18 +238,18 @@ namespace Game.Inventory
         }
 
 
-        
 
 
-        private void OnEnable()
-        {
-            shopPurchaseEventChannel.Subscribe(HandleShopPurchase);
-        }
 
-        private void OnDisable()
-        {
-            shopPurchaseEventChannel.Unsubscribe(HandleShopPurchase);
-        }
+        //private void OnEnable()
+        //{
+        //    shopPurchaseEventChannel.Subscribe(HandleShopPurchase);
+        //}
+
+        //private void OnDisable()
+        //{
+        //    shopPurchaseEventChannel.Unsubscribe(HandleShopPurchase);
+        //}
 
     }
 }

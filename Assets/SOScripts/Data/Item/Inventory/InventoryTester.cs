@@ -2,14 +2,17 @@ using UnityEngine;
 using Game.SO.Data.Item;
 using Game.SO.Data.Item.Sellable;
 using Game.SO.Data.Item.Sellable.Battle;
-using Game.SO.Data.Inventory;
 
 namespace Game.Inventory
 {
+    /// <summary>
+    /// exercises InventoryManager's real Add/RemoveItem with one sample of every ItemSO
+    /// subtype, so the manager -> InventoryUI -> InventoryItemUI pipeline can be verified
+    /// </summary>
     public class InventoryTester : MonoBehaviour
     {
         [Header("Target")]
-        [SerializeField] InventorySO inventorySO;
+        [SerializeField] InventoryManager inventoryManager;
 
         [Header("One Sample Per Item Type")]
         [SerializeField] QuestItemSO sampleQuestItem;
@@ -33,32 +36,36 @@ namespace Game.Inventory
         public void AddAllSamples()
         {
             foreach (var item in AllSamples)
-                inventorySO.Debug_AddStack(item, 1);
+            {
+                inventoryManager.AddItem(item, 1);
+            }
         }
 
         [ContextMenu("Remove All Samples")]
         public void RemoveAllSamples()
         {
             foreach (var item in AllSamples)
-                inventorySO.Debug_RemoveStack(item);
+                RemoveSafely(item);
         }
+        public void AddQuestItem() => inventoryManager.AddItem(sampleQuestItem, 1);
+        public void RemoveQuestItem() => RemoveSafely(sampleQuestItem);
+        public void AddResourceItem() => inventoryManager.AddItem(sampleResourceItem, 1);
+        public void RemoveResourceItem() => RemoveSafely(sampleResourceItem);
+        public void AddConsumableItem() => inventoryManager.AddItem(sampleConsumableItem, 1);
+        public void RemoveConsumableItem() => RemoveSafely(sampleConsumableItem);
+        public void AddWeaponItem() => inventoryManager.AddItem(sampleWeaponItem, 1);
+        public void RemoveWeaponItem() => RemoveSafely(sampleWeaponItem);
+        public void AddAccessoryItem() => inventoryManager.AddItem(sampleAccessoryItem, 1);
+        public void RemoveAccessoryItem() => RemoveSafely(sampleAccessoryItem);
+        public void AddCurseGemItem() => inventoryManager.AddItem(sampleCurseGemItem, 1);
+        public void RemoveCurseGemItem() => RemoveSafely(sampleCurseGemItem);
 
-        public void AddQuestItem() => inventorySO.Debug_AddStack(sampleQuestItem, 1);
-        public void RemoveQuestItem() => inventorySO.Debug_RemoveStack(sampleQuestItem);
-
-        public void AddResourceItem() => inventorySO.Debug_AddStack(sampleResourceItem, 1);
-        public void RemoveResourceItem() => inventorySO.Debug_RemoveStack(sampleResourceItem);
-
-        public void AddConsumableItem() => inventorySO.Debug_AddStack(sampleConsumableItem, 1);
-        public void RemoveConsumableItem() => inventorySO.Debug_RemoveStack(sampleConsumableItem);
-
-        public void AddWeaponItem() => inventorySO.Debug_AddStack(sampleWeaponItem, 1);
-        public void RemoveWeaponItem() => inventorySO.Debug_RemoveStack(sampleWeaponItem);
-
-        public void AddAccessoryItem() => inventorySO.Debug_AddStack(sampleAccessoryItem, 1);
-        public void RemoveAccessoryItem() => inventorySO.Debug_RemoveStack(sampleAccessoryItem);
-
-        public void AddCurseGemItem() => inventorySO.Debug_AddStack(sampleCurseGemItem, 1);
-        public void RemoveCurseGemItem() => inventorySO.Debug_RemoveStack(sampleCurseGemItem);
+        void RemoveSafely(ItemSO item)
+        {
+            if (inventoryManager.HasItemInList(item, out _))
+            {
+                inventoryManager.RemoveItem(item, 1);
+            }
+        }
     }
 }

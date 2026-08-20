@@ -1,13 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
-using Game.SO.Data.Inventory;
 
 namespace Game.Inventory
 {
     public class InventoryUI : MonoBehaviour
     {
         [Header("Source")]
-        [SerializeField] InventorySO inventorySO;
+        [SerializeField] InventoryManager inventoryManager;
 
         [Header("List (goes inside your ScrollRect's Content)")]
         [SerializeField] Transform contentParent;
@@ -17,18 +16,18 @@ namespace Game.Inventory
 
         void OnEnable()
         {
-            inventorySO.OnChanged += Refresh;
+            inventoryManager.OnInventoryChanged += Refresh;
             Refresh();
         }
 
         void OnDisable()
         {
-            inventorySO.OnChanged -= Refresh;
+            inventoryManager.OnInventoryChanged -= Refresh;
         }
 
         void Refresh()
         {
-            var stacks = inventorySO.ItemList;
+            var stacks = inventoryManager.GetItemList();
 
             while (spawned.Count < stacks.Count)
             {
@@ -36,6 +35,7 @@ namespace Game.Inventory
                 row.transform.SetParent(contentParent, false);
                 spawned.Add(row);
             }
+
             while (spawned.Count > stacks.Count)
             {
                 int last = spawned.Count - 1;

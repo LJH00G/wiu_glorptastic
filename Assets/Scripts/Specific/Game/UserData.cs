@@ -24,7 +24,7 @@ public class UserData
     public VisualizableDict<string, int> Statistics { get; set; }
 
 
-#if UNITY_EDITOR
+#if UNITY_EDITOR //this stuff only exists in editor
 
     public void OnUpdate_IfUnityEditor()
     {
@@ -32,7 +32,7 @@ public class UserData
         Statistics.InverseValidate();
     }
 
-    public void OnValidate()
+    public void OnValidate() 
     {
         Inventory.OnValidate();
         Flags.OnValidate();
@@ -40,5 +40,4 @@ public class UserData
     }
 
 #endif
-
 }

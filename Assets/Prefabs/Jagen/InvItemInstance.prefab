@@ -419,7 +419,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41906c7f5c3c31f45bf880240c4f9416, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Inventory.InventoryItemUI
-  icon: {fileID: 0}
+  icon: {fileID: 5181806016766085623}
   titleText: {fileID: 1317818275352129459}
   descriptionText: {fileID: 1645173149288395799}
   quantityText: {fileID: 2294485098492957984}
