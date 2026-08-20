@@ -1,9 +1,7 @@
 
 using Game.SO.Behaviour.EntityOverworld.InstanceData;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.TextCore;
 
 
 namespace Game.SO.Behaviour.EntityOverworld.InstanceData
@@ -53,22 +51,19 @@ namespace Game.SO.Behaviour.EntityOverworld
 
             
             // interact
-            if (InputSystem.actions["Interact"].triggered) // && GameManager.CanInteract
+            if (InputSystem.actions["Interact"].triggered && GameManager.CanInteract)
             {
                 Vector2 offset = instanceData.facingDire * (controller.Radius + interactionSize * 0.5f);
 
-                var colliders = Physics2D.OverlapBoxAll(
+                var collider = Physics2D.OverlapBox(
                         (Vector2)controller.transform.position + offset,
                         new Vector2(interactionSize, interactionSize),
                         0,
                         LayerMask.NameToLayer("Interactable")
                     );
 
-                if (colliders.Length > 0)
-                {
-                    var collider = colliders[0];
-
-                }
+                if (collider && collider.TryGetComponent(out InteractableHandler handler))
+                    handler.TriggerInteraction();
 
             }
         }

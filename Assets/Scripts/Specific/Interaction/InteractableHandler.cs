@@ -1,7 +1,8 @@
+using Game;
 using Game.SO.ActionFn;
-using Utility.VisualizableDictionary;
-using UnityEngine;
 using System;
+using UnityEngine;
+using Utility.VisualizableDictionary;
 
 [RequireComponent(typeof(BoxCollider2D))]
 public class InteractableHandler : MonoBehaviour
@@ -51,24 +52,18 @@ public class InteractableHandler : MonoBehaviour
         string flagOverrideKey = "";
         foreach (var entry in flagOverrideInteractions.dict)
         {
-            // if (GameManager.UserData.Flags[entry.key])
-            //{
-            //flagOverrideKey = entry.key;
-            //useFlagOverride = true;
-            //break;
-            //}
+            if (GameManager.CurrentUserData.Flags[entry.Key])
+            {
+                flagOverrideKey = entry.Key;
+                useFlagOverride = true;
+                break;
+            }
         }
 
         if (useFlagOverride)
             flagOverrideInteractions[flagOverrideKey].Trigger(ref actionIndexToBeTriggered);
         else
             defaultInteraction.Trigger(ref actionIndexToBeTriggered);
-    }
-
-
-    private void Update()
-    {
-        
     }
 
 
@@ -81,10 +76,10 @@ public class InteractableHandler : MonoBehaviour
 
         foreach (var entry in flagOverrideInteractions.dict)
         {
-            //if (!GameManager.UserData.Flags.dict.TryGetValue(entry.key, out bool flag))
-            //{
-                //Debug.LogError($"InteractableHandler.OnValidate() | flagOverrideInteractions contains invalid flag", this);
-            //}
+            if (!GameManager.CurrentUserData.Flags.dict.TryGetValue(entry.Key, out bool flag))
+            {
+                Debug.LogError($"InteractableHandler.OnValidate() | flagOverrideInteractions contains invalid flag", this);
+            }
         }
 
     }
