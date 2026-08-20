@@ -61,8 +61,8 @@ namespace Game.Combat
                 enemies.Add(CombatantRuntime.FromEnemy(enemyEncounter[i], anchor));
             }
 
-            targetSelector.Init(input, hud);
             menuUI.Init(input);
+            targetSelector.Init(input, hud);
             flee.Init(input);
             mastery.Init(input);
 
@@ -82,6 +82,9 @@ namespace Game.Combat
             if (partner != null && partner.isAlive) allyTurnOrder.Add(partner);
             allyTurnIndex = 0;
 
+            foreach (var actor in allyTurnOrder)
+                ApplyStartOfTurnRegen(actor);
+
             hud.UpdateStats(player.currentHP, player.maxHP, player.currentCS, player.maxCS);
 
             BeginAllyTurn();
@@ -90,7 +93,6 @@ namespace Game.Combat
         void BeginAllyTurn()
         {
             var actor = allyTurnOrder[allyTurnIndex];
-            ApplyStartOfTurnRegen(actor);
 
             state = CombatState.MAIN_MENU;
             ShowMenuFor(actor, isPlayer: actor == player);
@@ -177,11 +179,23 @@ namespace Game.Combat
 
         void OnAbilitySelected(CombatantRuntime actor, AbilitySO ability)
         {
-            if (actor.currentCS < ability.curseCost)
+            if (actor.actorType == ActorType.PARTNER)
             {
-                hud.ShowDescription("Not enough curse energy!");
-                return; // stays on the submenu, let them pick something else
+                foreach (var ally in Allies)
+                    if (ally.actorType == ActorType.PLAYER)
+                        if (ally.currentCS < ability.curseCost)
+                        {
+                            hud.ShowDescription("Not enough curse energy!");
+                            return; // stays on the submenu, let them pick something else
+                        }
             }
+            else if (actor.actorType == ActorType.PLAYER)
+                if (actor.currentCS < ability.curseCost)
+                {
+                    hud.ShowDescription("Not enough curse energy!");
+                    return; // stays on the submenu, let them pick something else
+                }
+
 
             hud.ShowDescription(ability.description);
 
@@ -289,7 +303,14 @@ namespace Game.Combat
         void ResolveAbility(CombatantRuntime actor, AbilitySO ability, List<CombatantRuntime> targets)
         {
             hud.ClearTargetArrows();
-            actor.SpendCurse(ability.curseCost);
+            if (actor.actorType == ActorType.PARTNER)
+            {
+                foreach (var ally in Allies)
+                    if (ally.actorType == ActorType.PLAYER)
+                        ally.SpendCurse(ability.curseCost);
+            }
+            else if (actor.actorType == ActorType.PLAYER)
+                actor.SpendCurse(ability.curseCost);
 
             foreach (var target in targets)
                 ApplyEffect(actor, target, ability.effect, ability.power);
