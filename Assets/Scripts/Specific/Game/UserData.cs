@@ -11,17 +11,17 @@ public class UserData
 
     [field: Header("Inventory")]
     [field: SerializeField]
-    public Inventory Inventory { get; set; }
+    public Inventory Inventory { get; set; } = new();
 
 
     [field: Header("Flags")]
     [field: SerializeField]
-    public VisualizableDict<string, bool> Flags { get; set; }
+    public VisualizableDict<string, bool> Flags { get; set; } = new();
 
 
     [field: Header("Statistics")]
     [field: SerializeField]
-    public VisualizableDict<string, int> Statistics { get; set; }
+    public VisualizableDict<string, int> Statistics { get; set; } = new();
 
 
 #if UNITY_EDITOR //this stuff only exists in editor

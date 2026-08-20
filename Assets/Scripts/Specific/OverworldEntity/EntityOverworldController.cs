@@ -6,6 +6,7 @@ using UnityEngine;
 
 
 [RequireComponent(typeof(AIPath))]
+[RequireComponent(typeof(BoxCollider2D))]
 public class EntityOverworldController : MonoBehaviour
 {
 
@@ -19,6 +20,7 @@ public class EntityOverworldController : MonoBehaviour
     public EntityOverworldBehaviourInstanceData InstanceData { get; set; }
 
     public AIPath AIPath { get; private set; }
+    public BoxCollider2D triggerCollider { get; private set; }
 
 
     public void SetBehaviour(EntityOverworldBehaviourSO behaviour)
@@ -33,6 +35,10 @@ public class EntityOverworldController : MonoBehaviour
         AIPath = GetComponent<AIPath>();
         AIPath.radius = Radius;
         AIPath.gravity = Vector3.zero;
+
+        triggerCollider = GetComponent<BoxCollider2D>();
+        triggerCollider.size = new Vector2(Radius * 2, Radius);
+        triggerCollider.offset = new Vector2(0, Radius * 0.5f);
 
         SetBehaviour(behaviour);
     }
@@ -57,6 +63,10 @@ public class EntityOverworldController : MonoBehaviour
         AIPath = GetComponent<AIPath>();
         AIPath.radius = Radius;
         AIPath.gravity = Vector3.zero;
+
+        triggerCollider = GetComponent<BoxCollider2D>();
+        triggerCollider.size = new Vector2(Radius * 2, Radius);
+        triggerCollider.offset = new Vector2(0, Radius * 0.5f);
 
         if (prevBehaviour != behaviour)
         {

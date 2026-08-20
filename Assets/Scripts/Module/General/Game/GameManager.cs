@@ -19,14 +19,14 @@ namespace Game
     public class GameManager
     {
 
-        static public bool Debug { get; private set; }
+        static public bool Debug { get; private set; } = true;
         static public GameObject Player { get; private set; }
         static public GameObject Follower { get; private set; }
         static public bool PlayerCanMove { get; private set; } = true;
         static public bool AllCanMove { get; private set; } = true;
         static public GAME_STATE GameState { get; private set; }
-        static public UserData CurrentUserData {get; private set; } //tracks the currently in use player saved data so scripts like inventory manager can be linked up after load attempt without a scene in use
-        static public bool CanInteract { get; private set; }
+        static public UserData CurrentUserData {get; private set; } = new(); //tracks the currently in use player saved data so scripts like inventory manager can be linked up after load attempt without a scene in use
+        static public bool CanInteract { get; private set; } = true;
         static public bool Paused { get; private set; }
 
 
@@ -34,6 +34,8 @@ namespace Game
         {
             Debug = value;
             DebugDraw.Enabled = value;
+
+            UnityEngine.Debug.Log($"GameManager.Debug: {Debug}");
         }
 
         static public void SetPlayer(GameObject player)
