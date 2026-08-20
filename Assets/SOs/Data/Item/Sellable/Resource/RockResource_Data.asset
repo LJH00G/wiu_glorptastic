@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9d582575254e7f44837c2e7e27a2a4b, type: 3}
+  m_Name: RockResource_Data
+  m_EditorClassIdentifier: Assembly-CSharp::Game.SO.Data.Item.Sellable.ResourceSO
+  <Name>k__BackingField: Rock
+  <Texture>k__BackingField: {fileID: 0}
+  <Description>k__BackingField: pet rock!??!11!!1
+  <SellValue>k__BackingField: 1

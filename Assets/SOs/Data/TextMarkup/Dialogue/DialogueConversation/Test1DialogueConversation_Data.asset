@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34f2ff470233db34a958620f483cd295, type: 3}
+  m_Name: Test1DialogueConversation_Data
+  m_EditorClassIdentifier: Assembly-CSharp::Game.SO.Data.TextMarkup.Dialogue.DialogueConversationSO
+  <Dialogues>k__BackingField:
+  - speaker: {fileID: 11400000, guid: 8493df514086b0d4691757853c57c2fc, type: 2}
+    text: sup.<input/><end/>
+  - speaker: {fileID: 11400000, guid: 820cb9029b4ac8443b18636ed7bd5bb4, type: 2}
+    text: Erm, <shake>shake test</shake><input/><end/>
+  - speaker: {fileID: 11400000, guid: 8493df514086b0d4691757853c57c2fc, type: 2}
+    text: try <color value="#00FFFFFF">color test</color> and <offset value="1,1">offset
+      test</offset>.<input/><end/>
+  - speaker: {fileID: 11400000, guid: 820cb9029b4ac8443b18636ed7bd5bb4, type: 2}
+    text: <rainbow>longgggggg rainbow testing</rainbow><input/><end/>
+  - speaker: {fileID: 11400000, guid: 820cb9029b4ac8443b18636ed7bd5bb4, type: 2}
+    text: <oscillate><shake>oscillation and shake test</shake>, only oscillation
+      now..</oscillate><input/><end/>
+  - speaker: {fileID: 11400000, guid: 8493df514086b0d4691757853c57c2fc, type: 2}
+    text: wait test 1s.<wait time="1"/><br/>cutoff test, try cut no-<end/>
+  - speaker: {fileID: 11400000, guid: 820cb9029b4ac8443b18636ed7bd5bb4, type: 2}
+    text: <interval time="0.2"/>......<interval time="0.0375"/>faaassssssstttt<input/><end/>
+  - speaker: {fileID: 11400000, guid: 820cb9029b4ac8443b18636ed7bd5bb4, type: 2}
+    text: <size value="0.5,0.5">small size test</size> normal size<input/><end/>

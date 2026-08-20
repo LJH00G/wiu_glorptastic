@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: 0a3cd5c1d1110154fb0f89f47c3475c9
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - shopPurchaseEventChannel: {fileID: 11400000, guid: 773f45de51239ff47b01497f6ed1e87d, type: 2}
+  - preset: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
