@@ -57,7 +57,7 @@ namespace Puzzle
             _sourceMarkerInstance.transform.SetAsFirstSibling();
 
             _targetMarkerInstance = Instantiate(targetMarkerPrefab, gridRenderer.PieceContainer);
-
+                
             markerRect = _targetMarkerInstance.GetComponent<RectTransform>();
             markerRect.anchorMin = new Vector2(0f, 1f);
             markerRect.anchorMax = new Vector2(0f, 1f);

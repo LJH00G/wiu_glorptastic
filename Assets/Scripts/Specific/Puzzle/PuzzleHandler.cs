@@ -14,7 +14,8 @@ namespace Puzzle
         Base,
         ShapeFit,
         Constraint,
-        Water
+        Water,
+        Balance
 
     }
 
