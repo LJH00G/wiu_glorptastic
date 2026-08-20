@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class MainMenuUIFluff : MonoBehaviour
@@ -17,15 +18,15 @@ public class MainMenuUIFluff : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Q))
+        if (Keyboard.current[Key.Q].wasPressedThisFrame)
         {
             Cycle(-1);
         }
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Keyboard.current[Key.E].wasPressedThisFrame)
         {
             Cycle(1);
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Keyboard.current[Key.Space].wasPressedThisFrame)
         {
             TriggerCurrent();
         }

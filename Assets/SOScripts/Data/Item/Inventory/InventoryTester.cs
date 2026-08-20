@@ -6,11 +6,6 @@ using Game.SO.Data.Inventory;
 
 namespace Game.Inventory
 {
-    /// <summary>
-    /// pokes InventorySO directly (bypassing whatever add/remove logic the real manager
-    /// ends up owning) so the display pipeline - SO -> InventoryUI -> InventoryItemUI -
-    /// can be verified with one sample of every ItemSO subtype before the manager exists
-    /// </summary>
     public class InventoryTester : MonoBehaviour
     {
         [Header("Target")]
@@ -48,7 +43,6 @@ namespace Game.Inventory
                 inventorySO.Debug_RemoveStack(item);
         }
 
-        // hook these up to individual buttons if you want to test one item at a time
         public void AddQuestItem() => inventorySO.Debug_AddStack(sampleQuestItem, 1);
         public void RemoveQuestItem() => inventorySO.Debug_RemoveStack(sampleQuestItem);
 

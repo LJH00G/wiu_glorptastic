@@ -30,15 +30,12 @@ namespace Game.Inventory
         {
             var stacks = inventorySO.ItemList;
 
-            // grow the pool if we have more stacks than rows
             while (spawned.Count < stacks.Count)
             {
                 InventoryItemUI row = Instantiate(itemUIPrefab);
-                row.transform.SetParent(contentParent, false); // false = don't keep world position, reset local pos/scale relative to new parent
+                row.transform.SetParent(contentParent, false);
                 spawned.Add(row);
             }
-
-            // shrink the pool if we have fewer stacks than rows
             while (spawned.Count > stacks.Count)
             {
                 int last = spawned.Count - 1;
