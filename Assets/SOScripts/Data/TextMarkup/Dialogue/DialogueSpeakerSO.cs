@@ -12,8 +12,11 @@ namespace Game.SO.Data.TextMarkup.Dialogue
 
         [field: SerializeField]
         public string Name { get; private set; }
-        [field: SerializeField]
-        public SpeechTextMarkupEffect DefaultSpeechSFX { get; private set; }
+        [Header("Default Speech")]
+        [SerializeField] TextMarkupAudioPresetSO speechSFXPreset;
+        [SerializeField] string speechSFXName;
+        public SpeechTextMarkupEffect DefaultSpeechSFX { get; private set; } = new();
+        [field: Header("Default Color")]
         [field: SerializeField]
         public ColorTextMarkupEffect DefaultTextColor { get; private set; }
 
@@ -24,6 +27,9 @@ namespace Game.SO.Data.TextMarkup.Dialogue
         {
             if (!TextMarkupOperation.CheckMarkup(Name, TextMarkupOperation.CHECK_TYPE.ONLY_EFFECT))
                 Debug.LogError($"DialogueSpeakerSO.OnValidate() | error at Name: " + TextMarkupOperation.ErrorMsg, this);
+
+            if (speechSFXPreset && speechSFXPreset.Presets.Count > 0)
+                DefaultSpeechSFX.speechSFX = speechSFXPreset.Presets[speechSFXName];
         }
 #endif
 

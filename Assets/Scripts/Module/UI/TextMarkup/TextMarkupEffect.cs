@@ -31,7 +31,7 @@ namespace Game.TextMarkup
 
             played = true;
 
-            if (speechSFX && !writer.WasSkipTextScrolling)
+            if (speechSFX && !writer.WasSkipTextScrolling && writer.PrintInterval != 0)
                 writer.speechSFXEventChannel.Raise(new PlaySFXEventContext(speechSFX));
         }
 

@@ -94,6 +94,7 @@ public class TextMarkupTypeWriter : MonoBehaviour
 
         for (int i = 0; i < textInfo.characterCount; i++)
         {
+            // handle effect pushing and poping
             for (int j = 0; j < effectList.Count;)
             {
                 if (effectList[j].index != i)
@@ -118,9 +119,11 @@ public class TextMarkupTypeWriter : MonoBehaviour
                 effectPopList.RemoveAt(j);
             }
 
+
+
             TMP_CharacterInfo charInfo = textInfo.characterInfo[i];
 
-            if (!charInfo.isVisible)
+            if (!charInfo.isVisible) // for characters that dont show (space, \n, etc)
             {
                 charDataList.Add(new CharacterData(false));
                 continue;
@@ -131,8 +134,8 @@ public class TextMarkupTypeWriter : MonoBehaviour
 
             ref readonly TMP_MeshInfo meshinfo = ref textInfo.meshInfo[materialIndex];
 
+            // build vertex list
             CharacterVertex[] vertices = new CharacterVertex[4];
-
             for (int j = 0; j < vertices.Length; j++)
                 vertices[j].Set(
                     meshinfo.vertices[vertexIndex + j],
@@ -140,18 +143,21 @@ public class TextMarkupTypeWriter : MonoBehaviour
                 );
 
 
-            List<TextMarkupEffect> effects = new();
 
+            // build effect list
+            List<TextMarkupEffect> effects = new();
             foreach (var effect in defaultEffectStack)
                 effects.Add(effect.Clone());
             foreach (var effect in effectStack)
                 effects.Add(effect.Clone());
 
+            
             bool foundSpeech = false;
             for (int j = effects.Count - 1; j >= 0; j--)
             {
                 var effect = effects[j];
 
+                // remove speech effect that are covered by the latest speech effect
                 if (effect is SpeechTextMarkupEffect)
                 {
                     if (foundSpeech)
@@ -163,6 +169,7 @@ public class TextMarkupTypeWriter : MonoBehaviour
                     foundSpeech = true;
                 }
 
+                // make offset work
                 if (effect is OffsetableTextMarkupEffect effect_offsetable)
                 {
                     effect_offsetable.offset *= i;
@@ -174,6 +181,7 @@ public class TextMarkupTypeWriter : MonoBehaviour
         }
 
 
+        // skip type writing of first frame of characters that are within print interval of 0
         int startRange = 0, endRange = charDataList.Count;
         bool foundZeroInterval = false;
 

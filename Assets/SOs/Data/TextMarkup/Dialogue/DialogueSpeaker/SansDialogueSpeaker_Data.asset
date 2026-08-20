@@ -13,9 +13,8 @@ MonoBehaviour:
   m_Name: SansDialogueSpeaker_Data
   m_EditorClassIdentifier: Assembly-CSharp::Game.SO.Data.TextMarkup.Dialogue.DialogueSpeakerSO
   <Name>k__BackingField: Sans
-  <DefaultSpeechSFX>k__BackingField:
-    speechSFX: {fileID: 8300000, guid: f4219ad9d433c1d49bda1656847c6b8f, type: 3}
-    played: 0
+  speechSFXPreset: {fileID: 11400000, guid: 6394698099c217e4f964ea8a214ab042, type: 2}
+  speechSFXName: Sans
   <DefaultTextColor>k__BackingField:
     color: {r: 1, g: 1, b: 1, a: 1}
     fadeColor: {r: 0, g: 1, b: 0.9970696, a: 1}
