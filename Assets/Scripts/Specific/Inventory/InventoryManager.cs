@@ -2,6 +2,7 @@ using Game.SO.Data.Item;
 using Game.SO.Data.Item.Sellable.Battle;
 using Game.SO.Data.Shop;
 using Game.SO.EventChannel;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -19,6 +20,7 @@ namespace Game.Inventory
         [Header("Inventory")]
         [SerializeField] Inventory inventory = null;
 
+        public event Action OnInventoryChanged;
 
 
         public void HandleShopPurchase(ShopTrade trade)
@@ -47,26 +49,31 @@ namespace Game.Inventory
                 return;
             }
 
-
-            // remove resource
             if (cost.useShell)
+            {
                 DeductShell(cost.shell);
+            }
             foreach (var stack in cost.itemStacks)
+            {
                 RemoveItem(stack.item, stack.count);
+            }
 
-
-            // add resource
             ref Shopable product = ref trade.product;
             if (product.useShell)
+            {
                 RecieveShell(product.shell);
+            }
             foreach (var stack in product.itemStacks)
+            {
                 AddItem(stack.item, stack.count);
+            }
         }
 
 
         public void ManageInventory(Inventory inv)
         {
             inventory = inv;
+            OnInventoryChanged?.Invoke();
         }
 
 
@@ -82,12 +89,13 @@ namespace Game.Inventory
                 {
                     itemStack.count += amount;
                     itemList[i] = itemStack;
+                    OnInventoryChanged?.Invoke();
                     return;
                 }
             }
 
             itemList.Add(new(item, amount));
-
+            OnInventoryChanged?.Invoke();
         }
 
 
@@ -113,12 +121,17 @@ namespace Game.Inventory
             amount = 0;
 
             if (inventory.EquipedWeapon == item)
+            {
                 amount++;
+            }
             else
+            {
                 foreach (var accessory in inventory.EquipedAccessoryList)
                     if (accessory == item)
+                    {
                         amount++;
-
+                    }
+            }
             return amount != 0;
         }
 
@@ -157,6 +170,7 @@ namespace Game.Inventory
                         itemStack.count -= amount;
                         itemList[i] = itemStack;
                     }
+                    OnInventoryChanged?.Invoke();
                     return;
                 }
             }
@@ -174,16 +188,19 @@ namespace Game.Inventory
         public void DeductShell(int amount)
         {
             inventory.ShellCurrency -= amount;
+            OnInventoryChanged?.Invoke();
         }
 
         public void RecieveShell(int amount)
         {
             inventory.ShellCurrency += amount;
+            OnInventoryChanged?.Invoke();
         }
 
         public void SetShell(int amount)
         {
             inventory.ShellCurrency = amount;
+            OnInventoryChanged?.Invoke();
         }
 
 
@@ -214,19 +231,106 @@ namespace Game.Inventory
             return list;
         }
 
-
-        
-
-
-        private void OnEnable()
+        public bool EquipItem(BattleItemSO item)
         {
-            shopPurchaseEventChannel.Subscribe(HandleShopPurchase);
+            if (item is WeaponItemSO weapon)
+            {
+                return EquipWeapon(weapon);
+            }
+            if (item is AccessoryItemSO accessory)
+            {
+                return EquipAccessory(accessory);
+            }
+            return false;
         }
 
-        private void OnDisable()
+        public bool EquipWeapon(WeaponItemSO weapon)
         {
-            shopPurchaseEventChannel.Unsubscribe(HandleShopPurchase);
+            if (!weapon || !HasItemInList(weapon, out _))
+            {
+                return false;
+            }
+            WeaponItemSO previous = inventory.EquipedWeapon;
+
+            RemoveItem(weapon, 1);
+            inventory.EquipedWeapon = weapon;
+
+            if (previous)
+            {
+                AddItem(previous, 1);
+            }
+            OnInventoryChanged?.Invoke();
+            return true;
         }
+
+        public void UnequipWeapon()
+        {
+            if (!inventory.EquipedWeapon)
+            {
+                return;
+            }
+            AddItem(inventory.EquipedWeapon, 1);
+            inventory.EquipedWeapon = null;
+
+            OnInventoryChanged?.Invoke();
+        }
+
+        public bool EquipAccessory(AccessoryItemSO accessory, int slotIndex = -1)
+        {
+            if (!accessory || !HasItemInList(accessory, out _))
+            {
+                return false;
+            }
+            var slots = inventory.EquipedAccessoryList;
+
+            if (slotIndex < 0)
+            {
+                slotIndex = Array.IndexOf(slots, null);
+                if (slotIndex < 0)
+                {
+                    slotIndex = 0;
+                }
+            }
+
+            AccessoryItemSO previous = slots[slotIndex];
+
+            RemoveItem(accessory, 1);
+            slots[slotIndex] = accessory;
+
+            if (previous)
+            {
+                AddItem(previous, 1);
+            }
+            OnInventoryChanged?.Invoke();
+            return true;
+        }
+
+        public void UnequipAccessory(int slotIndex)
+        {
+            var slots = inventory.EquipedAccessoryList;
+            if (slotIndex < 0 || slotIndex >= slots.Length || !slots[slotIndex])
+            {
+                return;
+            }
+            AddItem(slots[slotIndex], 1);
+            slots[slotIndex] = null;
+
+            OnInventoryChanged?.Invoke();
+        }
+
+
+
+
+
+        //private void OnEnable()
+        //{
+        //    shopPurchaseEventChannel.Subscribe(HandleShopPurchase);
+        //}
+
+        //private void OnDisable()
+        //{
+        //    shopPurchaseEventChannel.Unsubscribe(HandleShopPurchase);
+        //}
 
     }
 }

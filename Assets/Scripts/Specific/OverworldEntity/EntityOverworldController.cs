@@ -1,3 +1,4 @@
+using Game;
 using Game.SO.Behaviour.EntityOverworld;
 using Game.SO.Behaviour.EntityOverworld.InstanceData;
 using Pathfinding;
@@ -9,7 +10,8 @@ public class EntityOverworldController : MonoBehaviour
 {
 
     [Header("Data")]
-    [SerializeField] float radius = 0.25f;
+    [field: SerializeField]
+    public float Radius { get; private set; } = 0.25f;
 
     [Header("Behaviour")]
     [SerializeField] EntityOverworldBehaviourSO behaviour;
@@ -29,7 +31,7 @@ public class EntityOverworldController : MonoBehaviour
     void Start()
     {
         AIPath = GetComponent<AIPath>();
-        AIPath.radius = radius;
+        AIPath.radius = Radius;
         AIPath.gravity = Vector3.zero;
 
         SetBehaviour(behaviour);
@@ -41,6 +43,9 @@ public class EntityOverworldController : MonoBehaviour
 
         if (behaviour)
             behaviour.BehaviourUpdate(this, dt);
+
+        if (!GameManager.AllCanMove)
+            AIPath.destination = transform.position;
     }
 
 
@@ -50,7 +55,7 @@ public class EntityOverworldController : MonoBehaviour
     private void OnValidate()
     {
         AIPath = GetComponent<AIPath>();
-        AIPath.radius = radius;
+        AIPath.radius = Radius;
         AIPath.gravity = Vector3.zero;
 
         if (prevBehaviour != behaviour)

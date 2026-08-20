@@ -32,7 +32,9 @@ namespace Game.Inventory
         public void OnValidate()
         {
             if (EquipedAccessoryList.Length != MAX_ACCESSORYIES)
+            {
                 EquipedAccessoryList = new AccessoryItemSO[MAX_ACCESSORYIES];
+            }
         }
 #endif
     }

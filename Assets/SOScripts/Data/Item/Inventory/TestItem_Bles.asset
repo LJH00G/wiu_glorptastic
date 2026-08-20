@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b01204bdfd6be854c8669dbf756f1d8e, type: 3}
+  m_Name: TestItem_Bles
+  m_EditorClassIdentifier: Assembly-CSharp::Game.SO.Data.Item.Sellable.ConsumableItemSO
+  <Name>k__BackingField: Bles
+  <Texture>k__BackingField: {fileID: 2800000, guid: 9ae274b4a1a11374dbb47368c9c05ec2, type: 3}
+  <Description>k__BackingField: i sell bles to the bles factory
+  <SellValue>k__BackingField: 5
+  <Effect>k__BackingField: 0
+  <Value>k__BackingField: 5

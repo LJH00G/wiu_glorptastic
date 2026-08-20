@@ -49,7 +49,7 @@ namespace Game.TPManager
             {
 
                 player = GameManager.Player.transform;
-                GameManager.SetCanMove(false);
+                GameManager.SetPlayerCanMove(false);
             }
             else
             {
@@ -82,7 +82,7 @@ namespace Game.TPManager
 
             yield return new WaitForSeconds(currentTP.time);
 
-            GameManager.SetCanMove(true);
+            GameManager.SetPlayerCanMove(true);
         }
 
         
