@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aca77b464a3c090499a53b4ffe36c908, type: 3}
   m_Name: AccessoryItem_test
   m_EditorClassIdentifier: Assembly-CSharp::Game.SO.Data.Item.Sellable.Battle.AccessoryItemSO
-  <Name>k__BackingField: 
-  <Texture>k__BackingField: {fileID: 0}
-  <Description>k__BackingField: 
-  <SellValue>k__BackingField: 0
+  <Name>k__BackingField: Accesory
+  <Texture>k__BackingField: {fileID: 2800000, guid: 9ae274b4a1a11374dbb47368c9c05ec2, type: 3}
+  <Description>k__BackingField: shiny shiny glow glow
+  <SellValue>k__BackingField: 4
   <curseAbilityList>k__BackingField: []
   <ExtraMaxHP>k__BackingField: 0
-  <ExtraMaxCurse>k__BackingField: 0
-  <ExtraDamage>k__BackingField: 0
-  <ExtraDefence>k__BackingField: 0
+  <ExtraMaxCurse>k__BackingField: 1
+  <ExtraDamage>k__BackingField: 1
+  <ExtraDefence>k__BackingField: 1

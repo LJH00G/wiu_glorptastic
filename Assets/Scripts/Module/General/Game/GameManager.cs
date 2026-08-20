@@ -3,7 +3,12 @@ using UnityEngine;
 
 namespace Game
 {
-
+    /// <summary>
+    /// add flags
+    /// - can interact
+    /// - can move
+    /// - functions that forcefully set players position based on where they need or want to go, like teleporting after interacting with a portal of sorts
+    /// </summary>
     public enum GAME_STATE
     {
         MENU,

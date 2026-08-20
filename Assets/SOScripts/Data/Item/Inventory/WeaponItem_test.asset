@@ -12,13 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5b422a522e66c540b49bba118068c9f, type: 3}
   m_Name: WeaponItem_test
   m_EditorClassIdentifier: Assembly-CSharp::Game.SO.Data.Item.Sellable.Battle.WeaponItemSO
-  <Name>k__BackingField: 
-  <Texture>k__BackingField: {fileID: 0}
-  <Description>k__BackingField: 
-  <SellValue>k__BackingField: 0
+  <Name>k__BackingField: Weapon
+  <Texture>k__BackingField: {fileID: 2800000, guid: 9ae274b4a1a11374dbb47368c9c05ec2, type: 3}
+  <Description>k__BackingField: Weapon that weapons
+  <SellValue>k__BackingField: 1
   <curseAbilityList>k__BackingField: []
-  <ExtraMaxHP>k__BackingField: 0
-  <ExtraMaxCurse>k__BackingField: 0
-  <ExtraDamage>k__BackingField: 0
-  <ExtraDefence>k__BackingField: 0
-  <Dmage>k__BackingField: 0
+  <ExtraMaxHP>k__BackingField: 1
+  <ExtraMaxCurse>k__BackingField: 1
+  <ExtraDamage>k__BackingField: 1
+  <ExtraDefence>k__BackingField: 1
+  <Dmage>k__BackingField: 1

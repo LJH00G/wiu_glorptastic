@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
+using Game.SO.Data.Item;
+using Game.SO.Data.Item.Sellable.Battle;
 
 namespace Game.Inventory
 {
@@ -33,8 +35,10 @@ namespace Game.Inventory
             {
                 InventoryItemUI row = Instantiate(itemUIPrefab);
                 row.transform.SetParent(contentParent, false);
+                row.OnEquipRequested += HandleEquipRequested;
                 spawned.Add(row);
             }
+
 
             while (spawned.Count > stacks.Count)
             {
@@ -48,6 +52,12 @@ namespace Game.Inventory
                 spawned[i].gameObject.SetActive(true);
                 spawned[i].SetData(stacks[i].item, stacks[i].count);
             }
+        }
+
+        void HandleEquipRequested(ItemSO item)
+        {
+            if (item is BattleItemSO battleItem)
+                inventoryManager.EquipItem(battleItem);
         }
     }
 }

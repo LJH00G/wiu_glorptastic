@@ -20,7 +20,6 @@ namespace Game.Inventory
         [Header("Inventory")]
         [SerializeField] Inventory inventory = null;
 
-        //made it subscribe based
         public event Action OnInventoryChanged;
 
 
@@ -28,12 +27,12 @@ namespace Game.Inventory
         {
             ref Shopable cost = ref trade.cost;
 
+
+            // check can buy
             bool canBuy = true;
 
             if (cost.useShell && cost.shell > inventory.ShellCurrency)
-            {    
                 canBuy = false;
-            }
 
             foreach (var stack in cost.itemStacks)
             {
@@ -50,8 +49,6 @@ namespace Game.Inventory
                 return;
             }
 
-
-            // remove resource
             if (cost.useShell)
             {
                 DeductShell(cost.shell);
@@ -61,7 +58,6 @@ namespace Game.Inventory
                 RemoveItem(stack.item, stack.count);
             }
 
-            // add resource
             ref Shopable product = ref trade.product;
             if (product.useShell)
             {
@@ -127,16 +123,14 @@ namespace Game.Inventory
             if (inventory.EquipedWeapon == item)
             {
                 amount++;
-            } 
+            }
             else
             {
                 foreach (var accessory in inventory.EquipedAccessoryList)
-                {
                     if (accessory == item)
                     {
                         amount++;
                     }
-                }
             }
             return amount != 0;
         }
@@ -235,6 +229,93 @@ namespace Game.Inventory
             AccessoryItemSO[] list = new AccessoryItemSO[Inventory.MAX_ACCESSORYIES];
             inventory.EquipedAccessoryList.CopyTo(list, 0);
             return list;
+        }
+
+        public bool EquipItem(BattleItemSO item)
+        {
+            if (item is WeaponItemSO weapon)
+            {
+                return EquipWeapon(weapon);
+            }
+            if (item is AccessoryItemSO accessory)
+            {
+                return EquipAccessory(accessory);
+            }
+            return false;
+        }
+
+        public bool EquipWeapon(WeaponItemSO weapon)
+        {
+            if (!weapon || !HasItemInList(weapon, out _))
+            {
+                return false;
+            }
+            WeaponItemSO previous = inventory.EquipedWeapon;
+
+            RemoveItem(weapon, 1);
+            inventory.EquipedWeapon = weapon;
+
+            if (previous)
+            {
+                AddItem(previous, 1);
+            }
+            OnInventoryChanged?.Invoke();
+            return true;
+        }
+
+        public void UnequipWeapon()
+        {
+            if (!inventory.EquipedWeapon)
+            {
+                return;
+            }
+            AddItem(inventory.EquipedWeapon, 1);
+            inventory.EquipedWeapon = null;
+
+            OnInventoryChanged?.Invoke();
+        }
+
+        public bool EquipAccessory(AccessoryItemSO accessory, int slotIndex = -1)
+        {
+            if (!accessory || !HasItemInList(accessory, out _))
+            {
+                return false;
+            }
+            var slots = inventory.EquipedAccessoryList;
+
+            if (slotIndex < 0)
+            {
+                slotIndex = Array.IndexOf(slots, null);
+                if (slotIndex < 0)
+                {
+                    slotIndex = 0;
+                }
+            }
+
+            AccessoryItemSO previous = slots[slotIndex];
+
+            RemoveItem(accessory, 1);
+            slots[slotIndex] = accessory;
+
+            if (previous)
+            {
+                AddItem(previous, 1);
+            }
+            OnInventoryChanged?.Invoke();
+            return true;
+        }
+
+        public void UnequipAccessory(int slotIndex)
+        {
+            var slots = inventory.EquipedAccessoryList;
+            if (slotIndex < 0 || slotIndex >= slots.Length || !slots[slotIndex])
+            {
+                return;
+            }
+            AddItem(slots[slotIndex], 1);
+            slots[slotIndex] = null;
+
+            OnInventoryChanged?.Invoke();
         }
 
 

@@ -14,10 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.SO.Data.Shop.ShopPresetSO
   <TradeTable>k__BackingField:
   - product:
-      itemStacks: []
+      itemStacks:
+      - item: {fileID: 0}
+        count: 0
       useShell: 0
       shell: 0
     cost:
-      itemStacks: []
+      itemStacks:
+      - item: {fileID: 0}
+        count: 0
       useShell: 0
       shell: 0
