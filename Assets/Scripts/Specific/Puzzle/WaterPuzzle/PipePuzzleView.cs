@@ -1,9 +1,11 @@
-using UnityEngine;
-using UnityEngine.UI;
+using Puzzle;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
+
 namespace Puzzle
 {
     public class PipePuzzleView : MonoBehaviour, IPuzzleView
@@ -101,7 +103,7 @@ namespace Puzzle
         public void SlidePiece(SlidingPipeView pieceView, SlideDirection direction)
         {
             var allData = _pieceViews.Select(v => v.PieceData).ToList();
-            var newPos = SlideValidator.SlideToStop(pieceView.PieceData, direction, allData, _data.rows, _data.cols);
+            var newPos = SlideValidator.GetOneStepMove(pieceView.PieceData, direction, allData, _data.rows, _data.cols);
 
             pieceView.PieceData.position = newPos;
             var rect = pieceView.GetComponent<RectTransform>();

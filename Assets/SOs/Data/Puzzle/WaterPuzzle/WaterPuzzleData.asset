@@ -34,7 +34,15 @@ MonoBehaviour:
     pipeName: UpRight
     position: {x: 2, y: 0}
     rotation: 0
+  - pieceId: UpDown
+    pipeName: UpDown
+    position: {x: 2, y: 1}
+    rotation: 0
+  - pieceId: UpDown
+    pipeName: UpDown
+    position: {x: 0, y: 2}
+    rotation: 0
   sourceCell: {x: 0, y: 0}
-  sourceExitSide: 2
+  sourceExitSide: -1
   targetCell: {x: 2, y: 2}
-  targetEntrySide: 8
+  targetEntrySide: -1
