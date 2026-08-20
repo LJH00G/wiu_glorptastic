@@ -1,25 +1,17 @@
 
 using Game.SO.ActionFn;
-using System;
 using UnityEngine;
 
 
-namespace Game.TriggerHandler
+namespace Game.TriggerHandler.MassTriggerHandler
 {
 
-    [Serializable]
-    public class ActionTriggerList : TriggerableList<ActionSO>
+    [RequireComponent(typeof(BoxCollider2D))]
+    public class ActionTriggerHandler : MassTriggerHandler<ActionSO>
     {
-        protected override void Trigger(ActionSO triggerable)
+        protected override void TriggerTriggerable(ref ActionSO triggerable)
         {
             triggerable.Invoke();
         }
-    }
-
-
-    [RequireComponent(typeof(BoxCollider2D))]
-    public class ActionTriggerHandler : TriggerHandler<ActionTriggerList, ActionSO>
-    {
-        
     }
 }

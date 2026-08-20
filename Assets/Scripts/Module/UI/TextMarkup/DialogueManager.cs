@@ -69,6 +69,14 @@ public class DialogueManager : MonoBehaviour
 
     bool TryAdvanceNextDialogue()
     {
+        if (dialogueIndex >= 0)
+        {
+            var prevDialogueEndAction = currentConversation.Dialogues[dialogueIndex].endAction;
+            if (prevDialogueEndAction)
+                prevDialogueEndAction.Invoke();
+        }
+
+
         dialogueIndex++;
 
         if (dialogueIndex >= currentConversation.Dialogues.Length)
@@ -175,12 +183,6 @@ public class DialogueManager : MonoBehaviour
     {
         rectForm = GetComponent<RectTransform>();
         cGroup = GetComponent<CanvasGroup>();
-
-        Show = false;
-
-        var rectPos = rectForm.anchoredPosition;
-        rectPos.y = hidePosY;
-        rectForm.anchoredPosition = rectPos;
 
         if (animTime != 0)
             animTime_inv = 1 / animTime;

@@ -5,8 +5,9 @@ using Pathfinding;
 using UnityEngine;
 
 
-[RequireComponent(typeof(AIPath))]
+[RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(AIPath))]
 public class EntityOverworldController : MonoBehaviour
 {
 
@@ -30,15 +31,23 @@ public class EntityOverworldController : MonoBehaviour
     }
 
 
+
     void Start()
     {
         AIPath = GetComponent<AIPath>();
         AIPath.radius = Radius;
         AIPath.gravity = Vector3.zero;
+        AIPath.enableRotation = false;
 
         triggerCollider = GetComponent<BoxCollider2D>();
         triggerCollider.size = new Vector2(Radius * 2, Radius);
         triggerCollider.offset = new Vector2(0, Radius * 0.5f);
+
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        rb.gravityScale = 0;
+        rb.freezeRotation = true;
+        rb.bodyType = RigidbodyType2D.Kinematic;
+        rb.interpolation = RigidbodyInterpolation2D.Interpolate;
 
         SetBehaviour(behaviour);
     }
@@ -63,10 +72,20 @@ public class EntityOverworldController : MonoBehaviour
         AIPath = GetComponent<AIPath>();
         AIPath.radius = Radius;
         AIPath.gravity = Vector3.zero;
+        AIPath.enableRotation = false;
 
         triggerCollider = GetComponent<BoxCollider2D>();
         triggerCollider.size = new Vector2(Radius * 2, Radius);
         triggerCollider.offset = new Vector2(0, Radius * 0.5f);
+
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        rb.gravityScale = 0;
+        rb.freezeRotation = true;
+        rb.bodyType = RigidbodyType2D.Kinematic;
+        rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+
+        if (!behaviour)
+            Debug.LogError("behaviour must not be left empty", this);
 
         if (prevBehaviour != behaviour)
         {
