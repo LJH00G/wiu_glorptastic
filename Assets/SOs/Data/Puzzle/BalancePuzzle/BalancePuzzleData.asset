@@ -12,9 +12,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f728788ecb7e4c4409292dddcc12a19e, type: 3}
   m_Name: BalancePuzzleData
   m_EditorClassIdentifier: Assembly-CSharp::Puzzle.BalancePuzzleData
-  puzzleType: 0
-  puzzleName: 
-  slots: []
-  balls: []
-  targetOffset: {x: 0, y: 0}
-  tolerance: 0.1
+  puzzleType: 5
+  puzzleName: Test
+  slots:
+  - slotId: Slot1
+    localPosition: {x: 0, y: 1}
+  - slotId: Slot2
+    localPosition: {x: 0, y: -1}
+  - slotId: Slot3
+    localPosition: {x: 1, y: 0}
+  - slotId: Slot4
+    localPosition: {x: -1, y: 0}
+  - slotId: Slot5
+    localPosition: {x: -3, y: 0}
+  - slotId: Slot6
+    localPosition: {x: 3, y: 0}
+  balls:
+  - ballId: Ball1
+    mass: 1
+  - ballId: Ball2
+    mass: 1
+  - ballId: Ball3
+    mass: 1
+  targetOffset: {x: 1, y: 0}
+  tolerance: 0.15

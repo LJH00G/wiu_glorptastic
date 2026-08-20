@@ -156,6 +156,8 @@ MonoBehaviour:
     value: {fileID: 3892201150693600954, guid: 72bca80462b941b43bc8a95826d623a6, type: 3}
   - key: 4
     value: {fileID: 514802844981863662, guid: d2d023bb5ff9735408a09884f0911187, type: 3}
+  - key: 5
+    value: {fileID: 7087020143805963501, guid: bafb2a972d92fa94cb9ae8c7e7888124, type: 3}
   OnCompletePuzzle: {fileID: 11400000, guid: 408a34ea0932ad24b84105ab3c0b210e, type: 2}
 --- !u!4 &78688420
 Transform:
@@ -399,7 +401,7 @@ MonoBehaviour:
         m_MethodName: LoadPuzzle
         m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 11400000, guid: 720c82278ec6ef644b5477d8bbc9c549, type: 2}
+          m_ObjectArgument: {fileID: 11400000, guid: 146a6253bd349e54c8c4d45b7b156f50, type: 2}
           m_ObjectArgumentAssemblyTypeName: PuzzleData, Assembly-CSharp
           m_IntArgument: 0
           m_FloatArgument: 0
@@ -667,9 +669,9 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 1
+  m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96

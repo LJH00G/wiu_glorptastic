@@ -16,6 +16,8 @@ namespace Game
 
         static public bool Debug { get; private set; }
         static public GameObject Player { get; private set; }
+        static public GameObject Follower { get; private set; }
+        static public bool CanMove { get; private set; } 
         static public GAME_STATE GameState { get; private set; }
         static public UserData CurrentUserData {get; private set; } //tracks the currently in use player saved data so scripts like inventory manager can be linked up after load attempt without a scene in use
         static public bool CanInteract { get; private set; }
@@ -33,6 +35,10 @@ namespace Game
             Player = player;
         }
 
+        static public void SetFollower(GameObject follower)
+        {
+            Follower = follower;
+        }
         static public void SetGameState(GAME_STATE state)
         {
             GameState = state;
@@ -53,6 +59,9 @@ namespace Game
         static public void SetPause(bool pause)
         {
             Paused = pause;
+        static public void SetCanMove(bool value)
+        {
+            CanMove = value;
         }
     }
 }
