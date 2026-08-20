@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 00c2ca88f62831749a29ce796d40cde0, type: 3}
+  m_Name: TestConstraintPuzzle
+  m_EditorClassIdentifier: Assembly-CSharp::Puzzle.ConstraintPuzzleData
+  puzzleType: 3
+  puzzleName: Test
+  layout:
+    rows: 5
+    cols: 5
+    seatID:
+    - R0C0
+    - R0C1
+    - R0C2
+    - R0C3
+    - R0C4
+    - R1C0
+    - R1C1
+    - R1C2
+    - R1C3
+    - R1C4
+    - R2C0
+    - R2C1
+    - R2C2
+    - R2C3
+    - R2C4
+    - R3C0
+    - R3C1
+    - R3C2
+    - R3C3
+    - R3C4
+    - R4C0
+    - R4C1
+    - R4C2
+    - R4C3
+    - R4C4
+  people:
+  - Yellow
+  - Green
+  - Red
+  constraints:
+  - rid: 4526794256807362662
+  - rid: 4526794256807362664
+  references:
+    version: 2
+    RefIds:
+    - rid: 4526794256807362662
+      type: {class: NotAdjacentConstraint, ns: Puzzle, asm: Assembly-CSharp}
+      data:
+        personA: Yellow
+        personB: Green
+    - rid: 4526794256807362664
+      type: {class: SameRowConstraint, ns: Puzzle, asm: Assembly-CSharp}
+      data:
+        personA: Red
+        personB: Green
