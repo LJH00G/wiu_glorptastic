@@ -4,34 +4,34 @@ using System.Linq;
 
 namespace Puzzle
 {
-    public enum SlideDirection 
-    { 
-        Up, 
-        Down, 
-        Left, 
-        Right 
+    public enum SlideDirection
+    {
+        Up,
+        Down,
+        Left,
+        Right
     }
+
+
+
 
     public static class SlideValidator
     {
-        public static Vector2Int SlideToStop(PipePieceInstance piece, SlideDirection direction, List<PipePieceInstance> allPieces, int rows, int cols)
+
+        
+
+        public static Vector2Int GetOneStepMove(PipePieceInstance piece, SlideDirection direction, List<PipePieceInstance> allPieces, int rows, int cols)
         {
             Vector2Int delta = DirectionToDelta(direction);
-            Vector2Int current = piece.position;
+            Vector2Int target = piece.position + delta;
 
-            while (true)
-            {
-                var next = current + delta;
+            if (target.x < 0 || target.x >= cols || target.y < 0 || target.y >= rows)
+                return piece.position;
 
-                if (next.x < 0 || next.x >= cols || next.y < 0 || next.y >= rows) 
-                    break;
+            if (allPieces.Any(p => p != piece && p.position == target))
+                return piece.position;
 
-                if (allPieces.Any(p => p != piece && p.position == next)) 
-                    break;
-
-                current = next;
-            }
-            return current;
+            return target;
         }
 
         private static Vector2Int DirectionToDelta(SlideDirection direction) => direction switch
@@ -43,4 +43,5 @@ namespace Puzzle
             _ => Vector2Int.zero
         };
     }
+    
 }

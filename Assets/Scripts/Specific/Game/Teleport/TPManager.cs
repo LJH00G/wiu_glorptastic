@@ -96,6 +96,17 @@ namespace Game.TPManager
             TPPointDef.OnValidate();
         }
 
+        void OnDrawGizmos()
+        {
+            Gizmos.color = new Color(0, 0, 1);
+            Vector3 Gizmossize = new Vector3(1, 1, 1);
+            foreach(TPDefinition TP in TPPointDef.dict.Values)
+            {
+                
+                Gizmos.DrawWireCube(new Vector3(TP.position.x, TP.position.y, 0), Gizmossize);
+            }
+        }
+
 #endif
     }
 
