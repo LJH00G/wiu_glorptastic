@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.SO.Behaviour.EntityOverworld.PlayerOverworldBehaviourSO
   speed: 2
   acceleration: 10
+  interactionSize: 0.5

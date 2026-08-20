@@ -1,7 +1,9 @@
 
 using Game.SO.Behaviour.EntityOverworld.InstanceData;
+using Pathfinding;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 
 namespace Game.SO.Behaviour.EntityOverworld.InstanceData
@@ -43,6 +45,8 @@ namespace Game.SO.Behaviour.EntityOverworld
 
             // movement
             Vector2 dire = InputSystem.actions["Move"].ReadValue<Vector2>();
+            if (!GameManager.AllCanMove)
+                controller.AIPath.destination = controller.transform.position;
 
             if (dire != Vector2.zero)
                 instanceData.facingDire = dire;
@@ -62,7 +66,7 @@ namespace Game.SO.Behaviour.EntityOverworld
                         LayerMask.NameToLayer("Interactable")
                     );
 
-                if (collider && collider.TryGetComponent(out InteractableHandler handler))
+                if (collider && collider.TryGetComponent(out ActionTriggerHandler handler) && handler.RequiresInteraction)
                     handler.TriggerInteraction();
 
             }

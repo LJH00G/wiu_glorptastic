@@ -5,7 +5,7 @@ using UnityEngine;
 using Utility.VisualizableDictionary;
 
 [RequireComponent(typeof(BoxCollider2D))]
-public class InteractableHandler : MonoBehaviour
+public class ActionTriggerHandler : MonoBehaviour
 {
     [Serializable]
     public struct Interaction
@@ -25,22 +25,24 @@ public class InteractableHandler : MonoBehaviour
         }
     }
 
-    [Header("Interaction")]
+    [Header("Triggering Action")]
     [SerializeField] int actionIndexToBeTriggered = 0;
     [SerializeField] Interaction defaultInteraction;
     [SerializeField] VisualizableDict<string, Interaction> flagOverrideInteractions;
 
-    [Header("Interaction Trigger")]
+    [Header("Trigger")]
+    [field: SerializeField]
+    public bool RequiresInteraction { get; private set; }
     [SerializeField] Vector2 offset;
     [SerializeField] Vector2 size;
-    [SerializeField, DisplayOnly] BoxCollider2D interactableCollider;
+    [SerializeField, DisplayOnly] BoxCollider2D actionTriggerCollider;
 
     void Awake()
     {
-        interactableCollider = GetComponent<BoxCollider2D>();
-        interactableCollider.offset = offset;
-        interactableCollider.size = size;
-        interactableCollider.isTrigger = true;
+        actionTriggerCollider = GetComponent<BoxCollider2D>();
+        actionTriggerCollider.offset = offset;
+        actionTriggerCollider.size = size;
+        actionTriggerCollider.isTrigger = true;
 
         gameObject.layer = LayerMask.NameToLayer("Interactable");
     }
@@ -64,6 +66,13 @@ public class InteractableHandler : MonoBehaviour
             flagOverrideInteractions[flagOverrideKey].Trigger(ref actionIndexToBeTriggered);
         else
             defaultInteraction.Trigger(ref actionIndexToBeTriggered);
+    }
+
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (!RequiresInteraction)
+            TriggerInteraction();
     }
 
 

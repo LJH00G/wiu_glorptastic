@@ -1,3 +1,4 @@
+using Game;
 using Game.SO.Behaviour.EntityOverworld;
 using Game.SO.Behaviour.EntityOverworld.InstanceData;
 using Pathfinding;
@@ -42,6 +43,9 @@ public class EntityOverworldController : MonoBehaviour
 
         if (behaviour)
             behaviour.BehaviourUpdate(this, dt);
+
+        if (!GameManager.AllCanMove)
+            AIPath.destination = transform.position;
     }
 
 
