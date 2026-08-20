@@ -1,5 +1,5 @@
 using UnityEngine;
-using Utility.DictionaryEntry;
+using Utility.VisualizableDictionary;
 using System.Collections.Generic;
 using System;
 using Game.SO.EventChannel;

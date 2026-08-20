@@ -16,7 +16,8 @@ namespace Puzzle
         public override bool CheckSolution(object attempt)
         {
             var placement = attempt as Dictionary<string, string>;
-            if (placement == null) return false;
+            if (placement == null) 
+                return false;
 
             Vector2 centerOfMass = ComputeCenterOfMass(placement);
             return Vector2.Distance(centerOfMass, targetOffset) <= tolerance;
