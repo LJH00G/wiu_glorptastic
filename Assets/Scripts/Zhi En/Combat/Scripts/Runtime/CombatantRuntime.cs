@@ -4,8 +4,8 @@ namespace Game.Combat
 {
     /// <summary>
     /// a live combatant for the duration of one battle - wraps whichever loadout/data SO it
-    /// came from (player / partner / enemy) into one common shape the CombatManager can use
-    /// without caring which side it's on. (I had to consult big gpt on how to make this work so TODO go rework it yourself like a human being)
+    /// came from (player / partner / enemy) into one common shape the CombatManager can drive
+    /// without caring which side it's on.
     /// </summary>
     public class CombatantRuntime
     {
@@ -38,7 +38,7 @@ namespace Game.Combat
                 maxHP = source.maxHP,
                 currentHP = source.maxHP,
                 maxCS = source.maxCS,
-                currentCS = 0,
+                currentCS = source.maxCS,
                 damage = source.TotalDamage(),
                 defense = source.TotalDefense(),
                 anchor = anchor,
@@ -93,7 +93,11 @@ namespace Game.Combat
             if (isDefending)
                 mitigated = Mathf.RoundToInt(mitigated * 0.5f); // TODO: tune the Defend damage-reduction ratio
 
-            mitigated = Mathf.Max(mitigated, 0);
+            // minimum damage floor - a real attack (incomingDamage > 0) always deals at least 1,
+            // even if defense would otherwise reduce it to 0 or below. Non-damage calls (0 or
+            // negative incoming) stay clamped at 0 so heals/etc. never route through here oddly.
+            mitigated = incomingDamage > 0 ? Mathf.Max(mitigated, 1) : Mathf.Max(mitigated, 0);
+
             currentHP = Mathf.Max(currentHP - mitigated, 0);
             return mitigated;
         }

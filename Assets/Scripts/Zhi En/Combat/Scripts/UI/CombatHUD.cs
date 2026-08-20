@@ -5,7 +5,8 @@ using UnityEngine;
 namespace Game.Combat
 {
     /// <summary>
-    /// top-left HP/CS numeric display, bottom-centre description textbox, and the indicator arrows (that are currently squares for some reason I'm not very smart I think)
+    /// top-left HP/CS numeric display, bottom-centre description textbox, and the downward
+    /// arrow(s) that hover over whichever combatant(s) are currently targeted.
     /// </summary>
     public class CombatHUD : MonoBehaviour
     {
@@ -22,6 +23,11 @@ namespace Game.Combat
         [SerializeField] RectTransform arrowPrefab;
         [SerializeField] Transform arrowPool;
         readonly List<RectTransform> activeArrows = new();
+
+        [Header("Enemy Health Bars")]
+        [SerializeField] EnemyHealthBarWidget enemyHealthBarPrefab;
+        [SerializeField] Transform enemyHealthBarPool;
+        readonly Dictionary<CombatantRuntime, EnemyHealthBarWidget> enemyHealthBars = new();
 
         void Awake()
         {
@@ -67,7 +73,9 @@ namespace Game.Combat
         }
 
         /// <summary>
-        /// converts a world-space point (e.g. a combatant's anchor) into screen space and applies it to a UI RectTransform. Works with the default Screen Space - Overlay canvas as long as your scene camera is tagged "MainCamera" - no special canvas setup needed.
+        /// converts a world-space point (e.g. a combatant's anchor) into screen space and applies
+        /// it to a UI RectTransform. Works with the default Screen Space - Overlay canvas as long
+        /// as your scene camera is tagged "MainCamera" - no special canvas setup needed.
         /// </summary>
         public static void PositionAboveWorldPoint(RectTransform uiElement, Vector3 worldPoint, float heightOffset = 1f)
         {
@@ -81,6 +89,40 @@ namespace Game.Combat
             foreach (var arrow in activeArrows)
                 if (arrow) Destroy(arrow.gameObject);
             activeArrows.Clear();
+        }
+
+        // -------------------------------------------------------------- enemy health bars
+
+        /// <summary>spawns one health bar below each given enemy - call once when a battle starts</summary>
+        public void SetupEnemyHealthBars(IEnumerable<CombatantRuntime> enemyList)
+        {
+            ClearEnemyHealthBars();
+            if (!enemyHealthBarPrefab) return;
+
+            foreach (var enemy in enemyList)
+            {
+                if (enemy == null || !enemy.anchor) continue;
+
+                var widget = Instantiate(enemyHealthBarPrefab, enemyHealthBarPool ? enemyHealthBarPool : transform);
+                widget.gameObject.SetActive(true);
+                PositionAboveWorldPoint(widget.GetComponent<RectTransform>(), enemy.anchor.position, -1f); // negative offset = below the enemy
+                widget.SetValue(enemy.currentHP, enemy.maxHP);
+                enemyHealthBars[enemy] = widget;
+            }
+        }
+
+        /// <summary>call whenever an enemy's HP might have changed (damage, heal, etc.)</summary>
+        public void UpdateEnemyHealthBar(CombatantRuntime enemy)
+        {
+            if (enemy != null && enemyHealthBars.TryGetValue(enemy, out var widget) && widget)
+                widget.SetValue(enemy.currentHP, enemy.maxHP);
+        }
+
+        public void ClearEnemyHealthBars()
+        {
+            foreach (var kv in enemyHealthBars)
+                if (kv.Value) Destroy(kv.Value.gameObject);
+            enemyHealthBars.Clear();
         }
     }
 }

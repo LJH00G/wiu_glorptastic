@@ -1,25 +1,34 @@
 using System;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Game.Combat
 {
     /// <summary>
-    /// "spam Z and X for 2 seconds" flee attempt. Required press count is (sum of all enemies' attack + defense) * 2, a failed attempt keeps its progress so the next attempt within the same battle needs fewer presses.
+    /// "spam Z and X for 2 seconds" flee attempt. Required press count is
+    /// (sum of all enemies' attack + defense) * 2 per the design doc; a failed attempt keeps
+    /// its progress so the next attempt within the same battle needs fewer presses - the
+    /// progress bar reflects that by starting partially filled on a second try.
     /// </summary>
     public class FleeMinigameController : MonoBehaviour
     {
         [SerializeField] float attemptDuration = 2f;
 
+        [Header("UI (positioned roughly where the attack mastery bar sits)")]
+        [SerializeField] GameObject barRoot;
+        [SerializeField] Image fillImage;
+
         CombatInputReader input;
         bool running;
         int requiredPresses;
-        int pressesSoFar; // carries over across failed attempts within one battle
+        int pressesSoFar;      // carries over across failed attempts within one battle
         float timer;
         Action<bool> onResult; // true = escaped
 
         public void Init(CombatInputReader inputReader)
         {
             input = inputReader;
+            if (barRoot) barRoot.SetActive(false);
         }
 
         /// <summary>call once per battle when a new set of enemies is loaded, or whenever their combined stats change</summary>
@@ -34,12 +43,16 @@ namespace Game.Combat
             timer = attemptDuration;
             running = true;
             input.OnConfirmOrCancelHeldThisFrame.Subscribe(HandlePress);
+
+            if (barRoot) barRoot.SetActive(true);
+            RefreshBar(); // shows the carried-over progress immediately, even before the first new press
         }
 
         void HandlePress(bool isZ)
         {
             if (!running) return;
             pressesSoFar++;
+            RefreshBar();
         }
 
         void Update()
@@ -67,11 +80,18 @@ namespace Game.Combat
             running = false;
             input.OnConfirmOrCancelHeldThisFrame.Unsubscribe(HandlePress);
 
+            if (barRoot) barRoot.SetActive(false);
+
             if (success)
                 pressesSoFar = 0; // battle's over anyway, but reset for cleanliness
             // on failure pressesSoFar is deliberately NOT reset, so the next attempt is easier
 
             onResult?.Invoke(success);
+        }
+
+        void RefreshBar()
+        {
+            if (fillImage) fillImage.fillAmount = Progress01;
         }
 
         /// <summary>0-1, useful for driving a progress bar UI</summary>

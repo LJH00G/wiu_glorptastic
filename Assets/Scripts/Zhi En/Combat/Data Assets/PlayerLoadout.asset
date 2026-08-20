@@ -26,6 +26,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 4baeec0de38bb3849881e3eb3994e991, type: 2}
   inventory:
   - item: {fileID: 11400000, guid: 4cf82c94f6dc8d04baf9e7793f63576d, type: 2}
-    count: 3
+    count: 30
   - item: {fileID: 11400000, guid: afccdd405affc864fbc2570d941dc4ff, type: 2}
-    count: 3
+    count: 30

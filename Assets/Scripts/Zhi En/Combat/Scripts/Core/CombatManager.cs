@@ -5,15 +5,10 @@ using UnityEngine;
 namespace Game.Combat
 {
     /// <summary>
-    /// Drives the whole battle: player/partner take one action per round (see the note on
-    /// "Switch to Partner" below), then every alive enemy acts in order, repeat until someone wins.
-    ///
-    /// DESIGN ASSUMPTION (flag this with your team): only ONE ally acts per round, like a
-    /// party-swap system. Picking "Switch to Partner" from the Actions menu hands the current
-    /// round's single action to the partner instead of ending the round - it does not give both
-    /// of them a turn in the same round. This was the cleanest reading of "Actions contains
-    /// Switch to Partner" from the design doc; change BeginAllyRound()/OnActionsSubSelected()
-    /// if you actually want both to act every round.
+    /// Drives the whole battle. Each round: Player acts, then Partner acts (if present and
+    /// alive), then every alive enemy acts, then repeat. Choosing "Switch to Partner" from the
+    /// player's Actions menu reorders JUST that round so the Partner goes first, then the
+    /// Player - the next round goes back to the normal Player-then-Partner order automatically.
     /// </summary>
     public class CombatManager : MonoBehaviour
     {
@@ -22,12 +17,12 @@ namespace Game.Combat
         [SerializeField] PartnerLoadoutSO partnerLoadout; // leave empty if partner isn't unlocked yet
         [SerializeField] EnemyDataSO[] enemyEncounter;
 
-        [Header("Anchors")]
+        [Header("Anchors (world positions to spawn/point arrows at)")]
         [SerializeField] Transform playerAnchor;
         [SerializeField] Transform partnerAnchor;
         [SerializeField] Transform[] enemyAnchors;
 
-        [Header("Linking Stuff")]
+        [Header("Wiring")]
         [SerializeField] CombatInputReader input;
         [SerializeField] CombatHUD hud;
         [SerializeField] CombatMenuUI menuUI;
@@ -40,7 +35,10 @@ namespace Game.Combat
         CombatantRuntime partner; // null if not brought into this battle
         List<CombatantRuntime> enemies = new();
 
-        CombatantRuntime activeAlly; // whichever of player/partner is acting this round
+        // this round's ally turn order - rebuilt fresh every round as [player, partner], and
+        // only ever reordered mid-round by "Switch to Partner" (see ShowActionsMenu)
+        List<CombatantRuntime> allyTurnOrder = new();
+        int allyTurnIndex;
 
         List<CombatantRuntime> Allies => partner != null
             ? new List<CombatantRuntime> { player, partner }
@@ -68,6 +66,8 @@ namespace Game.Combat
             flee.Init(input);
             mastery.Init(input);
 
+            hud.SetupEnemyHealthBars(enemies);
+
             BeginAllyRound();
         }
 
@@ -76,12 +76,26 @@ namespace Game.Combat
             player.isDefending = false;
             if (partner != null) partner.isDefending = false;
 
-            activeAlly = player;
-            ApplyStartOfTurnRegen(player);
+            hud.ClearTargetArrows(); // clears any arrow left over from the previous enemy phase
+
+            allyTurnOrder = new List<CombatantRuntime> { player };
+            if (partner != null && partner.isAlive) allyTurnOrder.Add(partner);
+            allyTurnIndex = 0;
 
             hud.UpdateStats(player.currentHP, player.maxHP, player.currentCS, player.maxCS);
+
+            BeginAllyTurn();
+        }
+
+        void BeginAllyTurn()
+        {
+            var actor = allyTurnOrder[allyTurnIndex];
+            ApplyStartOfTurnRegen(actor);
+
             state = CombatState.MAIN_MENU;
-            ShowMenuFor(player, isPlayer: true);
+            ShowMenuFor(actor, isPlayer: actor == player);
+
+            hud.UpdateStats(player.currentHP, player.maxHP, player.currentCS, player.maxCS); // debug test
         }
 
         void ApplyStartOfTurnRegen(CombatantRuntime actor)
@@ -96,7 +110,7 @@ namespace Game.Combat
             state = CombatState.MAIN_MENU;
             var options = isPlayer
                 ? new List<CombatMenuOption> { CombatMenuOption.COMBAT, CombatMenuOption.ACTIONS, CombatMenuOption.ITEMS, CombatMenuOption.FLEE }
-                : new List<CombatMenuOption> { CombatMenuOption.COMBAT, CombatMenuOption.ACTIONS }; // partner list
+                : new List<CombatMenuOption> { CombatMenuOption.COMBAT, CombatMenuOption.ACTIONS }; // partner: no items/flee, per design doc
 
             menuUI.ShowIconRow(options, actor.anchor, idx => OnMainMenuSelected(actor, isPlayer, (CombatMenuOption)idx), () => { /* nothing to cancel back to at the root */ });
         }
@@ -128,7 +142,11 @@ namespace Game.Combat
 
         void ShowActionsMenu(CombatantRuntime actor, bool isPlayer)
         {
-            bool showSwitch = isPlayer && partner != null && partner.isAlive;
+            // only offer the swap while the partner hasn't acted yet this round - once they've
+            // gone (or been swapped in already), this naturally stops showing up again
+            bool partnerStillPending = partner != null && partner.isAlive && allyTurnOrder.IndexOf(partner) > allyTurnIndex;
+            bool showSwitch = isPlayer && partnerStillPending;
+
             List<AbilitySO> abilities = actor.playerSource != null ? actor.playerSource.knownAbilities : actor.partnerSource.knownAbilities;
 
             List<string> labels = new();
@@ -140,9 +158,14 @@ namespace Game.Combat
             {
                 if (showSwitch && idx == 0)
                 {
-                    activeAlly = partner;
-                    hud.ShowDescription($"{player.displayName} swaps in {partner.displayName}!");
-                    ShowMenuFor(partner, isPlayer: false);
+                    // swap the remaining order for this round only - partner acts now,
+                    // player picks up their action again right after
+                    int partnerIndex = allyTurnOrder.IndexOf(partner);
+                    (allyTurnOrder[allyTurnIndex], allyTurnOrder[partnerIndex]) = (allyTurnOrder[partnerIndex], allyTurnOrder[allyTurnIndex]);
+
+                    hud.ShowDescription($"{player.displayName} lets {partner.displayName} go first!");
+                    menuUI.HideAll();
+                    BeginAllyTurn(); // now shows whichever combatant landed on allyTurnIndex (the partner)
                     return;
                 }
 
@@ -157,10 +180,16 @@ namespace Game.Combat
             if (actor.currentCS < ability.curseCost)
             {
                 hud.ShowDescription("Not enough curse energy!");
-                return; // stays on submenu, let them pick something else
+                return; // stays on the submenu, let them pick something else
             }
 
             hud.ShowDescription(ability.description);
+
+            // stop the submenu from listening for Z/arrow-keys before target selection takes
+            // over input - otherwise a leftover submenu handler can re-fire on the very next
+            // Z press and re-trigger this selection on top of whatever comes next.
+            menuUI.HideAll();
+
             state = CombatState.TARGET_SELECT;
             targetSelector.BeginSelection(ability.targetType, actor, Allies, enemies,
                 targets => ResolveAbility(actor, ability, targets),
@@ -169,7 +198,8 @@ namespace Game.Combat
 
         void ShowItemsMenu(CombatantRuntime actor, bool isPlayer)
         {
-            // items are player only
+            // items are player-only per the design doc (partner menu never offers this option,
+            // but guard here too in case ShowItemsMenu gets called from elsewhere)
             if (actor.playerSource == null) return;
 
             var inventory = actor.playerSource.inventory;
@@ -187,6 +217,9 @@ namespace Game.Combat
         void OnItemSelected(CombatantRuntime actor, int inventoryIndex, ItemSO item)
         {
             hud.ShowDescription(item.description);
+
+            menuUI.HideAll(); // see the comment in OnAbilitySelected - same fix applies here
+
             state = CombatState.TARGET_SELECT;
             targetSelector.BeginSelection(item.targetType, actor, Allies, enemies,
                 targets =>
@@ -207,6 +240,8 @@ namespace Game.Combat
             var subOption = (CombatSubOption)idx;
             if (subOption == CombatSubOption.ATTACK)
             {
+                menuUI.HideAll(); // see the comment in OnAbilitySelected - same fix applies here
+
                 state = CombatState.TARGET_SELECT;
                 targetSelector.BeginSelection(CombatTargetType.SINGLE_ENEMY, actor, Allies, enemies,
                     targets => ResolveAttack(actor, targets[0]),
@@ -222,8 +257,9 @@ namespace Game.Combat
         {
             hud.ClearTargetArrows();
 
-            // attack mastery currently skips for the partner/enemies for now (AttackMasteryController todo change later).
-            if (actor == player)
+            // attack mastery triggers for every ally attack (player AND partner), never for
+            // enemies - see AttackMasteryController for the timing-window logic itself.
+            if (actor != null && actor.actorType != ActorType.ENEMY)
             {
                 float width = 0.25f * playerLoadout.TotalMasteryWidthMultiplier(); // TODO: tune base window width
                 mastery.BeginAttempt(width, bonusHit => FinishAttack(actor, target, bonusHit ? 1 : 0));
@@ -309,12 +345,29 @@ namespace Game.Combat
                 else
                 {
                     hud.ShowDescription("Couldn't escape!");
-                    EndAllyAction();
+                    // a failed flee spends the whole party's turn, not just the current actor's -
+                    // skip straight to the enemy phase rather than letting the next ally act
+                    SkipToEnemyTurn();
                 }
             });
         }
 
         void EndAllyAction()
+        {
+            if (state == CombatState.BATTLE_WON || state == CombatState.BATTLE_LOST || state == CombatState.FLED)
+                return;
+
+            menuUI.HideAll();
+            hud.ClearTargetArrows();
+
+            allyTurnIndex++;
+            if (allyTurnIndex < allyTurnOrder.Count)
+                BeginAllyTurn();
+            else
+                BeginEnemyTurn();
+        }
+
+        void SkipToEnemyTurn()
         {
             if (state == CombatState.BATTLE_WON || state == CombatState.BATTLE_LOST || state == CombatState.FLED)
                 return;
@@ -328,9 +381,9 @@ namespace Game.Combat
         {
             state = CombatState.ENEMY_TURN;
 
-            /* TODO: this resolves every enemy's move back-to-back with no pause, once you have
-            sprites/animations, drive this with a coroutine or DelayedCallbackInvoker so each
-            hit has a beat before the next one starts. */
+            // TODO: this resolves every enemy's move back-to-back with no pause - once you have
+            // sprites/animations, drive this with a coroutine or DelayedCallbackInvoker so each
+            // hit has a beat before the next one starts.
             foreach (var enemy in enemies.ToList())
             {
                 if (!enemy.isAlive) continue;
@@ -354,7 +407,7 @@ namespace Game.Combat
             List<CombatantRuntime> targets = move.targetType switch
             {
                 CombatTargetType.SELF => new List<CombatantRuntime> { enemy },
-                CombatTargetType.ALL_ENEMIES => Allies.Where(a => a.isAlive).ToList(),   // "enemies" from the attacking enemy pov is the player's side
+                CombatTargetType.ALL_ENEMIES => Allies.Where(a => a.isAlive).ToList(),   // "enemies" from the attacking enemy's POV = the player's side
                 CombatTargetType.SELF_AND_PARTNER => Allies.Where(a => a.isAlive).ToList(),
                 _ => new List<CombatantRuntime> { RandomAliveAlly() },
             };
@@ -389,6 +442,9 @@ namespace Game.Combat
 
         void CheckDeaths()
         {
+            foreach (var e in enemies)
+                hud.UpdateEnemyHealthBar(e);
+
             if (enemies.All(e => !e.isAlive))
             {
                 state = CombatState.BATTLE_WON;
@@ -412,7 +468,8 @@ namespace Game.Combat
             hud.ShowDescription(state == CombatState.FLED ? "Got away safely!" : (won ? "Victory!" : "You were defeated..."));
             input.InputEnabled = false;
 
-            // TODO: hook this into SceneSwitchController (see your project's SceneSwitchController.cs to return to the overworld / show a reward screen / trigger a game-over flow.
+            // TODO: hook this into SceneSwitchController (see your project's SceneSwitchController.cs)
+            // to return to the overworld / show a reward screen / trigger a game-over flow.
         }
     }
 }

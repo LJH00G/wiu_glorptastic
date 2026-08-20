@@ -7,7 +7,8 @@ using UnityEngine.UI;
 namespace Game.Combat
 {
     /// <summary>
-    /// the row of option icons that floats above a combatant's head (Combat/Actions/Items/Flee), and the small textbox that replaces it once one icon is chosen. Pure UI/navigation, CombatManager decides what the options actually do.
+    /// the row of option icons that floats above a combatant's head (Combat/Actions/Items/Flee),
+    /// and the small textbox that replaces it once one icon is chosen.
     /// </summary>
     public class CombatMenuUI : MonoBehaviour
     {
@@ -16,14 +17,18 @@ namespace Game.Combat
         [SerializeField] Image[] icons; // assign in the order: Combat, Actions, Items, Flee
         [SerializeField] Color normalColor = Color.white;
         [SerializeField] Color highlightColor = Color.yellow;
+        [Tooltip("the IconRow's own HorizontalLayoutGroup - spacing shrinks automatically for shorter menus (e.g. the partner's 2-icon menu)")]
+        [SerializeField] HorizontalLayoutGroup iconRowLayout;
+        [SerializeField] float fullMenuSpacing = 20f;
+        [SerializeField] float reducedMenuSpacing = 8f;
 
         [Header("Submenu textbox")]
         [SerializeField] GameObject submenuRoot;
-        [SerializeField] TextMeshProUGUI[] submenuLabels; // pre-allocate 6 and hide unused ones (TODO can reduce later maybe)
+        [SerializeField] TextMeshProUGUI[] submenuLabels; // pre-allocate a handful (e.g. 6) and hide unused ones
 
         CombatInputReader input;
 
-        List<int> activeIconIndices = new();  // indices into icons that are currently selectable (partner has fewer than player)
+        List<int> activeIconIndices = new();  // indices into `icons` that are currently selectable (partner has fewer than player)
         int iconCursor;
 
         List<string> currentSubOptions = new();
@@ -63,7 +68,12 @@ namespace Game.Combat
             foreach (var opt in availableOptions)
                 activeIconIndices.Add((int)opt);
 
-            iconCursor = 0;
+            // keep whatever was highlighted before (e.g. after cancelling out of a submenu) -
+            // only snap back to the first option if the old cursor no longer fits this menu
+            // (different actor / different option count)
+            if (iconCursor < 0 || iconCursor >= activeIconIndices.Count)
+                iconCursor = 0;
+
             onIconConfirmed = onConfirmed;
             onCancelled = onCancel;
 
@@ -71,6 +81,8 @@ namespace Game.Combat
             if (iconRowRoot) iconRowRoot.SetActive(true);
 
             if (anchor) CombatHUD.PositionAboveWorldPoint(iconRowRoot.GetComponent<RectTransform>(), anchor.position, 1.5f);
+
+            if (iconRowLayout) iconRowLayout.spacing = activeIconIndices.Count <= 2 ? reducedMenuSpacing : fullMenuSpacing;
 
             for (int i = 0; i < icons.Length; i++)
                 if (icons[i]) icons[i].gameObject.SetActive(activeIconIndices.Contains(i));
