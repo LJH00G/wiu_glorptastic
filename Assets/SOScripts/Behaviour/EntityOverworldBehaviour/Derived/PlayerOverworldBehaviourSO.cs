@@ -2,6 +2,7 @@
 using Game.SO.Behaviour.EntityOverworld.InstanceData;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Rendering;
 
 
 namespace Game.SO.Behaviour.EntityOverworld.InstanceData
@@ -22,14 +23,21 @@ namespace Game.SO.Behaviour.EntityOverworld
         {
             if (controller.InstanceData is not PlayerOverworldBehaviourInstanceData)
                 controller.InstanceData = new PlayerOverworldBehaviourInstanceData();
+
+            controller.AIPath.orientation = Pathfinding.OrientationMode.YAxisForward;
+            controller.AIPath.maxSpeed = speed;
+            controller.AIPath.maxAcceleration = acceleration;
+            controller.AIPath.pickNextWaypointDist = 0.5f;
+            controller.AIPath.slowdownDistance = 0;
+            controller.AIPath.endReachedDistance = 0;
+
         }
 
         public override void BehaviourUpdate(EntityOverworldController controller, float dt)
         {
             Vector2 moveDire = InputSystem.actions["Move"].ReadValue<Vector2>();
 
-            // do stuff 
-
+            controller.AIPath.destination = (Vector2)controller.transform.position + moveDire * 0.1f;
         }
 
     }

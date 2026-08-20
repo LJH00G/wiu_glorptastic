@@ -1,14 +1,22 @@
 using Game.SO.Behaviour.EntityOverworld;
 using Game.SO.Behaviour.EntityOverworld.InstanceData;
+using Pathfinding;
 using UnityEngine;
 
+
+[RequireComponent(typeof(AIPath))]
 public class EntityOverworldController : MonoBehaviour
 {
+
+    [Header("Data")]
+    [SerializeField] float radius = 0.25f;
 
     [Header("Behaviour")]
     [SerializeField] EntityOverworldBehaviourSO behaviour;
     [field: SerializeField]
     public EntityOverworldBehaviourInstanceData InstanceData { get; set; }
+
+    public AIPath AIPath { get; private set; }
 
 
     public void SetBehaviour(EntityOverworldBehaviourSO behaviour)
@@ -20,6 +28,10 @@ public class EntityOverworldController : MonoBehaviour
 
     void Start()
     {
+        AIPath = GetComponent<AIPath>();
+        AIPath.radius = radius;
+        AIPath.gravity = Vector3.zero;
+
         SetBehaviour(behaviour);
     }
 
@@ -27,7 +39,8 @@ public class EntityOverworldController : MonoBehaviour
     {
         float dt = Time.deltaTime;
 
-        behaviour.BehaviourUpdate(this, dt);
+        if (behaviour)
+            behaviour.BehaviourUpdate(this, dt);
     }
 
 
@@ -36,6 +49,10 @@ public class EntityOverworldController : MonoBehaviour
     EntityOverworldBehaviourSO prevBehaviour;
     private void OnValidate()
     {
+        AIPath = GetComponent<AIPath>();
+        AIPath.radius = radius;
+        AIPath.gravity = Vector3.zero;
+
         if (prevBehaviour != behaviour)
         {
             prevBehaviour = behaviour;
@@ -45,7 +62,8 @@ public class EntityOverworldController : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        behaviour.BehaviourOnDrawGizmosSelected(this);
+        if (behaviour)
+            behaviour.BehaviourOnDrawGizmosSelected(this);
     }
 #endif
 

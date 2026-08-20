@@ -13,7 +13,7 @@ namespace Game.SO.Data.TextMarkup.Dialogue
         public struct DialoguePage
         {
             public DialogueSpeakerSO speaker;
-            public string text;
+            [TextArea] public string text;
         }
 
         [field: SerializeField]

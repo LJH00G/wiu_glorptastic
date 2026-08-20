@@ -18,6 +18,7 @@ namespace Game.SO.Behaviour.EntityOverworld
     [CreateAssetMenu(fileName = "EnemyOverworld_Behaviour", menuName = "Scriptable Objects/Behaviour/EntityOverworld/NPCOverworld/EnemyOverworldBehaviourSO")]
     public class EnemyOverworldBehaviourSO : NPCOverworldBehaviourSO
     {
+        [Header("Enemy")]
         [SerializeField] bool useExternalTriggerDetection;
         [SerializeField] float detectionRange;
 
@@ -25,6 +26,14 @@ namespace Game.SO.Behaviour.EntityOverworld
         {
             if (controller.InstanceData is not EnemyOverworldBehaviourInstanceData)
                 controller.InstanceData = new EnemyOverworldBehaviourInstanceData();
+
+            controller.AIPath.orientation = Pathfinding.OrientationMode.YAxisForward;
+            controller.AIPath.maxSpeed = speed;
+            controller.AIPath.maxAcceleration = acceleration;
+            controller.AIPath.pickNextWaypointDist = 0.75f;
+            controller.AIPath.slowdownDistance = 1.5f;
+            controller.AIPath.endReachedDistance = 0.25f;
+
         }
 
         public override void BehaviourUpdate(EntityOverworldController controller, float dt)
