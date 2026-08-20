@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Game.SO.Data.Item;
-using Game.SO.Data.Item.Sellable.Battle;
 
 namespace Game.Inventory
 {
@@ -13,6 +12,9 @@ namespace Game.Inventory
         [Header("List (goes inside your ScrollRect's Content)")]
         [SerializeField] Transform contentParent;
         [SerializeField] InventoryItemUI itemUIPrefab;
+
+        [Header("Detail Panel")]
+        [SerializeField] ItemDetailUI itemDetailUI;
 
         readonly List<InventoryItemUI> spawned = new();
 
@@ -35,10 +37,9 @@ namespace Game.Inventory
             {
                 InventoryItemUI row = Instantiate(itemUIPrefab);
                 row.transform.SetParent(contentParent, false);
-                row.OnEquipRequested += HandleEquipRequested;
+                row.OnDetailsRequested += HandleDetailsRequested;
                 spawned.Add(row);
             }
-
 
             while (spawned.Count > stacks.Count)
             {
@@ -54,10 +55,12 @@ namespace Game.Inventory
             }
         }
 
-        void HandleEquipRequested(ItemSO item)
+        void HandleDetailsRequested(ItemSO item)
         {
-            if (item is BattleItemSO battleItem)
-                inventoryManager.EquipItem(battleItem);
+            if (item && itemDetailUI)
+            {
+                itemDetailUI.Show(item);
+            }
         }
     }
 }

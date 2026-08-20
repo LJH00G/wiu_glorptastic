@@ -6,7 +6,6 @@ using Game.SO.Data.Item;
 
 namespace Game.Inventory
 {
-
     public class EquipmentSlotUI : MonoBehaviour
     {
         [Header("Refs")]
@@ -15,18 +14,21 @@ namespace Game.Inventory
 
         static readonly Dictionary<Texture2D, Sprite> spriteCache = new();
 
-        public event Action OnUnequipRequested;
+        public ItemSO BoundItem { get; private set; }
+        public event Action<ItemSO> OnSlotClicked;
 
         void Awake()
         {
             if (clickButton)
             {
-                clickButton.onClick.AddListener(() => OnUnequipRequested?.Invoke());
+                clickButton.onClick.AddListener(() => OnSlotClicked?.Invoke(BoundItem));
             }
         }
 
         public void SetItem(ItemSO item)
         {
+            BoundItem = item;
+
             if (!icon)
             {
                 return;

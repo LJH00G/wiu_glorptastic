@@ -1,4 +1,5 @@
 using UnityEngine;
+using Game.SO.Data.Item;
 
 namespace Game.Inventory
 {
@@ -11,14 +12,16 @@ namespace Game.Inventory
         [SerializeField] EquipmentSlotUI weaponSlot;
         [SerializeField] EquipmentSlotUI[] accessorySlots;
 
+        [Header("Detail Panel")]
+        [SerializeField] ItemDetailUI itemDetailUI;
+
         void Awake()
         {
-            weaponSlot.OnUnequipRequested += () => inventoryManager.UnequipWeapon();
+            weaponSlot.OnSlotClicked += HandleSlotClicked;
 
-            for (int i = 0; i < accessorySlots.Length; i++)
+            foreach (var slot in accessorySlots)
             {
-                int slotIndex = i;
-                accessorySlots[i].OnUnequipRequested += () => inventoryManager.UnequipAccessory(slotIndex);
+                slot.OnSlotClicked += HandleSlotClicked;
             }
         }
 
@@ -41,6 +44,14 @@ namespace Game.Inventory
             for (int i = 0; i < accessorySlots.Length && i < accessories.Length; i++)
             {
                 accessorySlots[i].SetItem(accessories[i]);
+            }
+        }
+
+        void HandleSlotClicked(ItemSO item)
+        {
+            if (item && itemDetailUI)
+            {
+                itemDetailUI.Show(item);
             }
         }
     }

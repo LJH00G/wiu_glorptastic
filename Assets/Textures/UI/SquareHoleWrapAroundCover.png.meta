@@ -1,0 +1,676 @@
+fileFormatVersion: 2
+guid: 130a805379f95da469f931c5df9024e5
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6874979215737448108
+    second: SquareHoleWrapAroundCover_0
+  - first:
+      213: -1613713189376386985
+    second: SquareHoleWrapAroundCover_1
+  - first:
+      213: -6692606421517252833
+    second: SquareHoleWrapAroundCover_2
+  - first:
+      213: -2198383637820525086
+    second: SquareHoleWrapAroundCover_3
+  - first:
+      213: -7561069840996534410
+    second: SquareHoleWrapAroundCover_4
+  - first:
+      213: -6746267939565174585
+    second: SquareHoleWrapAroundCover_5
+  - first:
+      213: 5808197564916577517
+    second: SquareHoleWrapAroundCover_6
+  - first:
+      213: 2824193230869568778
+    second: SquareHoleWrapAroundCover_7
+  - first:
+      213: -2621428247826146675
+    second: SquareHoleWrapAroundCover_8
+  - first:
+      213: 2176339797442586548
+    second: SquareHoleWrapAroundCover_9
+  - first:
+      213: 5981833277528245273
+    second: SquareHoleWrapAroundCover_10
+  - first:
+      213: 9215641981085266477
+    second: SquareHoleWrapAroundCover_11
+  - first:
+      213: 2523425530912881459
+    second: SquareHoleWrapAroundCover_12
+  - first:
+      213: 3602063925003525727
+    second: SquareHoleWrapAroundCover_13
+  - first:
+      213: 5245893976605029736
+    second: SquareHoleWrapAroundCover_14
+  - first:
+      213: -6751053844245409268
+    second: SquareHoleWrapAroundCover_15
+  - first:
+      213: 2393838114395200171
+    second: SquareHoleWrapAroundCover_16
+  - first:
+      213: -7966165768835040948
+    second: SquareHoleWrapAroundCover_17
+  - first:
+      213: -3256264107194374510
+    second: SquareHoleWrapAroundCover_18
+  - first:
+      213: -2196486000499601258
+    second: SquareHoleWrapAroundCover_19
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: SquareHoleWrapAroundCover_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 52
+        width: 24
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca66938eb25d86f50800000000000000
+      internalID: 6874979215737448108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquareHoleWrapAroundCover_1
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 54
+        width: 15
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7589bd17760fa99e0800000000000000
+      internalID: -1613713189376386985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquareHoleWrapAroundCover_2
+      rect:
+        serializedVersion: 2
+        x: 39
+        y: 52
+        width: 24
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1747f72be51f13a0800000000000000
+      internalID: -6692606421517252833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquareHoleWrapAroundCover_3
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 53
+        width: 24
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e53dab9ab5cd71e0800000000000000
+      internalID: -2198383637820525086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquareHoleWrapAroundCover_4
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 55
+        width: 15
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6777b753a0fa11790800000000000000
+      internalID: -7561069840996534410
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquareHoleWrapAroundCover_5
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 53
+        width: 24
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7c08c9e5d017062a0800000000000000
+      internalID: -6746267939565174585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquareHoleWrapAroundCover_6
+      rect:
+        serializedVersion: 2
+        x: 126
+        y: 52
+        width: 24
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de4342289ecda9050800000000000000
+      internalID: 5808197564916577517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquareHoleWrapAroundCover_7
+      rect:
+        serializedVersion: 2
+        x: 150
+        y: 54
+        width: 15
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0d1b0fb7cc813720800000000000000
+      internalID: 2824193230869568778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquareHoleWrapAroundCover_8
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 52
+        width: 24
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d8ad524c5e0de9bd0800000000000000
+      internalID: -2621428247826146675
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquareHoleWrapAroundCover_9
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 51
+        width: 24
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b76c19d389e33e10800000000000000
+      internalID: 2176339797442586548
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquareHoleWrapAroundCover_10
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 51
+        width: 37
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9148eac3cadb30350800000000000000
+      internalID: 5981833277528245273
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquareHoleWrapAroundCover_11
+      rect:
+        serializedVersion: 2
+        x: 255
+        y: 51
+        width: 57
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d22b3c32e8984ef70800000000000000
+      internalID: 9215641981085266477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquareHoleWrapAroundCover_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 31
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33bb6339622050320800000000000000
+      internalID: 2523425530912881459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquareHoleWrapAroundCover_13
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 31
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5e95142e0a1df130800000000000000
+      internalID: 3602063925003525727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquareHoleWrapAroundCover_14
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 0
+        width: 31
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86577ec17c82dc840800000000000000
+      internalID: 5245893976605029736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquareHoleWrapAroundCover_15
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 0
+        width: 31
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c02973a1c407f42a0800000000000000
+      internalID: -6751053844245409268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquareHoleWrapAroundCover_16
+      rect:
+        serializedVersion: 2
+        x: 127
+        y: 1
+        width: 31
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: baa115af41f983120800000000000000
+      internalID: 2393838114395200171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquareHoleWrapAroundCover_17
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 1
+        width: 31
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c49f5b6907e727190800000000000000
+      internalID: -7966165768835040948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquareHoleWrapAroundCover_18
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 2
+        width: 59
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29623d30c0d6fc2d0800000000000000
+      internalID: -3256264107194374510
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: SquareHoleWrapAroundCover_19
+      rect:
+        serializedVersion: 2
+        x: 254
+        y: 3
+        width: 59
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6905a1abe938481e0800000000000000
+      internalID: -2196486000499601258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      SquareHoleWrapAroundCover_0: 6874979215737448108
+      SquareHoleWrapAroundCover_1: -1613713189376386985
+      SquareHoleWrapAroundCover_10: 5981833277528245273
+      SquareHoleWrapAroundCover_11: 9215641981085266477
+      SquareHoleWrapAroundCover_12: 2523425530912881459
+      SquareHoleWrapAroundCover_13: 3602063925003525727
+      SquareHoleWrapAroundCover_14: 5245893976605029736
+      SquareHoleWrapAroundCover_15: -6751053844245409268
+      SquareHoleWrapAroundCover_16: 2393838114395200171
+      SquareHoleWrapAroundCover_17: -7966165768835040948
+      SquareHoleWrapAroundCover_18: -3256264107194374510
+      SquareHoleWrapAroundCover_19: -2196486000499601258
+      SquareHoleWrapAroundCover_2: -6692606421517252833
+      SquareHoleWrapAroundCover_3: -2198383637820525086
+      SquareHoleWrapAroundCover_4: -7561069840996534410
+      SquareHoleWrapAroundCover_5: -6746267939565174585
+      SquareHoleWrapAroundCover_6: 5808197564916577517
+      SquareHoleWrapAroundCover_7: 2824193230869568778
+      SquareHoleWrapAroundCover_8: -2621428247826146675
+      SquareHoleWrapAroundCover_9: 2176339797442586548
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
