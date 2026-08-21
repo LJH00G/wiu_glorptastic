@@ -1,4 +1,5 @@
 using Game.SO.Data.Item;
+using Game.SO.Data.Item.Sellable;
 using Game.SO.Data.Item.Sellable.Battle;
 using Game.SO.Data.Shop;
 using Game.SO.EventChannel;
@@ -49,6 +50,8 @@ namespace Game.Inventory
                 return;
             }
 
+
+            // remove resource
             if (cost.useShell)
             {
                 DeductShell(cost.shell);
@@ -58,6 +61,7 @@ namespace Game.Inventory
                 RemoveItem(stack.item, stack.count);
             }
 
+            // add resource
             ref Shopable product = ref trade.product;
             if (product.useShell)
             {
@@ -288,7 +292,7 @@ namespace Game.Inventory
                 slotIndex = Array.IndexOf(slots, null);
                 if (slotIndex < 0)
                 {
-                    slotIndex = 0;
+                    return false;
                 }
             }
 
@@ -305,6 +309,11 @@ namespace Game.Inventory
             return true;
         }
 
+        public bool HasFreeAccessorySlot()
+        {
+            return Array.IndexOf(inventory.EquipedAccessoryList, null) >= 0;
+        }
+
         public void UnequipAccessory(int slotIndex)
         {
             var slots = inventory.EquipedAccessoryList;
@@ -318,19 +327,31 @@ namespace Game.Inventory
             OnInventoryChanged?.Invoke();
         }
 
+        public bool SellItem(SellableItemSO item, uint amount = 1)
+        {
+            if (!item || amount == 0 || !HasItemInList(item, out uint available) || available < amount)
+            {
+                return false;
+            }
+            RemoveItem(item, amount);
+            RecieveShell(item.SellValue * (int)amount);
+
+            return true;
+        }
 
 
 
 
-        //private void OnEnable()
-        //{
-        //    shopPurchaseEventChannel.Subscribe(HandleShopPurchase);
-        //}
 
-        //private void OnDisable()
-        //{
-        //    shopPurchaseEventChannel.Unsubscribe(HandleShopPurchase);
-        //}
+        private void OnEnable()
+        {
+            shopPurchaseEventChannel.Subscribe(HandleShopPurchase);
+        }
+
+        private void OnDisable()
+        {
+            shopPurchaseEventChannel.Unsubscribe(HandleShopPurchase);
+        }
 
     }
 }

@@ -10,15 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d5b422a522e66c540b49bba118068c9f, type: 3}
-  m_Name: WeaponItem_test
+  m_Name: WeaponItem_test 2
   m_EditorClassIdentifier: Assembly-CSharp::Game.SO.Data.Item.Sellable.Battle.WeaponItemSO
-  <Name>k__BackingField: Weapon1
+  <Name>k__BackingField: Weapon3
   <Texture>k__BackingField: {fileID: 2800000, guid: 9ae274b4a1a11374dbb47368c9c05ec2, type: 3}
-  <Description>k__BackingField: ' weapons that weapon while i stroke my cat and cry'
-  <SellValue>k__BackingField: 1321
+  <Description>k__BackingField: glorp glorp glorp glorptastic till i shimi my glorp
+    on the limilimi hululu
+  <SellValue>k__BackingField: 123
   <curseAbilityList>k__BackingField: []
-  <ExtraMaxHP>k__BackingField: 1
-  <ExtraMaxCurse>k__BackingField: 313
+  <ExtraMaxHP>k__BackingField: 12
+  <ExtraMaxCurse>k__BackingField: 67
   <ExtraDamage>k__BackingField: 67
-  <ExtraDefence>k__BackingField: 33
-  <Dmage>k__BackingField: 1
+  <ExtraDefence>k__BackingField: 67
+  <Dmage>k__BackingField: 123

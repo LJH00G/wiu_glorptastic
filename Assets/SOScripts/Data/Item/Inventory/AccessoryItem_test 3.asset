@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aca77b464a3c090499a53b4ffe36c908, type: 3}
+  m_Name: AccessoryItem_test 3
+  m_EditorClassIdentifier: Assembly-CSharp::Game.SO.Data.Item.Sellable.Battle.AccessoryItemSO
+  <Name>k__BackingField: Accesory4
+  <Texture>k__BackingField: {fileID: 2800000, guid: 9ae274b4a1a11374dbb47368c9c05ec2, type: 3}
+  <Description>k__BackingField: Shimi glorp glorp glorp bululululu
+  <SellValue>k__BackingField: 123
+  <curseAbilityList>k__BackingField: []
+  <ExtraMaxHP>k__BackingField: 0
+  <ExtraMaxCurse>k__BackingField: 1
+  <ExtraDamage>k__BackingField: 1
+  <ExtraDefence>k__BackingField: 1

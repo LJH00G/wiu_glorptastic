@@ -9,6 +9,7 @@ using Game.SO.Data.Item.Sellable.Battle;
 
 namespace Game.Inventory
 {
+
     public class ItemDetailUI : MonoBehaviour
     {
         [Header("Source")]
@@ -24,19 +25,38 @@ namespace Game.Inventory
         [SerializeField] Button unequipButton;
         [SerializeField] Button closeButton;
 
+        [SerializeField] Button sellButton;
+        [SerializeField] Button dontSellButton;
+
         static readonly Dictionary<Texture2D, Sprite> spriteCache = new();
 
         ItemSO currentItem;
         int currentAccessorySlotIndex = -1;
+        bool sellMode;
 
         void Awake()
         {
             if (equipButton)
+            {
                 equipButton.onClick.AddListener(HandleEquipClicked);
+            }
             if (unequipButton)
+            {
                 unequipButton.onClick.AddListener(HandleUnequipClicked);
+            }
             if (closeButton)
+            {
                 closeButton.onClick.AddListener(Hide);
+            }
+            
+            if (sellButton)
+            {
+                sellButton.onClick.AddListener(HandleSellClicked);
+            }
+            if (dontSellButton)
+            {
+                dontSellButton.onClick.AddListener(Hide);
+            }
 
             inventoryManager.OnInventoryChanged += Refresh;
 
@@ -47,9 +67,11 @@ namespace Game.Inventory
         {
             inventoryManager.OnInventoryChanged -= Refresh;
         }
-        public void Show(ItemSO item)
+
+        public void Show(ItemSO item, bool sellMode = false)
         {
             currentItem = item;
+            this.sellMode = sellMode;
 
             if (panelRoot)
             {
@@ -96,15 +118,27 @@ namespace Game.Inventory
         void UpdateButtons()
         {
             bool isEquipped = IsCurrentlyEquipped(currentItem, out currentAccessorySlotIndex);
-            bool isEquippable = currentItem is BattleItemSO;
+            bool canEquip = currentItem is BattleItemSO && !isEquipped;
 
+            if (canEquip && currentItem is AccessoryItemSO && !inventoryManager.HasFreeAccessorySlot())
+            {
+                canEquip = false;
+            }
             if (equipButton)
             {
-                equipButton.gameObject.SetActive(isEquippable && !isEquipped);
+                equipButton.gameObject.SetActive(!sellMode && canEquip);
             }
             if (unequipButton)
             {
-                unequipButton.gameObject.SetActive(isEquippable && isEquipped);
+                unequipButton.gameObject.SetActive(!sellMode && currentItem is BattleItemSO && isEquipped);
+            }
+            if (sellButton)
+            {
+                sellButton.gameObject.SetActive(sellMode && currentItem is SellableItemSO);
+            }
+            if (dontSellButton)
+            {
+                dontSellButton.gameObject.SetActive(sellMode);
             }
         }
 
@@ -152,6 +186,15 @@ namespace Game.Inventory
             }
         }
 
+        void HandleSellClicked()
+        {
+            if (currentItem is SellableItemSO sellable)
+            {
+                inventoryManager.SellItem(sellable, 1);
+            }
+            Hide();
+        }
+
         static string BuildStatsText(ItemSO item)
         {
             StringBuilder sb = new();
@@ -160,26 +203,48 @@ namespace Game.Inventory
             {
                 sb.AppendLine($"Sell Value: {sellable.SellValue}");
             }
-
             if (item is BattleItemSO battle)
             {
-                if (battle.ExtraMaxHP != 0) sb.AppendLine($"Max HP: +{battle.ExtraMaxHP}");
-                if (battle.ExtraMaxCurse != 0) sb.AppendLine($"Max Curse: +{battle.ExtraMaxCurse}");
-                if (battle.ExtraDamage != 0) sb.AppendLine($"Damage: +{battle.ExtraDamage}");
-                if (battle.ExtraDefence != 0) sb.AppendLine($"Defence: +{battle.ExtraDefence}");
+                if (battle.ExtraMaxHP != 0)
+                {
+                    sb.AppendLine($"Max HP: +{battle.ExtraMaxHP}");
+                }
+                if (battle.ExtraMaxCurse != 0)
+                {
+                    sb.AppendLine($"Max Curse: +{battle.ExtraMaxCurse}");
+                }
+                if (battle.ExtraDamage != 0)
+                {
+                    sb.AppendLine($"Damage: +{battle.ExtraDamage}");
+                }
+                if (battle.ExtraDefence != 0)
+                {
+                    sb.AppendLine($"Defence: +{battle.ExtraDefence}");
+                }
             }
 
             if (item is WeaponItemSO weapon)
             {
                 sb.AppendLine($"Weapon Damage: {weapon.Dmage}");
             }
-
             if (item is CurseGemItemSO curseGem)
             {
-                if (curseGem.ExtraMaxHP != 0) sb.AppendLine($"Max HP: +{curseGem.ExtraMaxHP}");
-                if (curseGem.ExtraMaxCurse != 0) sb.AppendLine($"Max Curse: +{curseGem.ExtraMaxCurse}");
-                if (curseGem.ExtraDamage != 0) sb.AppendLine($"Damage: +{curseGem.ExtraDamage}");
-                if (curseGem.ExtraDefence != 0) sb.AppendLine($"Defence: +{curseGem.ExtraDefence}");
+                if (curseGem.ExtraMaxHP != 0)
+                {
+                    sb.AppendLine($"Max HP: +{curseGem.ExtraMaxHP}");
+                }
+                if (curseGem.ExtraMaxCurse != 0)
+                {
+                    sb.AppendLine($"Max Curse: +{curseGem.ExtraMaxCurse}");
+                }
+                if (curseGem.ExtraDamage != 0)
+                {
+                    sb.AppendLine($"Damage: +{curseGem.ExtraDamage}");
+                }
+                if (curseGem.ExtraDefence != 0)
+                {
+                    sb.AppendLine($"Defence: +{curseGem.ExtraDefence}");
+                }
             }
 
             if (item is ConsumableItemSO consumable)

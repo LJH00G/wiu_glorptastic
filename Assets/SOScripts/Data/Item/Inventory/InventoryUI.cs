@@ -16,6 +16,11 @@ namespace Game.Inventory
         [Header("Detail Panel")]
         [SerializeField] ItemDetailUI itemDetailUI;
 
+        [Header("Panel (optional)")]
+        [SerializeField] GameObject panelRoot;
+        bool sellMode;
+
+
         readonly List<InventoryItemUI> spawned = new();
 
         void OnEnable()
@@ -29,6 +34,25 @@ namespace Game.Inventory
             inventoryManager.OnInventoryChanged -= Refresh;
         }
 
+        public void Show(bool sellModeEnabled = false)
+        {
+            sellMode = sellModeEnabled;
+
+            if (panelRoot)
+            {
+                panelRoot.SetActive(true);
+            }
+            Refresh();
+        }
+
+        public void Hide()
+        {
+            if (panelRoot)
+            {
+                panelRoot.SetActive(false);
+            }
+        }
+
         void Refresh()
         {
             var stacks = inventoryManager.GetItemList();
@@ -40,6 +64,7 @@ namespace Game.Inventory
                 row.OnDetailsRequested += HandleDetailsRequested;
                 spawned.Add(row);
             }
+
 
             while (spawned.Count > stacks.Count)
             {
@@ -59,7 +84,7 @@ namespace Game.Inventory
         {
             if (item && itemDetailUI)
             {
-                itemDetailUI.Show(item);
+                itemDetailUI.Show(item, sellMode);
             }
         }
     }

@@ -12,16 +12,26 @@ namespace Game.Inventory
         [SerializeField] EquipmentSlotUI weaponSlot;
         [SerializeField] EquipmentSlotUI[] accessorySlots;
 
-        [Header("Detail Panel")]
-        [SerializeField] ItemDetailUI itemDetailUI;
-
         void Awake()
         {
-            weaponSlot.OnSlotClicked += HandleSlotClicked;
-
-            foreach (var slot in accessorySlots)
+            weaponSlot.OnSlotClicked += item =>
             {
-                slot.OnSlotClicked += HandleSlotClicked;
+                if (item)
+                {
+                    inventoryManager.UnequipWeapon();
+                }
+            };
+
+            for (int i = 0; i < accessorySlots.Length; i++)
+            {
+                int slotIndex = i;
+                accessorySlots[i].OnSlotClicked += item =>
+                {
+                    if (item)
+                    {
+                        inventoryManager.UnequipAccessory(slotIndex);
+                    }
+                };
             }
         }
 
@@ -44,14 +54,6 @@ namespace Game.Inventory
             for (int i = 0; i < accessorySlots.Length && i < accessories.Length; i++)
             {
                 accessorySlots[i].SetItem(accessories[i]);
-            }
-        }
-
-        void HandleSlotClicked(ItemSO item)
-        {
-            if (item && itemDetailUI)
-            {
-                itemDetailUI.Show(item);
             }
         }
     }

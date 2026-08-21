@@ -26,8 +26,9 @@ public class SceneSwitchController : MonoBehaviour
             void OnSceneLoaded(Scene scene, LoadSceneMode mode)
             {
                 if (scene.name != context.loadScene)
+                {
                     return;
-
+                }
                 SceneManager.sceneLoaded -= OnSceneLoaded;
 
                 SceneManager.SetActiveScene(scene);
