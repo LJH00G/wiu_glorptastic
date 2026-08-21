@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using Game.Combat.Integration;
 
 namespace Game.Combat
 {
@@ -20,14 +21,14 @@ namespace Game.Combat
     public class CombatManager : MonoBehaviour
     {
         [Header("Data")]
-        [SerializeField] PlayerLoadoutSO playerLoadout;
-        [SerializeField] PartnerLoadoutSO partnerLoadout; // leave empty if partner isn't unlocked yet
-        [SerializeField] EnemyDataSO[] enemyEncounter;
+        public PlayerLoadoutSO playerLoadout;
+        public PartnerLoadoutSO partnerLoadout; // leave empty if partner isn't unlocked yet
+        public EnemyDataSO[] enemyEncounter;
 
         [Header("Anchors (world positions to spawn/point arrows at)")]
         [SerializeField] Transform playerAnchor;
         [SerializeField] Transform partnerAnchor;
-        [SerializeField] Transform[] enemyAnchors;
+        public Transform[] enemyAnchors;
 
         [Header("Wiring")]
         [SerializeField] CombatInputReader input;
@@ -36,6 +37,7 @@ namespace Game.Combat
         [SerializeField] TargetSelector targetSelector;
         [SerializeField] FleeMinigameController flee;
         [SerializeField] AttackMasteryController mastery;
+        [SerializeField] CombatAssigmment combatAssigner;
 
         CombatState state;
         CombatantRuntime player;
@@ -52,12 +54,9 @@ namespace Game.Combat
             ? new List<CombatantRuntime> { player, partner }
             : new List<CombatantRuntime> { player };
 
-        void Start()
-        {
-            SetupBattle();
-        }
+        
 
-        void SetupBattle()
+        public void SetupBattle()
         {
             player = CombatantRuntime.FromPlayer(playerLoadout, playerAnchor);
             partner = partnerLoadout != null
@@ -990,7 +989,7 @@ namespace Game.Combat
             );
 
             input.InputEnabled = false;
-
+            combatAssigner.WipeDataAssignment();
             // TODO:
             // Hook this into SceneSwitchController to return to the overworld,
             // show a reward screen, or trigger the game-over flow.
