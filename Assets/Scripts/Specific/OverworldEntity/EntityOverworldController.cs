@@ -8,6 +8,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(AIPath))]
+[RequireComponent(typeof(Animator))]
 public class EntityOverworldController : MonoBehaviour
 {
 
@@ -21,7 +22,8 @@ public class EntityOverworldController : MonoBehaviour
     public EntityOverworldBehaviourInstanceData InstanceData { get; set; }
 
     public AIPath AIPath { get; private set; }
-    public BoxCollider2D triggerCollider { get; private set; }
+    public BoxCollider2D TriggerCollider { get; private set; }
+    public Animator Animator { get; private set; }
 
 
     public void SetBehaviour(EntityOverworldBehaviourSO behaviour)
@@ -39,15 +41,17 @@ public class EntityOverworldController : MonoBehaviour
         AIPath.gravity = Vector3.zero;
         AIPath.enableRotation = false;
 
-        triggerCollider = GetComponent<BoxCollider2D>();
-        triggerCollider.size = new Vector2(Radius * 2, Radius);
-        triggerCollider.offset = new Vector2(0, Radius * 0.5f);
+        TriggerCollider = GetComponent<BoxCollider2D>();
+        TriggerCollider.size = new Vector2(Radius * 2, Radius);
+        TriggerCollider.offset = new Vector2(0, Radius * 0.5f);
 
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0;
         rb.freezeRotation = true;
         rb.bodyType = RigidbodyType2D.Kinematic;
         rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+
+        Animator = GetComponent<Animator>();
 
         SetBehaviour(behaviour);
     }
@@ -57,8 +61,10 @@ public class EntityOverworldController : MonoBehaviour
         float dt = Time.deltaTime;
 
         if (behaviour)
+        {
             behaviour.BehaviourUpdate(this, dt);
-
+            behaviour.UpdateAnimator(this);
+        }
         if (!GameManager.AllCanMove)
             AIPath.destination = transform.position;
     }
@@ -74,15 +80,17 @@ public class EntityOverworldController : MonoBehaviour
         AIPath.gravity = Vector3.zero;
         AIPath.enableRotation = false;
 
-        triggerCollider = GetComponent<BoxCollider2D>();
-        triggerCollider.size = new Vector2(Radius * 2, Radius);
-        triggerCollider.offset = new Vector2(0, Radius * 0.5f);
+        TriggerCollider = GetComponent<BoxCollider2D>();
+        TriggerCollider.size = new Vector2(Radius * 2, Radius);
+        TriggerCollider.offset = new Vector2(0, Radius * 0.5f);
 
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0;
         rb.freezeRotation = true;
         rb.bodyType = RigidbodyType2D.Kinematic;
         rb.interpolation = RigidbodyInterpolation2D.Interpolate;
+
+        Animator = GetComponent<Animator>();
 
         if (!behaviour)
             Debug.LogError("behaviour must not be left empty", this);
