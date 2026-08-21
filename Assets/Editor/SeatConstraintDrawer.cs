@@ -16,10 +16,7 @@ namespace Puzzle
         {
             if (_constraintTypes == null)
             {
-                _constraintTypes = AppDomain.CurrentDomain.GetAssemblies()
-                    .SelectMany(a => a.GetTypes())
-                    .Where(t => typeof(SeatConstraint).IsAssignableFrom(t) && !t.IsAbstract)
-                    .ToArray();
+                _constraintTypes = AppDomain.CurrentDomain.GetAssemblies().SelectMany(a => a.GetTypes()).Where(t => typeof(SeatConstraint).IsAssignableFrom(t) && !t.IsAbstract).ToArray();
             }
             return _constraintTypes;
         }

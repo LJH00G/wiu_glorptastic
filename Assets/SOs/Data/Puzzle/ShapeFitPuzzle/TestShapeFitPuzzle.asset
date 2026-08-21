@@ -37,6 +37,6 @@ MonoBehaviour:
   colRuns:
   - run: 04000000
   - run: 04000000
-  - run: 00000000
-  - run: 00000000
+  - run: 
+  - run: 
   RequireAllShapesPlaced: 0
