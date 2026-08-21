@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: a048d282cfaf38548b1c736d60ad4476
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - triggerCollider: {instanceID: 0}
+  - dialogueConversationEventChannel: {fileID: 11400000, guid: 44508743f5b9d8341ab1fa10572170f0, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

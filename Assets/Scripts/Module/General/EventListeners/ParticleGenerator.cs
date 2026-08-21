@@ -3,14 +3,16 @@ using Game.SO.EventChannel.Context;
 using Game.SO.EventChannel;
 
 using UnityEngine;
+using System.Collections.Generic;
 
 public class ParticleGenerator : MonoBehaviour
 {
 
     [Header("Event Listening Channel")]
     [SerializeField] GenerateParticleEventChannelSO GenerateParticleEventChannel;
-
+    [SerializeField] InstantiateGroupEventChannelSO InstantiateGroupEventChannel;
     [SerializeField] Transform particleGroup = null;
+    [SerializeField] string key;
 
     void HandleGenerateParticleEvent(GenerateParticleEventContext context)
     {
@@ -28,25 +30,28 @@ public class ParticleGenerator : MonoBehaviour
         Debug.Log($"ParticleGenerator.HandleGenerateParticleEvent() | handled event with {context}");
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void SetParticleGroup(Dictionary<string,GameObject> go)
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if(go.TryGetValue(key, out GameObject particle))
+        {
+            particleGroup = particle.transform;
+        }
+        else
+        {
+            particleGroup = null;
+            Debug.Log("Key mismatch to ParticleGenerator");
+        }
     }
 
     private void OnEnable()
     {
         GenerateParticleEventChannel.Subscribe(HandleGenerateParticleEvent);
+        InstantiateGroupEventChannel.Subscribe(SetParticleGroup);
     }
 
     private void OnDisable()
     {
         GenerateParticleEventChannel.Unsubscribe(HandleGenerateParticleEvent);
+        InstantiateGroupEventChannel.Unsubscribe(SetParticleGroup);
     }
 }

@@ -14,11 +14,15 @@ public class SFXPlayer : MonoBehaviour
     void HandlePlaySFXEvent(PlaySFXEventContext context)
     {
         if (!context.playOrStop)
+        {
             SFXSource.Stop();
+        }
         else
         {
             if (context.playOneShot)
+            {
                 SFXSource.PlayOneShot(context.SFX);
+            }
             else
             {
                 SFXSource.clip = context.SFX;
@@ -27,7 +31,6 @@ public class SFXPlayer : MonoBehaviour
         }
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
         SFXSource = GetComponent<AudioSource>();

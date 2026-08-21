@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d75da6c5d03438d4aa2b1c475dcc7431, type: 3}
+  m_Name: PipeSpriteConfig
+  m_EditorClassIdentifier: Assembly-CSharp::PipeSpriteConfig
+  entries:
+  - pipeName: UpDown
+    sprite: {fileID: 21300000, guid: e642da39d82fe2049b4e536701678e08, type: 3}
+  - pipeName: UpRight
+    sprite: {fileID: 21300000, guid: b69c5098a54dc0340b74bf2827721e6f, type: 3}
+  - pipeName: UpRightDown
+    sprite: {fileID: 21300000, guid: 0bc56fae891cd864b833b502bcbb18dc, type: 3}
+  - pipeName: Cross
+    sprite: {fileID: 21300000, guid: 5f461714fe1cc9949b8cee36753dbaff, type: 3}

@@ -27,7 +27,7 @@ public class DebugDraw
 
     static public bool Enabled { get; set; } = false;
     static public Color Color { get; set; } = Color.blue;
-    static public float Duration { get; set; } = 0;
+    static public float Duration { get; set; } = 0.1f;
 
     static public void Box(Vector2 center, Vector2 size)
     {
