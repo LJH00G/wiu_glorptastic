@@ -1,9 +1,8 @@
 
 using Game.SO.Behaviour.EntityOverworld.InstanceData;
-using Pathfinding;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEngine.RuleTile.TilingRuleOutput;
+using Game.TriggerHandler;
 
 
 namespace Game.SO.Behaviour.EntityOverworld.InstanceData
@@ -44,30 +43,42 @@ namespace Game.SO.Behaviour.EntityOverworld
             
 
             // movement
-            Vector2 dire = InputSystem.actions["Move"].ReadValue<Vector2>();
-            if (!GameManager.AllCanMove)
-                controller.AIPath.destination = controller.transform.position;
+            Vector2 dire = GameManager.PlayerCanMove ?
+                InputSystem.actions["Move"].ReadValue<Vector2>() : Vector2.zero;
 
             if (dire != Vector2.zero)
                 instanceData.facingDire = dire;
 
             controller.AIPath.destination = (Vector2)controller.transform.position + dire * 0.1f;
 
-            
+
             // interact
-            if (InputSystem.actions["Interact"].triggered && GameManager.CanInteract)
+            if (InputSystem.actions["Interact"].WasPressedThisFrame() && GameManager.CanInteract)
             {
                 Vector2 offset = instanceData.facingDire * (controller.Radius + interactionSize * 0.5f);
+                Vector2 interactionPos = (Vector2)controller.transform.position + offset;
+                Vector2 interactionSize_vec2 = new Vector2(interactionSize, interactionSize);
 
-                var collider = Physics2D.OverlapBox(
-                        (Vector2)controller.transform.position + offset,
-                        new Vector2(interactionSize, interactionSize),
+                var colliders = Physics2D.OverlapBoxAll(
+                        interactionPos,
+                        interactionSize_vec2,
                         0,
-                        LayerMask.NameToLayer("Interactable")
+                        LayerMask.GetMask("Interactable")
                     );
 
-                if (collider && collider.TryGetComponent(out ActionTriggerHandler handler) && handler.RequiresInteraction)
-                    handler.TriggerInteraction();
+                DebugDraw.Box(interactionPos, interactionSize_vec2);
+
+
+                foreach (var collider in colliders)
+                {
+                    if (collider.TryGetComponent(out I_TriggerHandler handler) &&
+                        handler.RequiresInteraction())
+                    {
+                        handler?.Trigger();
+                        break;
+                    }
+                }
+                    
 
             }
         }

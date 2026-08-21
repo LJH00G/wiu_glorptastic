@@ -1,6 +1,5 @@
 using Game.SO.EventChannel;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 using Utility.VisualizableDictionary;
 
@@ -30,8 +29,6 @@ namespace Game.TPManager
 
         void PerformTeleport(string TPName)
         {
-           
-
             if(TPPointDef.dict.TryGetValue(TPName, out TPDefinition currentTP))
             {
                 StartCoroutine(Teleport(currentTP));
@@ -40,8 +37,8 @@ namespace Game.TPManager
 
         public IEnumerator Teleport(TPDefinition currentTP)
         {
-
             
+
             Transform player = null;
             Transform follower = null;
 

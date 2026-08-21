@@ -21,24 +21,29 @@ namespace Game.CSEvent
         }
 
         List<PriorityListener<T>> listeners = new();
+
+        void Sort()
+        {
+            listeners.Sort( // comparison lambda take in 2 listeners, then return a int, depending on the sign, it determines which listener comes first
+                (a, b) => b.priority.CompareTo(a.priority) // ComapreTo returns a int which has its possitive sign indecating b is larger than a, negative sign is opposite, and 0 means both are the same
+                );
+        }
         public void Subscribe(Action<T> method, sbyte priority)
         {
             listeners.Add(new PriorityListener<T>(method, priority));
+            Sort();
         }
         public void Unsubscribe(Action<T> method)
         {
             listeners.RemoveAll(
                 listener => listener.method == method
                 );
+            Sort();
         }
         public void Raise(T args)
         {
             if (Lock)
                 return;
-
-            listeners.Sort( // comparison lambda take in 2 listeners, then return a int, depending on the sign, it determines which listener comes first
-                (a, b) => b.priority.CompareTo(a.priority) // ComapreTo returns a int which has its possitive sign indecating b is larger than a, negative sign is opposite, and 0 means both are the same
-                );
 
             foreach (var listener in listeners)
                 listener.method.Invoke(args);
@@ -65,24 +70,28 @@ namespace Game.CSEvent
         }
 
         List<PriorityListener> listeners = new();
+        void Sort()
+        {
+            listeners.Sort( // comparison lambda take in 2 listeners, then return a int, depending on the sign, it determines which listener comes first
+                (a, b) => b.priority.CompareTo(a.priority) // ComapreTo returns a int which has its possitive sign indecating b is larger than a, negative sign is opposite, and 0 means both are the same
+                );
+        }
         public void Subscribe(Action method, sbyte priority)
         {
             listeners.Add(new PriorityListener(method, priority));
+            Sort();
         }
         public void Unsubscribe(Action method)
         {
             listeners.RemoveAll(
                 listener => listener.method == method
                 );
+            Sort();
         }
         public void Raise()
         {
             if (Lock)
                 return;
-
-            listeners.Sort( // comparison lambda take in 2 listeners, then return a int, depending on the sign, it determines which listener comes first
-                (a, b) => b.priority.CompareTo(a.priority) // ComapreTo returns a int which has its possitive sign indecating b is larger than a, negative sign is opposite, and 0 means both are the same
-                );
 
             foreach (var listener in listeners)
                 listener.method.Invoke();
