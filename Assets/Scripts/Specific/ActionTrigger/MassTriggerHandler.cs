@@ -29,7 +29,7 @@ namespace Game.TriggerHandler.MassTriggerHandler
                 if (index < 0 || index >= triggerables.Length)
                 {
                     if (useExhaustedTriggerable)
-                        return false;
+                        return true;
 
                     index = cycleToStartWhenExhausted ?
                         0 : (triggerables.Length - 1);
@@ -62,6 +62,8 @@ namespace Game.TriggerHandler.MassTriggerHandler
         [Header("Triggerable List")]
         [SerializeField] TypedTriggerableList defaultTriggerList = new();
         [SerializeField] VisualizableDict<string, TypedTriggerableList> flagOverrideTriggerLists = new();
+
+        [Header("Lock")]
         [SerializeField] float lockTimeAfterTrigger;
         [SerializeField, DisplayOnly] float lockTimer;
 

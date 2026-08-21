@@ -34,9 +34,11 @@ namespace Game.SO.Behaviour.EntityOverworld
             controller.AIPath.orientation = Pathfinding.OrientationMode.YAxisForward;
             controller.AIPath.maxSpeed = speed;
             controller.AIPath.maxAcceleration = acceleration;
-            controller.AIPath.pickNextWaypointDist = 0.75f;
-            controller.AIPath.slowdownDistance = 1.5f;
-            controller.AIPath.endReachedDistance = 0.25f;
+            controller.AIPath.pickNextWaypointDist = controller.Radius * 3;
+            controller.AIPath.slowdownDistance = controller.Radius * 4;
+            controller.AIPath.endReachedDistance = controller.Radius;
+
+            controller.Animator.runtimeAnimatorController = animCtrller;
 
             MovePointsOverworldBehaviourInstanceData instanceData = (MovePointsOverworldBehaviourInstanceData)controller.InstanceData;
 

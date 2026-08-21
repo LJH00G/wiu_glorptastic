@@ -13,6 +13,8 @@ namespace Game.TriggerHandler.SingleTriggerHandler
         [Header("Triggerable")]
         [SerializeField] T triggerable;
         [SerializeField] VisualizableDict<string, T> flagOverrideTriggerables;
+
+        [Header("Lock")]
         [SerializeField] float lockTimeAfterTrigger;
         [SerializeField, DisplayOnly] float lockTimer;
 

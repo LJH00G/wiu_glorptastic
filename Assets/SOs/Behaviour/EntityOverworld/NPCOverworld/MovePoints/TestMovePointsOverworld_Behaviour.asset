@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 563190cba4a05e145b42c725a7f2dc77, type: 3}
   m_Name: TestMovePointsOverworld_Behaviour
   m_EditorClassIdentifier: Assembly-CSharp::Game.SO.Behaviour.EntityOverworld.MovePointsOverworldBehaviourSO
+  animCtrller: {fileID: 9100000, guid: 28037eb664ccae54697df05b84b416bd, type: 2}
   speed: 2
   acceleration: 10
   points:

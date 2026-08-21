@@ -9,7 +9,7 @@ namespace Game.SO.Behaviour.EntityOverworld.InstanceData
 {
     public class PlayerOverworldBehaviourInstanceData : EntityOverworldBehaviourInstanceData
     {
-        public Vector2 facingDire;
+        
     }
 }
 
@@ -30,10 +30,12 @@ namespace Game.SO.Behaviour.EntityOverworld
             controller.AIPath.orientation = Pathfinding.OrientationMode.YAxisForward;
             controller.AIPath.maxSpeed = speed;
             controller.AIPath.maxAcceleration = acceleration;
-            controller.AIPath.pickNextWaypointDist = 0.5f;
-            controller.AIPath.slowdownDistance = 0;
-            controller.AIPath.endReachedDistance = 0;
+            controller.AIPath.pickNextWaypointDist = controller.Radius;
+            controller.AIPath.slowdownDistance = controller.Radius * 0.9f;
+            controller.AIPath.endReachedDistance = controller.Radius * 0.8f;
+            controller.AIPath.destination = controller.transform.position;
 
+            controller.Animator.runtimeAnimatorController = animCtrller;
         }
 
         public override void BehaviourUpdate(EntityOverworldController controller, float dt)
@@ -47,10 +49,11 @@ namespace Game.SO.Behaviour.EntityOverworld
                 InputSystem.actions["Move"].ReadValue<Vector2>() : Vector2.zero;
 
             if (dire != Vector2.zero)
+            {
                 instanceData.facingDire = dire;
 
-            controller.AIPath.destination = (Vector2)controller.transform.position + dire * 0.1f;
-
+                controller.AIPath.destination = (Vector2)controller.transform.position + dire * controller.Radius;
+            }
 
             // interact
             if (InputSystem.actions["Interact"].WasPressedThisFrame() && GameManager.CanInteract)
