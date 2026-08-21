@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Game.Combat
 {
@@ -28,6 +29,15 @@ namespace Game.Combat
         [SerializeField] EnemyHealthBarWidget enemyHealthBarPrefab;
         [SerializeField] Transform enemyHealthBarPool;
         readonly Dictionary<CombatantRuntime, EnemyHealthBarWidget> enemyHealthBars = new();
+
+        [Header("Status Effect Icons")]
+        [Tooltip("a small root GameObject with a HorizontalLayoutGroup on it - one is spawned under every combatant (player/partner/each enemy)")]
+        [SerializeField] RectTransform statusIconRowPrefab;
+        [Tooltip("a single plain Image - instantiated once per active status inside a combatant's row")]
+        [SerializeField] Image statusIconPrefab;
+        [SerializeField] Transform statusIconPool;
+        [SerializeField] StatusEffectIconLibrarySO statusIconLibrary;
+        readonly Dictionary<CombatantRuntime, RectTransform> statusIconRows = new();
 
         void Awake()
         {
@@ -91,8 +101,6 @@ namespace Game.Combat
             activeArrows.Clear();
         }
 
-        // -------------------------------------------------------------- enemy health bars
-
         /// <summary>spawns one health bar below each given enemy - call once when a battle starts</summary>
         public void SetupEnemyHealthBars(IEnumerable<CombatantRuntime> enemyList)
         {
@@ -123,6 +131,46 @@ namespace Game.Combat
             foreach (var kv in enemyHealthBars)
                 if (kv.Value) Destroy(kv.Value.gameObject);
             enemyHealthBars.Clear();
+        }
+
+        /// <summary>spawns an empty icon row below the given combatant - call once per combatant (player, partner, each enemy) when a battle starts</summary>
+        public void SetupStatusIconRow(CombatantRuntime combatant)
+        {
+            if (combatant == null || !statusIconRowPrefab || !combatant.anchor) return;
+
+            var row = Instantiate(statusIconRowPrefab, statusIconPool ? statusIconPool : transform);
+            row.gameObject.SetActive(true);
+            PositionAboveWorldPoint(row, combatant.anchor.position, -1.4f); // TODO: tune this offset so it sits below the health bar (enemies) or sprite (allies) rather than overlapping it
+            statusIconRows[combatant] = row;
+        }
+
+        /// <summary>call whenever a combatant's active statuses change (applied, cured, or ticked/expired)</summary>
+        public void RefreshStatusIcons(CombatantRuntime combatant)
+        {
+            if (combatant == null || !statusIconRows.TryGetValue(combatant, out var row) || !row) return;
+
+            for (int i = row.childCount - 1; i >= 0; i--)
+                Destroy(row.GetChild(i).gameObject);
+
+            if (!statusIconPrefab) return;
+
+            foreach (var status in combatant.activeStatuses)
+            {
+                var icon = Instantiate(statusIconPrefab, row);
+                icon.gameObject.SetActive(true);
+                if (statusIconLibrary)
+                {
+                    icon.sprite = statusIconLibrary.GetIcon(status.type);
+                    icon.color = statusIconLibrary.GetColor(status.type);
+                }
+            }
+        }
+
+        public void ClearAllStatusIconRows()
+        {
+            foreach (var kv in statusIconRows)
+                if (kv.Value) Destroy(kv.Value.gameObject);
+            statusIconRows.Clear();
         }
     }
 }

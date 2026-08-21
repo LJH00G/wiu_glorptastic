@@ -15,6 +15,6 @@ MonoBehaviour:
   itemName: Cursed Gem
   description: This is a test description
   icon: {fileID: 0}
-  damageBonus: 0
-  defenseBonus: 0
+  damageBonus: 1
+  defenseBonus: 1
   level: 1

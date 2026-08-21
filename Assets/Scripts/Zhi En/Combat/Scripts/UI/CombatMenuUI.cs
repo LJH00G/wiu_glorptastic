@@ -68,9 +68,9 @@ namespace Game.Combat
             foreach (var opt in availableOptions)
                 activeIconIndices.Add((int)opt);
 
-            // keep whatever was highlighted before (e.g. after cancelling out of a submenu) -
-            // only snap back to the first option if the old cursor no longer fits this menu
-            // (different actor / different option count)
+            /* keep whatever was highlighted before(e.g.after cancelling out of a submenu)
+            only snap back to the first option if the old cursor no longer fits this menu
+            (different actor/different option count) */
             if (iconCursor < 0 || iconCursor >= activeIconIndices.Count)
                 iconCursor = 0;
 

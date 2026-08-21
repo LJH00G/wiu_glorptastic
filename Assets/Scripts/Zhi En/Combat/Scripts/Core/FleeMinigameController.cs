@@ -6,9 +6,8 @@ namespace Game.Combat
 {
     /// <summary>
     /// "spam Z and X for 2 seconds" flee attempt. Required press count is
-    /// (sum of all enemies' attack + defense) * 2 per the design doc; a failed attempt keeps
-    /// its progress so the next attempt within the same battle needs fewer presses - the
-    /// progress bar reflects that by starting partially filled on a second try.
+    /// (sum of all enemies' attack + defense) * 2 a failed attempt keeps
+    /// its progress so the next attempt within the same battle needs fewer presses
     /// </summary>
     public class FleeMinigameController : MonoBehaviour
     {
@@ -21,7 +20,7 @@ namespace Game.Combat
         CombatInputReader input;
         bool running;
         int requiredPresses;
-        int pressesSoFar;      // carries over across failed attempts within one battle
+        int pressesSoFar; // carries over across failed attempts within one battle
         float timer;
         Action<bool> onResult; // true = escaped
 
@@ -83,8 +82,7 @@ namespace Game.Combat
             if (barRoot) barRoot.SetActive(false);
 
             if (success)
-                pressesSoFar = 0; // battle's over anyway, but reset for cleanliness
-            // on failure pressesSoFar is deliberately NOT reset, so the next attempt is easier
+                pressesSoFar = 0;
 
             onResult?.Invoke(success);
         }

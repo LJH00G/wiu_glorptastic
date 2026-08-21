@@ -15,7 +15,14 @@ MonoBehaviour:
   itemName: Mushroom
   description: cursed thing i guess
   icon: {fileID: 0}
-  effect: 2
-  amount: 30
+  effects:
+  - effect: 2
+    power: 50
+    status: 0
+    duration: 0
+  - effect: 1
+    power: 50
+    status: 0
+    duration: 0
   targetType: 2
   consumeOnUse: 1

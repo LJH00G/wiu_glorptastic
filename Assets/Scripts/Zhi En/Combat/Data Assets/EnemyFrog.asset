@@ -23,9 +23,9 @@ MonoBehaviour:
     ability: {fileID: 0}
     attackDamageMultiplier: 1
     flavourText: frog hungry
-  - moveType: 0
+  - moveType: 1
     targetType: 0
-    ability: {fileID: 0}
+    ability: {fileID: 11400000, guid: ddb3d59058dda30409932d874268e630, type: 2}
     attackDamageMultiplier: 1.5
     flavourText: frog very hungry
   loopMoveOrder: 1

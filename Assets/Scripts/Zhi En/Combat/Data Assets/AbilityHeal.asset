@@ -16,6 +16,9 @@ MonoBehaviour:
   description: well what do you think heal does smarty pants
   icon: {fileID: 0}
   curseCost: 8
-  effect: 1
-  power: 15
+  effects:
+  - effect: 1
+    power: 10
+    status: 0
+    duration: 0
   targetType: 2

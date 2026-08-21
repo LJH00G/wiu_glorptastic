@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Game.Combat
@@ -10,9 +11,8 @@ namespace Game.Combat
         [TextArea] public string description;
         public Sprite icon;
 
-        [Header("Effect")]
-        public EffectType effect = EffectType.HEAL_HP;
-        public int amount = 10;
+        [Header("Effects (all applied together, to the same target(s))")]
+        public List<EffectEntry> effects = new();
         public CombatTargetType targetType = CombatTargetType.SELF;
 
         [Header("Behaviour")]

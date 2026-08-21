@@ -15,7 +15,14 @@ MonoBehaviour:
   itemName: Bandage
   description: it has a nice hello kitty on it, makes it really kid friendly
   icon: {fileID: 0}
-  effect: 1
-  amount: 12
+  effects:
+  - effect: 1
+    power: 50
+    status: 0
+    duration: 0
+  - effect: 5
+    power: 1
+    status: 0
+    duration: 3
   targetType: 2
   consumeOnUse: 1

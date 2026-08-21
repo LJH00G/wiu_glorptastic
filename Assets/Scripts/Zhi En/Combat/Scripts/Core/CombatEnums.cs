@@ -1,6 +1,6 @@
 namespace Game.Combat
 {
-    /// <summary>top level icons shown above a combatant's head (sword / star / bag / boot)</summary>
+    /// <summary>top level icons shown above head</summary>
     public enum CombatMenuOption : byte
     {
         COMBAT,
@@ -34,26 +34,34 @@ namespace Game.Combat
         ENEMY
     }
 
-    /// <summary>what an item / ability actually does when used</summary>
+    /// <summary>what a single effect entry within an item/ability actually does</summary>
     public enum EffectType : byte
     {
         DAMAGE,
         HEAL_HP,
         HEAL_CS,
-        CURE_STATUS,
         BUFF_DAMAGE,
         BUFF_DEFENSE,
-        INVINCIBLE
+        APPLY_STATUS,
+        CURE_STATUS
     }
 
-    /// <summary>a move an enemy can perform, chosen from its hardcoded move list</summary>
+    /// <summary>the 3 status effects currently exist just add more here as needed</summary>
+    public enum StatusEffectType : byte
+    {
+        POISON,
+        INVINCIBILITY,
+        STUN
+    }
+
+    /// <summary>a move an enemy can perform</summary>
     public enum EnemyMoveType : byte
     {
         ATTACK,
         ABILITY
     }
 
-    /// <summary>the overall combat state machine, driven by <see cref="CombatManager"/></summary>
+    /// <summary>the overall combat state machine, managed by <see cref="CombatManager"/></summary>
     public enum CombatState : byte
     {
         TURN_START,

@@ -34,7 +34,7 @@ namespace Game.Combat
     [CreateAssetMenu(menuName = "Combat/Equipment/Cursed Gem", fileName = "New Cursed Gem")]
     public class CursedGemSO : StatModifierSO
     {
-        // this is the main levelling vector - upgrading the gem raises damageBonus/defenseBonus
+        // this is the main levelling vector, upgrading the gem raises damageBonus/defenseBonus
         [Header("Gem Level (for your levelling system)")]
         public int level = 1;
     }
