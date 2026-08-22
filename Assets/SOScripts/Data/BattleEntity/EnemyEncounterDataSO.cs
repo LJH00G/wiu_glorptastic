@@ -3,8 +3,10 @@ using UnityEngine;
 using Game.Combat;
 using System.Collections.Generic;
 
-public class EnemyEncounterDataSO : MonoBehaviour
-{ 
+[CreateAssetMenu(menuName = "Combat/Enemy Combat Encounter", fileName = "New Enemy Encounter")]
+public class EnemyEncounterDataSO : ScriptableObject
+{
+    
     public List<EnemyDataSO> dataList;
    
 }

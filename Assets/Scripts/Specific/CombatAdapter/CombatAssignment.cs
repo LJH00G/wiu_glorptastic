@@ -8,6 +8,12 @@ namespace Game.Combat.Integration
 {
     public class CombatAssigmment : MonoBehaviour
     {
+
+        void Start()
+        {
+            LoadDataAssignment(dataTunnel.enemyEncounterData.dataList.Count);
+        }
+
         [SerializeField] private List<Transform> transformList;
         [SerializeField] private CombatManager combatManager;
         [SerializeField] private CombatDataTunnelSO dataTunnel;
@@ -31,6 +37,8 @@ namespace Game.Combat.Integration
         {
             dataTunnel.WipeCall();
         }
+
+
     }
 }
 

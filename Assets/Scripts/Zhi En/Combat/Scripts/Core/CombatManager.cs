@@ -1,7 +1,9 @@
+using Game.Combat.Integration;
+using Game.SO.Data.Item.Sellable;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Game.Combat.Integration;
+using Game.Inventory;
 
 namespace Game.Combat
 {
@@ -427,20 +429,15 @@ namespace Game.Combat
 
             var inventory = actor.playerSource.inventory;
 
-            List<string> labels = inventory
-                .Select(stack =>
-                    $"{stack.item.itemName} x{stack.count}"
-                )
-                .ToList();
+            var usable = inventory.Select((stack, index) => (stack, index)).Where(pair => pair.stack.item is ConsumableItemSO).ToList();
+
+            List<string> labels = inventory.Select(stack =>$"{stack.item.Name} x{stack.count}").ToList();
 
             state = CombatState.SUB_MENU;
 
-            menuUI.ShowSubmenu(
-                labels,
-                actor.anchor,
-                idx =>
+            menuUI.ShowSubmenu(labels,actor.anchor, idx =>
                 {
-                    var stack = inventory[idx];
+                    var stack = inventory.ElementAtOrDefault(idx);
 
                     if (stack.count <= 0)
                         return;
@@ -448,7 +445,7 @@ namespace Game.Combat
                     OnItemSelected(
                         actor,
                         idx,
-                        stack.item
+                        (ConsumableItemSO)stack.item
                     );
                 },
                 () => ShowMenuFor(actor, isPlayer)
@@ -458,16 +455,16 @@ namespace Game.Combat
         void OnItemSelected(
             CombatantRuntime actor,
             int inventoryIndex,
-            ItemSO item)
+            ConsumableItemSO item)
         {
-            hud.ShowDescription(item.description);
+            hud.ShowDescription(item.Description);
 
             menuUI.HideAll();
 
             state = CombatState.TARGET_SELECT;
 
             targetSelector.BeginSelection(
-                item.targetType,
+                item.TargetType,
                 actor,
                 Allies,
                 enemies,
@@ -475,15 +472,12 @@ namespace Game.Combat
                 {
                     ResolveItem(actor, item, targets);
 
-                    if (item.consumeOnUse)
+                    if (item.ConsumeOnUse)
                     {
                         var stack =
                             actor.playerSource.inventory[inventoryIndex];
 
-                        stack.count = Mathf.Max(
-                            stack.count - 1,
-                            0
-                        );
+                        stack.count = stack.count > 0 ? stack.count - 1 : 0;
 
                         actor.playerSource.inventory[inventoryIndex] =
                             stack;
@@ -643,7 +637,7 @@ namespace Game.Combat
 
         void ResolveItem(
             CombatantRuntime actor,
-            ItemSO item,
+            ConsumableItemSO item,
             List<CombatantRuntime> targets)
         {
             hud.ClearTargetArrows();
@@ -652,7 +646,7 @@ namespace Game.Combat
             // Items can contain multiple EffectEntry entries.
             foreach (var target in targets)
             {
-                foreach (var entry in item.effects)
+                foreach (var entry in item.Effects)
                 {
                     ApplyEffect(
                         actor,
@@ -663,7 +657,7 @@ namespace Game.Combat
             }
 
             hud.ShowDescription(
-                $"{actor.displayName} uses {item.itemName}!"
+                $"{actor.displayName} uses {item.Name}!"
             );
 
             CheckDeaths();

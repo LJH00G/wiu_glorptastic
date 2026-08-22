@@ -1,3 +1,4 @@
+
 using Game.SO.Data.Item;
 using Game.SO.Data.Item.Sellable.Battle;
 using Game.SO.Data.Shop;
@@ -318,7 +319,36 @@ namespace Game.Inventory
             OnInventoryChanged?.Invoke();
         }
 
+        public bool EquipArmour(ArmourItemSO armour)
+        {
+            if (!armour || !HasItemInList(armour, out _))
+            {
+                return false;
+            }
+            ArmourItemSO previous = inventory.EquipedArmour;
 
+            RemoveItem(armour, 1);
+            inventory.EquipedArmour = armour;
+
+            if (previous)
+            {
+                AddItem(previous, 1);
+            }
+            OnInventoryChanged?.Invoke();
+            return true;
+        }
+
+        public void UnequipArmour()
+        {
+            if (!inventory.EquipedArmour)
+            {
+                return;
+            }
+            AddItem(inventory.EquipedArmour, 1);
+            inventory.EquipedArmour = null;
+
+            OnInventoryChanged?.Invoke();
+        }
 
 
 

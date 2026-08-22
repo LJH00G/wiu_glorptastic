@@ -1,5 +1,5 @@
-
 using Game.SO.Data.Item.Sellable.Battle;
+using Game.SO.Data.Item;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,6 +26,8 @@ namespace Game.Inventory
         public const uint MAX_ACCESSORYIES = 3;
         [field: SerializeField]
         public AccessoryItemSO[] EquipedAccessoryList { get; set; } = new AccessoryItemSO[MAX_ACCESSORYIES];
+        public ArmourItemSO EquipedArmour { get; set; } = null;
+        public CurseGemItemSO currentGem { get; set; } = null;
 
 
 #if UNITY_EDITOR

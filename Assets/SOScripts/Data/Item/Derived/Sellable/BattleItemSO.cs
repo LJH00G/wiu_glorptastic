@@ -1,5 +1,5 @@
-using Game.SO.Data.CurseAbility;
 using UnityEngine;
+using Game.Combat;
 
 
 namespace Game.SO.Data.Item.Sellable.Battle
@@ -7,7 +7,7 @@ namespace Game.SO.Data.Item.Sellable.Battle
     public abstract class BattleItemSO : SellableItemSO
     {
         [field: SerializeField]
-        public CurseAbilitySO[] curseAbilityList { get; private set; }
+        public AbilitySO[] curseAbilityList { get; private set; }
         [field: SerializeField]
         public int ExtraMaxHP { get; private set; }
         [field: SerializeField]

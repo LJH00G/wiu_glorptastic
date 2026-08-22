@@ -1,5 +1,8 @@
+using Game.SO.Data.Item;
+using Game.SO.Data.Item.Sellable.Battle;
 using System.Collections.Generic;
 using UnityEngine;
+
 
 namespace Game.Combat
 {
@@ -19,11 +22,11 @@ namespace Game.Combat
         public int maxCS = 30;
 
         [Header("Equipped Gear")]
-        public CursedGemSO equippedGem;
-        public WeaponSO equippedWeapon;
-        public ArmorSO equippedArmor;
+        public CurseGemItemSO equippedGem;
+        public WeaponItemSO equippedWeapon;
+        public ArmourItemSO equippedArmor;
         [Tooltip("cap this in the inspector/UI to however many accessory slots you allow")]
-        public List<AccessorySO> equippedAccessories = new();
+        public List<AccessoryItemSO> equippedAccessories = new();
 
         [Header("Actions Menu")]
         public List<AbilitySO> knownAbilities = new();
@@ -31,27 +34,27 @@ namespace Game.Combat
         [Header("Items Menu")]
         // TODO: swap this for a proper persistent inventory system once one exists;
         // for now the battle reads/writes counts directly on this list.
-        public List<ItemStack> inventory = new();
+        public List<Game.Inventory.ItemStack> inventory = new();
 
         public int TotalDamage()
         {
             int total = baseDamage;
-            if (equippedGem) total += equippedGem.damageBonus;
-            if (equippedWeapon) total += equippedWeapon.damageBonus;
-            if (equippedArmor) total += equippedArmor.damageBonus;
+            if (equippedGem) total += equippedGem.ExtraDamage;
+            if (equippedWeapon) total += equippedWeapon.ExtraDamage;
+            if (equippedArmor) total += equippedArmor.ExtraDamage;
             foreach (var a in equippedAccessories)
-                if (a) total += a.damageBonus;
+                if (a) total += a.ExtraDamage;
             return total;
         }
 
         public int TotalDefense()
         {
             int total = baseDefense;
-            if (equippedGem) total += equippedGem.defenseBonus;
-            if (equippedWeapon) total += equippedWeapon.defenseBonus;
-            if (equippedArmor) total += equippedArmor.defenseBonus;
+            if (equippedGem) total += equippedGem.ExtraDefence;
+            if (equippedWeapon) total += equippedWeapon.ExtraDefence;
+            if (equippedArmor) total += equippedArmor.ExtraDefence;
             foreach (var a in equippedAccessories)
-                if (a) total += a.defenseBonus;
+                if (a) total += a.ExtraDefence;
             return total;
         }
 

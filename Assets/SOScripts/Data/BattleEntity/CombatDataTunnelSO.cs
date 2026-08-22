@@ -13,7 +13,7 @@ public class CombatDataTunnelSO : ScriptableObject
     {
         Destroy(playerLoadout);
         Destroy(partnerLoadout);
-        Destroy(enemyEncounterData);
+        enemyEncounterData = null;
 
     }
 }
