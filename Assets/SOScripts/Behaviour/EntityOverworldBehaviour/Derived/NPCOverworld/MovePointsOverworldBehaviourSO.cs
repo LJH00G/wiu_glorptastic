@@ -2,7 +2,7 @@
 using Game.SO.Behaviour.EntityOverworld.InstanceData;
 using UnityEngine;
 using Utility.Math;
-
+using Game.GlobalVariable.OverworldNPCMovePoints;
 
 namespace Game.SO.Behaviour.EntityOverworld.InstanceData
 {
@@ -21,7 +21,7 @@ namespace Game.SO.Behaviour.EntityOverworld
     public class MovePointsOverworldBehaviourSO : NPCOverworldBehaviourSO
     {
         [Header("Move Points")]
-        [SerializeField] Vector2[] points;
+        [SerializeField] string MovePointsKey;
         [SerializeField] bool isRandom;
         [SerializeField] float maxPauseDurationAtPoint;
 
@@ -48,6 +48,10 @@ namespace Game.SO.Behaviour.EntityOverworld
             int closestPointIndex = 0;
             float closestDist_sqr = float.PositiveInfinity;
 
+            if (!OverworldNPCMovePointsGlobalVariable.MovePointsDict.TryGetValue(MovePointsKey, out MovePoints movePoints))
+                return;
+            Vector2[] points = movePoints.points;
+
             for (int i = 0; i < points.Length; i++)
             {
                 float dist_sqr = (points[i] - (Vector2)controller.transform.position).sqrMagnitude;
@@ -73,6 +77,10 @@ namespace Game.SO.Behaviour.EntityOverworld
             if (controller.InstanceData is not MovePointsOverworldBehaviourInstanceData instanceData)
                 return;
 
+            if (!OverworldNPCMovePointsGlobalVariable.MovePointsDict.TryGetValue(MovePointsKey, out MovePoints movePoints))
+                return;
+            Vector2[] points = movePoints.points;
+
             controller.AIPath.destination = points[instanceData.toPointIndex];
 
             if (controller.AIPath.reachedEndOfPath)
@@ -96,8 +104,21 @@ namespace Game.SO.Behaviour.EntityOverworld
 
 
 #if UNITY_EDITOR
+
+        public override void BehaviourOnValidate(EntityOverworldController controller)
+        {
+            if (!OverworldNPCMovePointsGlobalVariable.MovePointsDict.TryGetValue(MovePointsKey, out _))
+            {
+                Debug.LogError($"no MovePoints in this scene matches the key {MovePointsKey}", this);
+            }
+        }
+
         public override void BehaviourOnDrawGizmosSelected(EntityOverworldController controller)
         {
+            if (!OverworldNPCMovePointsGlobalVariable.MovePointsDict.TryGetValue(MovePointsKey, out MovePoints movePoints))
+                return;
+            Vector2[] points = movePoints.points;
+
             if (points.Length == 0)
                 return;
 

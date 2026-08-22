@@ -14,6 +14,8 @@ namespace Game.SO.Behaviour.EntityOverworld.InstanceData
     public abstract class EntityOverworldBehaviourSO : ScriptableObject
     {
         [SerializeField] protected RuntimeAnimatorController animCtrller;
+        [field: SerializeField]
+        public Sprite DefaultSprite { get; private set; }
         [SerializeField] protected float speed = 2;
         [SerializeField] protected float acceleration = 10;
 
@@ -22,8 +24,9 @@ namespace Game.SO.Behaviour.EntityOverworld.InstanceData
 
         public void UpdateAnimator(EntityOverworldController controller)
         {
+            var speed = controller.AIPath.desiredVelocity.magnitude;
 
-            if (controller.AIPath.desiredVelocity.magnitude > 0.1f)
+            if (speed > 0.1f)
             {
 
                 float theta = Vector2.SignedAngle(Vector2.right, controller.AIPath.desiredVelocity);
@@ -52,6 +55,7 @@ namespace Game.SO.Behaviour.EntityOverworld.InstanceData
 
 
             controller.Animator.SetBool("Walking", !controller.AIPath.reachedEndOfPath);
+            controller.Animator.SetFloat("Speed", speed * 0.3f);
 
         }
 
@@ -63,6 +67,8 @@ namespace Game.SO.Behaviour.EntityOverworld.InstanceData
             if (!animCtrller)
                 Debug.LogError("animCtrller cannot be left enpty", this);
         }
+
+        public virtual void BehaviourOnValidate(EntityOverworldController controller) { }
         public virtual void BehaviourOnDrawGizmosSelected(EntityOverworldController controller) { }
 #endif
     }

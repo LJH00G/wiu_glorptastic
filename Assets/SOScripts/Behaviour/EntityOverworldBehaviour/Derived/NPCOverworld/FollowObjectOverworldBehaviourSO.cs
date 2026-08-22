@@ -32,7 +32,7 @@ namespace Game.SO.Behaviour.EntityOverworld
             controller.AIPath.maxAcceleration = acceleration;
             controller.AIPath.pickNextWaypointDist = controller.Radius * 3 * followDistMult;
             controller.AIPath.slowdownDistance = controller.Radius * 4 * followDistMult;
-            controller.AIPath.endReachedDistance = controller.Radius * followDistMult;
+            controller.AIPath.endReachedDistance = controller.Radius * 2 * followDistMult;
 
             controller.Animator.runtimeAnimatorController = animCtrller;
 
