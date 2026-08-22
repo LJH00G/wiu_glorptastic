@@ -84,12 +84,17 @@ namespace Game
         static public void SetPlayerCanMove(bool value)
         {
             PlayerCanMove = value;
+
+            if (PlayerCanMove)
+                Player.GetComponent<EntityOverworldController>().RefreshMovement();
         }
 
         static public void SetAllCanMove(bool value)
         {
             AllCanMove = value;
-            Player.GetComponent<EntityOverworldController>().RefreshMovement();
+
+            if (AllCanMove)
+                Player.GetComponent<EntityOverworldController>().RefreshMovement();
         }
     }
 }

@@ -1,6 +1,5 @@
 using Game;
 using Game.Combat;
-using Game.SO.Data.Item.Sellable.Battle;
 using Game.SO.EventChannel;
 using Game.SO.EventChannel.Context;
 using System.Collections.Generic;
@@ -30,7 +29,7 @@ public class CombatInitialiser : MonoBehaviour
         tunnelDataTunnel.enemyEncounterData = data;
         tunnelDataTunnel.playerLoadout = player;
 
-        PlayMusicEventContext music = new PlayMusicEventContext();
+        PlayMusicEventContext music = PlayMusicEventContext.FadeAllOut_2s;
         SceneSwitchEventContext context = new("Combat Scene", 2, music);
 
         onSwitch.Raise(context);

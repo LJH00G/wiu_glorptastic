@@ -1,4 +1,4 @@
-using Game.TriggerHandler.SingleTriggerHandler;
+using Game.Interactable.SingleTriggerHandler;
 using UnityEngine;
 
 public class EnemyEncounterTriggerHandler : SingleTriggerHandler<EnemyEncounterDataSO>
