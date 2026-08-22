@@ -33,6 +33,11 @@ public class EntityOverworldController : MonoBehaviour
     }
 
 
+    public void RefreshMovement()
+    {
+        AIPath.destination = transform.position;
+    }
+
 
     void Start()
     {
@@ -92,14 +97,21 @@ public class EntityOverworldController : MonoBehaviour
 
         Animator = GetComponent<Animator>();
 
-        if (!behaviour)
-            Debug.LogError("behaviour must not be left empty", this);
-
-        if (prevBehaviour != behaviour)
+        if (behaviour)
         {
-            prevBehaviour = behaviour;
-            SetBehaviour(behaviour);
+            if (prevBehaviour != behaviour) {
+                prevBehaviour = behaviour;
+                SetBehaviour(behaviour);
+            }
+
+            behaviour.BehaviourOnValidate(this);
+
+            SpriteRenderer spriteRenderer = transform.GetComponentInChildren<SpriteRenderer>();
+            if (spriteRenderer)
+                spriteRenderer.sprite = behaviour.DefaultSprite;
         }
+        else
+            Debug.LogError("behaviour must not be left empty", this);
     }
 
     private void OnDrawGizmosSelected()

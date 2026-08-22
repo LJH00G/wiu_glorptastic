@@ -121,6 +121,8 @@ public class DialogueManager : MonoBehaviour
         rectForm.anchoredPosition = rectPos;
 
         cGroup.alpha = 0;
+
+        animTimer = animTime;
     }
 
 

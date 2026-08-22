@@ -2,7 +2,7 @@
 using Game.SO.Behaviour.EntityOverworld.InstanceData;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Game.TriggerHandler;
+using Game.Interactable;
 
 
 namespace Game.SO.Behaviour.EntityOverworld.InstanceData
@@ -32,7 +32,7 @@ namespace Game.SO.Behaviour.EntityOverworld
             controller.AIPath.maxAcceleration = acceleration;
             controller.AIPath.pickNextWaypointDist = controller.Radius;
             controller.AIPath.slowdownDistance = controller.Radius * 0.9f;
-            controller.AIPath.endReachedDistance = controller.Radius * 0.8f;
+            controller.AIPath.endReachedDistance = controller.Radius * 0.75f;
             controller.AIPath.destination = controller.transform.position;
 
             controller.Animator.runtimeAnimatorController = animCtrller;
@@ -74,10 +74,9 @@ namespace Game.SO.Behaviour.EntityOverworld
 
                 foreach (var collider in colliders)
                 {
-                    if (collider.TryGetComponent(out I_TriggerHandler handler) &&
-                        handler.RequiresInteraction())
+                    if (collider.TryGetComponent(out I_Interactable interactable))
                     {
-                        handler?.Trigger();
+                        interactable?.Interact();
                         break;
                     }
                 }

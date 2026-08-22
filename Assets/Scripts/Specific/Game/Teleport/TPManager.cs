@@ -93,10 +93,10 @@ namespace Game.TPManager
             TPPointDef.OnValidate();
         }
 
-        void OnDrawGizmos()
+        void OnDrawGizmosSelected()
         {
             Gizmos.color = new Color(0, 0, 1);
-            Vector3 Gizmossize = new Vector3(1, 1, 1);
+            Vector3 Gizmossize = new Vector3(1, 1, 1) * 0.5f;
             foreach(TPDefinition TP in TPPointDef.dict.Values)
             {
                 

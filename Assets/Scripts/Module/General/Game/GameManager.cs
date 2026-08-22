@@ -40,11 +40,23 @@ namespace Game
 
         static public void SetPlayer(GameObject player)
         {
+            if (!player.TryGetComponent<EntityOverworldController>(out _))
+            {
+                UnityEngine.Debug.LogWarning("GameManager.SetPlayer() | cannot set a game object without EntityOverworldController as player");
+                return;
+            }
+
             Player = player;
         }
 
         static public void SetFollower(GameObject follower)
         {
+            if (!follower.TryGetComponent<EntityOverworldController>(out _))
+            {
+                UnityEngine.Debug.LogWarning("GameManager.SetFollower() | cannot set a game object without EntityOverworldController as follower");
+                return;
+            }
+
             Follower = follower;
         }
         static public void SetGameState(GAME_STATE state)
@@ -77,6 +89,7 @@ namespace Game
         static public void SetAllCanMove(bool value)
         {
             AllCanMove = value;
+            Player.GetComponent<EntityOverworldController>().RefreshMovement();
         }
     }
 }
