@@ -20,8 +20,20 @@ namespace Game.Inventory
         [SerializeField] GameObject panelRoot;
         bool sellMode;
 
-
         readonly List<InventoryItemUI> spawned = new();
+
+        public static InventoryUI Instance { get; private set; }
+
+        public bool IsOpen => panelRoot ? panelRoot.activeSelf : gameObject.activeSelf;
+
+        void Awake()
+        {
+            if (Instance && Instance != this)
+            {
+                Debug.LogWarning("InventoryUI.Awake() | more than one InventoryUI exists in the scene, Instance will point at the most recently loaded one");
+            }
+            Instance = this;
+        }
 
         void OnEnable()
         {
@@ -34,7 +46,7 @@ namespace Game.Inventory
             inventoryManager.OnInventoryChanged -= Refresh;
         }
 
-        public void Show(bool sellModeEnabled = false)
+        public void Show(bool sellModeEnabled = false)//
         {
             sellMode = sellModeEnabled;
 
@@ -64,7 +76,6 @@ namespace Game.Inventory
                 row.OnDetailsRequested += HandleDetailsRequested;
                 spawned.Add(row);
             }
-
 
             while (spawned.Count > stacks.Count)
             {

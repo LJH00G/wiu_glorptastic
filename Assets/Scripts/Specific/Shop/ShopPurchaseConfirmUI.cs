@@ -19,8 +19,16 @@ public class ShopPurchaseConfirmUI : MonoBehaviour
 
     Action pendingConfirm;
 
+    public static ShopPurchaseConfirmUI Instance { get; private set; }
+
     void Awake()
     {
+        if (Instance && Instance != this)
+        {
+            Debug.LogWarning("ShopPurchaseConfirmUI.Awake() ++++OWO++++ more than one instance exists in this scene,glorp will point at the most recently loaded one");
+        }
+        Instance = this;
+
         if (yesButton)
         {
             yesButton.onClick.AddListener(HandleYesClicked);
@@ -60,12 +68,10 @@ public class ShopPurchaseConfirmUI : MonoBehaviour
         Hide();
     }
 
-    // fills one side (cost or product) with one entry per item, plus one for shell if used
     void PopulateSide(Transform container, List<ShopTradeEntryUI> pool, Shopable shopable)
     {
         int neededCount = (shopable.useShell ? 1 : 0) + (shopable.itemStacks?.Count ?? 0);
 
-        // grow the pool if needed
         while (pool.Count < neededCount)
         {
             ShopTradeEntryUI entry = Instantiate(entryPrefab);

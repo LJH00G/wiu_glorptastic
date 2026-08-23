@@ -6,10 +6,10 @@ using TMPro;
 using Game.SO.Data.Item;
 using Game.SO.Data.Item.Sellable;
 using Game.SO.Data.Item.Sellable.Battle;
+using Game.SO.Data.Shop;
 
 namespace Game.Inventory
 {
-
     public class ItemDetailUI : MonoBehaviour
     {
         [Header("Source")]
@@ -27,6 +27,7 @@ namespace Game.Inventory
 
         [SerializeField] Button sellButton;
         [SerializeField] Button dontSellButton;
+        [SerializeField] ShopPurchaseConfirmUI shopConfirmUI;
 
         static readonly Dictionary<Texture2D, Sprite> spriteCache = new();
 
@@ -37,26 +38,18 @@ namespace Game.Inventory
         void Awake()
         {
             if (equipButton)
-            {
                 equipButton.onClick.AddListener(HandleEquipClicked);
-            }
             if (unequipButton)
-            {
                 unequipButton.onClick.AddListener(HandleUnequipClicked);
-            }
             if (closeButton)
-            {
                 closeButton.onClick.AddListener(Hide);
-            }
-            
+
+            // --- ADDED ---
             if (sellButton)
-            {
                 sellButton.onClick.AddListener(HandleSellClicked);
-            }
             if (dontSellButton)
-            {
                 dontSellButton.onClick.AddListener(Hide);
-            }
+            // --- END ADDED ---
 
             inventoryManager.OnInventoryChanged += Refresh;
 
@@ -188,11 +181,35 @@ namespace Game.Inventory
 
         void HandleSellClicked()
         {
-            if (currentItem is SellableItemSO sellable)
+            if (currentItem is not SellableItemSO sellable)
+            {
+                return;
+            }
+            if (shopConfirmUI)
+            {
+                ShopTrade sellTrade = new ShopTrade
+                {
+                    cost = new Shopable
+                    {
+                        itemStacks = new List<ItemStack> {new ItemStack(sellable, 1)},
+                        useShell = false
+                    },
+                    product = new Shopable
+                    {
+                        itemStacks = null,
+                        useShell = true,
+                        shell = sellable.SellValue
+                    }
+                };
+
+                shopConfirmUI.Show(sellTrade, () => inventoryManager.SellItem(sellable, 1));
+                Hide();
+            }
+            else
             {
                 inventoryManager.SellItem(sellable, 1);
+                Hide();
             }
-            Hide();
         }
 
         static string BuildStatsText(ItemSO item)
