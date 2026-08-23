@@ -1,10 +1,12 @@
 
 using Game.SO.Behaviour.EntityOverworld.InstanceData;
+using System;
 using UnityEngine;
 
 
 namespace Game.SO.Behaviour.EntityOverworld.InstanceData
 {
+    [Serializable]
     public class FollowObjectOverworldBehaviourInstanceData : EntityOverworldBehaviourInstanceData
     {
         public Transform targetForm;
@@ -36,7 +38,7 @@ namespace Game.SO.Behaviour.EntityOverworld
 
             controller.Animator.runtimeAnimatorController = animCtrller;
 
-            if (defaultTargetsPlayer)
+            if (defaultTargetsPlayer && controller.InstanceData != null)
                 ((FollowObjectOverworldBehaviourInstanceData)controller.InstanceData).targetForm = GameManager.Player.transform;
         }
 

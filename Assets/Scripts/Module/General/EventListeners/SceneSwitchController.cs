@@ -14,6 +14,7 @@ public class SceneSwitchController : MonoBehaviour
 
     public void SwitchScene(SceneSwitchEventContext context)
     {
+        Debug.Log($"trying to scene switch to {context}", this);
         Time.timeScale = 0f;
 
         playMusicEventChannel.Raise(context.playMusicContext);
@@ -33,6 +34,7 @@ public class SceneSwitchController : MonoBehaviour
                 SceneManager.SetActiveScene(scene);
                 Time.timeScale = 1f;
 
+                Debug.Log($"unloading old scene: {oldScene}");
                 SceneManager.UnloadSceneAsync(oldScene);
             }
 
@@ -40,7 +42,8 @@ public class SceneSwitchController : MonoBehaviour
             SceneManager.LoadSceneAsync(context.loadScene, LoadSceneMode.Additive);
             Camera.main.tag = "Untagged";
         },
-            context.delay
+            context.delay,
+            false
         ));
 
     }

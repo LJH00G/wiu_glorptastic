@@ -68,12 +68,16 @@ namespace Game.TPManager
 
             yield return new WaitForSeconds(currentTP.time);
 
-            if(player != null)
+            if (player != null)
+            {
                 player.transform.position = currentTP.position;
-
-            if(follower != null)
+                player.GetComponent<EntityOverworldController>().RefreshMovement();
+            }
+            if (follower != null)
+            {
                 follower.transform.position = currentTP.position;
-        
+                follower.GetComponent<EntityOverworldController>().RefreshMovement();
+            }
 
             TPAnimChannel.Raise(false);
 

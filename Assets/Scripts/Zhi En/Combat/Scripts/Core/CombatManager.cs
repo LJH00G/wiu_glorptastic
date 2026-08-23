@@ -62,7 +62,7 @@ namespace Game.Combat
         {
             player = CombatantRuntime.FromPlayer(playerLoadout, playerAnchor);
             partner = partnerLoadout != null
-                ? CombatantRuntime.FromPartner(partnerLoadout, partnerAnchor)
+                ? CombatantRuntime.FromPartner(playerLoadout, partnerLoadout, partnerAnchor)
                 : null;
 
             enemies.Clear();

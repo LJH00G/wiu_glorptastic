@@ -22,7 +22,7 @@ namespace Game.Inventory
 
         void OnEnable()
         {
-            InventoryManager.OnInventoryChanged.Subscribe(Refresh);
+            InventoryManager.OnInventoryChanged.Subscribe(Refresh, 0);
             Refresh();
         }
 

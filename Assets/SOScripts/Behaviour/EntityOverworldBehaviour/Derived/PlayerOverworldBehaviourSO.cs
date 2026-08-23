@@ -1,12 +1,14 @@
 
+using Game.Interactable;
 using Game.SO.Behaviour.EntityOverworld.InstanceData;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Game.Interactable;
 
 
 namespace Game.SO.Behaviour.EntityOverworld.InstanceData
 {
+    [Serializable]
     public class PlayerOverworldBehaviourInstanceData : EntityOverworldBehaviourInstanceData
     {
         

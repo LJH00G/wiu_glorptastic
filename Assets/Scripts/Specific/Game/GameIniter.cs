@@ -1,6 +1,8 @@
 using Game;
+using Game.Inventory;
 using UnityEngine;
 
+[DefaultExecutionOrder(-99999)]
 public class GameIniter : MonoBehaviour
 {
     [SerializeField] GameObject player;
@@ -10,6 +12,7 @@ public class GameIniter : MonoBehaviour
     {
         GameManager.SetPlayer(player);
         GameManager.SetFollower(follower);
+        InventoryManager.ManageInventory(GameManager.CurrentUserData.Inventory);
     }
 
 #if UNITY_EDITOR

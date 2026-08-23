@@ -32,6 +32,18 @@ namespace Game.Inventory
         public CurseGemItemSO CurrentGem { get; set; } = null;
 
 
+        public Inventory() { }
+        public Inventory(Inventory other)
+        {
+            ItemList = new(other.ItemList);
+            ShellCurrency = other.ShellCurrency;
+            EquipedWeapon = other.EquipedWeapon;
+            EquipedArmour = other.EquipedArmour;
+            other.EquipedAccessoryList.CopyTo(EquipedAccessoryList, 0);
+            CurrentGem = other.CurrentGem;
+        }
+
+
 #if UNITY_EDITOR
         public void OnValidate()
         {

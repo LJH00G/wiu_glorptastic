@@ -1,2 +1,14 @@
 fileFormatVersion: 2
 guid: d27b6ad76679fc7479aa5415bfb47cd6
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - triggerable: {instanceID: 0}
+  - triggerCollider: {instanceID: 0}
+  - initializeCombatEventChannel: {fileID: 11400000, guid: 6473217a41b61ad448a433824b5ce524, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

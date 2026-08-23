@@ -16,10 +16,18 @@ namespace Game.Inventory
 
         static public Inventory ManagedInventory { get; private set; }
 
-        static public EventCS OnInventoryChanged { get; set; } = new();
+        static public PriorityEventCS OnInventoryChanged { get; set; } = new(TryRefreshPlayerBattleData, -128);
 
 
-        static public void HandleShopPurchase(ref ShopTrade trade)
+        static void TryRefreshPlayerBattleData()
+        {
+            if (ManagedInventory != GameManager.CurrentUserData.Inventory)
+                return;
+
+            GameManager.CurrentUserData.PlayerBattleData.Refresh();
+        }
+
+        static public bool TryShopPurchase(ref ShopTrade trade)
         {
             ref Shopable cost = ref trade.cost;
 
@@ -42,7 +50,7 @@ namespace Game.Inventory
             if (!canBuy)
             {
                 // toast notif event
-                return;
+                return false;
             }
 
             if (cost.useShell)
@@ -65,6 +73,8 @@ namespace Game.Inventory
             }
 
             // toast notif event
+
+            return true;
         }
 
 
@@ -89,6 +99,39 @@ namespace Game.Inventory
             OnInventoryChanged.Raise();
         }
 
+        static public bool TryGetItemInList<T_ItemSO>(out T_ItemSO item)
+            where T_ItemSO : ItemSO
+        {
+            var itemList = ManagedInventory.ItemList;
+            for (int i = 0; i < itemList.Count; i++)
+            {
+                if (itemList[i].item is T_ItemSO item_T)
+                {
+                    item = item_T;
+                    return true;
+                }
+            }
+
+            item = null;
+            return false;
+        }
+
+        static public bool HasItemInList<T_ItemSO>(out uint amount)
+            where T_ItemSO : ItemSO
+        {
+            amount = 0;
+
+            var itemList = ManagedInventory.ItemList;
+            for (int i = 0; i < itemList.Count; i++)
+            {
+                if (itemList[i].item is T_ItemSO)
+                {
+                    amount += itemList[i].count;
+                }
+            }
+
+            return amount != 0;
+        }
 
         static public bool HasItemInList(ItemSO item, out uint amount)
         {
@@ -107,6 +150,56 @@ namespace Game.Inventory
             return amount != 0;
         }
 
+        static public bool TryGetItemInEquiped<T_ItemSO>(out T_ItemSO item)
+            where T_ItemSO : ItemSO
+        {
+            item = null;
+
+            if (ManagedInventory.EquipedWeapon is T_ItemSO item_weapon)
+            {
+                item = item_weapon;
+            }
+            else if (ManagedInventory.EquipedArmour is T_ItemSO item_armour)
+            {
+                item = item_armour;
+            }
+            else
+            {
+                foreach (var accessory in ManagedInventory.EquipedAccessoryList)
+                {
+                    if (accessory is T_ItemSO item_accessory)
+                    {
+                        item = item_accessory;
+                        break;
+                    }
+                }
+            }
+
+            return item != null;
+        }
+
+        static public bool HasItemInEquiped<T_ItemSO>(out uint amount)
+            where T_ItemSO : ItemSO
+        {
+            amount = 0;
+
+            if (ManagedInventory.EquipedWeapon is T_ItemSO)
+            {
+                amount++;
+            }
+
+            if (ManagedInventory.EquipedArmour is T_ItemSO)
+            {
+                amount++;
+            }
+
+            foreach (var accessory in ManagedInventory.EquipedAccessoryList)
+                if (accessory is T_ItemSO)
+                    amount++;
+
+            return amount != 0;
+        }
+
         static public bool HasItemInEquiped(ItemSO item, out uint amount)
         {
             amount = 0;
@@ -116,16 +209,28 @@ namespace Game.Inventory
                 amount++;
             }
             else
+            if (ManagedInventory.EquipedArmour == item)
+            {
+                amount++;
+            }
+            else
             {
                 foreach (var accessory in ManagedInventory.EquipedAccessoryList)
                     if (accessory == item)
-                    {
                         amount++;
-                    }
             }
             return amount != 0;
         }
 
+        static public bool HasItem<T_ItemSO>(out uint amount)
+            where T_ItemSO : ItemSO
+        {
+            HasItemInList<T_ItemSO>(out uint a1);
+            HasItemInEquiped<T_ItemSO>(out uint a2);
+            amount = a1 + a2;
+
+            return amount != 0;
+        }
 
         static public bool HasItem(ItemSO item, out uint amount)
         {

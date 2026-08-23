@@ -9,12 +9,12 @@ public class ShopBaseController : MonoBehaviour
     public ShopPresetSO Preset { get; private set; }
 
 
-    public void TryMakeDeal(int index)
+    public bool TryMakeDeal(int index)
     {
         if (index < 0 || index >= Preset.TradeTable.Length)
-            return;
+            return false;
 
-        InventoryManager.HandleShopPurchase(ref Preset.TradeTable[index]);
+        return InventoryManager.TryShopPurchase(ref Preset.TradeTable[index]);
     }
 
 

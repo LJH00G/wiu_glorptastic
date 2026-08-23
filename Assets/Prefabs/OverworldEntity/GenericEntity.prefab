@@ -217,6 +217,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EntityOverworldController
   <Radius>k__BackingField: 0.25
   behaviour: {fileID: 0}
+  <InstanceData>k__BackingField:
+    rid: -2
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
 --- !u!1 &7618617631642094810
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,8 +1,10 @@
 
+using System;
 using UnityEngine;
 
 namespace Game.SO.Behaviour.EntityOverworld.InstanceData
 {
+    [Serializable]
     public abstract class EntityOverworldBehaviourInstanceData
     {
         public Vector2 facingDire;

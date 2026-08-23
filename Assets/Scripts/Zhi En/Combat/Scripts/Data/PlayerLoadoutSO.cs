@@ -15,12 +15,6 @@ namespace Game.Combat
     [CreateAssetMenu(menuName = "Combat/Player Loadout", fileName = "PlayerLoadout")]
     public class PlayerLoadoutSO : ScriptableObject
     {
-        [Header("Base Stats (design doc: tentatively 1 dmg, 0 def)")]
-        public int baseDamage = 1;
-        public int baseDefense = 0;
-        public int maxHP = 64;
-        public int maxCS = 30;
-
         [Header("Equipped Gear")]
         public CurseGemItemSO equippedGem;
         public WeaponItemSO equippedWeapon;
@@ -46,11 +40,6 @@ namespace Game.Combat
             return total;
         }
 
-        public int TotalDamage()
-        {
-            return baseDamage + TotalExtraDamage();
-        }
-
         public int TotalExtraDefense()
         {
             int total = 0;
@@ -59,11 +48,6 @@ namespace Game.Combat
             foreach (var a in equippedAccessories)
                 if (a) total += a.ExtraDefence;
             return total;
-        }
-
-        public int TotalDefence()
-        {
-            return baseDefense + TotalExtraDefense();
         }
 
         public float TotalMasteryWidthMultiplier()
@@ -92,22 +76,5 @@ namespace Game.Combat
             if (equippedGem) total += equippedGem.CSRegenPerTurn;
             return total;
         }
-    }
-
-    /// <summary>
-    /// partner only gets Combat(Attack) + Actions
-    /// </summary>
-    [CreateAssetMenu(menuName = "Combat/Partner Loadout", fileName = "PartnerLoadout")]
-    public class PartnerLoadoutSO : ScriptableObject
-    {
-        public string partnerName = "Partner";
-        public int baseDamage = 1;
-        public int baseDefense = 0;
-        public int maxHP = 50;
-        public int maxCS = 0;
-        public List<AbilitySO> knownAbilities = new();
-
-        public int TotalDamage() => baseDamage;
-        public int TotalDefense() => baseDefense;
     }
 }

@@ -1,8 +1,7 @@
-using NUnit.Framework;
+
 using UnityEngine;
 using System.Collections.Generic;
 using System;
-using Game.Combat;
 
 namespace Game.Combat.Integration
 {
@@ -11,25 +10,22 @@ namespace Game.Combat.Integration
 
         void Start()
         {
-            LoadDataAssignment(dataTunnel.enemyEncounterData.dataList.Count);
+            Debug.Log($"trying to load data from tunnel");
+            LoadDataAssignment();
         }
 
         [SerializeField] private List<Transform> transformList;
         [SerializeField] private CombatManager combatManager;
         [SerializeField] private CombatDataTunnelSO dataTunnel;
-        public void LoadDataAssignment(int count)
+        public void LoadDataAssignment()
         {
-            Array.Clear(combatManager.enemyAnchors, 0, combatManager.enemyAnchors.Length);
-
-            for (int i = 0; i < count; i++)
-            {
-                combatManager.enemyAnchors.SetValue(transformList[i], i);
-            }
+            combatManager.enemyAnchors = transformList.ToArray();
 
             combatManager.enemyEncounter = dataTunnel.enemyEncounterData.dataList.ToArray();
             combatManager.playerLoadout = dataTunnel.playerLoadout;
             combatManager.partnerLoadout = dataTunnel.partnerLoadout;
 
+            Debug.Log($"trying set up battle");
             combatManager.SetupBattle();
         }
 

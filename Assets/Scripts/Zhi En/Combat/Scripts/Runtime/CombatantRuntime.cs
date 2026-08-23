@@ -35,22 +35,25 @@ namespace Game.Combat
 
         public static CombatantRuntime FromPlayer(PlayerLoadoutSO source, Transform anchor)
         {
+            var playerBattleData = GameManager.CurrentUserData.PlayerBattleData;
+            playerBattleData.Refresh();
+
             return new CombatantRuntime
             {
                 actorType = ActorType.PLAYER,
                 displayName = "Player", // TODO: pull an actual player name if you have one
-                maxHP = source.maxHP,
-                currentHP = source.maxHP,
-                maxCS = source.maxCS,
-                currentCS = 0,
-                damage = source.TotalDamage(),
-                defense = source.TotalDefence(),
+                maxHP = playerBattleData.MaxHP,
+                currentHP = playerBattleData.CurrentHP,
+                maxCS = playerBattleData.MaxCurse,
+                currentCS = playerBattleData.CurrentCurse,
+                damage = 1 + source.TotalExtraDamage(),
+                defense = source.TotalExtraDefense(),
                 anchor = anchor,
                 playerSource = source
             };
         }
 
-        public static CombatantRuntime FromPartner(PartnerLoadoutSO source, Transform anchor)
+        public static CombatantRuntime FromPartner(PlayerLoadoutSO playerSource, PartnerLoadoutSO source, Transform anchor)
         {
             return new CombatantRuntime
             {
@@ -60,7 +63,7 @@ namespace Game.Combat
                 currentHP = source.maxHP,
                 maxCS = source.maxCS,
                 currentCS = 0,
-                damage = source.baseDamage,
+                damage = source.baseDamage + playerSource.equippedGem.ExtraDamage,
                 anchor = anchor,
                 partnerSource = source
             };

@@ -11,8 +11,6 @@ public class CombatDataTunnelSO : ScriptableObject
 
     public void WipeCall()
     {
-        Destroy(playerLoadout);
-        Destroy(partnerLoadout);
         enemyEncounterData = null;
 
     }

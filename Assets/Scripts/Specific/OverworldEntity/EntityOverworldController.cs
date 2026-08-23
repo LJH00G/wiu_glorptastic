@@ -18,7 +18,7 @@ public class EntityOverworldController : MonoBehaviour
 
     [Header("Behaviour")]
     [SerializeField] EntityOverworldBehaviourSO behaviour;
-    [field: SerializeField]
+    [field: SerializeReference]
     public EntityOverworldBehaviourInstanceData InstanceData { get; set; }
 
     public AIPath AIPath { get; private set; }

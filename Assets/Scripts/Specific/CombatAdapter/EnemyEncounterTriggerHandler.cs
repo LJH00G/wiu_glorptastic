@@ -3,10 +3,10 @@ using UnityEngine;
 
 public class EnemyEncounterTriggerHandler : SingleTriggerHandler<EnemyEncounterDataSO>
 {
-    [SerializeField] CombatInitialiser combatInitialiser;
+    [SerializeField] InitializeCombatEventChannelSO initializeCombatEventChannel;
 
     protected override void TriggerTriggerable(ref EnemyEncounterDataSO triggerable)
     {
-        combatInitialiser.StartCombat(triggerable);
+        initializeCombatEventChannel.Raise(triggerable);
     }
 }

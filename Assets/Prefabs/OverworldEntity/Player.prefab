@@ -217,6 +217,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EntityOverworldController
   <Radius>k__BackingField: 0.25
   behaviour: {fileID: 11400000, guid: 8e126c8ea824a0f4e97d592268c984a2, type: 2}
+  <InstanceData>k__BackingField:
+    rid: 1000
+  references:
+    version: 2
+    RefIds:
+    - rid: 1000
+      type: {class: PlayerOverworldBehaviourInstanceData, ns: Game.SO.Behaviour.EntityOverworld.InstanceData, asm: Assembly-CSharp}
+      data:
+        facingDire: {x: 0, y: 0}
 --- !u!1 &7618617631642094810
 GameObject:
   m_ObjectHideFlags: 0

@@ -107,10 +107,20 @@ namespace Game.SO.Behaviour.EntityOverworld
 
         public override void BehaviourOnValidate(EntityOverworldController controller)
         {
-            if (!OverworldNPCMovePointsGlobalVariable.MovePointsDict.TryGetValue(MovePointsKey, out _))
+            if (!OverworldNPCMovePointsGlobalVariable.MovePointsDict.TryGetValue(MovePointsKey, out MovePoints movePoints))
             {
                 Debug.LogError($"no MovePoints in this scene matches the key {MovePointsKey}", this);
+                return;
             }
+
+            if (controller.InstanceData is not MovePointsOverworldBehaviourInstanceData instanceData)
+                return;
+
+            if (instanceData.toPointIndex < 0)
+                instanceData.toPointIndex = movePoints.points.Length - 1;
+            else if (instanceData.toPointIndex >= movePoints.points.Length)
+                instanceData.toPointIndex = 0;
+            
         }
 
         public override void BehaviourOnDrawGizmosSelected(EntityOverworldController controller)
