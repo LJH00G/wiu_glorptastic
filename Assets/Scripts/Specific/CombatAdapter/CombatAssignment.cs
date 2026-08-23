@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System;
+using Game.SO.EventChannel.Context;
 
 namespace Game.Combat.Integration
 {
@@ -16,6 +17,8 @@ namespace Game.Combat.Integration
         [SerializeField] private List<Transform> transformList;
         [SerializeField] private CombatManager combatManager;
         [SerializeField] private CombatDataTunnelSO dataTunnel;
+
+        [SerializeField] private CombatEndEventChannelSO combatEnd;
         public void LoadDataAssignment()
         {
             combatManager.enemyAnchors = transformList.ToArray();
@@ -32,9 +35,11 @@ namespace Game.Combat.Integration
             );
         }
 
-        public void WipeDataAssignment()
+        public void WipeDataAssignment(bool won)
         {
             dataTunnel.WipeCall();
+            CombatEndEventContextSO context = new(won);
+            combatEnd.Raise(context);
         }
 
 

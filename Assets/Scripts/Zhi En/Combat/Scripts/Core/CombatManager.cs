@@ -961,7 +961,7 @@ namespace Game.Combat
             );
 
             input.InputEnabled = false;
-            combatAssigner.WipeDataAssignment();
+            combatAssigner.WipeDataAssignment(won);
             // TODO:
             // Hook this into SceneSwitchController to return to the overworld,
             // show a reward screen, or trigger the game-over flow.

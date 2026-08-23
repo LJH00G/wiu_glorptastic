@@ -11,11 +11,14 @@ namespace Game.SO.EventChannel.Context
         public float delay;
         public PlayMusicEventContext playMusicContext;
 
-        public SceneSwitchEventContext(string loadNewActiveScene, float delay, PlayMusicEventContext playMusicContext)
+        public bool unloadOldScene;
+
+        public SceneSwitchEventContext(string loadNewActiveScene, float delay, PlayMusicEventContext playMusicContext, bool unloadOldScene)
         {
             loadScene = loadNewActiveScene;
             this.delay = delay;
             this.playMusicContext = playMusicContext;
+            this.unloadOldScene = unloadOldScene;
         }
 
         public override string ToString()
