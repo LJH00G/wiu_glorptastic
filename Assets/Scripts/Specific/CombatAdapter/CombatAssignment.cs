@@ -1,4 +1,3 @@
-
 using UnityEngine;
 using System.Collections.Generic;
 using System;
@@ -26,7 +25,11 @@ namespace Game.Combat.Integration
             combatManager.partnerLoadout = dataTunnel.partnerLoadout;
 
             Debug.Log($"trying set up battle");
-            combatManager.SetupBattle();
+            combatManager.SetupBattle(
+                dataTunnel.playerSprite,
+                dataTunnel.partnerSprite,
+                dataTunnel.enemySprites
+            );
         }
 
         public void WipeDataAssignment()
@@ -38,6 +41,4 @@ namespace Game.Combat.Integration
     }
 }
 
-    
 
-    
