@@ -17,8 +17,11 @@ public class CombatInitialiser : MonoBehaviour
     [SerializeField] CombatEndEventChannelSO combatEndEventChannel;
     [SerializeField] CombatDataTunnelSO tunnelDataTunnel;
     [SerializeField] SceneSwitchEventChannelSO onSwitch;
+    [SerializeField] Camera overworldCamera;
 
     GameObject enemyInitiated;
+
+    string overworldSceneName;
 
     public void StartCombat(EnemyEncounterDataSO data)
     {
@@ -36,6 +39,7 @@ public class CombatInitialiser : MonoBehaviour
         tunnelDataTunnel.partnerLoadout = partner;
 
         enemyInitiated = data.enemy;
+        SceneManager.GetSceneByName(overworldSceneName);
 
         PlayMusicEventContext music = PlayMusicEventContext.FadeAllOut_2s;
         SceneSwitchEventContext context = new("Combat Scene", 2, music, false);
@@ -51,6 +55,10 @@ public class CombatInitialiser : MonoBehaviour
         enemyInitiated = null;
 
         SceneManager.UnloadSceneAsync("Combat Scene");
+        Scene scene = SceneManager.GetSceneByName(overworldSceneName);
+        SceneManager.SetActiveScene(scene);
+
+        overworldCamera.tag = "MainCamera";
     }
 
     private void OnEnable()
