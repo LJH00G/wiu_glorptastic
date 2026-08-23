@@ -7,7 +7,7 @@ namespace Game.SO.Data.Item.Sellable.Battle
     {
 
         [field: SerializeField]
-        public int Dmage {  get; private set; }
+        public int Defence {  get; private set; }
 
     }
 }

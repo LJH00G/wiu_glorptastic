@@ -44,7 +44,7 @@ namespace Game.Combat
                 maxCS = source.maxCS,
                 currentCS = 0,
                 damage = source.TotalDamage(),
-                defense = source.TotalDefense(),
+                defense = source.TotalDefence(),
                 anchor = anchor,
                 playerSource = source
             };
@@ -60,8 +60,7 @@ namespace Game.Combat
                 currentHP = source.maxHP,
                 maxCS = source.maxCS,
                 currentCS = 0,
-                damage = source.TotalDamage(),
-                defense = source.TotalDefense(),
+                damage = source.baseDamage,
                 anchor = anchor,
                 partnerSource = source
             };

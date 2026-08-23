@@ -1,12 +1,9 @@
+using Game.Inventory;
 using Game.SO.Data.Shop;
-using Game.SO.EventChannel;
 using UnityEngine;
 
 public class ShopBaseController : MonoBehaviour
 {
-    [Header("Event Broadcasting Channel")]
-    [SerializeField] ShopPurchaseEventChannelSO shopPurchaseEventChannel;
-
     [Header("ShopPreset")]
     [field: SerializeField]
     public ShopPresetSO Preset { get; private set; }
@@ -14,11 +11,10 @@ public class ShopBaseController : MonoBehaviour
 
     public void TryMakeDeal(int index)
     {
-        if (index < 0 || index >= Preset.TradeTable.Count)
+        if (index < 0 || index >= Preset.TradeTable.Length)
             return;
 
-        shopPurchaseEventChannel.Raise(Preset.TradeTable[index]);
-
+        InventoryManager.HandleShopPurchase(ref Preset.TradeTable[index]);
     }
 
 

@@ -36,33 +36,42 @@ namespace Game.Combat
         // for now the battle reads/writes counts directly on this list.
         public List<Game.Inventory.ItemStack> inventory = new();
 
-        public int TotalDamage()
+        public int TotalExtraDamage()
         {
-            int total = baseDamage;
+            int total = 0;
             if (equippedGem) total += equippedGem.ExtraDamage;
-            if (equippedWeapon) total += equippedWeapon.ExtraDamage;
-            if (equippedArmor) total += equippedArmor.ExtraDamage;
+            if (equippedWeapon) total += equippedWeapon.Dmage;
             foreach (var a in equippedAccessories)
                 if (a) total += a.ExtraDamage;
             return total;
         }
 
-        public int TotalDefense()
+        public int TotalDamage()
         {
-            int total = baseDefense;
+            return baseDamage + TotalExtraDamage();
+        }
+
+        public int TotalExtraDefense()
+        {
+            int total = 0;
             if (equippedGem) total += equippedGem.ExtraDefence;
-            if (equippedWeapon) total += equippedWeapon.ExtraDefence;
-            if (equippedArmor) total += equippedArmor.ExtraDefence;
+            if (equippedArmor) total += equippedArmor.Defence;
             foreach (var a in equippedAccessories)
                 if (a) total += a.ExtraDefence;
             return total;
+        }
+
+        public int TotalDefence()
+        {
+            return baseDefense + TotalExtraDefense();
         }
 
         public float TotalMasteryWidthMultiplier()
         {
             float mult = 1f;
             foreach (var a in equippedAccessories)
-                if (a) mult *= a.masteryWindowWidthMultiplier;
+                if (a) mult *= a.MasteryWindowWidthMultiplier;
+            if (equippedGem) mult *= equippedGem.MasteryWindowWidthMultiplier;
             return mult;
         }
 
@@ -70,7 +79,8 @@ namespace Game.Combat
         {
             int total = 0;
             foreach (var a in equippedAccessories)
-                if (a) total += a.hpRegenPerTurn;
+                if (a) total += a.HPRegenPerTurn;
+            if (equippedGem) total += equippedGem.HPRegenPerTurn;
             return total;
         }
 
@@ -78,7 +88,8 @@ namespace Game.Combat
         {
             int total = 0;
             foreach (var a in equippedAccessories)
-                if (a) total += a.csRegenPerTurn;
+                if (a) total += a.CSRegenPerTurn;
+            if (equippedGem) total += equippedGem.CSRegenPerTurn;
             return total;
         }
     }
@@ -93,7 +104,7 @@ namespace Game.Combat
         public int baseDamage = 1;
         public int baseDefense = 0;
         public int maxHP = 50;
-        public int maxCS = 30;
+        public int maxCS = 0;
         public List<AbilitySO> knownAbilities = new();
 
         public int TotalDamage() => baseDamage;

@@ -4,8 +4,6 @@ namespace Game.Inventory
 {
     public class EquipmentUI : MonoBehaviour
     {
-        [Header("Source")]
-        [SerializeField] InventoryManager inventoryManager;
 
         [Header("Slots")]
         [SerializeField] EquipmentSlotUI weaponSlot;
@@ -13,31 +11,31 @@ namespace Game.Inventory
 
         void Awake()
         {
-            weaponSlot.OnUnequipRequested += () => inventoryManager.UnequipWeapon();
+            weaponSlot.OnUnequipRequested += () => InventoryManager.UnequipWeapon();
 
             for (int i = 0; i < accessorySlots.Length; i++)
             {
                 int slotIndex = i;
-                accessorySlots[i].OnUnequipRequested += () => inventoryManager.UnequipAccessory(slotIndex);
+                accessorySlots[i].OnUnequipRequested += () => InventoryManager.UnequipAccessory(slotIndex);
             }
         }
 
         void OnEnable()
         {
-            inventoryManager.OnInventoryChanged += Refresh;
+            InventoryManager.OnInventoryChanged.Subscribe(Refresh);
             Refresh();
         }
 
         void OnDisable()
         {
-            inventoryManager.OnInventoryChanged -= Refresh;
+            InventoryManager.OnInventoryChanged.Unsubscribe(Refresh);
         }
 
         void Refresh()
         {
-            weaponSlot.SetItem(inventoryManager.GetEquipedWeapon());
+            weaponSlot.SetItem(InventoryManager.GetEquipedWeapon());
 
-            var accessories = inventoryManager.GetEquipedAccessories();
+            var accessories = InventoryManager.GetEquipedAccessories();
             for (int i = 0; i < accessorySlots.Length && i < accessories.Length; i++)
             {
                 accessorySlots[i].SetItem(accessories[i]);

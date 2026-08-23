@@ -2,29 +2,24 @@
 using Game.SO.Data.Item;
 using Game.SO.Data.Item.Sellable.Battle;
 using Game.SO.Data.Shop;
-using Game.SO.EventChannel;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Game.CSEvent;
 
 
 namespace Game.Inventory
 {
-    public class InventoryManager : MonoBehaviour
+    static public class InventoryManager
     {
-        [Header("Event Lisening Channel")]
-        [SerializeField] ShopPurchaseEventChannelSO shopPurchaseEventChannel;
+        //static public ToastNotifEventChannel toastNotifEventChannel;
 
-        [Header("Event Broadcasting Channel")]
-        //[SerializeField] StringEventChannelSO ; // toast notif event
+        static public Inventory ManagedInventory { get; private set; }
 
-        [Header("Inventory")]
-        [SerializeField] Inventory inventory = null;
-
-        public event Action OnInventoryChanged;
+        static public EventCS OnInventoryChanged { get; set; } = new();
 
 
-        public void HandleShopPurchase(ShopTrade trade)
+        static public void HandleShopPurchase(ref ShopTrade trade)
         {
             ref Shopable cost = ref trade.cost;
 
@@ -32,7 +27,7 @@ namespace Game.Inventory
             // check can buy
             bool canBuy = true;
 
-            if (cost.useShell && cost.shell > inventory.ShellCurrency)
+            if (cost.useShell && cost.shell > ManagedInventory.ShellCurrency)
                 canBuy = false;
 
             foreach (var stack in cost.itemStacks)
@@ -68,19 +63,14 @@ namespace Game.Inventory
             {
                 AddItem(stack.item, stack.count);
             }
+
+            // toast notif event
         }
 
 
-        public void ManageInventory(Inventory inv)
+        static public void AddItem(ItemSO item, uint amount = 1)
         {
-            inventory = inv;
-            OnInventoryChanged?.Invoke();
-        }
-
-
-        public void AddItem(ItemSO item, uint amount = 1)
-        {
-            var itemList = inventory.ItemList;
+            var itemList = ManagedInventory.ItemList;
 
             for (int i = 0; i < itemList.Count; i++)
             {
@@ -90,21 +80,21 @@ namespace Game.Inventory
                 {
                     itemStack.count += amount;
                     itemList[i] = itemStack;
-                    OnInventoryChanged?.Invoke();
+                    OnInventoryChanged.Raise();
                     return;
                 }
             }
 
             itemList.Add(new(item, amount));
-            OnInventoryChanged?.Invoke();
+            OnInventoryChanged.Raise();
         }
 
 
-        public bool HasItemInList(ItemSO item, out uint amount)
+        static public bool HasItemInList(ItemSO item, out uint amount)
         {
             amount = 0;
 
-            var itemList = inventory.ItemList;
+            var itemList = ManagedInventory.ItemList;
             for (int i = 0; i < itemList.Count; i++)
             {
                 if (itemList[i].item == item)
@@ -117,17 +107,17 @@ namespace Game.Inventory
             return amount != 0;
         }
 
-        public bool HasItemInEquiped(ItemSO item, out uint amount)
+        static public bool HasItemInEquiped(ItemSO item, out uint amount)
         {
             amount = 0;
 
-            if (inventory.EquipedWeapon == item)
+            if (ManagedInventory.EquipedWeapon == item)
             {
                 amount++;
             }
             else
             {
-                foreach (var accessory in inventory.EquipedAccessoryList)
+                foreach (var accessory in ManagedInventory.EquipedAccessoryList)
                     if (accessory == item)
                     {
                         amount++;
@@ -137,7 +127,7 @@ namespace Game.Inventory
         }
 
 
-        public bool HasItem(ItemSO item, out uint amount)
+        static public bool HasItem(ItemSO item, out uint amount)
         {
             HasItemInList(item, out uint a1);
             HasItemInEquiped(item, out uint a2);
@@ -147,9 +137,9 @@ namespace Game.Inventory
         }
 
 
-        public void RemoveItem(ItemSO item, uint amount)
+        static public void RemoveItem(ItemSO item, uint amount)
         {
-            var itemList = inventory.ItemList;
+            var itemList = ManagedInventory.ItemList;
 
             for (int i = 0; i < itemList.Count; i++)
             {
@@ -171,7 +161,7 @@ namespace Game.Inventory
                         itemStack.count -= amount;
                         itemList[i] = itemStack;
                     }
-                    OnInventoryChanged?.Invoke();
+                    OnInventoryChanged.Raise();
                     return;
                 }
             }
@@ -180,59 +170,65 @@ namespace Game.Inventory
         }
 
 
-        public List<ItemStack> GetItemList()
+        static public List<ItemStack> GetItemList()
         {
-            return new(inventory.ItemList);
+            return new(ManagedInventory.ItemList);
         }
 
 
-        public void DeductShell(int amount)
+        static public void DeductShell(int amount)
         {
-            inventory.ShellCurrency -= amount;
-            OnInventoryChanged?.Invoke();
+            ManagedInventory.ShellCurrency -= amount;
+            OnInventoryChanged.Raise();
         }
 
-        public void RecieveShell(int amount)
+        static public void RecieveShell(int amount)
         {
-            inventory.ShellCurrency += amount;
-            OnInventoryChanged?.Invoke();
+            ManagedInventory.ShellCurrency += amount;
+            OnInventoryChanged.Raise();
         }
 
-        public void SetShell(int amount)
+        static public void SetShell(int amount)
         {
-            inventory.ShellCurrency = amount;
-            OnInventoryChanged?.Invoke();
+            ManagedInventory.ShellCurrency = amount;
+            OnInventoryChanged.Raise();
         }
 
 
-        public BattleItemSO[] GetEquipedBattleItems()
+        static public BattleItemSO[] GetEquipedBattleItems()
         {
             BattleItemSO[] battleItemList = new BattleItemSO[Inventory.MAX_ACCESSORYIES + 1];
-            battleItemList[0] = inventory.EquipedWeapon;
+            battleItemList[0] = ManagedInventory.EquipedWeapon;
 
-            for (int i = 0; i < inventory.EquipedAccessoryList.Length; i++)
+            for (int i = 0; i < ManagedInventory.EquipedAccessoryList.Length; i++)
             {
-                battleItemList[i + 1] = inventory.EquipedAccessoryList[i];
+                battleItemList[i + 1] = ManagedInventory.EquipedAccessoryList[i];
             }
 
             return battleItemList;
         }
 
 
-        public WeaponItemSO GetEquipedWeapon()
+        static public WeaponItemSO GetEquipedWeapon()
         {
-            return inventory.EquipedWeapon;
+            return ManagedInventory.EquipedWeapon;
         }
 
 
-        public AccessoryItemSO[] GetEquipedAccessories()
+        static public ArmourItemSO GetEquipedArmour()
+        {
+            return ManagedInventory.EquipedArmour;
+        }
+
+
+        static public AccessoryItemSO[] GetEquipedAccessories()
         {
             AccessoryItemSO[] list = new AccessoryItemSO[Inventory.MAX_ACCESSORYIES];
-            inventory.EquipedAccessoryList.CopyTo(list, 0);
+            ManagedInventory.EquipedAccessoryList.CopyTo(list, 0);
             return list;
         }
 
-        public bool EquipItem(BattleItemSO item)
+        static public bool EquipItem(BattleItemSO item)
         {
             if (item is WeaponItemSO weapon)
             {
@@ -245,44 +241,47 @@ namespace Game.Inventory
             return false;
         }
 
-        public bool EquipWeapon(WeaponItemSO weapon)
+        static public bool EquipWeapon(WeaponItemSO weapon)
         {
             if (!weapon || !HasItemInList(weapon, out _))
-            {
                 return false;
-            }
-            WeaponItemSO previous = inventory.EquipedWeapon;
+
+
+            Inventory inv = ManagedInventory;
+
+            WeaponItemSO previous = inv.EquipedWeapon;
 
             RemoveItem(weapon, 1);
-            inventory.EquipedWeapon = weapon;
+            inv.EquipedWeapon = weapon;
 
             if (previous)
             {
                 AddItem(previous, 1);
             }
-            OnInventoryChanged?.Invoke();
+
+            OnInventoryChanged.Raise();
             return true;
         }
 
-        public void UnequipWeapon()
+        static public void UnequipWeapon()
         {
-            if (!inventory.EquipedWeapon)
-            {
-                return;
-            }
-            AddItem(inventory.EquipedWeapon, 1);
-            inventory.EquipedWeapon = null;
+            Inventory inv = ManagedInventory;
 
-            OnInventoryChanged?.Invoke();
+            if (!inv.EquipedWeapon)
+                return;
+
+            AddItem(inv.EquipedWeapon, 1);
+            inv.EquipedWeapon = null;
+
+            OnInventoryChanged.Raise();
         }
 
-        public bool EquipAccessory(AccessoryItemSO accessory, int slotIndex = -1)
+        static public bool EquipAccessory(AccessoryItemSO accessory, int slotIndex = -1)
         {
             if (!accessory || !HasItemInList(accessory, out _))
-            {
                 return false;
-            }
-            var slots = inventory.EquipedAccessoryList;
+
+            var slots = ManagedInventory.EquipedAccessoryList;
 
             if (slotIndex < 0)
             {
@@ -302,54 +301,66 @@ namespace Game.Inventory
             {
                 AddItem(previous, 1);
             }
-            OnInventoryChanged?.Invoke();
+
+            OnInventoryChanged.Raise();
             return true;
         }
 
-        public void UnequipAccessory(int slotIndex)
+        static public void UnequipAccessory(int slotIndex)
         {
-            var slots = inventory.EquipedAccessoryList;
+            var slots = ManagedInventory.EquipedAccessoryList;
             if (slotIndex < 0 || slotIndex >= slots.Length || !slots[slotIndex])
             {
                 return;
             }
+
             AddItem(slots[slotIndex], 1);
             slots[slotIndex] = null;
 
-            OnInventoryChanged?.Invoke();
+            OnInventoryChanged.Raise();
         }
 
-        public bool EquipArmour(ArmourItemSO armour)
+        static public bool EquipArmour(ArmourItemSO armour)
         {
             if (!armour || !HasItemInList(armour, out _))
-            {
                 return false;
-            }
-            ArmourItemSO previous = inventory.EquipedArmour;
+
+            Inventory inv = ManagedInventory;
+
+            ArmourItemSO previous = inv.EquipedArmour;
 
             RemoveItem(armour, 1);
-            inventory.EquipedArmour = armour;
+            inv.EquipedArmour = armour;
 
             if (previous)
             {
                 AddItem(previous, 1);
             }
-            OnInventoryChanged?.Invoke();
+
+            OnInventoryChanged.Raise();
             return true;
         }
 
-        public void UnequipArmour()
+        static public void UnequipArmour()
         {
-            if (!inventory.EquipedArmour)
+            Inventory inv = ManagedInventory;
+
+            if (!inv.EquipedArmour)
             {
                 return;
             }
-            AddItem(inventory.EquipedArmour, 1);
-            inventory.EquipedArmour = null;
+            AddItem(inv.EquipedArmour, 1);
+            inv.EquipedArmour = null;
 
-            OnInventoryChanged?.Invoke();
+            OnInventoryChanged.Raise();
         }
 
+
+        static public void ManageInventory(Inventory inv)
+        {
+            if (inv != null)
+                ManagedInventory = inv;
+        }
 
 
         //private void OnEnable()

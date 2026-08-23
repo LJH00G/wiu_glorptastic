@@ -8,6 +8,10 @@ using Utility.VisualizableDictionary;
 [Serializable]
 public class UserData
 {
+    //[field: Header("Buddy Info")]
+    //[field: SerializeField]
+    //public Inventory Inventory { get; set; } = new();
+
 
     [field: Header("Inventory")]
     [field: SerializeField]

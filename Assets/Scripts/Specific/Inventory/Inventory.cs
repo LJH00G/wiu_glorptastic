@@ -23,11 +23,13 @@ namespace Game.Inventory
         [field: Header("Equiped")]
         [field: SerializeField]
         public WeaponItemSO EquipedWeapon { get; set; } = null;
+        [field: SerializeField]
+        public ArmourItemSO EquipedArmour { get; set; } = null;
         public const uint MAX_ACCESSORYIES = 3;
         [field: SerializeField]
         public AccessoryItemSO[] EquipedAccessoryList { get; set; } = new AccessoryItemSO[MAX_ACCESSORYIES];
-        public ArmourItemSO EquipedArmour { get; set; } = null;
-        public CurseGemItemSO currentGem { get; set; } = null;
+        [field: SerializeField]
+        public CurseGemItemSO CurrentGem { get; set; } = null;
 
 
 #if UNITY_EDITOR

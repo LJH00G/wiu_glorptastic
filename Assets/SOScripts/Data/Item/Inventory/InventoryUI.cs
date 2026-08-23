@@ -7,8 +7,6 @@ namespace Game.Inventory
 {
     public class InventoryUI : MonoBehaviour
     {
-        [Header("Source")]
-        [SerializeField] InventoryManager inventoryManager;
 
         [Header("List (goes inside your ScrollRect's Content)")]
         [SerializeField] Transform contentParent;
@@ -18,18 +16,18 @@ namespace Game.Inventory
 
         void OnEnable()
         {
-            inventoryManager.OnInventoryChanged += Refresh;
+            InventoryManager.OnInventoryChanged.Subscribe(Refresh);
             Refresh();
         }
 
         void OnDisable()
         {
-            inventoryManager.OnInventoryChanged -= Refresh;
+            InventoryManager.OnInventoryChanged.Unsubscribe(Refresh);
         }
 
         void Refresh()
         {
-            var stacks = inventoryManager.GetItemList();
+            var stacks = InventoryManager.GetItemList();
 
             while (spawned.Count < stacks.Count)
             {
@@ -57,7 +55,7 @@ namespace Game.Inventory
         void HandleEquipRequested(ItemSO item)
         {
             if (item is BattleItemSO battleItem)
-                inventoryManager.EquipItem(battleItem);
+                InventoryManager.EquipItem(battleItem);
         }
     }
 }
