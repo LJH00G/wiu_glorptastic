@@ -67,11 +67,16 @@ public class CombatInitialiser : MonoBehaviour
         overworldCamera.enabled = true;
         GameManager.SetAllCanMove(true);
         GameManager.SetGameState(GAME_STATE.OVERWORLD);
+
+        AddLootToInventory(context);
     }
 
     public void AddLootToInventory(CombatEndEventContextSO context)
     {
-
+        foreach(LootData loot in context.lootCollected)
+        {
+            InventoryManager.AddItem(loot.item, (uint)loot.count);
+        }
     }
 
     private void OnEnable()
