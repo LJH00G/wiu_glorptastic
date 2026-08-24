@@ -17,7 +17,6 @@ namespace Game.Interactable.MassTriggerHandler
             dialogueConversationEventChannel.Raise(triggerable);
         }
 
-
 #if UNITY_EDITOR
         protected override void OnValidate_Editor()
         {

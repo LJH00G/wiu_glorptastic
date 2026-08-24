@@ -45,12 +45,10 @@ namespace Game.Inventory
             if (closeButton)
                 closeButton.onClick.AddListener(Hide);
 
-            // --- ADDED ---
             if (sellButton)
                 sellButton.onClick.AddListener(HandleSellClicked);
             if (dontSellButton)
                 dontSellButton.onClick.AddListener(Hide);
-            // --- END ADDED ---
 
             InventoryManager.OnInventoryChanged.Subscribe(Refresh,0);
 

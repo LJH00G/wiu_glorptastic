@@ -1182,7 +1182,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &194182321
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2819,7 +2819,6 @@ GameObject:
   - component: {fileID: 533421446}
   - component: {fileID: 533421445}
   - component: {fileID: 533421444}
-  - component: {fileID: 533421448}
   m_Layer: 5
   m_Name: InventoryUI
   m_TagString: Untagged
@@ -2913,22 +2912,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &533421448
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 533421443}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd8a233f765528743b8b61aaa15c75b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Inventory.InventoryUI
-  contentParent: {fileID: 307142839}
-  itemUIPrefab: {fileID: 6234733973270982164, guid: cf0ee6b6c515e314ba0a9bcd545052b0, type: 3}
-  itemDetailUI: {fileID: 1008801128}
-  panelRoot: {fileID: 533421443}
 --- !u!1 &558694704
 GameObject:
   m_ObjectHideFlags: 0
@@ -6393,7 +6376,6 @@ GameObject:
   - component: {fileID: 1538157828}
   - component: {fileID: 1538157827}
   - component: {fileID: 1538157831}
-  - component: {fileID: 1538157832}
   m_Layer: 5
   m_Name: ShopUI
   m_TagString: Untagged
@@ -6503,31 +6485,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShopBaseController
   <Preset>k__BackingField: {fileID: 11400000, guid: 42c71de34ce165e4786446520e21eae0, type: 2}
---- !u!114 &1538157832
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1538157826}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f406e77f239e7104790e5de1f7dd9ebf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::ShopUI
-  shopController: {fileID: 1538157831}
-  slots:
-  - {fileID: 1084238390}
-  - {fileID: 51079379}
-  - {fileID: 214236116}
-  - {fileID: 1098648124}
-  - {fileID: 1127665114}
-  - {fileID: 1206132796}
-  - {fileID: 573841288}
-  - {fileID: 2114935602}
-  - {fileID: 1696358153}
-  confirmUI: {fileID: 194182324}
-  panelRoot: {fileID: 0}
 --- !u!1 &1579578339
 GameObject:
   m_ObjectHideFlags: 0
@@ -8222,6 +8179,80 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Inventory.InventoryHotkey
   hotkey: 23
+--- !u!1 &2014968303
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2014968304}
+  - component: {fileID: 2014968306}
+  - component: {fileID: 2014968305}
+  m_Layer: 0
+  m_Name: UI Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2014968304
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2014968303}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2014968305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2014968303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd8a233f765528743b8b61aaa15c75b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Inventory.InventoryUI
+  contentParent: {fileID: 307142839}
+  itemUIPrefab: {fileID: 6234733973270982164, guid: cf0ee6b6c515e314ba0a9bcd545052b0, type: 3}
+  itemDetailUI: {fileID: 1008801128}
+  panelRoot: {fileID: 533421443}
+--- !u!114 &2014968306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2014968303}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f406e77f239e7104790e5de1f7dd9ebf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ShopUI
+  shopController: {fileID: 1538157831}
+  slots:
+  - {fileID: 1084238390}
+  - {fileID: 51079379}
+  - {fileID: 214236116}
+  - {fileID: 1098648124}
+  - {fileID: 1127665114}
+  - {fileID: 1206132796}
+  - {fileID: 573841288}
+  - {fileID: 2114935602}
+  - {fileID: 1696358153}
+  confirmUI: {fileID: 194182324}
+  panelRoot: {fileID: 1538157826}
 --- !u!1 &2018580990
 GameObject:
   m_ObjectHideFlags: 0
@@ -8911,3 +8942,4 @@ SceneRoots:
   - {fileID: 1937559901}
   - {fileID: 1781603570}
   - {fileID: 1538157830}
+  - {fileID: 2014968304}
