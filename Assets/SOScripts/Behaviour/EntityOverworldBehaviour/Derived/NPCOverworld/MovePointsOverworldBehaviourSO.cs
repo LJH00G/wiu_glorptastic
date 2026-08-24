@@ -2,12 +2,13 @@
 using Game.SO.Behaviour.EntityOverworld.InstanceData;
 using UnityEngine;
 using Utility.Math;
-
+using Game.GlobalVariable.OverworldNPCMovePoints;
 
 namespace Game.SO.Behaviour.EntityOverworld.InstanceData
 {
     public class MovePointsOverworldBehaviourInstanceData : EntityOverworldBehaviourInstanceData
     {
+        public string MovePointsKey;
         public int toPointIndex;
         public bool isIncrement;
         public float pauseTimer;
@@ -21,7 +22,7 @@ namespace Game.SO.Behaviour.EntityOverworld
     public class MovePointsOverworldBehaviourSO : NPCOverworldBehaviourSO
     {
         [Header("Move Points")]
-        [SerializeField] Vector2[] points;
+        [SerializeField] bool isCycle;
         [SerializeField] bool isRandom;
         [SerializeField] float maxPauseDurationAtPoint;
 
@@ -34,17 +35,21 @@ namespace Game.SO.Behaviour.EntityOverworld
             controller.AIPath.orientation = Pathfinding.OrientationMode.YAxisForward;
             controller.AIPath.maxSpeed = speed;
             controller.AIPath.maxAcceleration = acceleration;
-            controller.AIPath.pickNextWaypointDist = 0.75f;
-            controller.AIPath.slowdownDistance = 1.5f;
-            controller.AIPath.endReachedDistance = 0.25f;
+            controller.AIPath.pickNextWaypointDist = controller.Radius * 3;
+            controller.AIPath.slowdownDistance = controller.Radius * 4;
+            controller.AIPath.endReachedDistance = controller.Radius;
 
             MovePointsOverworldBehaviourInstanceData instanceData = (MovePointsOverworldBehaviourInstanceData)controller.InstanceData;
 
-
-            instanceData.isIncrement = Random.Range(0, 1) == 1;
+            if (isCycle)
+                instanceData.isIncrement = Random.Range(0, 1) == 1;
 
             int closestPointIndex = 0;
             float closestDist_sqr = float.PositiveInfinity;
+
+            if (!OverworldNPCMovePointsGlobalVariable.MovePointsDict.TryGetValue(instanceData.MovePointsKey, out MovePoints movePoints))
+                return;
+            Vector2[] points = movePoints.points;
 
             for (int i = 0; i < points.Length; i++)
             {
@@ -71,6 +76,10 @@ namespace Game.SO.Behaviour.EntityOverworld
             if (controller.InstanceData is not MovePointsOverworldBehaviourInstanceData instanceData)
                 return;
 
+            if (!OverworldNPCMovePointsGlobalVariable.MovePointsDict.TryGetValue(instanceData.MovePointsKey, out MovePoints movePoints))
+                return;
+            Vector2[] points = movePoints.points;
+
             controller.AIPath.destination = points[instanceData.toPointIndex];
 
             if (controller.AIPath.reachedEndOfPath)
@@ -94,12 +103,35 @@ namespace Game.SO.Behaviour.EntityOverworld
 
 
 #if UNITY_EDITOR
-        public override void BehaviourOnDrawGizmosSelected(EntityOverworldController controller)
+
+        public override void BehaviourOnValidate(EntityOverworldController controller)
         {
-            if (points.Length == 0)
+            if (controller.InstanceData is not MovePointsOverworldBehaviourInstanceData instanceData)
                 return;
 
+            if (!OverworldNPCMovePointsGlobalVariable.MovePointsDict.TryGetValue(instanceData.MovePointsKey, out MovePoints movePoints))
+            {
+                Debug.LogError($"no MovePoints in this scene matches the key {instanceData.MovePointsKey}", this);
+                return;
+            }
+
+            if (instanceData.toPointIndex < 0)
+                instanceData.toPointIndex = movePoints.points.Length - 1;
+            else if (instanceData.toPointIndex >= movePoints.points.Length)
+                instanceData.toPointIndex = 0;
+            
+        }
+
+        public override void BehaviourOnDrawGizmosSelected(EntityOverworldController controller)
+        {
             if (controller.InstanceData is not MovePointsOverworldBehaviourInstanceData instanceData)
+                return;
+
+            if (!OverworldNPCMovePointsGlobalVariable.MovePointsDict.TryGetValue(instanceData.MovePointsKey, out MovePoints movePoints))
+                return;
+            Vector2[] points = movePoints.points;
+
+            if (points.Length == 0)
                 return;
 
             Gizmos.color = Color.blue;

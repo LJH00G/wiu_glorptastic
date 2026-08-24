@@ -1,5 +1,5 @@
-
 using Game.SO.Data.Item.Sellable.Battle;
+using Game.SO.Data.Item;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,9 +23,25 @@ namespace Game.Inventory
         [field: Header("Equiped")]
         [field: SerializeField]
         public WeaponItemSO EquipedWeapon { get; set; } = null;
+        [field: SerializeField]
+        public ArmourItemSO EquipedArmour { get; set; } = null;
         public const uint MAX_ACCESSORYIES = 3;
         [field: SerializeField]
         public AccessoryItemSO[] EquipedAccessoryList { get; set; } = new AccessoryItemSO[MAX_ACCESSORYIES];
+        [field: SerializeField]
+        public CurseGemItemSO CurrentGem { get; set; } = null;
+
+
+        public Inventory() { }
+        public Inventory(Inventory other)
+        {
+            ItemList = new(other.ItemList);
+            ShellCurrency = other.ShellCurrency;
+            EquipedWeapon = other.EquipedWeapon;
+            EquipedArmour = other.EquipedArmour;
+            other.EquipedAccessoryList.CopyTo(EquipedAccessoryList, 0);
+            CurrentGem = other.CurrentGem;
+        }
 
 
 #if UNITY_EDITOR

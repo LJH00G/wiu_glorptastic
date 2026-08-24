@@ -1,10 +1,13 @@
+
+using System;
 using UnityEngine;
 
 namespace Game.SO.Behaviour.EntityOverworld.InstanceData
 {
+    [Serializable]
     public abstract class EntityOverworldBehaviourInstanceData
     {
-
+        public Vector2 facingDire;
     }
 }
 
@@ -18,7 +21,10 @@ namespace Game.SO.Behaviour.EntityOverworld.InstanceData
         public abstract void BehaviourStart(EntityOverworldController controller);
         public abstract void BehaviourUpdate(EntityOverworldController controller, float dt);
 
+
 #if UNITY_EDITOR
+
+        public virtual void BehaviourOnValidate(EntityOverworldController controller) { }
         public virtual void BehaviourOnDrawGizmosSelected(EntityOverworldController controller) { }
 #endif
     }

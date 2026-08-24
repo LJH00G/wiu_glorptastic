@@ -1,24 +1,39 @@
 using System;
 using System.Collections.Generic;
 
+
 namespace Game.CSEvent
 {
+    public struct PriorityListener<T>
+    {
+        public Action<T> method;
+        public sbyte priority;
+
+        public PriorityListener(Action<T> method, sbyte priority)
+        {
+            this.method = method;
+            this.priority = priority;
+        }
+    }
+
+    public struct PriorityListener
+    {
+        public Action method;
+        public sbyte priority;
+
+        public PriorityListener(Action method, sbyte priority)
+        {
+            this.method = method;
+            this.priority = priority;
+        }
+    }
+
+
     /// <summary>
     /// callbacks raised will be sorted by priority in descending order
     /// </summary>
     public class PriorityEventCS<T>
     {
-        public struct PriorityListener<T_>
-        {
-            public Action<T_> method;
-            public sbyte priority;
-
-            public PriorityListener(Action<T_> method, sbyte priority)
-            {
-                this.method = method;
-                this.priority = priority;
-            }
-        }
 
         List<PriorityListener<T>> listeners = new();
 
@@ -53,21 +68,23 @@ namespace Game.CSEvent
         /// Whether this event is locked from <see cref="Raise"/>
         /// </summary>
         public bool Lock { get; set; }
+
+        public PriorityEventCS() { }
+        public PriorityEventCS(Action<T> method, sbyte priority)
+        {
+            listeners.Add(new PriorityListener<T>(method, priority));
+        }
+        public PriorityEventCS(PriorityListener<T>[] startingListeners)
+        {
+            foreach (var listener in startingListeners)
+                listeners.Add(listener);
+
+            Sort();
+        }
     }
 
     public class PriorityEventCS
     {
-        public struct PriorityListener
-        {
-            public Action method;
-            public sbyte priority;
-
-            public PriorityListener(Action method, sbyte priority)
-            {
-                this.method = method;
-                this.priority = priority;
-            }
-        }
 
         List<PriorityListener> listeners = new();
         void Sort()
@@ -101,5 +118,18 @@ namespace Game.CSEvent
         /// Whether this event is locked from <see cref="Raise"/>
         /// </summary>
         public bool Lock { get; set; }
+
+        public PriorityEventCS() { }
+        public PriorityEventCS(Action method, sbyte priority)
+        {
+            listeners.Add(new PriorityListener(method, priority));
+        }
+        public PriorityEventCS(PriorityListener[] startingListeners)
+        {
+            foreach (var listener in startingListeners)
+                listeners.Add(listener);
+
+            Sort();
+        }
     }
 }

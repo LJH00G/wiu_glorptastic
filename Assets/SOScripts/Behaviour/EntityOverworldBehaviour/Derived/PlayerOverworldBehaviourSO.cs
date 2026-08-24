@@ -1,15 +1,17 @@
 
+using Game.Interactable;
 using Game.SO.Behaviour.EntityOverworld.InstanceData;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Game.TriggerHandler;
 
 
 namespace Game.SO.Behaviour.EntityOverworld.InstanceData
 {
+    [Serializable]
     public class PlayerOverworldBehaviourInstanceData : EntityOverworldBehaviourInstanceData
     {
-        public Vector2 facingDire;
+        
     }
 }
 
@@ -30,9 +32,10 @@ namespace Game.SO.Behaviour.EntityOverworld
             controller.AIPath.orientation = Pathfinding.OrientationMode.YAxisForward;
             controller.AIPath.maxSpeed = speed;
             controller.AIPath.maxAcceleration = acceleration;
-            controller.AIPath.pickNextWaypointDist = 0.5f;
-            controller.AIPath.slowdownDistance = 0;
-            controller.AIPath.endReachedDistance = 0;
+            controller.AIPath.pickNextWaypointDist = controller.Radius;
+            controller.AIPath.slowdownDistance = controller.Radius * 0.9f;
+            controller.AIPath.endReachedDistance = controller.Radius * 0.75f;
+            controller.AIPath.destination = controller.transform.position;
 
         }
 
@@ -47,10 +50,11 @@ namespace Game.SO.Behaviour.EntityOverworld
                 InputSystem.actions["Move"].ReadValue<Vector2>() : Vector2.zero;
 
             if (dire != Vector2.zero)
+            {
                 instanceData.facingDire = dire;
 
-            controller.AIPath.destination = (Vector2)controller.transform.position + dire * 0.1f;
-
+                controller.AIPath.destination = (Vector2)controller.transform.position + dire * controller.Radius;
+            }
 
             // interact
             if (InputSystem.actions["Interact"].WasPressedThisFrame() && GameManager.CanInteract)
@@ -71,10 +75,9 @@ namespace Game.SO.Behaviour.EntityOverworld
 
                 foreach (var collider in colliders)
                 {
-                    if (collider.TryGetComponent(out I_TriggerHandler handler) &&
-                        handler.RequiresInteraction())
+                    if (collider.TryGetComponent(out I_Interactable interactable))
                     {
-                        handler?.Trigger();
+                        interactable?.Interact();
                         break;
                     }
                 }

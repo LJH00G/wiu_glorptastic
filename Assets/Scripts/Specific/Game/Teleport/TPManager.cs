@@ -68,12 +68,16 @@ namespace Game.TPManager
 
             yield return new WaitForSeconds(currentTP.time);
 
-            if(player != null)
+            if (player != null)
+            {
                 player.transform.position = currentTP.position;
-
-            if(follower != null)
+                player.GetComponent<EntityOverworldController>().RefreshMovement();
+            }
+            if (follower != null)
+            {
                 follower.transform.position = currentTP.position;
-        
+                follower.GetComponent<EntityOverworldController>().RefreshMovement();
+            }
 
             TPAnimChannel.Raise(false);
 
@@ -93,10 +97,10 @@ namespace Game.TPManager
             TPPointDef.OnValidate();
         }
 
-        void OnDrawGizmos()
+        void OnDrawGizmosSelected()
         {
             Gizmos.color = new Color(0, 0, 1);
-            Vector3 Gizmossize = new Vector3(1, 1, 1);
+            Vector3 Gizmossize = new Vector3(1, 1, 1) * 0.5f;
             foreach(TPDefinition TP in TPPointDef.dict.Values)
             {
                 

@@ -80,7 +80,7 @@ namespace Game.Combat
             if (submenuRoot) submenuRoot.SetActive(false);
             if (iconRowRoot) iconRowRoot.SetActive(true);
 
-            if (anchor) CombatHUD.PositionAboveWorldPoint(iconRowRoot.GetComponent<RectTransform>(), anchor.position, 1.5f);
+            if (anchor) CombatHUD.PositionAboveWorldPoint(iconRowRoot.GetComponent<RectTransform>(), anchor.position, 2.5f);
 
             if (iconRowLayout) iconRowLayout.spacing = activeIconIndices.Count <= 2 ? reducedMenuSpacing : fullMenuSpacing;
 

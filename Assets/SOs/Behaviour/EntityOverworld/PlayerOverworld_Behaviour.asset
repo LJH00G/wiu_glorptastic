@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eead549915d890e47bb7aeb1451d67c1, type: 3}
   m_Name: PlayerOverworld_Behaviour
   m_EditorClassIdentifier: Assembly-CSharp::Game.SO.Behaviour.EntityOverworld.PlayerOverworldBehaviourSO
-  speed: 2
+  animCtrller: {fileID: 9100000, guid: 28037eb664ccae54697df05b84b416bd, type: 2}
+  <DefaultSprite>k__BackingField: {fileID: 86489958, guid: 5292a0151f3283648ab371a071b83c1e, type: 3}
+  speed: 3
   acceleration: 10
   interactionSize: 0.5

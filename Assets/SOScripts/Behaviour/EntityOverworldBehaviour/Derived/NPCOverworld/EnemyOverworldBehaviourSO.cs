@@ -1,10 +1,12 @@
 
 using Game.SO.Behaviour.EntityOverworld.InstanceData;
+using System;
 using UnityEngine;
 
 
 namespace Game.SO.Behaviour.EntityOverworld.InstanceData
 {
+    [Serializable]
     public class EnemyOverworldBehaviourInstanceData : EntityOverworldBehaviourInstanceData
     {
         [SerializeField] Collider2D detectionTrigger;
@@ -30,15 +32,19 @@ namespace Game.SO.Behaviour.EntityOverworld
             controller.AIPath.orientation = Pathfinding.OrientationMode.YAxisForward;
             controller.AIPath.maxSpeed = speed;
             controller.AIPath.maxAcceleration = acceleration;
-            controller.AIPath.pickNextWaypointDist = 0.75f;
-            controller.AIPath.slowdownDistance = 1.5f;
-            controller.AIPath.endReachedDistance = 0.25f;
+            controller.AIPath.pickNextWaypointDist = controller.Radius * 3;
+            controller.AIPath.slowdownDistance = controller.Radius * 4;
+            controller.AIPath.endReachedDistance = controller.Radius;
 
         }
 
         public override void BehaviourUpdate(EntityOverworldController controller, float dt)
         {
-            throw new System.NotImplementedException();
+            if (controller.InstanceData is not EnemyOverworldBehaviourInstanceData)
+                controller.InstanceData = new EnemyOverworldBehaviourInstanceData();
+
+
+
         }
 
 #if UNITY_EDITOR

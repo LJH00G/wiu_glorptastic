@@ -8,28 +8,46 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(AIPath))]
+[RequireComponent(typeof(Animator))]
 public class EntityOverworldController : MonoBehaviour
 {
 
-    [Header("Data")]
+    [field: Header("Data")]
     [field: SerializeField]
     public float Radius { get; private set; } = 0.25f;
 
-    [Header("Behaviour")]
-    [SerializeField] EntityOverworldBehaviourSO behaviour;
+    [field: Header("Appearance")]
     [field: SerializeField]
+    public OverworldEntityAppearanceSO Appearance { get; set; }
+
+    [field: Header("Behaviour")]
+    [field: SerializeField]
+    public EntityOverworldBehaviourSO Behaviour { get; set; }
+    [field: SerializeReference]
     public EntityOverworldBehaviourInstanceData InstanceData { get; set; }
 
     public AIPath AIPath { get; private set; }
-    public BoxCollider2D triggerCollider { get; private set; }
+    public BoxCollider2D TriggerCollider { get; private set; }
+    public Animator Animator { get; private set; }
 
 
     public void SetBehaviour(EntityOverworldBehaviourSO behaviour)
     {
-        this.behaviour = behaviour;
-        this.behaviour.BehaviourStart(this);
+        Behaviour = behaviour;
+        Behaviour.BehaviourStart(this);
     }
 
+    public void SetAppearance(OverworldEntityAppearanceSO appearance)
+    {
+        Appearance = appearance;
+        Appearance.UpdateAppearance(this);
+    }
+
+
+    public void RefreshMovement()
+    {
+        AIPath.destination = transform.position;
+    }
 
 
     void Start()
@@ -39,9 +57,10 @@ public class EntityOverworldController : MonoBehaviour
         AIPath.gravity = Vector3.zero;
         AIPath.enableRotation = false;
 
-        triggerCollider = GetComponent<BoxCollider2D>();
-        triggerCollider.size = new Vector2(Radius * 2, Radius);
-        triggerCollider.offset = new Vector2(0, Radius * 0.5f);
+        TriggerCollider = GetComponent<BoxCollider2D>();
+        TriggerCollider.isTrigger = true;
+        TriggerCollider.size = new Vector2(Radius * 2, Radius);
+        TriggerCollider.offset = new Vector2(0, Radius * 0.5f);
 
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0;
@@ -49,24 +68,29 @@ public class EntityOverworldController : MonoBehaviour
         rb.bodyType = RigidbodyType2D.Kinematic;
         rb.interpolation = RigidbodyInterpolation2D.Interpolate;
 
-        SetBehaviour(behaviour);
+        Animator = GetComponent<Animator>();
+
+        SetBehaviour(Behaviour);
     }
 
     void Update()
     {
         float dt = Time.deltaTime;
 
-        if (behaviour)
-            behaviour.BehaviourUpdate(this, dt);
-
+        if (Behaviour)
+        {
+            Behaviour.BehaviourUpdate(this, dt);
+        }
         if (!GameManager.AllCanMove)
             AIPath.destination = transform.position;
+
+        if (Appearance)
+            Appearance.UpdateAnimator(this);
     }
 
 
 #if UNITY_EDITOR
 
-    EntityOverworldBehaviourSO prevBehaviour;
     private void OnValidate()
     {
         AIPath = GetComponent<AIPath>();
@@ -74,9 +98,10 @@ public class EntityOverworldController : MonoBehaviour
         AIPath.gravity = Vector3.zero;
         AIPath.enableRotation = false;
 
-        triggerCollider = GetComponent<BoxCollider2D>();
-        triggerCollider.size = new Vector2(Radius * 2, Radius);
-        triggerCollider.offset = new Vector2(0, Radius * 0.5f);
+        TriggerCollider = GetComponent<BoxCollider2D>();
+        TriggerCollider.isTrigger = true;
+        TriggerCollider.size = new Vector2(Radius * 2, Radius);
+        TriggerCollider.offset = new Vector2(0, Radius * 0.5f);
 
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         rb.gravityScale = 0;
@@ -84,20 +109,28 @@ public class EntityOverworldController : MonoBehaviour
         rb.bodyType = RigidbodyType2D.Kinematic;
         rb.interpolation = RigidbodyInterpolation2D.Interpolate;
 
-        if (!behaviour)
+        Animator = GetComponent<Animator>();
+
+        if (Behaviour)
+        {
+            Behaviour.BehaviourOnValidate(this);
+        }
+        else
             Debug.LogError("behaviour must not be left empty", this);
 
-        if (prevBehaviour != behaviour)
+        if (Appearance)
         {
-            prevBehaviour = behaviour;
-            SetBehaviour(behaviour);
+            Appearance.UpdateAppearance(this);
         }
+        else
+            Debug.LogError("Appearance must not be left empty", this);
+
     }
 
     private void OnDrawGizmosSelected()
     {
-        if (behaviour)
-            behaviour.BehaviourOnDrawGizmosSelected(this);
+        if (Behaviour)
+            Behaviour.BehaviourOnDrawGizmosSelected(this);
     }
 #endif
 
