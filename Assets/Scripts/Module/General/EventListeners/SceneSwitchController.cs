@@ -46,8 +46,12 @@ public class SceneSwitchController : MonoBehaviour
             }
 
             SceneManager.sceneLoaded += OnSceneLoaded;
-            Camera.main.tag = "Untagged";
-            
+            Camera main = Camera.main;
+            if (main)
+            {
+                main.enabled = false;
+                main.tag = "Untagged";
+            }
             SceneManager.LoadSceneAsync(context.loadScene, LoadSceneMode.Additive);
             OverworldDisableManager.DisableAllObjects(oldScene, context.ignoreableObjs);
             OverworldDisableManager.EnableAllObjects(SceneManager.GetSceneByName(context.loadScene));
