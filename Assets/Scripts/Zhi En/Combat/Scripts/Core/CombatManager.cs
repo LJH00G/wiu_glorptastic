@@ -1,9 +1,10 @@
 using Game.Combat.Integration;
+using Game.Inventory;
 using Game.SO.Data.Item.Sellable;
+using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Game.Inventory;
 
 namespace Game.Combat
 {
@@ -56,13 +57,13 @@ namespace Game.Combat
             ? new List<CombatantRuntime> { player, partner }
             : new List<CombatantRuntime> { player };
 
-        
 
-        public void SetupBattle()
+
+        public void SetupBattle(Sprite playerSprite, Sprite partnerSprite, Sprite[] enemySprites)
         {
-            player = CombatantRuntime.FromPlayer(playerLoadout, playerAnchor);
+            player = CombatantRuntime.FromPlayer(playerLoadout, playerAnchor, playerSprite);
             partner = partnerLoadout != null
-                ? CombatantRuntime.FromPartner(playerLoadout, partnerLoadout, partnerAnchor)
+                ? CombatantRuntime.FromPartner(playerLoadout, partnerLoadout, partnerAnchor, partnerSprite)
                 : null;
 
             enemies.Clear();
@@ -74,8 +75,13 @@ namespace Game.Combat
                         ? enemyAnchors[i]
                         : null;
 
+                Sprite enemySprite =
+                    (enemySprites != null && i < enemySprites.Length)
+                        ? enemySprites[i]
+                        : null;
+
                 enemies.Add(
-                    CombatantRuntime.FromEnemy(enemyEncounter[i], anchor)
+                    CombatantRuntime.FromEnemy(enemyEncounter[i], anchor, enemySprite)
                 );
             }
 
@@ -431,23 +437,23 @@ namespace Game.Combat
 
             var usable = inventory.Select((stack, index) => (stack, index)).Where(pair => pair.stack.item is ConsumableItemSO).ToList();
 
-            List<string> labels = inventory.Select(stack =>$"{stack.item.Name} x{stack.count}").ToList();
+            List<string> labels = inventory.Select(stack => $"{stack.item.Name} x{stack.count}").ToList();
 
             state = CombatState.SUB_MENU;
 
-            menuUI.ShowSubmenu(labels,actor.anchor, idx =>
-                {
-                    var stack = inventory.ElementAtOrDefault(idx);
+            menuUI.ShowSubmenu(labels, actor.anchor, idx =>
+            {
+                var stack = inventory.ElementAtOrDefault(idx);
 
-                    if (stack.count <= 0)
-                        return;
+                if (stack.count <= 0)
+                    return;
 
-                    OnItemSelected(
-                        actor,
-                        idx,
-                        (ConsumableItemSO)stack.item
-                    );
-                },
+                OnItemSelected(
+                    actor,
+                    idx,
+                    (ConsumableItemSO)stack.item
+                );
+            },
                 () => ShowMenuFor(actor, isPlayer)
             );
         }
@@ -844,35 +850,33 @@ namespace Game.Combat
             BeginAllyRound();
         }
 
-        void ResolveEnemyMove(
-            CombatantRuntime enemy,
-            EnemyMove move)
-        {
-            List<CombatantRuntime> targets =
-                move.targetType switch
-                {
-                    CombatTargetType.SELF =>
-                        new List<CombatantRuntime>
-                        {
-                            enemy
-                        },
+    void ResolveEnemyMove(CombatantRuntime enemy, EnemyMove move)
+    {
+        List<CombatantRuntime> targets =
+        move.targetType switch
+            {
+                CombatTargetType.SELF =>
+                    new List<CombatantRuntime>
+                    {
+                        enemy
+                    },
 
-                    CombatTargetType.ALL_ENEMIES =>
-                        Allies
-                            .Where(a => a.isAlive)
-                            .ToList(),
+                CombatTargetType.ALL_ENEMIES =>
+                    new List<CombatantRuntime> { player }
+                        .Where(a => a.isAlive)
+                        .ToList(),
 
-                    CombatTargetType.SELF_AND_PARTNER =>
-                        Allies
-                            .Where(a => a.isAlive)
-                            .ToList(),
+                CombatTargetType.SELF_AND_PARTNER =>
+                    new List<CombatantRuntime> { player }
+                        .Where(a => a.isAlive)
+                        .ToList(),
 
-                    _ =>
-                        new List<CombatantRuntime>
-                        {
-                            RandomAliveAlly()
-                        }
-                };
+                _ =>
+                    new List<CombatantRuntime>
+                    {
+                        player.isAlive ? player : null
+                    }
+            };
 
             hud.ShowTargetArrows(
                 targets
@@ -887,18 +891,9 @@ namespace Game.Combat
 
                 if (move.moveType == EnemyMoveType.ATTACK)
                 {
-                    int dmg =
-                        Mathf.RoundToInt(
-                            enemy.damage *
-                            (
-                                move.attackDamageMultiplier <= 0
-                                    ? 1f
-                                    : move.attackDamageMultiplier
-                            )
-                        );
+                    int dmg = Mathf.RoundToInt(enemy.damage * (move.attackDamageMultiplier <= 0 ? 1f : move.attackDamageMultiplier));
 
-                    int dealt =
-                        target.ApplyDamage(dmg);
+                    int dealt = target.ApplyDamage(dmg);
 
                     hud.ShowDescription(
                         string.IsNullOrEmpty(move.flavourText)
@@ -908,15 +903,10 @@ namespace Game.Combat
                 }
                 else if (move.ability != null)
                 {
-                    // New feature:
                     // Enemy abilities also use the multi-entry effect system.
                     foreach (var entry in move.ability.effects)
                     {
-                        ApplyEffect(
-                            enemy,
-                            target,
-                            entry
-                        );
+                        ApplyEffect(enemy, target, entry);
                     }
 
                     hud.ShowDescription(
@@ -926,18 +916,6 @@ namespace Game.Combat
                     );
                 }
             }
-        }
-
-        CombatantRuntime RandomAliveAlly()
-        {
-            var alive =
-                Allies
-                    .Where(a => a.isAlive)
-                    .ToList();
-
-            return alive.Count == 0
-                ? null
-                : alive[Random.Range(0, alive.Count)];
         }
 
         // end condition
@@ -983,7 +961,7 @@ namespace Game.Combat
             );
 
             input.InputEnabled = false;
-            combatAssigner.WipeDataAssignment();
+            combatAssigner.WipeDataAssignment(won);
             // TODO:
             // Hook this into SceneSwitchController to return to the overworld,
             // show a reward screen, or trigger the game-over flow.

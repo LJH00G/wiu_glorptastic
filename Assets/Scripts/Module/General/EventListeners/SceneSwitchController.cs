@@ -34,8 +34,14 @@ public class SceneSwitchController : MonoBehaviour
                 SceneManager.SetActiveScene(scene);
                 Time.timeScale = 1f;
 
-                Debug.Log($"unloading old scene: {oldScene}");
-                SceneManager.UnloadSceneAsync(oldScene);
+                if (context.unloadOldScene)
+                {
+                    Debug.Log($"unloading old scene: {oldScene}");
+                    SceneManager.UnloadSceneAsync(oldScene);
+                } else
+                {
+                    Debug.Log($"unloading skipped, specified no unloading");
+                }
             }
 
             SceneManager.sceneLoaded += OnSceneLoaded;

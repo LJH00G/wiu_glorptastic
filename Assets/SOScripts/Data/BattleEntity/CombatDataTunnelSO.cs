@@ -9,6 +9,10 @@ public class CombatDataTunnelSO : ScriptableObject
     public PartnerLoadoutSO partnerLoadout;
     public EnemyEncounterDataSO enemyEncounterData;
 
+    public Sprite playerSprite;
+    public Sprite partnerSprite;
+    public Sprite[] enemySprites;
+
     public void WipeCall()
     {
         enemyEncounterData = null;
