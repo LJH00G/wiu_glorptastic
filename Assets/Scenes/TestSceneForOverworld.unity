@@ -407,6 +407,7 @@ MonoBehaviour:
       fadeOffOther_Time: 0
       fadeForceSetVolume: 0
     unloadOldScene: 0
+    ignoreableObjs: []
   testConvo1: {fileID: 11400000, guid: 6eb9ccc3237ab404c9fa2eb07aaa120f, type: 2}
   testConvo2: {fileID: 11400000, guid: 2fb6cc53f80ab6b4c9625131f83b482c, type: 2}
   testConvo3: {fileID: 11400000, guid: 0c182ecde89c1dd4094026ed176fcd97, type: 2}
@@ -494,6 +495,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   player: {fileID: 2087693728}
   follower: {fileID: 1455610210}
+  InventorySceneName: 
 --- !u!4 &828279313
 Transform:
   m_ObjectHideFlags: 0
@@ -2105,7 +2107,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5.625
+  orthographic size: 7.1875
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
