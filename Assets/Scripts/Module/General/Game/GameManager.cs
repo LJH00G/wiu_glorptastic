@@ -29,7 +29,8 @@ namespace Game
         static public UserData CurrentUserData {get; private set; } = new(); //tracks the currently in use player saved data so scripts like inventory manager can be linked up after load attempt without a scene in use
         static public bool CanInteract { get; private set; } = true;
         static public bool Paused { get; private set; } = false;
-
+        static public bool InDialogue { get; private set; } = false;
+        static public GameObject DialogueNPC { get; private set; }
 
         static public void SetDebug(bool value)
         {
@@ -96,6 +97,19 @@ namespace Game
 
             if (AllCanMove)
                 Player.GetComponent<EntityOverworldController>().RefreshMovement();
+        }
+
+        static public void StartDialogue(GameObject npc)
+        {
+            InDialogue = true;
+            DialogueNPC = null;
+            SetAllCanMove(false);
+        }
+        static public void EndDialogue()
+        {
+            InDialogue = false;
+            DialogueNPC = null;
+            SetAllCanMove(true);
         }
     }
 }
