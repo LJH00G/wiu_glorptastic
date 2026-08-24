@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: NoBuddyData_Data
   m_EditorClassIdentifier: Assembly-CSharp::Game.SO.Data.Buddy.BuddyDataSO
   <Loadout>k__BackingField: {fileID: 0}
-  <OverworldBehaviour>k__BackingField: {fileID: 11400000, guid: 0270458a94664254bbc76bc68b2797a6, type: 2}
+  <OverworldAppearance>k__BackingField: {fileID: 11400000, guid: b97b3702347c54e4b823b89c7ff15275, type: 2}

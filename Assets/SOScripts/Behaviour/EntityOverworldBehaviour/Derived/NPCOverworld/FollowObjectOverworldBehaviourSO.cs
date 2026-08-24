@@ -36,8 +36,6 @@ namespace Game.SO.Behaviour.EntityOverworld
             controller.AIPath.slowdownDistance = controller.Radius * 4 * followDistMult;
             controller.AIPath.endReachedDistance = controller.Radius * 2 * followDistMult;
 
-            controller.Animator.runtimeAnimatorController = animCtrller;
-
             if (defaultTargetsPlayer && controller.InstanceData != null)
                 ((FollowObjectOverworldBehaviourInstanceData)controller.InstanceData).targetForm = GameManager.Player.transform;
         }

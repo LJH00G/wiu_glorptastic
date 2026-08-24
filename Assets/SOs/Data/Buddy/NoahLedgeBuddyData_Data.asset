@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: NoahLedgeBuddyData_Data
   m_EditorClassIdentifier: Assembly-CSharp::Game.SO.Data.Buddy.BuddyDataSO
   <Loadout>k__BackingField: {fileID: 11400000, guid: e15f330b88b47a94ca3311faee16bf16, type: 2}
-  <OverworldBehaviour>k__BackingField: {fileID: 11400000, guid: 4a58ebc5d69ab694f819f5518ad8e6c9, type: 2}
+  <OverworldAppearance>k__BackingField: {fileID: 11400000, guid: f6f7b353cda7f80439497e32ed77a373, type: 2}
