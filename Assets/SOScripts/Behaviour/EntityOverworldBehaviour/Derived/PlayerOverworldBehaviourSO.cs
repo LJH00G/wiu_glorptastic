@@ -37,7 +37,6 @@ namespace Game.SO.Behaviour.EntityOverworld
             controller.AIPath.endReachedDistance = controller.Radius * 0.75f;
             controller.AIPath.destination = controller.transform.position;
 
-            controller.Animator.runtimeAnimatorController = animCtrller;
         }
 
         public override void BehaviourUpdate(EntityOverworldController controller, float dt)

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: PiaoFuBuddyData_Data
   m_EditorClassIdentifier: Assembly-CSharp::Game.SO.Data.Buddy.BuddyDataSO
   <Loadout>k__BackingField: {fileID: 11400000, guid: 337120da5c78a394a8d193e925f9471b, type: 2}
-  <OverworldBehaviour>k__BackingField: {fileID: 11400000, guid: 9e3044173b8d7534bbbf3b4f2e23b53f, type: 2}
+  <OverworldAppearance>k__BackingField: {fileID: 11400000, guid: 482acafd22fd8424db28dcf539420a6d, type: 2}

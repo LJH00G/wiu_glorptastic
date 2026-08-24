@@ -8,6 +8,7 @@ namespace Game.SO.Behaviour.EntityOverworld.InstanceData
 {
     public class MovePointsOverworldBehaviourInstanceData : EntityOverworldBehaviourInstanceData
     {
+        public string MovePointsKey;
         public int toPointIndex;
         public bool isIncrement;
         public float pauseTimer;
@@ -21,7 +22,7 @@ namespace Game.SO.Behaviour.EntityOverworld
     public class MovePointsOverworldBehaviourSO : NPCOverworldBehaviourSO
     {
         [Header("Move Points")]
-        [SerializeField] string MovePointsKey;
+        [SerializeField] bool isCycle;
         [SerializeField] bool isRandom;
         [SerializeField] float maxPauseDurationAtPoint;
 
@@ -38,17 +39,15 @@ namespace Game.SO.Behaviour.EntityOverworld
             controller.AIPath.slowdownDistance = controller.Radius * 4;
             controller.AIPath.endReachedDistance = controller.Radius;
 
-            controller.Animator.runtimeAnimatorController = animCtrller;
-
             MovePointsOverworldBehaviourInstanceData instanceData = (MovePointsOverworldBehaviourInstanceData)controller.InstanceData;
 
-
-            instanceData.isIncrement = Random.Range(0, 1) == 1;
+            if (isCycle)
+                instanceData.isIncrement = Random.Range(0, 1) == 1;
 
             int closestPointIndex = 0;
             float closestDist_sqr = float.PositiveInfinity;
 
-            if (!OverworldNPCMovePointsGlobalVariable.MovePointsDict.TryGetValue(MovePointsKey, out MovePoints movePoints))
+            if (!OverworldNPCMovePointsGlobalVariable.MovePointsDict.TryGetValue(instanceData.MovePointsKey, out MovePoints movePoints))
                 return;
             Vector2[] points = movePoints.points;
 
@@ -77,7 +76,7 @@ namespace Game.SO.Behaviour.EntityOverworld
             if (controller.InstanceData is not MovePointsOverworldBehaviourInstanceData instanceData)
                 return;
 
-            if (!OverworldNPCMovePointsGlobalVariable.MovePointsDict.TryGetValue(MovePointsKey, out MovePoints movePoints))
+            if (!OverworldNPCMovePointsGlobalVariable.MovePointsDict.TryGetValue(instanceData.MovePointsKey, out MovePoints movePoints))
                 return;
             Vector2[] points = movePoints.points;
 
@@ -107,14 +106,14 @@ namespace Game.SO.Behaviour.EntityOverworld
 
         public override void BehaviourOnValidate(EntityOverworldController controller)
         {
-            if (!OverworldNPCMovePointsGlobalVariable.MovePointsDict.TryGetValue(MovePointsKey, out MovePoints movePoints))
-            {
-                Debug.LogError($"no MovePoints in this scene matches the key {MovePointsKey}", this);
-                return;
-            }
-
             if (controller.InstanceData is not MovePointsOverworldBehaviourInstanceData instanceData)
                 return;
+
+            if (!OverworldNPCMovePointsGlobalVariable.MovePointsDict.TryGetValue(instanceData.MovePointsKey, out MovePoints movePoints))
+            {
+                Debug.LogError($"no MovePoints in this scene matches the key {instanceData.MovePointsKey}", this);
+                return;
+            }
 
             if (instanceData.toPointIndex < 0)
                 instanceData.toPointIndex = movePoints.points.Length - 1;
@@ -125,14 +124,14 @@ namespace Game.SO.Behaviour.EntityOverworld
 
         public override void BehaviourOnDrawGizmosSelected(EntityOverworldController controller)
         {
-            if (!OverworldNPCMovePointsGlobalVariable.MovePointsDict.TryGetValue(MovePointsKey, out MovePoints movePoints))
+            if (controller.InstanceData is not MovePointsOverworldBehaviourInstanceData instanceData)
+                return;
+
+            if (!OverworldNPCMovePointsGlobalVariable.MovePointsDict.TryGetValue(instanceData.MovePointsKey, out MovePoints movePoints))
                 return;
             Vector2[] points = movePoints.points;
 
             if (points.Length == 0)
-                return;
-
-            if (controller.InstanceData is not MovePointsOverworldBehaviourInstanceData instanceData)
                 return;
 
             Gizmos.color = Color.blue;

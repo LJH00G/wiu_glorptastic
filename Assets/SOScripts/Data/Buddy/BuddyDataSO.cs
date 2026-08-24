@@ -11,6 +11,6 @@ namespace Game.SO.Data.Buddy
         public PartnerLoadoutSO Loadout { get; private set; }
 
         [field: SerializeField]
-        public FollowObjectOverworldBehaviourSO OverworldBehaviour { get; private set; }
+        public OverworldEntityAppearanceSO OverworldAppearance { get; private set; }
     }
 }

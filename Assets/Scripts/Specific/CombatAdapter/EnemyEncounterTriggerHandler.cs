@@ -1,12 +1,15 @@
-using Game.Interactable.SingleTriggerHandler;
+
 using UnityEngine;
 
-public class EnemyEncounterTriggerHandler : SingleTriggerHandler<EnemyEncounterDataSO>
+namespace Game.Interactable.TriggerHandler.Single
 {
-    [SerializeField] InitializeCombatEventChannelSO initializeCombatEventChannel;
-
-    protected override void TriggerTriggerable(ref EnemyEncounterDataSO triggerable)
+    public class EnemyEncounterTriggerHandler : SingleTriggerHandler<EnemyEncounterDataSO>
     {
-        initializeCombatEventChannel.Raise(triggerable);
+        [SerializeField] InitializeCombatEventChannelSO initializeCombatEventChannel;
+
+        protected override void TriggerTriggerable(ref EnemyEncounterDataSO triggerable)
+        {
+            initializeCombatEventChannel.Raise(triggerable);
+        }
     }
 }

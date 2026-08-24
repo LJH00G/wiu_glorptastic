@@ -14,4 +14,11 @@ public class GameIniter_test : MonoBehaviour
         GameManager.CurrentUserData.PlayerBattleData.CurrentHP = GameManager.CurrentUserData.PlayerBattleData.MaxHP;
         GameManager.CurrentUserData.PlayerBattleData.CurrentCurse = GameManager.CurrentUserData.PlayerBattleData.MaxCurse;
     }
+
+#if UNITY_EDITOR
+    private void OnValidate()
+    {
+        Awake();
+    }
+#endif
 }

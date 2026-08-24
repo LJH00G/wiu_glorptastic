@@ -45,6 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.GlobalVariable.StaticGlobalVariableAssigner
   playerLoadout: {fileID: 11400000, guid: 71598e27c091e1a4e871d010a3ccaf2d, type: 2}
+  followerBehaviour: {fileID: 11400000, guid: 6c82395bdba3ac14da5f6a9daf76606c, type: 2}
 --- !u!1 &850396615452843615
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 
 using Game;
 using Game.Combat.Integration;
+using Game.GlobalVariable;
 using Game.Inventory;
 using Game.SO.Data.Buddy;
 using System;
@@ -49,7 +50,9 @@ public class UserData
             return;
 
         CurrentEquipedBuddy = buddyData;
-        GameManager.Follower.GetComponent<EntityOverworldController>().SetBehaviour(CurrentEquipedBuddy.OverworldBehaviour);
+        EntityOverworldController controller = GameManager.Follower.GetComponent<EntityOverworldController>();
+        controller.SetAppearance(CurrentEquipedBuddy.OverworldAppearance);
+        controller.SetBehaviour(StaticGlobalVariable.FollowerBehaviour);
     }
 
     public UserData Clone(int saveSlotIndex)

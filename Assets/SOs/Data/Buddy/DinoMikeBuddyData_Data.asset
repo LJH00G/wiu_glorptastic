@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: DinoMikeBuddyData_Data
   m_EditorClassIdentifier: Assembly-CSharp::Game.SO.Data.Buddy.BuddyDataSO
   <Loadout>k__BackingField: {fileID: 11400000, guid: 42cf38b62f4608742946b9a721cae4e4, type: 2}
-  <OverworldBehaviour>k__BackingField: {fileID: 11400000, guid: 6c82395bdba3ac14da5f6a9daf76606c, type: 2}
+  <OverworldAppearance>k__BackingField: {fileID: 11400000, guid: 436867ed5133bd24a96ed8261078dd46, type: 2}

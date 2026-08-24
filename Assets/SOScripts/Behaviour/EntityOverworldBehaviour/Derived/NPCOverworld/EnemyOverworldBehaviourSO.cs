@@ -36,8 +36,6 @@ namespace Game.SO.Behaviour.EntityOverworld
             controller.AIPath.slowdownDistance = controller.Radius * 4;
             controller.AIPath.endReachedDistance = controller.Radius;
 
-            controller.Animator.runtimeAnimatorController = animCtrller;
-
         }
 
         public override void BehaviourUpdate(EntityOverworldController controller, float dt)

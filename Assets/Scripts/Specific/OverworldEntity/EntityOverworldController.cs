@@ -12,12 +12,17 @@ using UnityEngine;
 public class EntityOverworldController : MonoBehaviour
 {
 
-    [Header("Data")]
+    [field: Header("Data")]
     [field: SerializeField]
     public float Radius { get; private set; } = 0.25f;
 
-    [Header("Behaviour")]
-    [SerializeField] EntityOverworldBehaviourSO behaviour;
+    [field: Header("Appearance")]
+    [field: SerializeField]
+    public OverworldEntityAppearanceSO Appearance { get; set; }
+
+    [field: Header("Behaviour")]
+    [field: SerializeField]
+    public EntityOverworldBehaviourSO Behaviour { get; set; }
     [field: SerializeReference]
     public EntityOverworldBehaviourInstanceData InstanceData { get; set; }
 
@@ -28,8 +33,14 @@ public class EntityOverworldController : MonoBehaviour
 
     public void SetBehaviour(EntityOverworldBehaviourSO behaviour)
     {
-        this.behaviour = behaviour;
-        this.behaviour.BehaviourStart(this);
+        Behaviour = behaviour;
+        Behaviour.BehaviourStart(this);
+    }
+
+    public void SetAppearance(OverworldEntityAppearanceSO appearance)
+    {
+        Appearance = appearance;
+        Appearance.UpdateAppearance(this);
     }
 
 
@@ -47,6 +58,7 @@ public class EntityOverworldController : MonoBehaviour
         AIPath.enableRotation = false;
 
         TriggerCollider = GetComponent<BoxCollider2D>();
+        TriggerCollider.isTrigger = true;
         TriggerCollider.size = new Vector2(Radius * 2, Radius);
         TriggerCollider.offset = new Vector2(0, Radius * 0.5f);
 
@@ -58,26 +70,27 @@ public class EntityOverworldController : MonoBehaviour
 
         Animator = GetComponent<Animator>();
 
-        SetBehaviour(behaviour);
+        SetBehaviour(Behaviour);
     }
 
     void Update()
     {
         float dt = Time.deltaTime;
 
-        if (behaviour)
+        if (Behaviour)
         {
-            behaviour.BehaviourUpdate(this, dt);
-            behaviour.UpdateAnimator(this);
+            Behaviour.BehaviourUpdate(this, dt);
         }
         if (!GameManager.AllCanMove)
             AIPath.destination = transform.position;
+
+        if (Appearance)
+            Appearance.UpdateAnimator(this);
     }
 
 
 #if UNITY_EDITOR
 
-    EntityOverworldBehaviourSO prevBehaviour;
     private void OnValidate()
     {
         AIPath = GetComponent<AIPath>();
@@ -86,6 +99,7 @@ public class EntityOverworldController : MonoBehaviour
         AIPath.enableRotation = false;
 
         TriggerCollider = GetComponent<BoxCollider2D>();
+        TriggerCollider.isTrigger = true;
         TriggerCollider.size = new Vector2(Radius * 2, Radius);
         TriggerCollider.offset = new Vector2(0, Radius * 0.5f);
 
@@ -97,27 +111,26 @@ public class EntityOverworldController : MonoBehaviour
 
         Animator = GetComponent<Animator>();
 
-        if (behaviour)
+        if (Behaviour)
         {
-            if (prevBehaviour != behaviour) {
-                prevBehaviour = behaviour;
-                SetBehaviour(behaviour);
-            }
-
-            behaviour.BehaviourOnValidate(this);
-
-            SpriteRenderer spriteRenderer = transform.GetComponentInChildren<SpriteRenderer>();
-            if (spriteRenderer)
-                spriteRenderer.sprite = behaviour.DefaultSprite;
+            Behaviour.BehaviourOnValidate(this);
         }
         else
             Debug.LogError("behaviour must not be left empty", this);
+
+        if (Appearance)
+        {
+            Appearance.UpdateAppearance(this);
+        }
+        else
+            Debug.LogError("Appearance must not be left empty", this);
+
     }
 
     private void OnDrawGizmosSelected()
     {
-        if (behaviour)
-            behaviour.BehaviourOnDrawGizmosSelected(this);
+        if (Behaviour)
+            Behaviour.BehaviourOnDrawGizmosSelected(this);
     }
 #endif
 
