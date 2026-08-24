@@ -2,6 +2,7 @@ using Game.SO.EventChannel.Context;
 using Game.SO.EventChannel;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Game.OverworldDisableManager;
 
 public class SceneSwitchController : MonoBehaviour
 {
@@ -45,9 +46,11 @@ public class SceneSwitchController : MonoBehaviour
             }
 
             SceneManager.sceneLoaded += OnSceneLoaded;
-            Camera.main.enabled = false;
             Camera.main.tag = "Untagged";
+            
             SceneManager.LoadSceneAsync(context.loadScene, LoadSceneMode.Additive);
+            OverworldDisableManager.DisableAllObjects(oldScene, context.ignoreableObjs);
+            OverworldDisableManager.EnableAllObjects(SceneManager.GetSceneByName(context.loadScene));
             
         },
             context.delay,

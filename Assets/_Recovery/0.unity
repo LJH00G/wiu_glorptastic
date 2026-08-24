@@ -406,6 +406,7 @@ MonoBehaviour:
       fadeOffOther_Time: 0
       fadeForceSetVolume: 0
     unloadOldScene: 0
+    ignoreableObjs: []
   testConvo1: {fileID: 11400000, guid: 6eb9ccc3237ab404c9fa2eb07aaa120f, type: 2}
   testConvo2: {fileID: 11400000, guid: 2fb6cc53f80ab6b4c9625131f83b482c, type: 2}
   testConvo3: {fileID: 11400000, guid: 0c182ecde89c1dd4094026ed176fcd97, type: 2}
@@ -18600,15 +18601,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 263098528329391435, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_Size.x
-      value: 0.54
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 263098528329391435, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_Size.y
-      value: 0.53
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 263098528329391435, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_Offset.y
-      value: 0
+      value: 0.125
       objectReference: {fileID: 0}
     - target: {fileID: 263098528329391435, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_IsTrigger

@@ -2,6 +2,7 @@ using Game;
 using Game.Combat;
 using Game.GlobalVariable;
 using Game.Inventory;
+using Game.OverworldDisableManager;
 using Game.SO.Data.Item;
 using Game.SO.EventChannel;
 using Game.SO.EventChannel.Context;
@@ -20,8 +21,7 @@ public class CombatInitialiser : MonoBehaviour
     [SerializeField] Camera overworldCamera;
 
     GameObject enemyInitiated;
-
-    string overworldSceneName;
+    Scene scene;
 
     public void StartCombat(EnemyEncounterDataSO data)
     {
@@ -39,11 +39,13 @@ public class CombatInitialiser : MonoBehaviour
         tunnelDataTunnel.partnerLoadout = partner;
 
         enemyInitiated = data.enemy;
-        SceneManager.GetSceneByName(overworldSceneName);
+        scene = SceneManager.GetActiveScene();
         GameManager.SetAllCanMove(false);
 
+        List<GameObject> list = new List<GameObject>();
+        list.Add(this.gameObject);
         PlayMusicEventContext music = PlayMusicEventContext.FadeAllOut_2s;
-        SceneSwitchEventContext context = new("Combat Scene", 2, music, false);
+        SceneSwitchEventContext context = new("Combat Scene", 2, music, false, list);
 
         onSwitch.Raise(context);
     }
@@ -55,9 +57,11 @@ public class CombatInitialiser : MonoBehaviour
 
         enemyInitiated = null;
 
-        SceneManager.UnloadSceneAsync("Combat Scene");
-        Scene scene = SceneManager.GetSceneByName(overworldSceneName);
+        
+        
+        OverworldDisableManager.EnableAllObjects(scene);
         SceneManager.SetActiveScene(scene);
+        SceneManager.UnloadSceneAsync("Combat Scene");
 
         overworldCamera.tag = "MainCamera";
         overworldCamera.enabled = true;
