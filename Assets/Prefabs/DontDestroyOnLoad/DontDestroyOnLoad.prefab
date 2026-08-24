@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 840eb6539221d1747b566b60e215f435, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.GlobalVariable.StaticGlobalVariableAssigner
-  playerLoadout: {fileID: 11400000, guid: 768118dd1cfdab54cb6d17563e0e692a, type: 2}
+  playerLoadout: {fileID: 11400000, guid: 71598e27c091e1a4e871d010a3ccaf2d, type: 2}
 --- !u!1 &850396615452843615
 GameObject:
   m_ObjectHideFlags: 0
