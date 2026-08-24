@@ -37,5 +37,8 @@ namespace Game.Combat
         [Header("Move Order")]
         public EnemyMove[] moveOrder;
         public bool loopMoveOrder = true;
+
+        [Header("Loot Table")]
+        public LootTableSO enemyLootTable;
     }
 }

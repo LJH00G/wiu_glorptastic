@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 using Game.SO.EventChannel.Context;
+using Game.SO.Data.Item;
 
 namespace Game.Combat.Integration
 {
@@ -43,11 +44,62 @@ namespace Game.Combat.Integration
 
         public void WipeDataAssignment(bool won)
         {
+            
+            List<LootTableSO> lootPool = ObtainLootPool(dataTunnel);
+            List<LootData> loot = LootCalculation(lootPool);
+
             dataTunnel.WipeCall();
-            CombatEndEventContextSO context = new(won);
+            CombatEndEventContextSO context = new(won, loot);
             combatEnd.Raise(context);
         }
 
+        public List<LootData> LootCalculation(List<LootTableSO> lootChanceData)
+        {
+            List<LootData> loot = new();
+            
+            foreach (LootTableSO lootTable in lootChanceData)
+            {
+                Dictionary<int, LootData> lootWeightTable = new Dictionary<int, LootData>();
+                int index = 0;
+
+                foreach (LootChanceData chanceData in lootTable.itemList)
+                {
+                    int amt = chanceData.odds;
+
+                    for (int i = 0; i < amt; i++)
+                    {
+                        index++;
+                        LootData lootData = new LootData(chanceData.amount, chanceData.item);
+                        lootWeightTable.Add(index, lootData);
+                    }
+
+                }
+
+                for (int i = 0; i < lootTable.rolls; i++)
+                {
+
+                    int roll = UnityEngine.Random.Range(1, lootWeightTable.Count + 1);
+
+                    if (lootWeightTable.TryGetValue(roll, out LootData item))
+                        loot.Add(item);
+                }
+
+            }
+
+            return loot;
+        }
+
+        public List<LootTableSO> ObtainLootPool(CombatDataTunnelSO tunnelData)
+        {
+            List<LootTableSO> lootPool = new();
+            foreach(EnemyDataSO lootTable in tunnelData.enemyEncounterData.dataList)
+            {
+                lootPool.Add(lootTable.enemyLootTable);
+            }
+            lootPool.Add(tunnelData.enemyEncounterData.encounterLootTable);
+
+            return lootPool;
+        }
 
     }
 }

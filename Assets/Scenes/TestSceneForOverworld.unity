@@ -406,6 +406,7 @@ MonoBehaviour:
       fadeOffOther_Time: 0
       fadeForceSetVolume: 0
     unloadOldScene: 0
+    ignoreableObjs: []
   testConvo1: {fileID: 11400000, guid: 6eb9ccc3237ab404c9fa2eb07aaa120f, type: 2}
   testConvo2: {fileID: 11400000, guid: 2fb6cc53f80ab6b4c9625131f83b482c, type: 2}
   testConvo3: {fileID: 11400000, guid: 0c182ecde89c1dd4094026ed176fcd97, type: 2}
@@ -493,6 +494,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   player: {fileID: 2087693728}
   follower: {fileID: 1455610210}
+  InventorySceneName: SceneSampleSwap
 --- !u!4 &828279313
 Transform:
   m_ObjectHideFlags: 0
@@ -720,7 +722,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7375fc3aae0df5144b64b3371b800b89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.TriggerHandler.TeleportTriggerHandler
-  triggerable: 
+  triggerable: Test2
   flagOverrideTriggerables:
     serializableList: []
   lockTimeAfterTrigger: 0
@@ -1827,7 +1829,7 @@ Transform:
   m_GameObject: {fileID: 1784252614}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.12, y: -0.22, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

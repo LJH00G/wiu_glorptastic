@@ -12,6 +12,16 @@ namespace Game
         ENDING
     }
 
+    public enum OVERWORLD_STATE
+    {
+        GENERAL,
+        PUZZLE,
+        CUTSCENE,
+        TELEPORT,
+        INVENTORY_SHOP,
+
+    }
+
     /// <summary>
     /// add flags
     /// - can interact
@@ -26,6 +36,7 @@ namespace Game
         static public bool PlayerCanMove { get; private set; } = true;
         static public bool AllCanMove { get; private set; } = true;
         static public GAME_STATE GameState { get; private set; }
+        static public OVERWORLD_STATE OverworldState { get; private set; }
         static public UserData CurrentUserData {get; private set; } = new(); //tracks the currently in use player saved data so scripts like inventory manager can be linked up after load attempt without a scene in use
         static public bool CanInteract { get; private set; } = true;
         static public bool Paused { get; private set; } = false;
@@ -63,6 +74,12 @@ namespace Game
         static public void SetGameState(GAME_STATE state)
         {
             GameState = state;
+            Time.timeScale = 1;
+        }
+
+        static public void SetOverWorldState(OVERWORLD_STATE state)
+        {
+            OverworldState = state;
             Time.timeScale = 1;
         }
 

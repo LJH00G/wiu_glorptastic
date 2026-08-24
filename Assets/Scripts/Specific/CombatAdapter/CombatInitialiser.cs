@@ -46,7 +46,7 @@ public class CombatInitialiser : MonoBehaviour
         list.Add(this.gameObject);
         PlayMusicEventContext music = PlayMusicEventContext.FadeAllOut_2s;
         SceneSwitchEventContext context = new("Combat Scene", 2, music, false, list);
-
+        GameManager.SetGameState(GAME_STATE.BATTLE);
         onSwitch.Raise(context);
     }
 
@@ -66,6 +66,12 @@ public class CombatInitialiser : MonoBehaviour
         overworldCamera.tag = "MainCamera";
         overworldCamera.enabled = true;
         GameManager.SetAllCanMove(true);
+        GameManager.SetGameState(GAME_STATE.OVERWORLD);
+    }
+
+    public void AddLootToInventory(CombatEndEventContextSO context)
+    {
+
     }
 
     private void OnEnable()

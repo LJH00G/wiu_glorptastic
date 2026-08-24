@@ -8,5 +8,5 @@ public class EnemyEncounterDataSO : ScriptableObject
 {
     public GameObject enemy;
     public List<EnemyDataSO> dataList;
-   
+    public LootTableSO encounterLootTable;
 }

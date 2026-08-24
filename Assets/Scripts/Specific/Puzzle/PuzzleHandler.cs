@@ -25,6 +25,7 @@ namespace Puzzle
         [SerializeField] Transform container;
         [SerializeField] List<DictEntry<PuzzleType, GameObject>> viewRegistry = new();
         [SerializeField] EventChannelSO OnCompletePuzzle;
+        [SerializeField] PuzzleStartEventChannelSO OnEnterPuzzle;
 
         private IPuzzleView _activeView;
         private GameObject _activeViewInstance;
@@ -107,6 +108,16 @@ namespace Puzzle
         private void OnDestroy()
         {
             UnloadCurrentView();
+        }
+
+        private void OnEnable()
+        {
+            OnEnterPuzzle.Subscribe(LoadPuzzle);
+        }
+
+        private void OnDisable()
+        {
+            OnEnterPuzzle.Unsubscribe(LoadPuzzle);
         }
     }
 

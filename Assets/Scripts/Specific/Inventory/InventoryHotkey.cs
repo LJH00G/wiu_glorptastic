@@ -1,5 +1,7 @@
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Utility.VisualizableDictionary;
 
 namespace Game.Inventory
 {
@@ -7,10 +9,15 @@ namespace Game.Inventory
     {
         [SerializeField] Key hotkey = Key.I;
 
+        [SerializeField] VisualizableDict<OVERWORLD_STATE, bool> stateDictionary;
+
         void Update()
         {
+
             if (Keyboard.current != null && Keyboard.current[hotkey].wasPressedThisFrame)
             {
+                
+                if(CheckGameState())
                 Toggle();
             }
         }
@@ -30,5 +37,31 @@ namespace Game.Inventory
                 InventoryUI.Instance.Show();
             }
         }
+
+        bool CheckGameState()
+        {
+            //Checks Gamestate
+            if (GameManager.GameState != GAME_STATE.OVERWORLD)
+            {
+                Debug.Log("GameState returned false");
+                return false;
+            }
+                
+
+            if (stateDictionary.dict.TryGetValue(GameManager.OverworldState, out bool confirm))
+            {
+                Debug.Log($"Overworld returned: {GameManager.OverworldState}");
+                return confirm;
+            }
+                
+            return false;
+        }
+
+#if UNITY_EDITOR
+        void OnValidate()
+        {
+            stateDictionary.OnValidate();
+        }
+#endif
     }
 }
