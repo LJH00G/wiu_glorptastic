@@ -1,4 +1,5 @@
 using UnityEngine;
+using Game.SO.Data.Item;
 
 namespace Game.Inventory
 {
@@ -11,12 +12,24 @@ namespace Game.Inventory
 
         void Awake()
         {
-            weaponSlot.OnUnequipRequested += () => InventoryManager.UnequipWeapon();
+            weaponSlot.OnSlotClicked += item =>
+            {
+                if (item)
+                {
+                    InventoryManager.UnequipWeapon();
+                }
+            };
 
             for (int i = 0; i < accessorySlots.Length; i++)
             {
                 int slotIndex = i;
-                accessorySlots[i].OnUnequipRequested += () => InventoryManager.UnequipAccessory(slotIndex);
+                accessorySlots[i].OnSlotClicked += item =>
+                {
+                    if (item)
+                    {
+                        InventoryManager.UnequipAccessory(slotIndex);
+                    }
+                };
             }
         }
 

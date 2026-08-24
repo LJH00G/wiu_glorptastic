@@ -18,6 +18,8 @@ namespace Game.Inventory
 
         void Awake()
         {
+
+            Debug.Log("hello sigma, InventoryLoopBootStrap Is here sigmas");
             UserData userData = new UserData
             {
                 Inventory = new Inventory()

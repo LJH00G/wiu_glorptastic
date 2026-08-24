@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Game.SO.Data.Item;
-using Game.SO.Data.Item.Sellable.Battle;
 
 namespace Game.Inventory
 {
@@ -12,7 +11,27 @@ namespace Game.Inventory
         [SerializeField] Transform contentParent;
         [SerializeField] InventoryItemUI itemUIPrefab;
 
+        [Header("Detail Panel")]
+        [SerializeField] ItemDetailUI itemDetailUI;
+
+        [Header("Panel (optional)")]
+        [SerializeField] GameObject panelRoot;
+        bool sellMode;
+
         readonly List<InventoryItemUI> spawned = new();
+
+        public static InventoryUI Instance { get; private set; }
+
+        public bool IsOpen => panelRoot ? panelRoot.activeSelf : gameObject.activeSelf;
+
+        void Awake()
+        {
+            if (Instance && Instance != this)
+            {
+                Debug.LogWarning("InventoryUI.Awake() | more than one InventoryUI exists in the scene, Instance will point at the most recently loaded one");
+            }
+            Instance = this;
+        }
 
         void OnEnable()
         {
@@ -25,6 +44,25 @@ namespace Game.Inventory
             InventoryManager.OnInventoryChanged.Unsubscribe(Refresh);
         }
 
+        public void Show(bool sellModeEnabled = false)//
+        {
+            sellMode = sellModeEnabled;
+
+            if (panelRoot)
+            {
+                panelRoot.SetActive(true);
+            }
+            Refresh();
+        }
+
+        public void Hide()
+        {
+            if (panelRoot)
+            {
+                panelRoot.SetActive(false);
+            }
+        }
+
         void Refresh()
         {
             var stacks = InventoryManager.GetItemList();
@@ -33,10 +71,9 @@ namespace Game.Inventory
             {
                 InventoryItemUI row = Instantiate(itemUIPrefab);
                 row.transform.SetParent(contentParent, false);
-                row.OnEquipRequested += HandleEquipRequested;
+                row.OnDetailsRequested += HandleDetailsRequested;
                 spawned.Add(row);
             }
-
 
             while (spawned.Count > stacks.Count)
             {
@@ -52,10 +89,12 @@ namespace Game.Inventory
             }
         }
 
-        void HandleEquipRequested(ItemSO item)
+        void HandleDetailsRequested(ItemSO item)
         {
-            if (item is BattleItemSO battleItem)
-                InventoryManager.EquipItem(battleItem);
+            if (item && itemDetailUI)
+            {
+                itemDetailUI.Show(item, sellMode);
+            }
         }
     }
 }

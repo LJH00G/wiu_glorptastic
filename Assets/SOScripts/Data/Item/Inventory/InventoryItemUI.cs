@@ -4,9 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Game.SO.Data.Item;
-using Game.SO.Data.Item.Sellable.Battle;
-///add a new system that allows inventory to be reused during the shop section when the player is prompted whether they want to sell anything, inventory should pop back open, disable the underlying shop layer and let player
-///choose what items in their inventory they want to sell, then it uses the inventory description space to display the shop trading stuff like the cost you gain from trading and the amount players want to trade for it etc.
+
 namespace Game.Inventory
 {
     public class InventoryItemUI : MonoBehaviour
@@ -16,19 +14,17 @@ namespace Game.Inventory
         [SerializeField] TMP_Text titleText;
         [SerializeField] TMP_Text descriptionText;
         [SerializeField] TMP_Text quantityText;
-
-        [SerializeField] Button equipButton;
+        [SerializeField] Button detailsButton;
 
         static readonly Dictionary<Texture2D, Sprite> spriteCache = new();
 
         public ItemSO BoundItem { get; private set; }
-
-        public event Action<ItemSO> OnEquipRequested;
+        public event Action<ItemSO> OnDetailsRequested;
         void Awake()
         {
-            if (equipButton)
+            if (detailsButton)
             {
-                equipButton.onClick.AddListener(() => OnEquipRequested?.Invoke(BoundItem));
+                detailsButton.onClick.AddListener(() => OnDetailsRequested?.Invoke(BoundItem));
             }
         }
 
@@ -51,10 +47,6 @@ namespace Game.Inventory
             if (quantityText)
             {
                 quantityText.text = quantity > 1 ? $"x{quantity}" : string.Empty;
-            }
-            if (equipButton)
-            {
-                equipButton.gameObject.SetActive(item is BattleItemSO);
             }
         }
 
