@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aca77b464a3c090499a53b4ffe36c908, type: 3}
   m_Name: AccessoryItem_test 1
   m_EditorClassIdentifier: Assembly-CSharp::Game.SO.Data.Item.Sellable.Battle.AccessoryItemSO
-  <Name>k__BackingField: Accesory2
+  <Name>k__BackingField: Accessory2
   <Texture>k__BackingField: {fileID: 2800000, guid: 9ae274b4a1a11374dbb47368c9c05ec2, type: 3}
   <Description>k__BackingField: Shimi Shimi Ey Shimi Shimi Ah Falalala
   <SellValue>k__BackingField: 1233
@@ -21,3 +21,6 @@ MonoBehaviour:
   <ExtraMaxCurse>k__BackingField: 1
   <ExtraDamage>k__BackingField: 1
   <ExtraDefence>k__BackingField: 1
+  <MasteryWindowWidthMultiplier>k__BackingField: 1
+  <HPRegenPerTurn>k__BackingField: 0
+  <CSRegenPerTurn>k__BackingField: 0
