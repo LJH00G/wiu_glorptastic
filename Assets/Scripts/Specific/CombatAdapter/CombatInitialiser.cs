@@ -40,6 +40,7 @@ public class CombatInitialiser : MonoBehaviour
 
         enemyInitiated = data.enemy;
         SceneManager.GetSceneByName(overworldSceneName);
+        GameManager.SetAllCanMove(false);
 
         PlayMusicEventContext music = PlayMusicEventContext.FadeAllOut_2s;
         SceneSwitchEventContext context = new("Combat Scene", 2, music, false);
@@ -59,6 +60,8 @@ public class CombatInitialiser : MonoBehaviour
         SceneManager.SetActiveScene(scene);
 
         overworldCamera.tag = "MainCamera";
+        overworldCamera.enabled = true;
+        GameManager.SetAllCanMove(true);
     }
 
     private void OnEnable()
