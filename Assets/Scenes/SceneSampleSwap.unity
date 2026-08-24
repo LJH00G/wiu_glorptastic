@@ -1731,7 +1731,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 699d409ca0adcbd4e862755473496f2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Inventory.DebugInventoryPanel
-  inventoryManager: {fileID: 1937559900}
   debugItemPool:
   - {fileID: 11400000, guid: ec03b2cb75205f746a16e34fda1bc517, type: 2}
   - {fileID: 11400000, guid: d96144da2ca78c94283401f20dabc597, type: 2}
@@ -2926,7 +2925,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd8a233f765528743b8b61aaa15c75b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Inventory.InventoryUI
-  inventoryManager: {fileID: 1937559900}
   contentParent: {fileID: 307142839}
   itemUIPrefab: {fileID: 6234733973270982164, guid: cf0ee6b6c515e314ba0a9bcd545052b0, type: 3}
   itemDetailUI: {fileID: 1008801128}
@@ -3740,7 +3738,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 448501f567bf81249814c68c6f329cd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Inventory.EquipmentUI
-  inventoryManager: {fileID: 1937559900}
   weaponSlot: {fileID: 240791369}
   accessorySlots:
   - {fileID: 1757155761}
@@ -4318,7 +4315,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab6b55cfd3587ec458c30a85ed17875c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Inventory.ItemDetailUI
-  inventoryManager: {fileID: 1937559900}
   panelRoot: {fileID: 1008801124}
   icon: {fileID: 1904239365}
   titleText: {fileID: 1747918903}
@@ -6506,7 +6502,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a3cd5c1d1110154fb0f89f47c3475c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ShopBaseController
-  shopPurchaseEventChannel: {fileID: 11400000, guid: 773f45de51239ff47b01497f6ed1e87d, type: 2}
   <Preset>k__BackingField: {fileID: 11400000, guid: 42c71de34ce165e4786446520e21eae0, type: 2}
 --- !u!114 &1538157832
 MonoBehaviour:
@@ -7880,7 +7875,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9e748d9ad1ef3df43a32dd2de8d5ac65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Inventory.TEMP_InventoryLoopBootstrap
-  inventoryManager: {fileID: 1937559900}
 --- !u!4 &1781603570
 Transform:
   m_ObjectHideFlags: 0
@@ -8192,8 +8186,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1937559901}
-  - component: {fileID: 1937559900}
-  - component: {fileID: 1937559902}
   - component: {fileID: 1937559903}
   m_Layer: 0
   m_Name: InventoryManager
@@ -8202,27 +8194,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1937559900
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1937559899}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: be3c2f84f869cba45b3f3c8df077d8c3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Inventory.InventoryManager
-  shopPurchaseEventChannel: {fileID: 11400000, guid: 773f45de51239ff47b01497f6ed1e87d, type: 2}
-  inventory:
-    <ItemList>k__BackingField: []
-    <ShellCurrency>k__BackingField: 0
-    <EquipedWeapon>k__BackingField: {fileID: 0}
-    <EquipedAccessoryList>k__BackingField:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
 --- !u!4 &1937559901
 Transform:
   m_ObjectHideFlags: 0
@@ -8238,24 +8209,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1937559902
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1937559899}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 448501f567bf81249814c68c6f329cd1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Inventory.EquipmentUI
-  inventoryManager: {fileID: 1937559900}
-  weaponSlot: {fileID: 240791369}
-  accessorySlots:
-  - {fileID: 1757155761}
-  - {fileID: 1687939255}
-  - {fileID: 1101638730}
 --- !u!114 &1937559903
 MonoBehaviour:
   m_ObjectHideFlags: 0

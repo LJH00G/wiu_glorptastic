@@ -58,13 +58,13 @@ public class ShopUI : MonoBehaviour
     {
         var tradeTable = shopController.Preset.TradeTable;
 
-        if (tradeTable.Count != slots.Length)
+        if (tradeTable.Length != slots.Length)
         {
-            Debug.LogWarning($"ShopUI.PopulateSlots() | expected exactly {slots.Length} trades in the preset, found {tradeTable.Count}");
+            Debug.LogWarning($"ShopUI.PopulateSlots() | expected exactly {slots.Length} trades in the preset, found {tradeTable.Length}");
         }
         for (int i = 0; i < slots.Length; i++)
         {
-            bool hasTrade = i < tradeTable.Count;
+            bool hasTrade = i < tradeTable.Length;
             slots[i].gameObject.SetActive(hasTrade);
 
             if (hasTrade)
@@ -77,7 +77,7 @@ public class ShopUI : MonoBehaviour
     void HandleSlotClicked(int tradeIndex)
     {
         var tradeTable = shopController.Preset.TradeTable;
-        if (tradeIndex < 0 || tradeIndex >= tradeTable.Count)
+        if (tradeIndex < 0 || tradeIndex >= tradeTable.Length)
         {
             return;
         }

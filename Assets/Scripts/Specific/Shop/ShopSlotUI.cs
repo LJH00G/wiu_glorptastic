@@ -28,7 +28,7 @@ public class ShopSlotUI : MonoBehaviour
     {
         TradeIndex = index;
 
-        ItemSO displayItem = (trade.product.itemStacks != null && trade.product.itemStacks.Count > 0) ? trade.product.itemStacks[0].item : null;
+        ItemSO displayItem = (trade.product.itemStacks != null && trade.product.itemStacks.Length > 0) ? trade.product.itemStacks[0].item : null;
 
         if (icon)
         {

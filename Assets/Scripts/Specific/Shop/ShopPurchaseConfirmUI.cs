@@ -70,7 +70,7 @@ public class ShopPurchaseConfirmUI : MonoBehaviour
 
     void PopulateSide(Transform container, List<ShopTradeEntryUI> pool, Shopable shopable)
     {
-        int neededCount = (shopable.useShell ? 1 : 0) + (shopable.itemStacks?.Count ?? 0);
+        int neededCount = (shopable.useShell ? 1 : 0) + (shopable.itemStacks?.Length ?? 0);
 
         while (pool.Count < neededCount)
         {

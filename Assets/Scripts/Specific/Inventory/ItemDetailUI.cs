@@ -1,19 +1,20 @@
-using System.Collections.Generic;
-using System.Text;
-using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
+using Game.SO.Data.Inventory;
 using Game.SO.Data.Item;
 using Game.SO.Data.Item.Sellable;
 using Game.SO.Data.Item.Sellable.Battle;
 using Game.SO.Data.Shop;
+using System.Collections.Generic;
+using System.Text;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
 namespace Game.Inventory
 {
     public class ItemDetailUI : MonoBehaviour
     {
-        [Header("Source")]
-        [SerializeField] InventoryManager inventoryManager;
+        //[Header("Source")]
+        //[SerializeField] InventoryManager inventoryManager;
 
         [Header("Refs")]
         [SerializeField] GameObject panelRoot;
@@ -51,14 +52,14 @@ namespace Game.Inventory
                 dontSellButton.onClick.AddListener(Hide);
             // --- END ADDED ---
 
-            inventoryManager.OnInventoryChanged += Refresh;
+            InventoryManager.OnInventoryChanged.Subscribe(Refresh,0);
 
             Hide();
         }
 
         void OnDestroy()
         {
-            inventoryManager.OnInventoryChanged -= Refresh;
+            InventoryManager.OnInventoryChanged.Unsubscribe(Refresh);
         }
 
         public void Show(ItemSO item, bool sellMode = false)
@@ -113,7 +114,7 @@ namespace Game.Inventory
             bool isEquipped = IsCurrentlyEquipped(currentItem, out currentAccessorySlotIndex);
             bool canEquip = currentItem is BattleItemSO && !isEquipped;
 
-            if (canEquip && currentItem is AccessoryItemSO && !inventoryManager.HasFreeAccessorySlot())
+            if (canEquip && currentItem is AccessoryItemSO && !InventoryManager.HasFreeAccessorySlot())
             {
                 canEquip = false;
             }
@@ -142,11 +143,11 @@ namespace Game.Inventory
             {
                 return false;
             }
-            if (inventoryManager.GetEquipedWeapon() == item)
+            if (InventoryManager.GetEquipedWeapon() == item)
             {
                 return true;
             }
-            var accessories = inventoryManager.GetEquipedAccessories();
+            var accessories = InventoryManager.GetEquipedAccessories();
             for (int i = 0; i < accessories.Length; i++)
             {
                 if (accessories[i] == item)
@@ -163,7 +164,7 @@ namespace Game.Inventory
         {
             if (currentItem is BattleItemSO battleItem)
             {
-                inventoryManager.EquipItem(battleItem);
+                InventoryManager.EquipItem(battleItem);
             }
         }
 
@@ -171,11 +172,11 @@ namespace Game.Inventory
         {
             if (currentItem is WeaponItemSO)
             {
-                inventoryManager.UnequipWeapon();
+                InventoryManager.UnequipWeapon();
             }
             else if (currentItem is AccessoryItemSO && currentAccessorySlotIndex >= 0)
             {
-                inventoryManager.UnequipAccessory(currentAccessorySlotIndex);
+                InventoryManager.UnequipAccessory(currentAccessorySlotIndex);
             }
         }
 
@@ -185,29 +186,31 @@ namespace Game.Inventory
             {
                 return;
             }
+
+            ShopTrade sellTrade = new ShopTrade
+            {
+                cost = new Shopable
+                {
+                    itemStacks = new ItemStack[1] { new(sellable, 1) },
+                    useShell = false
+                },
+                product = new Shopable
+                {
+                    itemStacks = null,
+                    useShell = true,
+                    shell = sellable.SellValue
+                }
+            };
+
             if (shopConfirmUI)
             {
-                ShopTrade sellTrade = new ShopTrade
-                {
-                    cost = new Shopable
-                    {
-                        itemStacks = new List<ItemStack> {new ItemStack(sellable, 1)},
-                        useShell = false
-                    },
-                    product = new Shopable
-                    {
-                        itemStacks = null,
-                        useShell = true,
-                        shell = sellable.SellValue
-                    }
-                };
 
-                shopConfirmUI.Show(sellTrade, () => inventoryManager.SellItem(sellable, 1));
+                shopConfirmUI.Show(sellTrade, () => InventoryManager.TryShopPurchase(ref sellTrade));
                 Hide();
             }
             else
             {
-                inventoryManager.SellItem(sellable, 1);
+                InventoryManager.TryShopPurchase(ref sellTrade);
                 Hide();
             }
         }
@@ -220,25 +223,25 @@ namespace Game.Inventory
             {
                 sb.AppendLine($"Sell Value: {sellable.SellValue}");
             }
-            if (item is BattleItemSO battle)
-            {
-                if (battle.ExtraMaxHP != 0)
-                {
-                    sb.AppendLine($"Max HP: +{battle.ExtraMaxHP}");
-                }
-                if (battle.ExtraMaxCurse != 0)
-                {
-                    sb.AppendLine($"Max Curse: +{battle.ExtraMaxCurse}");
-                }
-                if (battle.ExtraDamage != 0)
-                {
-                    sb.AppendLine($"Damage: +{battle.ExtraDamage}");
-                }
-                if (battle.ExtraDefence != 0)
-                {
-                    sb.AppendLine($"Defence: +{battle.ExtraDefence}");
-                }
-            }
+            //if (item is BattleItemSO battle)
+            //{
+            //    if (battle.ExtraMaxHP != 0)
+            //    {
+            //        sb.AppendLine($"Max HP: +{battle.ExtraMaxHP}");
+            //    }
+            //    if (battle.ExtraMaxCurse != 0)
+            //    {
+            //        sb.AppendLine($"Max Curse: +{battle.ExtraMaxCurse}");
+            //    }
+            //    if (battle.ExtraDamage != 0)
+            //    {
+            //        sb.AppendLine($"Damage: +{battle.ExtraDamage}");
+            //    }
+            //    if (battle.ExtraDefence != 0)
+            //    {
+            //        sb.AppendLine($"Defence: +{battle.ExtraDefence}");
+            //    }
+            //}
 
             if (item is WeaponItemSO weapon)
             {
@@ -266,7 +269,7 @@ namespace Game.Inventory
 
             if (item is ConsumableItemSO consumable)
             {
-                sb.AppendLine($"Effect: {consumable.Effect} ({consumable.Value})");
+                sb.AppendLine($"Effect: {consumable.Effects} ({consumable.ConsumeOnUse})");
             }
             return sb.Length > 0 ? sb.ToString() : "No additional stats";
         }

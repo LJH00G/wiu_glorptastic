@@ -16,7 +16,7 @@ namespace Game.Inventory
             {
                 if (item)
                 {
-                    inventoryManager.UnequipWeapon();
+                    InventoryManager.UnequipWeapon();
                 }
             };
 
@@ -27,7 +27,7 @@ namespace Game.Inventory
                 {
                     if (item)
                     {
-                        inventoryManager.UnequipAccessory(slotIndex);
+                        InventoryManager.UnequipAccessory(slotIndex);
                     }
                 };
             }

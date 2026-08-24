@@ -417,7 +417,7 @@ namespace Game.Inventory
 
         static public bool HasFreeAccessorySlot()
         {
-            return Array.IndexOf(inventory.EquipedAccessoryList, null) >= 0;
+            return Array.IndexOf(ManagedInventory.EquipedAccessoryList, null) >= 0;
         }
 
         static public void UnequipAccessory(int slotIndex)
@@ -469,17 +469,17 @@ namespace Game.Inventory
             OnInventoryChanged.Raise();
         }
 
-        public bool SellItem(SellableItemSO item, uint amount = 1)
-        {
-            if (!item || amount == 0 || !HasItemInList(item, out uint available) || available < amount)
-            {
-                return false;
-            }
-            RemoveItem(item, amount);
-            RecieveShell(item.SellValue * (int)amount);
+        //public bool SellItem(SellableItemSO item, uint amount = 1)
+        //{
+        //    if (!item || amount == 0 || !HasItemInList(item, out uint available) || available < amount)
+        //    {
+        //        return false;
+        //    }
+        //    RemoveItem(item, amount);
+        //    RecieveShell(item.SellValue * (int)amount);
 
-            return true;
-        }
+        //    return true;
+        //}
 
         static public void ManageInventory(Inventory inv)
         {
@@ -489,15 +489,15 @@ namespace Game.Inventory
 
 
 
-        private void OnEnable()
-        {
-            shopPurchaseEventChannel.Subscribe(HandleShopPurchase);
-        }
+        //private void OnEnable()
+        //{
+        //    shopPurchaseEventChannel.Subscribe(HandleShopPurchase);
+        //}
 
-        private void OnDisable()
-        {
-            shopPurchaseEventChannel.Unsubscribe(HandleShopPurchase);
-        }
+        //private void OnDisable()
+        //{
+        //    shopPurchaseEventChannel.Unsubscribe(HandleShopPurchase);
+        //}
 
     }
 }
