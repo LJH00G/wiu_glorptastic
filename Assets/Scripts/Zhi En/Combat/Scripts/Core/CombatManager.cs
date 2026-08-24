@@ -57,14 +57,17 @@ namespace Game.Combat
             ? new List<CombatantRuntime> { player, partner }
             : new List<CombatantRuntime> { player };
 
-
-
         public void SetupBattle(Sprite playerSprite, Sprite partnerSprite, Sprite[] enemySprites)
         {
             player = CombatantRuntime.FromPlayer(playerLoadout, playerAnchor, playerSprite);
+            ApplyCombatSprite(player);
+
             partner = partnerLoadout != null
                 ? CombatantRuntime.FromPartner(playerLoadout, partnerLoadout, partnerAnchor, partnerSprite)
                 : null;
+
+            if (partner != null)
+                ApplyCombatSprite(partner);
 
             enemies.Clear();
 
@@ -80,9 +83,9 @@ namespace Game.Combat
                         ? enemySprites[i]
                         : null;
 
-                enemies.Add(
-                    CombatantRuntime.FromEnemy(enemyEncounter[i], anchor, enemySprite)
-                );
+                var enemy = CombatantRuntime.FromEnemy(enemyEncounter[i], anchor, enemySprite);
+                enemies.Add(enemy);
+                ApplyCombatSprite(enemy);
             }
 
             // Keep the initialization order from the known-good version.
@@ -103,6 +106,24 @@ namespace Game.Combat
                 hud.SetupStatusIconRow(enemy);
 
             BeginAllyRound();
+        }
+
+        /// <summary>Pushes CombatantRuntime.combatSprite onto the SpriteRenderer sitting on (or under) its anchor.</summary>
+        void ApplyCombatSprite(CombatantRuntime combatant)
+        {
+            if (combatant == null || combatant.anchor == null || combatant.combatSprite == null)
+                return;
+
+            var renderer = combatant.anchor.GetComponentInChildren<SpriteRenderer>();
+
+            if (renderer == null)
+            {
+                Debug.LogWarning($"No SpriteRenderer found on or under anchor for {combatant.displayName}", combatant.anchor);
+                return;
+            }
+
+            renderer.sprite = combatant.combatSprite;
+            renderer.color = Color.white;
         }
 
         void BeginAllyRound()
