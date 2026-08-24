@@ -11,8 +11,6 @@ namespace Game.Inventory
     /// </summary>
     public class DebugInventoryPanel : MonoBehaviour
     {
-        [Header("Target")]
-        [SerializeField] InventoryManager inventoryManager;
 
         [Header("Items Available To Debug With")]
         [SerializeField] ItemSO[] debugItemPool;
@@ -69,7 +67,7 @@ namespace Game.Inventory
             {
                 return;
             }
-            inventoryManager.AddItem(item, GetQuantity());
+            InventoryManager.AddItem(item, GetQuantity());
         }
 
         public void RemoveFromUI()
@@ -79,12 +77,12 @@ namespace Game.Inventory
             {
                 return;
             }
-            if (!inventoryManager.HasItemInList(item, out uint available))
+            if (!InventoryManager.HasItemInList(item, out uint available))
             {
                 return;
             }
             uint amount = GetQuantity();
-            inventoryManager.RemoveItem(item, amount > available ? available : amount);
+            InventoryManager.RemoveItem(item, amount > available ? available : amount);
         }
     }
 }

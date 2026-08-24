@@ -2,15 +2,15 @@
 using Game.SO.Behaviour.EntityOverworld.InstanceData;
 using UnityEngine;
 using Utility.Math;
-
+using Game.GlobalVariable.OverworldNPCMovePoints;
 
 namespace Game.SO.Behaviour.EntityOverworld.InstanceData
 {
     public class MovePointsOverworldBehaviourInstanceData : EntityOverworldBehaviourInstanceData
     {
         public int toPointIndex;
-        public int fromPointIndex;
         public bool isIncrement;
+        public float pauseTimer;
     }
 }
 
@@ -20,8 +20,8 @@ namespace Game.SO.Behaviour.EntityOverworld
     [CreateAssetMenu(fileName = "MovePointsOverworld_Behaviour", menuName = "Scriptable Objects/Behaviour/EntityOverworld/NPCOverworld/MovePointsOverworldBehaviourSO")]
     public class MovePointsOverworldBehaviourSO : NPCOverworldBehaviourSO
     {
-        [SerializeField] Vector2[] points;
-        [SerializeField] bool isCycle;
+        [Header("Move Points")]
+        [SerializeField] string MovePointsKey;
         [SerializeField] bool isRandom;
         [SerializeField] float maxPauseDurationAtPoint;
 
@@ -31,6 +31,14 @@ namespace Game.SO.Behaviour.EntityOverworld
             if (controller.InstanceData is not MovePointsOverworldBehaviourInstanceData)
                 controller.InstanceData = new MovePointsOverworldBehaviourInstanceData();
 
+            controller.AIPath.orientation = Pathfinding.OrientationMode.YAxisForward;
+            controller.AIPath.maxSpeed = speed;
+            controller.AIPath.maxAcceleration = acceleration;
+            controller.AIPath.pickNextWaypointDist = controller.Radius * 3;
+            controller.AIPath.slowdownDistance = controller.Radius * 4;
+            controller.AIPath.endReachedDistance = controller.Radius;
+
+            controller.Animator.runtimeAnimatorController = animCtrller;
 
             MovePointsOverworldBehaviourInstanceData instanceData = (MovePointsOverworldBehaviourInstanceData)controller.InstanceData;
 
@@ -39,6 +47,10 @@ namespace Game.SO.Behaviour.EntityOverworld
 
             int closestPointIndex = 0;
             float closestDist_sqr = float.PositiveInfinity;
+
+            if (!OverworldNPCMovePointsGlobalVariable.MovePointsDict.TryGetValue(MovePointsKey, out MovePoints movePoints))
+                return;
+            Vector2[] points = movePoints.points;
 
             for (int i = 0; i < points.Length; i++)
             {
@@ -58,21 +70,65 @@ namespace Game.SO.Behaviour.EntityOverworld
             }
 
             instanceData.toPointIndex = closestPointIndex;
-
-            instanceData.fromPointIndex = instanceData.isIncrement ?
-                Math_I.DecrementWrap(instanceData.toPointIndex, 0, points.Length - 1) :
-                Math_I.IncrementWrap(instanceData.toPointIndex, 0, points.Length - 1);
         }
 
         public override void BehaviourUpdate(EntityOverworldController controller, float dt)
         {
-            throw new System.NotImplementedException();
+            if (controller.InstanceData is not MovePointsOverworldBehaviourInstanceData instanceData)
+                return;
+
+            if (!OverworldNPCMovePointsGlobalVariable.MovePointsDict.TryGetValue(MovePointsKey, out MovePoints movePoints))
+                return;
+            Vector2[] points = movePoints.points;
+
+            controller.AIPath.destination = points[instanceData.toPointIndex];
+
+            if (controller.AIPath.reachedEndOfPath)
+            {
+                if (instanceData.pauseTimer <= 0)
+                    instanceData.pauseTimer = Random.Range(maxPauseDurationAtPoint * 0.5f, maxPauseDurationAtPoint);
+
+                instanceData.pauseTimer -= dt;
+
+                if (instanceData.pauseTimer <= 0)
+                {
+                    if (isRandom)
+                        instanceData.toPointIndex = Random.Range(0, points.Length - 1);
+                    else
+                        instanceData.toPointIndex = instanceData.isIncrement ?
+                            Math_I.IncrementWrap(instanceData.toPointIndex, 0, points.Length - 1) :
+                            Math_I.DecrementWrap(instanceData.toPointIndex, 0, points.Length - 1);
+                }
+            }
         }
 
 
 #if UNITY_EDITOR
+
+        public override void BehaviourOnValidate(EntityOverworldController controller)
+        {
+            if (!OverworldNPCMovePointsGlobalVariable.MovePointsDict.TryGetValue(MovePointsKey, out MovePoints movePoints))
+            {
+                Debug.LogError($"no MovePoints in this scene matches the key {MovePointsKey}", this);
+                return;
+            }
+
+            if (controller.InstanceData is not MovePointsOverworldBehaviourInstanceData instanceData)
+                return;
+
+            if (instanceData.toPointIndex < 0)
+                instanceData.toPointIndex = movePoints.points.Length - 1;
+            else if (instanceData.toPointIndex >= movePoints.points.Length)
+                instanceData.toPointIndex = 0;
+            
+        }
+
         public override void BehaviourOnDrawGizmosSelected(EntityOverworldController controller)
         {
+            if (!OverworldNPCMovePointsGlobalVariable.MovePointsDict.TryGetValue(MovePointsKey, out MovePoints movePoints))
+                return;
+            Vector2[] points = movePoints.points;
+
             if (points.Length == 0)
                 return;
 

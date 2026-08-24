@@ -15,8 +15,6 @@ namespace Game.Inventory
     [DefaultExecutionOrder(-9999)] // runs before InventoryUI/InventoryManager's default-order Awake/OnEnable
     public class TEMP_InventoryLoopBootstrap : MonoBehaviour
     {
-        [Header("Target")]
-        [SerializeField] InventoryManager inventoryManager;
 
         void Awake()
         {
@@ -26,7 +24,7 @@ namespace Game.Inventory
             };
 
             GameManager.SetUserData(userData);
-            inventoryManager.ManageInventory(userData.Inventory);
+            InventoryManager.ManageInventory(userData.Inventory);
 
             Debug.Log("TEMP_InventoryLoopBootstrap.Awake() | created a throwaway UserData and linked it into GameManager + InventoryManager");
         }

@@ -28,6 +28,6 @@ MonoBehaviour:
   - speaker: {fileID: 11400000, guid: 8493df514086b0d4691757853c57c2fc, type: 2}
     text: wait test 1s.<wait time="1"/><br/>cutoff test, try cut no-<end/>
   - speaker: {fileID: 11400000, guid: 820cb9029b4ac8443b18636ed7bd5bb4, type: 2}
-    text: <interval time="0.2"/>......<interval time="0.025"/>faaassssssstttt<input/><end/>
+    text: <interval time="0.2"/>......<interval time="0.0375"/>faaassssssstttt<input/><end/>
   - speaker: {fileID: 11400000, guid: 820cb9029b4ac8443b18636ed7bd5bb4, type: 2}
     text: <size value="0.5,0.5">small size test</size> normal size<input/><end/>

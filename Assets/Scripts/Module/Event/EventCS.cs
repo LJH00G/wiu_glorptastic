@@ -12,6 +12,19 @@ namespace Game.CSEvent
         /// Whether this event is locked from <see cref="Raise"/>
         /// </summary>
         public bool Lock { get; set; }
+
+        public EventCS() { }
+        public EventCS(Action<T> startingListener)
+        {
+            listeners = startingListener;
+        }
+        public EventCS(Action<T>[] startingListeners)
+        {
+            foreach (var listener in startingListeners)
+            {
+                listeners += listener;
+            }
+        }
     }
 
     public class EventCS
@@ -24,6 +37,19 @@ namespace Game.CSEvent
         /// Whether this event is locked from <see cref="Raise"/>
         /// </summary>
         public bool Lock { get; set; }
+
+        public EventCS() { }
+        public EventCS(Action startingListener)
+        {
+            listeners = startingListener;
+        }
+        public EventCS(Action[] startingListeners)
+        {
+            foreach (var listener in startingListeners)
+            {
+                listeners += listener;
+            }
+        }
     }
 
 }

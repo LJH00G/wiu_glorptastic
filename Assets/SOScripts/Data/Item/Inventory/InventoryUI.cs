@@ -6,8 +6,6 @@ namespace Game.Inventory
 {
     public class InventoryUI : MonoBehaviour
     {
-        [Header("Source")]
-        [SerializeField] InventoryManager inventoryManager;
 
         [Header("List (goes inside your ScrollRect's Content)")]
         [SerializeField] Transform contentParent;
@@ -37,13 +35,13 @@ namespace Game.Inventory
 
         void OnEnable()
         {
-            inventoryManager.OnInventoryChanged += Refresh;
+            InventoryManager.OnInventoryChanged.Subscribe(Refresh, 0);
             Refresh();
         }
 
         void OnDisable()
         {
-            inventoryManager.OnInventoryChanged -= Refresh;
+            InventoryManager.OnInventoryChanged.Unsubscribe(Refresh);
         }
 
         public void Show(bool sellModeEnabled = false)//
@@ -67,7 +65,7 @@ namespace Game.Inventory
 
         void Refresh()
         {
-            var stacks = inventoryManager.GetItemList();
+            var stacks = InventoryManager.GetItemList();
 
             while (spawned.Count < stacks.Count)
             {

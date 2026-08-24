@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f728788ecb7e4c4409292dddcc12a19e, type: 3}
+  m_Name: BalancePuzzleData
+  m_EditorClassIdentifier: Assembly-CSharp::Puzzle.BalancePuzzleData
+  puzzleType: 5
+  puzzleName: Test
+  slots:
+  - slotId: Slot1
+    localPosition: {x: 0, y: 1}
+  - slotId: Slot2
+    localPosition: {x: 0, y: -1}
+  - slotId: Slot3
+    localPosition: {x: 1, y: 0}
+  - slotId: Slot4
+    localPosition: {x: -1, y: 0}
+  - slotId: Slot5
+    localPosition: {x: -3, y: 0}
+  - slotId: Slot6
+    localPosition: {x: 3, y: 0}
+  balls:
+  - ballId: Ball1
+    mass: 1
+  - ballId: Ball2
+    mass: 1
+  - ballId: Ball3
+    mass: 1
+  targetOffset: {x: 1, y: 0}
+  tolerance: 0.15
