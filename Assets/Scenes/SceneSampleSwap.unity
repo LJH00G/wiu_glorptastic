@@ -7603,7 +7603,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1781603569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8049,7 +8049,7 @@ MonoBehaviour:
   - {fileID: 1696358153}
   confirmUI: {fileID: 194182324}
   panelRoot: {fileID: 1538157826}
-  shopEvent: {fileID: 0}
+  shopEvent: {fileID: 11400000, guid: 26a86935d98ab964b82baa677f866c8f, type: 2}
 --- !u!1 &2018580990
 GameObject:
   m_ObjectHideFlags: 0

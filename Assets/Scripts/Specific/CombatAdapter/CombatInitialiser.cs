@@ -3,6 +3,7 @@ using Game.Combat;
 using Game.GlobalVariable;
 using Game.Inventory;
 using Game.OverworldDisableManager;
+using Game.SO.Data.Buddy;
 using Game.SO.Data.Item;
 using Game.SO.EventChannel;
 using Game.SO.EventChannel.Context;
@@ -25,6 +26,8 @@ public class CombatInitialiser : MonoBehaviour
 
     public void StartCombat(EnemyEncounterDataSO data)
     {
+        Debug.Log(GameManager.CurrentUserData.CurrentEquipedBuddy, this);
+
         PlayerLoadoutSO player = StaticGlobalVariable.PlayerLoadout;
         PartnerLoadoutSO partner = GameManager.CurrentUserData.CurrentEquipedBuddy.Loadout;
 
