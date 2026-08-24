@@ -3592,6 +3592,7 @@ MonoBehaviour:
   - {fileID: 79138179}
   combatManager: {fileID: 2120331845}
   dataTunnel: {fileID: 11400000, guid: 95b4e3211af86b547a9a57f22b14da68, type: 2}
+  combatEnd: {fileID: 11400000, guid: 8678d7d0c75cba240aa68a1825baeddb, type: 2}
 --- !u!1 &2144632264
 GameObject:
   m_ObjectHideFlags: 0

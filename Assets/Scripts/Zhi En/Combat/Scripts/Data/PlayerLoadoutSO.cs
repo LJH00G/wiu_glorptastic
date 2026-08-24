@@ -15,6 +15,9 @@ namespace Game.Combat
     [CreateAssetMenu(menuName = "Combat/Player Loadout", fileName = "PlayerLoadout")]
     public class PlayerLoadoutSO : ScriptableObject
     {
+        [Header("Display")]
+        public Sprite sprite;
+
         [Header("Equipped Gear")]
         public CurseGemItemSO equippedGem;
         public WeaponItemSO equippedWeapon;

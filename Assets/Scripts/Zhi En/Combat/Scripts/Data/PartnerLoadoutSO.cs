@@ -11,6 +11,9 @@ namespace Game.Combat
     [CreateAssetMenu(menuName = "Combat/Partner Loadout", fileName = "PartnerLoadout")]
     public class PartnerLoadoutSO : ScriptableObject
     {
+        [Header("Display")]
+        public Sprite sprite;
+
         public string partnerName = "Partner";
         public int baseDamage = 1;
         public int baseDefense = 0;

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b31063468734d84a82c69744d73d0ee, type: 3}
   m_Name: DinoMikeLoadout
   m_EditorClassIdentifier: Assembly-CSharp::Game.Combat.PartnerLoadoutSO
+  sprite: {fileID: -411108491, guid: e20bc7d1e02398343aaf1a2548bbfc2c, type: 3}
   partnerName: Dino Mike
   baseDamage: 1
   baseDefense: 0

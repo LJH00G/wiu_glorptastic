@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b31063468734d84a82c69744d73d0ee, type: 3}
   m_Name: NoahLedgeLoadout
   m_EditorClassIdentifier: Assembly-CSharp::Game.Combat.PartnerLoadoutSO
-  partnerName: Dino Mike
+  sprite: {fileID: 0}
+  partnerName: Noah Ledge
   baseDamage: 1
   baseDefense: 0
   maxHP: 50

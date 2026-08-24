@@ -12,10 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aaeacd16fd17d784ab5798e8c6c1e7d7, type: 3}
   m_Name: PlayerLoadout
   m_EditorClassIdentifier: Assembly-CSharp::Game.Combat.PlayerLoadoutSO
-  baseDamage: 1
-  baseDefense: 0
-  maxHP: 64
-  maxCS: 30
+  sprite: {fileID: -471060803, guid: 5292a0151f3283648ab371a071b83c1e, type: 3}
   equippedGem: {fileID: 0}
   equippedWeapon: {fileID: 0}
   equippedArmor: {fileID: 0}

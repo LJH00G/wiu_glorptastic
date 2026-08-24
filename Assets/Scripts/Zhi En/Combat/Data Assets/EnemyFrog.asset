@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: EnemyFrog
   m_EditorClassIdentifier: Assembly-CSharp::Game.Combat.EnemyDataSO
   enemyName: Frog
-  sprite: {fileID: 0}
+  sprite: {fileID: 8719748582598661304, guid: f11a2cc0734006141ae704b6a1d58779, type: 3}
   maxHP: 20
   damage: 4
   defense: 0

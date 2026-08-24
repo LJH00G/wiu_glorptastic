@@ -5,8 +5,10 @@ MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - initializeConbatEventChannel: {fileID: 11400000, guid: 6473217a41b61ad448a433824b5ce524, type: 2}
+  - combatEndEventChannel: {fileID: 11400000, guid: 8678d7d0c75cba240aa68a1825baeddb, type: 2}
   - tunnelDataTunnel: {fileID: 11400000, guid: 95b4e3211af86b547a9a57f22b14da68, type: 2}
   - onSwitch: {fileID: 11400000, guid: d99eee56572e0f540b7dc2913fe66e56, type: 2}
+  - overworldCamera: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

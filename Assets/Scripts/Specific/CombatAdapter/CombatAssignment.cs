@@ -21,17 +21,23 @@ namespace Game.Combat.Integration
         [SerializeField] private CombatEndEventChannelSO combatEnd;
         public void LoadDataAssignment()
         {
+            var EnemyDataList = dataTunnel.enemyEncounterData.dataList;
+
             combatManager.enemyAnchors = transformList.ToArray();
 
-            combatManager.enemyEncounter = dataTunnel.enemyEncounterData.dataList.ToArray();
+            combatManager.enemyEncounter = EnemyDataList.ToArray();
             combatManager.playerLoadout = dataTunnel.playerLoadout;
             combatManager.partnerLoadout = dataTunnel.partnerLoadout;
 
+            Sprite[] enemySprites = new Sprite [EnemyDataList.Count];
+            for (int i = 0; i < EnemyDataList.Count; i++)
+                enemySprites[i] = EnemyDataList[i].sprite;
+
             Debug.Log($"trying set up battle");
             combatManager.SetupBattle(
-                dataTunnel.playerSprite,
-                dataTunnel.partnerSprite,
-                dataTunnel.enemySprites
+                dataTunnel.playerLoadout.sprite,
+                dataTunnel.partnerLoadout ? dataTunnel.partnerLoadout.sprite : null,
+                enemySprites
             );
         }
 
