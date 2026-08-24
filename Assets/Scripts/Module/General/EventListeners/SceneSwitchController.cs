@@ -45,8 +45,10 @@ public class SceneSwitchController : MonoBehaviour
             }
 
             SceneManager.sceneLoaded += OnSceneLoaded;
-            SceneManager.LoadSceneAsync(context.loadScene, LoadSceneMode.Additive);
+            Camera.main.enabled = false;
             Camera.main.tag = "Untagged";
+            SceneManager.LoadSceneAsync(context.loadScene, LoadSceneMode.Additive);
+            
         },
             context.delay,
             false
