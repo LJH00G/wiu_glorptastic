@@ -16,6 +16,9 @@ public class TextMarkupTypeWriter : MonoBehaviour
     [SerializeField] TextMarkupAudioPresetSO speechPresets;
     [SerializeField] TextMarkupAudioPresetSO sfxPresets;
 
+    [Header("Default Text")]
+    [SerializeField] bool useDefaultText;
+    [SerializeField] string defaultText;
 
     [field: Header("Info")]
     [field: SerializeField, DisplayOnly]
@@ -71,10 +74,13 @@ public class TextMarkupTypeWriter : MonoBehaviour
         canTypeWrite = false;
     }
 
-    public void StartNewTypeWriting(string text)
+    public void StartNewTypeWriting(string text, bool useCustomPrintSpeed = false, float customSpeed = 0)
     {
         ResetTypeWriting();
         canTypeWrite = true;
+
+        if (useCustomPrintSpeed)
+            text = $"<interval time=\"{customSpeed}\"/>" + text + "<end/>";
 
         TextMarkupOperation.SFXPresets = sfxPresets;
         TextMarkupOperation.SpeechPresets = speechPresets;
@@ -226,6 +232,11 @@ public class TextMarkupTypeWriter : MonoBehaviour
         tmpText = GetComponent<TextMeshProUGUI>();
     }
 
+    private void Start()
+    {
+        if (useDefaultText)
+            StartNewTypeWriting(defaultText, true);
+    }
 
     private void Update()
     {

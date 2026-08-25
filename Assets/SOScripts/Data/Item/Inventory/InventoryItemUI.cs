@@ -11,12 +11,10 @@ namespace Game.Inventory
     {
         [Header("Refs")]
         [SerializeField] Image icon;
-        [SerializeField] TMP_Text titleText;
+        [SerializeField] TextMarkupTypeWriter titleText;
         [SerializeField] TMP_Text descriptionText;
         [SerializeField] TMP_Text quantityText;
         [SerializeField] Button detailsButton;
-
-        static readonly Dictionary<Texture2D, Sprite> spriteCache = new();
 
         public ItemSO BoundItem { get; private set; }
         public event Action<ItemSO> OnDetailsRequested;
@@ -34,11 +32,11 @@ namespace Game.Inventory
 
             if (icon)
             {
-                icon.sprite = TextureToSprite(item.Texture);
+                icon.sprite = item.Sprite;
             }
             if (titleText)
             {
-                titleText.text = item.Name;
+                titleText.StartNewTypeWriting(item.Name);
             }
             if (descriptionText)
             {
@@ -50,19 +48,5 @@ namespace Game.Inventory
             }
         }
 
-        static Sprite TextureToSprite(Texture2D texture)
-        {
-            if (!texture)
-            {
-                return null;
-            }
-            if (!spriteCache.TryGetValue(texture, out Sprite sprite))
-            {
-                sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
-                spriteCache[texture] = sprite;
-            }
-
-            return sprite;
-        }
     }
 }

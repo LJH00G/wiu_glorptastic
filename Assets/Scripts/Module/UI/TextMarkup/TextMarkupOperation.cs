@@ -829,7 +829,7 @@ namespace Game.TextMarkup
      * | command markups
      * <br/> // new line
      * <wait time="1"/> // wait for amount of time
-     * <interval time="0.2"/> // time between printing each character
+     * <interval time="0.075f"/> // time between printing each character
      * <end/> // ends text scrolling
      * <input/> // wait for player input to continue
      * <sfx name="name"/> // play a sfx

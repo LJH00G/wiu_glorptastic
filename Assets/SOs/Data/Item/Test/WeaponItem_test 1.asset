@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WeaponItem_test 1
   m_EditorClassIdentifier: Assembly-CSharp::Game.SO.Data.Item.Sellable.Battle.WeaponItemSO
   <Name>k__BackingField: Weapon 2
-  <Texture>k__BackingField: {fileID: 2800000, guid: c34e80707071d864d8d4c344adafee52, type: 3}
+  <Sprite>k__BackingField: {fileID: 3267989906450162926, guid: c34e80707071d864d8d4c344adafee52, type: 3}
   <Description>k__BackingField: Game so simple i can pet my kitty until i kitty while
     i pet the kitty
   <SellValue>k__BackingField: 123

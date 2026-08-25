@@ -51,7 +51,7 @@ public class DialogueManager : MonoBehaviour
         //GameManager.SetCanInteract(false);
 
         textWriter.ResetTypeWriting();
-        speakerNameWriter.StartNewTypeWriting("<interval time=\"0\"/>" + currentConversation.Dialogues[0].speaker.Name + "<end/>");
+        speakerNameWriter.StartNewTypeWriting(currentConversation.Dialogues[0].speaker.Name, true);
     }
 
 
@@ -84,7 +84,7 @@ public class DialogueManager : MonoBehaviour
 
         var thisDialogue = currentConversation.Dialogues[dialogueIndex];
 
-        speakerNameWriter.StartNewTypeWriting("<interval time=\"0\"/>" + thisDialogue.speaker.Name + "<end/>");
+        speakerNameWriter.StartNewTypeWriting(thisDialogue.speaker.Name, true);
 
         
         List<TextMarkupEffect> defaultEffects = new()

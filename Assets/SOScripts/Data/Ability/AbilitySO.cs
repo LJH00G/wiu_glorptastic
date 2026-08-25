@@ -10,7 +10,6 @@ namespace Game.Combat
         [Header("Display")]
         public string abilityName;
         [TextArea] public string description;
-        public Sprite icon;
 
         [Header("Cost")]
         public int curseCost = 10;

@@ -8,6 +8,7 @@ namespace Game.Inventory
 
         [Header("Slots")]
         [SerializeField] EquipmentSlotUI weaponSlot;
+        [SerializeField] EquipmentSlotUI armourSlot;
         [SerializeField] EquipmentSlotUI[] accessorySlots;
 
         void Awake()
@@ -17,6 +18,14 @@ namespace Game.Inventory
                 if (item)
                 {
                     InventoryManager.UnequipWeapon();
+                }
+            };
+
+            armourSlot.OnSlotClicked += item =>
+            {
+                if (item)
+                {
+                    InventoryManager.UnequipArmour();
                 }
             };
 
@@ -47,6 +56,7 @@ namespace Game.Inventory
         void Refresh()
         {
             weaponSlot.SetItem(InventoryManager.GetEquipedWeapon());
+            armourSlot.SetItem(InventoryManager.GetEquipedArmour());
 
             var accessories = InventoryManager.GetEquipedAccessories();
             for (int i = 0; i < accessorySlots.Length && i < accessories.Length; i++)
