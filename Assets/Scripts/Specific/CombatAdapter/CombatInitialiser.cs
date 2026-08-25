@@ -48,7 +48,7 @@ public class CombatInitialiser : MonoBehaviour
         List<GameObject> list = new List<GameObject>();
         list.Add(this.gameObject);
         PlayMusicEventContext music = PlayMusicEventContext.FadeAllOut_2s;
-        SceneSwitchEventContext context = new("Combat Scene", 2, music, false, list);
+        SceneSwitchEventContext context = new("Combat Scene", 2, music, SCENE_SETTING.LOAD_ADDITIVE, list);
         GameManager.SetGameState(GAME_STATE.BATTLE);
         onSwitch.Raise(context);
     }
@@ -56,22 +56,22 @@ public class CombatInitialiser : MonoBehaviour
     public void EndCombat(CombatEndEventContextSO context)
     {
         if (context.won && enemyInitiated)
+        {
             Destroy(enemyInitiated);
+            AddLootToInventory(context);
+        }
+            
 
         enemyInitiated = null;
 
-        
-        
-        OverworldDisableManager.EnableAllObjects(scene);
-        SceneManager.SetActiveScene(scene);
-        SceneManager.UnloadSceneAsync("Combat Scene");
+        List<GameObject> list = new List<GameObject>();
+        PlayMusicEventContext music = PlayMusicEventContext.FadeAllOut_2s;
+        SceneSwitchEventContext switchContext = new(scene.name, 2, music, SCENE_SETTING.UNLOAD, list);
+        onSwitch.Raise(switchContext);
 
-        overworldCamera.tag = "MainCamera";
-        overworldCamera.enabled = true;
         GameManager.SetAllCanMove(true);
         GameManager.SetGameState(GAME_STATE.OVERWORLD);
 
-        AddLootToInventory(context);
     }
 
     public void AddLootToInventory(CombatEndEventContextSO context)

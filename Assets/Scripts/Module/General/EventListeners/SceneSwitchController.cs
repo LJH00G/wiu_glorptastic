@@ -31,31 +31,61 @@ public class SceneSwitchController : MonoBehaviour
                 {
                     return;
                 }
+
                 SceneManager.sceneLoaded -= OnSceneLoaded;
 
                 SceneManager.SetActiveScene(scene);
                 Time.timeScale = 1f;
 
-                if (context.unloadOldScene)
+                if (context.setting != SCENE_SETTING.LOAD_ADDITIVE)
                 {
                     Debug.Log($"unloading old scene: {oldScene}");
                     SceneManager.UnloadSceneAsync(oldScene);
+
                 } else
                 {
                     Debug.Log($"unloading skipped, specified no unloading");
                 }
             }
 
-            SceneManager.sceneLoaded += OnSceneLoaded;
-            Camera main = Camera.main;
-            if (main)
+            
+            if(context.setting != SCENE_SETTING.UNLOAD)
             {
-                main.enabled = false;
-                main.tag = "Untagged";
+                SceneManager.sceneLoaded += OnSceneLoaded;
+
+                Camera main = Camera.main;
+                if (main)
+                {
+                    main.enabled = false;
+                    main.tag = "Untagged";
+                }
+                SceneManager.LoadSceneAsync(context.loadScene, LoadSceneMode.Additive);
+                OverworldDisableManager.DisableAllObjects(oldScene, context.ignoreableObjs);
+                OverworldDisableManager.EnableAllObjects(SceneManager.GetSceneByName(context.loadScene));
             }
-            SceneManager.LoadSceneAsync(context.loadScene, LoadSceneMode.Additive);
-            OverworldDisableManager.DisableAllObjects(oldScene, context.ignoreableObjs);
-            OverworldDisableManager.EnableAllObjects(SceneManager.GetSceneByName(context.loadScene));
+            else
+            {
+                Scene scene = SceneManager.GetSceneByName(context.loadScene);
+                OverworldDisableManager.EnableAllObjects(scene);
+                SceneManager.SetActiveScene(scene);
+                SceneManager.UnloadSceneAsync(oldScene);
+
+
+                GameObject[] rootList = scene.GetRootGameObjects();
+                foreach(GameObject root in rootList)
+                {
+                    Camera cam = root.GetComponent<Camera>();
+                    if (cam)
+                    {
+                        cam.tag = "MainCamera";
+                        cam.enabled = true;
+                    }
+                        
+                }
+            }
+
+
+            
             
         },
             context.delay,

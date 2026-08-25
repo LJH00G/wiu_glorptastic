@@ -1,8 +1,9 @@
-using UnityEngine;
-using System.Collections.Generic;
-using System;
-using Game.SO.EventChannel.Context;
 using Game.SO.Data.Item;
+using Game.SO.EventChannel.Context;
+using System;
+using System.Collections.Generic;
+using UnityEngine;
+
 
 namespace Game.Combat.Integration
 {
@@ -44,9 +45,15 @@ namespace Game.Combat.Integration
 
         public void WipeDataAssignment(bool won)
         {
+
+            List<LootData> loot = null;
+            if (won)
+            {
+                List<LootTableSO> lootPool = ObtainLootPool(dataTunnel);
+                if(lootPool.Count > 0)
+                    loot = LootCalculation(lootPool);
+            }
             
-            List<LootTableSO> lootPool = ObtainLootPool(dataTunnel);
-            List<LootData> loot = LootCalculation(lootPool);
 
             dataTunnel.WipeCall();
             CombatEndEventContextSO context = new(won, loot);
@@ -61,6 +68,9 @@ namespace Game.Combat.Integration
             {
                 Dictionary<int, LootData> lootWeightTable = new Dictionary<int, LootData>();
                 int index = 0;
+
+                if (lootTable == null || lootTable.itemList == null || lootTable.itemList.Count == 0)
+                    continue;
 
                 foreach (LootChanceData chanceData in lootTable.itemList)
                 {
