@@ -5,6 +5,7 @@ using Game.Inventory;
 using Game.OverworldDisableManager;
 using Game.SO.Data.Buddy;
 using Game.SO.Data.Item;
+using Game.SO.Data.Item.Sellable;
 using Game.SO.EventChannel;
 using Game.SO.EventChannel.Context;
 using System.Collections.Generic;
@@ -31,7 +32,7 @@ public class CombatInitialiser : MonoBehaviour
         PlayerLoadoutSO player = StaticGlobalVariable.PlayerLoadout;
         PartnerLoadoutSO partner = GameManager.CurrentUserData.CurrentEquipedBuddy.Loadout;
 
-        player.inventory = InventoryManager.GetItemList();
+        InventoryManager.TryGetItemInList<ConsumableItemSO>(out player.inventory);
         player.equippedGem = InventoryManager.TryGetItemInList(out CurseGemItemSO gem) ? gem : null;
         player.equippedWeapon = InventoryManager.GetEquipedWeapon();
         player.equippedArmor = InventoryManager.GetEquipedArmour();

@@ -71,14 +71,14 @@ namespace Game.TPManager
 
             if (player != null)
             {
-                Vector3 positionDelta = currentTP.position - player.position;
+                Vector3 positionDelta = currentTP.position - (Vector2)player.position;
                 player.transform.position = currentTP.position;
                 CinemachineCore.OnTargetObjectWarped(player, positionDelta);
                 player.GetComponent<EntityOverworldController>().RefreshMovement();
             }
             if (follower != null)
             {
-                Vector3 positionDelta = currentTP.position - follower.position;
+                Vector3 positionDelta = currentTP.position - (Vector2)follower.position;
                 follower.transform.position = currentTP.position;
                 CinemachineCore.OnTargetObjectWarped(follower, positionDelta);
                 follower.GetComponent<EntityOverworldController>().RefreshMovement();

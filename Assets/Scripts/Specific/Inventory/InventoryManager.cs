@@ -1,12 +1,12 @@
 
 using Game.SO.Data.Item;
-using Game.SO.Data.Item.Sellable;
 using Game.SO.Data.Item.Sellable.Battle;
 using Game.SO.Data.Shop;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Game.CSEvent;
+using Unity.VisualScripting;
 
 
 namespace Game.Inventory
@@ -118,6 +118,19 @@ namespace Game.Inventory
 
             item = null;
             return false;
+        }
+
+        static public bool TryGetItemInList<T_ItemSO>(out List<ItemStack> itemList)
+            where T_ItemSO : ItemSO
+        {
+            var list = ManagedInventory.ItemList;
+            itemList = new();
+
+            for (int i = 0; i < list.Count; i++)
+                if (list[i].item is T_ItemSO)
+                    itemList.Add(list[i]);
+
+            return itemList.Count > 0;
         }
 
         static public bool HasItemInList<T_ItemSO>(out uint amount)
@@ -473,17 +486,6 @@ namespace Game.Inventory
             OnInventoryChanged.Raise();
         }
 
-        //public bool SellItem(SellableItemSO item, uint amount = 1)
-        //{
-        //    if (!item || amount == 0 || !HasItemInList(item, out uint available) || available < amount)
-        //    {
-        //        return false;
-        //    }
-        //    RemoveItem(item, amount);
-        //    RecieveShell(item.SellValue * (int)amount);
-
-        //    return true;
-        //}
 
         static public void ManageInventory(Inventory inv)
         {

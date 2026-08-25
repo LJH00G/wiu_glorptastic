@@ -21,7 +21,7 @@ public class GameIniter : MonoBehaviour
 
     private void Start()
     {
-        SceneManager.LoadSceneAsync(InventorySceneName, LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync("GeneralUIOverlay", LoadSceneMode.Additive);
     }
 
 #if UNITY_EDITOR

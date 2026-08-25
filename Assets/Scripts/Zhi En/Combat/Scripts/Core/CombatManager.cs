@@ -456,7 +456,10 @@ namespace Game.Combat
 
             var inventory = actor.playerSource.inventory;
 
-            var usable = inventory.Select((stack, index) => (stack, index)).Where(pair => pair.stack.item is ConsumableItemSO).ToList();
+            var usable = inventory.Select(
+                (stack, index) =>
+                (stack, index)).Where(pair => pair.stack.item is ConsumableItemSO
+                ).ToList();
 
             List<string> labels = inventory.Select(stack => $"{stack.item.Name} x{stack.count}").ToList();
 

@@ -9,18 +9,10 @@ public class GameIniter_test : MonoBehaviour
     private void Awake()
     {
         GameManager.CurrentUserData.SetCurrentBuddy(buddyData);
-        Debug.LogWarning("settled test initer");
-        Debug.Log(GameManager.CurrentUserData.CurrentEquipedBuddy, this);
 
         GameManager.CurrentUserData.PlayerBattleData.Refresh();
         GameManager.CurrentUserData.PlayerBattleData.CurrentHP = GameManager.CurrentUserData.PlayerBattleData.MaxHP;
         GameManager.CurrentUserData.PlayerBattleData.CurrentCurse = GameManager.CurrentUserData.PlayerBattleData.MaxCurse;
-    }
-
-
-    private void Update()
-    {
-        Debug.Log(GameManager.CurrentUserData.CurrentEquipedBuddy, this);
     }
 
 

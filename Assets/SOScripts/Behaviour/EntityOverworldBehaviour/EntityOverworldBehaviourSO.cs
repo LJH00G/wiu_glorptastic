@@ -7,7 +7,7 @@ namespace Game.SO.Behaviour.EntityOverworld.InstanceData
     [Serializable]
     public abstract class EntityOverworldBehaviourInstanceData
     {
-        public Vector2 facingDire;
+        public Vector2 facingDire = Vector2.down;
     }
 }
 
