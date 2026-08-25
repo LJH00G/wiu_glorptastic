@@ -171,6 +171,7 @@ public class EntityOverworldController : MonoBehaviour
         if (Behaviour)
         {
             Behaviour.BehaviourOnValidate(this);
+            SetBehaviour(Behaviour);
         }
         else
             Debug.LogError("behaviour must not be left empty", this);
@@ -178,6 +179,7 @@ public class EntityOverworldController : MonoBehaviour
         if (Appearance)
         {
             Appearance.UpdateAppearance(this);
+            SetAppearance(Appearance);
         }
         else
             Debug.LogError("Appearance must not be left empty", this);
