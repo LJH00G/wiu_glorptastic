@@ -25,11 +25,13 @@ public class EntityOverworldController : MonoBehaviour
     public EntityOverworldBehaviourSO Behaviour { get; set; }
     [field: SerializeReference]
     public EntityOverworldBehaviourInstanceData InstanceData { get; set; }
+    [field: SerializeField]
+    public bool Frozen { get; private set; }
 
     public AIPath AIPath { get; private set; }
     public BoxCollider2D TriggerCollider { get; private set; }
     public Animator Animator { get; private set; }
-    public bool Frozen { get; private set; }
+    
 
     public void SetBehaviour(EntityOverworldBehaviourSO behaviour)
     {
@@ -114,7 +116,7 @@ public class EntityOverworldController : MonoBehaviour
         {
             return;
         }
-        Vector2 dir = ((Vector2)targetPos - (Vector2)transform.position);
+        Vector2 dir = targetPos - (Vector2)transform.position;
         if (dir != Vector2.zero)
         {
             InstanceData.facingDire = dir.normalized;
