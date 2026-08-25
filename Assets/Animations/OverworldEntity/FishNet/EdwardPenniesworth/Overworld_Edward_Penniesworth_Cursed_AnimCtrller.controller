@@ -47,7 +47,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: b077fab800f4948408fd33afca143a98, type: 2}
+  m_Motion: {fileID: 7400000, guid: 7b05de0f89c102243bff82fd9e2461a3, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -239,7 +239,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: ff51293135c5df146af559d0532aca58, type: 2}
+  m_Motion: {fileID: 7400000, guid: 696b08874e0334c45ba9ba138106ca90, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -342,7 +342,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: d27085e769ca83e45a91c5424ec9a895, type: 2}
+  m_Motion: {fileID: 7400000, guid: ae04ba16bbc34c54e8541b9882427405, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -429,7 +429,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Overworld_Gordom_Ramsee_Cursed_AnimCtrller
+  m_Name: Overworld_Edward_Penniesworth_Cursed_AnimCtrller
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Walking
@@ -485,7 +485,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: ff51293135c5df146af559d0532aca58, type: 2}
+  m_Motion: {fileID: 7400000, guid: 696b08874e0334c45ba9ba138106ca90, type: 2}
   m_Tag: 
   m_SpeedParameter: Speed
   m_MirrorParameter: 
@@ -538,7 +538,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 8e75dc214569f78428563d0b6f09afee, type: 2}
+  m_Motion: {fileID: 7400000, guid: b0b4456bc95088f42b49a8bfbfcf7214, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -562,13 +562,13 @@ AnimatorState:
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
   m_Mirror: 0
-  m_SpeedParameterActive: 1
+  m_SpeedParameterActive: 0
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: d27085e769ca83e45a91c5424ec9a895, type: 2}
+  m_Motion: {fileID: 7400000, guid: ae04ba16bbc34c54e8541b9882427405, type: 2}
   m_Tag: 
-  m_SpeedParameter: Speed
+  m_SpeedParameter: 
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
@@ -625,18 +625,18 @@ AnimatorStateMachine:
   m_AnyStateTransitions: []
   m_EntryTransitions: []
   m_StateMachineTransitions:
-  - first: {fileID: 5584751176347734531}
-    second:
-    - {fileID: -6352284812912418460}
-  - first: {fileID: -1565086387128203024}
-    second:
-    - {fileID: 4467450567344363343}
   - first: {fileID: -8226131983087422400}
     second:
     - {fileID: 5435865449725876113}
   - first: {fileID: -7066084845988581028}
     second:
     - {fileID: 8095006344357627576}
+  - first: {fileID: -1565086387128203024}
+    second:
+    - {fileID: 4467450567344363343}
+  - first: {fileID: 5584751176347734531}
+    second:
+    - {fileID: -6352284812912418460}
   m_StateMachineBehaviours: []
   m_AnyStatePosition: {x: 180, y: 280, z: 0}
   m_EntryPosition: {x: 420, y: 280, z: 0}
@@ -754,7 +754,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: b077fab800f4948408fd33afca143a98, type: 2}
+  m_Motion: {fileID: 7400000, guid: 7b05de0f89c102243bff82fd9e2461a3, type: 2}
   m_Tag: 
   m_SpeedParameter: Speed
   m_MirrorParameter: 
@@ -960,7 +960,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 8e75dc214569f78428563d0b6f09afee, type: 2}
+  m_Motion: {fileID: 7400000, guid: b0b4456bc95088f42b49a8bfbfcf7214, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

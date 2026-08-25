@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: gordom_ramsea_cursed_Idle_Down
+  m_Name: emilia_aerhart_cursed_Idle_Down
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,7 +21,7 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 1045260603, guid: 45b7f2f21ec3039488f8c63149cbd489, type: 3}
+      value: {fileID: -1358056595, guid: 02e84124fd32c754aba2fddc20e15ae3, type: 3}
     attribute: m_Sprite
     path: Sprite
     classID: 212
@@ -44,7 +44,7 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 1045260603, guid: 45b7f2f21ec3039488f8c63149cbd489, type: 3}
+    - {fileID: -1358056595, guid: 02e84124fd32c754aba2fddc20e15ae3, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}

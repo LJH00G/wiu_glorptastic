@@ -92,7 +92,7 @@ public class EntityOverworldController : MonoBehaviour
 
         if (Frozen && ForcedFacingTarget)
         {
-            ApplyForcedFacingToAnimator(InstanceData.facingDire);
+            ApplyForcedFacingToAnimator(InstanceData.GetVector2Dire());
         }
 
         if (!GameManager.AllCanMove || Frozen)
@@ -119,7 +119,7 @@ public class EntityOverworldController : MonoBehaviour
         Vector2 dir = targetPos - (Vector2)transform.position;
         if (dir != Vector2.zero)
         {
-            InstanceData.facingDire = dir.normalized;
+            InstanceData.SetFacingDire(dir);
         }
     }
     void ApplyForcedFacingToAnimator(Vector2 facingDire)

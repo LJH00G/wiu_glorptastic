@@ -8,7 +8,6 @@ public class GameIniter : MonoBehaviour
 {
     [SerializeField] GameObject player;
     [SerializeField] GameObject follower;
-    [SerializeField] string InventorySceneName;
 
     private void Awake()
     {
@@ -17,11 +16,6 @@ public class GameIniter : MonoBehaviour
         InventoryManager.ManageInventory(GameManager.CurrentUserData.Inventory);
         GameManager.SetGameState(GAME_STATE.OVERWORLD);
         GameManager.SetOverWorldState(OVERWORLD_STATE.GENERAL);
-    }
-
-    private void Start()
-    {
-        SceneManager.LoadSceneAsync("GeneralUIOverlay", LoadSceneMode.Additive);
     }
 
 #if UNITY_EDITOR

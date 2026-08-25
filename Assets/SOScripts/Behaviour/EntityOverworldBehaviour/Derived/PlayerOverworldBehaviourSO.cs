@@ -51,7 +51,7 @@ namespace Game.SO.Behaviour.EntityOverworld
 
             if (dire != Vector2.zero)
             {
-                instanceData.facingDire = dire;
+                instanceData.SetFacingDire(dire);
 
                 controller.AIPath.destination = (Vector2)controller.transform.position + dire * controller.Radius;
             }
@@ -59,9 +59,9 @@ namespace Game.SO.Behaviour.EntityOverworld
             // interact
             if (InputSystem.actions["Interact"].WasPressedThisFrame() && GameManager.CanInteract)
             {
-                Vector2 offset = instanceData.facingDire * (controller.Radius + interactionSize * 0.5f);
+                Vector2 offset = instanceData.GetVector2Dire() * (controller.Radius + interactionSize * 0.5f);
                 Vector2 interactionPos = (Vector2)controller.transform.position + offset;
-                Vector2 interactionSize_vec2 = new Vector2(interactionSize, interactionSize);
+                Vector2 interactionSize_vec2 = new(interactionSize, interactionSize);
 
                 var colliders = Physics2D.OverlapBoxAll(
                         interactionPos,
