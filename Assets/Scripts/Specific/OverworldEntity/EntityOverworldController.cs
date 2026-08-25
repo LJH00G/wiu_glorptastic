@@ -68,16 +68,30 @@ public class EntityOverworldController : MonoBehaviour
         if (behaviour)
         {
             behaviour.BehaviourUpdate(this, dt);
+
+            if (Frozen && ForcedFacingTarget)
+            {
+                FaceTowards(ForcedFacingTarget.position);
+            }
             behaviour.UpdateAnimator(this);
+
+            if (Frozen && ForcedFacingTarget)
+            {
+                ApplyForcedFacingToAnimator(InstanceData.facingDire);
+            }
         }
         if (!GameManager.AllCanMove || Frozen)
         {
             AIPath.destination = transform.position;
         }
     }
-    public void SetFrozen(bool frozen)
+    public Transform ForcedFacingTarget { get; private set; }
+
+    public void SetFrozen(bool frozen, Transform faceTarget = null)
     {
         Frozen = frozen;
+        ForcedFacingTarget = frozen ? faceTarget : null;
+
         if (!frozen)
         {
             RefreshMovement();
@@ -94,6 +108,31 @@ public class EntityOverworldController : MonoBehaviour
         {
             InstanceData.facingDire = dir.normalized;
         }
+    }
+    void ApplyForcedFacingToAnimator(Vector2 facingDire)
+    {
+        float theta = Vector2.SignedAngle(Vector2.right, facingDire);
+
+        int direction;
+        if (Mathf.Abs(theta) < 44)
+        {
+            direction = 0;
+        }
+        else if (theta < 136 && theta > 44)
+        {
+            direction = 1;
+        }
+        else if (Mathf.Abs(theta) > 136)
+        {
+            direction = 2;
+        }
+        else
+        {
+            direction = 3;
+        }
+        Animator.SetInteger("Direction", direction);
+        Animator.SetBool("Walking", false);
+        Animator.SetFloat("Speed", 0f);
     }
 
 #if UNITY_EDITOR

@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -97,7 +98,6 @@ namespace Game
             if (AllCanMove)
                 Player.GetComponent<EntityOverworldController>().RefreshMovement();
         }
-
         static public void StartConversation(EntityOverworldController partner)
         {
             if (!Player || !partner)
@@ -107,11 +107,8 @@ namespace Game
             var playerController = Player.GetComponent<EntityOverworldController>();
             ConversationPartner = partner;
 
-            playerController.SetFrozen(true);
-            partner.SetFrozen(true);
-
-            playerController.FaceTowards(partner.transform.position);
-            partner.FaceTowards(playerController.transform.position);
+            playerController.SetFrozen(true, partner.transform);
+            partner.SetFrozen(true, playerController.transform);
 
             SetPlayerCanMove(false);
             SetCanInteract(false);

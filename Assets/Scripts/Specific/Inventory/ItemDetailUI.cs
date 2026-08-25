@@ -219,7 +219,7 @@ namespace Game.Inventory
         {
             StringBuilder sb = new();
 
-            if (item is SellableItemSO sellable)
+            if (item is SellableItemSO sellable)//oopsie gurts this is uhhhhhhhh very glorptastic shuper magisco tism
             {
                 sb.AppendLine($"Sell Value: {sellable.SellValue}");
             }
