@@ -9,6 +9,7 @@ namespace Game.Interactable.TriggerHandler.Single
 
         protected override void TriggerTriggerable(ref EnemyEncounterDataSO triggerable)
         {
+            triggerable.enemy = transform.parent.gameObject;
             initializeCombatEventChannel.Raise(triggerable);
         }
     }
