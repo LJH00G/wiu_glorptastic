@@ -1,14 +1,2 @@
 fileFormatVersion: 2
 guid: d3a3c4f8de7613d4bbf0067e35a6f92d
-MonoImporter:
-  externalObjects: {}
-  serializedVersion: 2
-  defaultReferences:
-  - sceneSwitchEventChannel: {fileID: 11400000, guid: d99eee56572e0f540b7dc2913fe66e56, type: 2}
-  - delayedCallbackEventChannel: {fileID: 11400000, guid: f657aa2dfb0d6be4c8a6401eda5e217c, type: 2}
-  - playMusicEventChannel: {fileID: 11400000, guid: 29bc08d3cdf6f4f44b394bf310f101f0, type: 2}
-  executionOrder: 0
-  icon: {instanceID: 0}
-  userData: 
-  assetBundleName: 
-  assetBundleVariant: 

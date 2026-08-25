@@ -131,7 +131,7 @@ GameObject:
   - component: {fileID: 80446083}
   - component: {fileID: 80446082}
   m_Layer: 10
-  m_Name: GameObject
+  m_Name: TriggerHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -501,7 +501,8 @@ MonoBehaviour:
   dialogueConversationEventChannel: {fileID: 11400000, guid: 44508743f5b9d8341ab1fa10572170f0, type: 2}
   sceneSwitchEventChannel: {fileID: 11400000, guid: d99eee56572e0f540b7dc2913fe66e56, type: 2}
   sceneSwitchContext:
-    loadScene: TestSceneForOverworld
+    setting: 0
+    scene: 
     delay: 0
     playMusicContext:
       music: {fileID: 0}
@@ -514,7 +515,8 @@ MonoBehaviour:
       fadeOffOther: 0
       fadeOffOther_Time: 0
       fadeForceSetVolume: 0
-    unloadOldScene: 0
+    timePause: 0
+    setSceneAsMain: 0
     ignoreableObjs: []
   testConvo1: {fileID: 11400000, guid: 6eb9ccc3237ab404c9fa2eb07aaa120f, type: 2}
   testConvo2: {fileID: 11400000, guid: 2fb6cc53f80ab6b4c9625131f83b482c, type: 2}

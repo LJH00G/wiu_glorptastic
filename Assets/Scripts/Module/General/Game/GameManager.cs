@@ -120,7 +120,7 @@ namespace Game
             var playerController = Player.GetComponent<EntityOverworldController>();
             ConversationPartner = partner;
 
-            playerController.SetFrozen(true, ConversationPartner.transform);
+            playerController.SetFrozen(true, ConversationPartner ? ConversationPartner.transform : null);
             if (ConversationPartner)
                 ConversationPartner.SetFrozen(true, playerController.transform);
 

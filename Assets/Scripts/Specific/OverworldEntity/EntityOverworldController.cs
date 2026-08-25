@@ -90,7 +90,6 @@ public class EntityOverworldController : MonoBehaviour
 
         if (Frozen && ForcedFacingTarget)
         {
-            Debug.Log("trying to force direction");
             ApplyForcedFacingToAnimator(InstanceData.facingDire);
         }
 
@@ -102,7 +101,7 @@ public class EntityOverworldController : MonoBehaviour
     public void SetFrozen(bool frozen, Transform faceTarget = null)
     {
         Frozen = frozen;
-        ForcedFacingTarget = frozen ? faceTarget : null;
+        ForcedFacingTarget = (frozen && faceTarget) ? faceTarget : null;
 
         if (!frozen)
         {

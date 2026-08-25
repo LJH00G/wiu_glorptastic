@@ -29,11 +29,12 @@ public class DeathScreenAnimator : MonoBehaviour
     public void SwitchMenu()
     {
         sceneSwitchEventChannel.Raise(new SceneSwitchEventContext(
+            SCENE_SWITCH_SETTING.LOAD_SEQUENTIALLY,
             "MainMenu",
             1,
             PlayMusicEventContext.FadeAllOut_1s,
-            false,
-            new()
+            SCENE_SWITCH_PAUSE.PAUSE_AT_START,
+            true
             ));
     }
 

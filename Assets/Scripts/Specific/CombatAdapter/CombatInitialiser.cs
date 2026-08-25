@@ -48,7 +48,7 @@ public class CombatInitialiser : MonoBehaviour
         List<GameObject> list = new List<GameObject>();
         list.Add(this.gameObject);
         PlayMusicEventContext music = PlayMusicEventContext.FadeAllOut_2s;
-        SceneSwitchEventContext context = new("Combat Scene", 2, music, SCENE_SETTING.LOAD_ADDITIVE, list);
+        SceneSwitchEventContext context = new(SCENE_SWITCH_SETTING.LOAD_ADDITIVE, "Combat Scene", 2, music, SCENE_SWITCH_PAUSE.PAUSE_DURING_LOAD, true, list);
         GameManager.SetGameState(GAME_STATE.BATTLE);
         onSwitch.Raise(context);
     }
@@ -66,7 +66,7 @@ public class CombatInitialiser : MonoBehaviour
 
         List<GameObject> list = new List<GameObject>();
         PlayMusicEventContext music = PlayMusicEventContext.FadeAllOut_2s;
-        SceneSwitchEventContext switchContext = new(scene.name, 2, music, SCENE_SETTING.UNLOAD, list);
+        SceneSwitchEventContext switchContext = new(SCENE_SWITCH_SETTING.UNLOAD, scene.name, 2, music, SCENE_SWITCH_PAUSE.PAUSE_AT_START, true, list);
         onSwitch.Raise(switchContext);
 
         GameManager.SetAllCanMove(true);
