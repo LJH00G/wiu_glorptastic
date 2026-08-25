@@ -220,6 +220,7 @@ MonoBehaviour:
   <Behaviour>k__BackingField: {fileID: 0}
   <InstanceData>k__BackingField:
     rid: -2
+  <Frozen>k__BackingField: 0
   references:
     version: 2
     RefIds:
