@@ -47,8 +47,8 @@ public class DialogueManager : MonoBehaviour
         dialogueIndex = -1;
         tryTriggerFirstDialogue = true;
 
-        GameManager.SetPlayerCanMove(false);
-        GameManager.SetCanInteract(false);
+        //GameManager.SetPlayerCanMove(false);
+        //GameManager.SetCanInteract(false);
 
         textWriter.ResetTypeWriting();
         speakerNameWriter.StartNewTypeWriting("<interval time=\"0\"/>" + currentConversation.Dialogues[0].speaker.Name + "<end/>");
@@ -104,8 +104,9 @@ public class DialogueManager : MonoBehaviour
         Show = false;
         animTimer = Mathf.Max(animTime - animTimer, 0);
 
-        GameManager.SetPlayerCanMove(true);
-        GameManager.SetCanInteract(true);
+        //GameManager.SetPlayerCanMove(true);
+        //GameManager.SetCanInteract(true);
+        GameManager.EndConversation();
     }
 
 
