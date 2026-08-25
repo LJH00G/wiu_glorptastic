@@ -17,5 +17,10 @@ public class ShopBaseController : MonoBehaviour
         return InventoryManager.TryShopPurchase(ref Preset.TradeTable[index]);
     }
 
+    public void SetPreset(ShopPresetSO preset)
+    {
+        Preset = preset;
+    }
+
 
 }

@@ -3,6 +3,7 @@ using Game.Combat;
 using Game.GlobalVariable;
 using Game.Inventory;
 using Game.OverworldDisableManager;
+using Game.SO.Data.Buddy;
 using Game.SO.Data.Item;
 using Game.SO.EventChannel;
 using Game.SO.EventChannel.Context;
@@ -25,6 +26,8 @@ public class CombatInitialiser : MonoBehaviour
 
     public void StartCombat(EnemyEncounterDataSO data)
     {
+        Debug.Log(GameManager.CurrentUserData.CurrentEquipedBuddy, this);
+
         PlayerLoadoutSO player = StaticGlobalVariable.PlayerLoadout;
         PartnerLoadoutSO partner = GameManager.CurrentUserData.CurrentEquipedBuddy.Loadout;
 
@@ -45,7 +48,7 @@ public class CombatInitialiser : MonoBehaviour
         List<GameObject> list = new List<GameObject>();
         list.Add(this.gameObject);
         PlayMusicEventContext music = PlayMusicEventContext.FadeAllOut_2s;
-        SceneSwitchEventContext context = new("Combat Scene", 2, music, false, list);
+        SceneSwitchEventContext context = new("Combat Scene", 2, music, SCENE_SETTING.LOAD_ADDITIVE, list);
         GameManager.SetGameState(GAME_STATE.BATTLE);
         onSwitch.Raise(context);
     }
@@ -53,25 +56,30 @@ public class CombatInitialiser : MonoBehaviour
     public void EndCombat(CombatEndEventContextSO context)
     {
         if (context.won && enemyInitiated)
+        {
             Destroy(enemyInitiated);
+            AddLootToInventory(context);
+        }
+            
 
         enemyInitiated = null;
 
-        
-        
-        OverworldDisableManager.EnableAllObjects(scene);
-        SceneManager.SetActiveScene(scene);
-        SceneManager.UnloadSceneAsync("Combat Scene");
+        List<GameObject> list = new List<GameObject>();
+        PlayMusicEventContext music = PlayMusicEventContext.FadeAllOut_2s;
+        SceneSwitchEventContext switchContext = new(scene.name, 2, music, SCENE_SETTING.UNLOAD, list);
+        onSwitch.Raise(switchContext);
 
-        overworldCamera.tag = "MainCamera";
-        overworldCamera.enabled = true;
         GameManager.SetAllCanMove(true);
         GameManager.SetGameState(GAME_STATE.OVERWORLD);
+
     }
 
     public void AddLootToInventory(CombatEndEventContextSO context)
     {
-
+        foreach(LootData loot in context.lootCollected)
+        {
+            InventoryManager.AddItem(loot.item, (uint)loot.count);
+        }
     }
 
     private void OnEnable()

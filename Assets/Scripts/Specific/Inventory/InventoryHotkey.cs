@@ -1,3 +1,4 @@
+using Game.SO.Data.Shop;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -5,11 +6,11 @@ using Utility.VisualizableDictionary;
 
 namespace Game.Inventory
 {
-    public class InventoryHotkey : MonoBehaviour
+    public class UIHotkey : MonoBehaviour
     {
         [SerializeField] Key hotkey = Key.I;
-
         [SerializeField] VisualizableDict<OVERWORLD_STATE, bool> stateDictionary;
+        
 
         void Update()
         {
@@ -56,6 +57,11 @@ namespace Game.Inventory
                 
             return false;
         }
+
+    
+
+      
+
 
 #if UNITY_EDITOR
         void OnValidate()

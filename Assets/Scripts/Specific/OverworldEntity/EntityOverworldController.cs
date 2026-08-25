@@ -29,7 +29,7 @@ public class EntityOverworldController : MonoBehaviour
     public AIPath AIPath { get; private set; }
     public BoxCollider2D TriggerCollider { get; private set; }
     public Animator Animator { get; private set; }
-
+    public bool Frozen { get; private set; }
 
     public void SetBehaviour(EntityOverworldBehaviourSO behaviour)
     {
@@ -81,13 +81,71 @@ public class EntityOverworldController : MonoBehaviour
         {
             Behaviour.BehaviourUpdate(this, dt);
         }
-        if (!GameManager.AllCanMove)
-            AIPath.destination = transform.position;
+
+        if (Frozen && ForcedFacingTarget)
+            FaceTowards(ForcedFacingTarget.position);
 
         if (Appearance)
             Appearance.UpdateAnimator(this);
-    }
 
+        if (Frozen && ForcedFacingTarget)
+        {
+            Debug.Log("trying to force direction");
+            ApplyForcedFacingToAnimator(InstanceData.facingDire);
+        }
+
+        if (!GameManager.AllCanMove || Frozen)
+            AIPath.destination = transform.position;
+    }
+    public Transform ForcedFacingTarget { get; private set; }
+
+    public void SetFrozen(bool frozen, Transform faceTarget = null)
+    {
+        Frozen = frozen;
+        ForcedFacingTarget = frozen ? faceTarget : null;
+
+        if (!frozen)
+        {
+            RefreshMovement();
+        }
+    }
+    public void FaceTowards(Vector2 targetPos)
+    {
+        if (InstanceData == null)
+        {
+            return;
+        }
+        Vector2 dir = ((Vector2)targetPos - (Vector2)transform.position);
+        if (dir != Vector2.zero)
+        {
+            InstanceData.facingDire = dir.normalized;
+        }
+    }
+    void ApplyForcedFacingToAnimator(Vector2 facingDire)
+    {
+        float theta = Vector2.SignedAngle(Vector2.right, facingDire);
+
+        int direction;
+        if (Mathf.Abs(theta) < 44)
+        {
+            direction = 0;
+        }
+        else if (theta < 136 && theta > 44)
+        {
+            direction = 1;
+        }
+        else if (Mathf.Abs(theta) > 136)
+        {
+            direction = 2;
+        }
+        else
+        {
+            direction = 3;
+        }
+        Animator.SetInteger("Direction", direction);
+        Animator.SetBool("Walking", false);
+        Animator.SetFloat("Speed", 0f);
+    }
 
 #if UNITY_EDITOR
 

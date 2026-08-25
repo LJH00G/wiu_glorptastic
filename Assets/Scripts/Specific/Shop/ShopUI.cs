@@ -1,3 +1,4 @@
+using Game.SO.Data.Shop;
 using UnityEngine;
 
 public class ShopUI : MonoBehaviour
@@ -13,6 +14,10 @@ public class ShopUI : MonoBehaviour
 
     [Header("Panel (optional - leave empty if this UI is always visible)")]
     [SerializeField] GameObject panelRoot;
+
+    [Header("EventChannel")]
+
+    [SerializeField] ShopOpenEventChannelSO shopEvent;
 
     public static ShopUI Instance { get; private set; }
 
@@ -35,6 +40,12 @@ public class ShopUI : MonoBehaviour
     void OnEnable()
     {
         PopulateSlots();
+        shopEvent.Subscribe(Show);
+    }
+
+    void OnDisable()
+    {
+        shopEvent.Unsubscribe(Show);
     }
 
     public void Show()
@@ -43,6 +54,16 @@ public class ShopUI : MonoBehaviour
         {
             panelRoot.SetActive(true);
         }
+        PopulateSlots();
+    }
+
+    public void Show(ShopPresetSO preset)
+    {
+        if(panelRoot)
+        {
+            panelRoot.SetActive(true);
+        }
+        shopController.SetPreset(preset);
         PopulateSlots();
     }
 

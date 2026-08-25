@@ -58,7 +58,7 @@ namespace Game.Combat
                 currentHP = source.maxHP,
                 maxCS = source.maxCS,
                 currentCS = 0,
-                damage = source.baseDamage + playerSource.equippedGem.ExtraDamage,
+                damage = source.baseDamage + (playerSource.equippedGem ? playerSource.equippedGem.ExtraDamage : 0),
                 anchor = anchor,
                 partnerSource = source
             };

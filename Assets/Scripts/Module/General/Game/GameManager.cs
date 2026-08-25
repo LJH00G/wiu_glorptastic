@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 
@@ -40,7 +41,7 @@ namespace Game
         static public UserData CurrentUserData {get; private set; } = new(); //tracks the currently in use player saved data so scripts like inventory manager can be linked up after load attempt without a scene in use
         static public bool CanInteract { get; private set; } = true;
         static public bool Paused { get; private set; } = false;
-
+        static public EntityOverworldController ConversationPartner { get; private set; }
 
         static public void SetDebug(bool value)
         {
@@ -113,6 +114,30 @@ namespace Game
 
             if (AllCanMove)
                 Player.GetComponent<EntityOverworldController>().RefreshMovement();
+        }
+        static public void StartConversation(EntityOverworldController partner)
+        {
+            var playerController = Player.GetComponent<EntityOverworldController>();
+            ConversationPartner = partner;
+
+            playerController.SetFrozen(true, ConversationPartner.transform);
+            if (ConversationPartner)
+                ConversationPartner.SetFrozen(true, playerController.transform);
+
+            SetPlayerCanMove(false);
+            SetCanInteract(false);
+        }
+
+        static public void EndConversation()
+        {
+            Player.GetComponent<EntityOverworldController>().SetFrozen(false);
+
+            if (ConversationPartner)
+                ConversationPartner.SetFrozen(false);
+            ConversationPartner = null;
+
+            SetPlayerCanMove(true);
+            SetCanInteract(true);
         }
     }
 }
