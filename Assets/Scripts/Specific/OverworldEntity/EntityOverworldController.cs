@@ -24,7 +24,7 @@ public class EntityOverworldController : MonoBehaviour
     public AIPath AIPath { get; private set; }
     public BoxCollider2D TriggerCollider { get; private set; }
     public Animator Animator { get; private set; }
-
+    public bool Frozen { get; private set; }
 
     public void SetBehaviour(EntityOverworldBehaviourSO behaviour)
     {
@@ -70,10 +70,31 @@ public class EntityOverworldController : MonoBehaviour
             behaviour.BehaviourUpdate(this, dt);
             behaviour.UpdateAnimator(this);
         }
-        if (!GameManager.AllCanMove)
+        if (!GameManager.AllCanMove || Frozen)
+        {
             AIPath.destination = transform.position;
+        }
     }
-
+    public void SetFrozen(bool frozen)
+    {
+        Frozen = frozen;
+        if (!frozen)
+        {
+            RefreshMovement();
+        }
+    }
+    public void FaceTowards(Vector2 targetPos)
+    {
+        if (InstanceData == null)
+        {
+            return;
+        }
+        Vector2 dir = ((Vector2)targetPos - (Vector2)transform.position);
+        if (dir != Vector2.zero)
+        {
+            InstanceData.facingDire = dir.normalized;
+        }
+    }
 
 #if UNITY_EDITOR
 

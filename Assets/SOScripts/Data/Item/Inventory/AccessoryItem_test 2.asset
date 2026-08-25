@@ -19,8 +19,8 @@ MonoBehaviour:
   <curseAbilityList>k__BackingField: []
   <ExtraMaxHP>k__BackingField: 0
   <ExtraMaxCurse>k__BackingField: 1
-  <ExtraDamage>k__BackingField: 1
-  <ExtraDefence>k__BackingField: 1
-  <MasteryWindowWidthMultiplier>k__BackingField: 1
+  <ExtraDamage>k__BackingField: 1010
+  <ExtraDefence>k__BackingField: 1029
+  <MasteryWindowWidthMultiplier>k__BackingField: 1041.7
   <HPRegenPerTurn>k__BackingField: 0
   <CSRegenPerTurn>k__BackingField: 0

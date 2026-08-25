@@ -29,8 +29,7 @@ namespace Game
         static public UserData CurrentUserData {get; private set; } = new(); //tracks the currently in use player saved data so scripts like inventory manager can be linked up after load attempt without a scene in use
         static public bool CanInteract { get; private set; } = true;
         static public bool Paused { get; private set; } = false;
-        static public bool InDialogue { get; private set; } = false;
-        static public GameObject DialogueNPC { get; private set; }
+        static public EntityOverworldController ConversationPartner { get; private set; }
 
         static public void SetDebug(bool value)
         {
@@ -99,17 +98,37 @@ namespace Game
                 Player.GetComponent<EntityOverworldController>().RefreshMovement();
         }
 
-        static public void StartDialogue(GameObject npc)
+        static public void StartConversation(EntityOverworldController partner)
         {
-            InDialogue = true;
-            DialogueNPC = null;
-            SetAllCanMove(false);
+            if (!Player || !partner)
+            {
+                return;
+            }
+            var playerController = Player.GetComponent<EntityOverworldController>();
+            ConversationPartner = partner;
+
+            playerController.SetFrozen(true);
+            partner.SetFrozen(true);
+
+            playerController.FaceTowards(partner.transform.position);
+            partner.FaceTowards(playerController.transform.position);
+
+            SetPlayerCanMove(false);
+            SetCanInteract(false);
         }
-        static public void EndDialogue()
+
+        static public void EndConversation()
         {
-            InDialogue = false;
-            DialogueNPC = null;
-            SetAllCanMove(true);
+            if (!Player || !ConversationPartner)
+            {
+                return;
+            }
+            Player.GetComponent<EntityOverworldController>().SetFrozen(false);
+            ConversationPartner.SetFrozen(false);
+            ConversationPartner = null;
+
+            SetPlayerCanMove(true);
+            SetCanInteract(true);
         }
     }
 }
