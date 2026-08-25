@@ -12,5 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45230dd24da17804cb7f1558c4aea0a6, type: 3}
   m_Name: TestFrogEnemyEncounter
   m_EditorClassIdentifier: Assembly-CSharp::EnemyEncounterDataSO
+  enemy: {fileID: 0}
   dataList:
   - {fileID: 11400000, guid: 16bf055f5f361ba40814b674f9e4a87e, type: 2}
+  encounterLootTable: {fileID: 11400000, guid: a8c2a8bba00f34047b0c543455c57678, type: 2}
