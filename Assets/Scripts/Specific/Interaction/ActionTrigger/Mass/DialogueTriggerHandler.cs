@@ -14,7 +14,7 @@ namespace Game.Interactable.TriggerHandler.Mass
 
         protected override void TriggerTriggerable(ref DialogueConversationSO triggerable)
         {
-            if (TryGetComponent(out EntityOverworldController npcController))
+            if (transform.parent.TryGetComponent(out EntityOverworldController npcController))
             {
                 GameManager.StartConversation(npcController);
             }

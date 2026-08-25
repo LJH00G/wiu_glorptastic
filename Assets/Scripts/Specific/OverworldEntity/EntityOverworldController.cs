@@ -89,7 +89,10 @@ public class EntityOverworldController : MonoBehaviour
             Appearance.UpdateAnimator(this);
 
         if (Frozen && ForcedFacingTarget)
+        {
+            Debug.Log("trying to force direction");
             ApplyForcedFacingToAnimator(InstanceData.facingDire);
+        }
 
         if (!GameManager.AllCanMove || Frozen)
             AIPath.destination = transform.position;

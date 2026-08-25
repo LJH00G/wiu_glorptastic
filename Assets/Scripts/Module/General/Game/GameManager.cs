@@ -117,15 +117,12 @@ namespace Game
         }
         static public void StartConversation(EntityOverworldController partner)
         {
-            if (!Player || !partner)
-            {
-                return;
-            }
             var playerController = Player.GetComponent<EntityOverworldController>();
             ConversationPartner = partner;
 
-            playerController.SetFrozen(true, partner.transform);
-            partner.SetFrozen(true, playerController.transform);
+            playerController.SetFrozen(true, ConversationPartner.transform);
+            if (ConversationPartner)
+                ConversationPartner.SetFrozen(true, playerController.transform);
 
             SetPlayerCanMove(false);
             SetCanInteract(false);
@@ -133,12 +130,10 @@ namespace Game
 
         static public void EndConversation()
         {
-            if (!Player || !ConversationPartner)
-            {
-                return;
-            }
             Player.GetComponent<EntityOverworldController>().SetFrozen(false);
-            ConversationPartner.SetFrozen(false);
+
+            if (ConversationPartner)
+                ConversationPartner.SetFrozen(false);
             ConversationPartner = null;
 
             SetPlayerCanMove(true);
