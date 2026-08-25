@@ -24,7 +24,7 @@ namespace Game.Combat
 
         [Header("Submenu textbox")]
         [SerializeField] GameObject submenuRoot;
-        [SerializeField] TextMeshProUGUI[] submenuLabels; // pool size = how many rows are visible at once; list can be longer and will scroll
+        [SerializeField] TextMarkupTypeWriter[] submenuLabels; // pool size = how many rows are visible at once; list can be longer and will scroll
 
         CombatInputReader input;
 
@@ -182,8 +182,7 @@ namespace Game.Combat
 
                 if (inUse)
                 {
-                    submenuLabels[i].text = currentSubOptions[optionIndex];
-                    submenuLabels[i].color = (optionIndex == subCursor) ? highlightColor : normalColor;
+                    submenuLabels[i].StartNewTypeWriting((optionIndex == subCursor ? "> " : "") + currentSubOptions[optionIndex], true);
                 }
             }
         }
