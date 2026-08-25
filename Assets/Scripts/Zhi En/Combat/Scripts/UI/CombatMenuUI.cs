@@ -24,7 +24,7 @@ namespace Game.Combat
 
         [Header("Submenu textbox")]
         [SerializeField] GameObject submenuRoot;
-        [SerializeField] TextMeshProUGUI[] submenuLabels; // pre-allocate a handful (e.g. 6) and hide unused ones
+        [SerializeField] TextMeshProUGUI[] submenuLabels; // pool size = how many rows are visible at once; list can be longer and will scroll
 
         CombatInputReader input;
 
@@ -33,6 +33,7 @@ namespace Game.Combat
 
         List<string> currentSubOptions = new();
         int subCursor;
+        int subScrollOffset; // index of the option currently shown in submenuLabels[0]
 
         Action<int> onIconConfirmed;   // returns index into activeIconIndices
         Action<int> onSubOptionConfirmed;
@@ -96,6 +97,7 @@ namespace Game.Combat
         {
             currentSubOptions = options;
             subCursor = 0;
+            subScrollOffset = 0;
             onSubOptionConfirmed = onConfirmed;
             onCancelled = onCancel;
 
@@ -104,14 +106,7 @@ namespace Game.Combat
 
             if (anchor) CombatHUD.PositionAboveWorldPoint(submenuRoot.GetComponent<RectTransform>(), anchor.position, 1.5f);
 
-            for (int i = 0; i < submenuLabels.Length; i++)
-            {
-                bool inUse = i < options.Count;
-                submenuLabels[i].gameObject.SetActive(inUse);
-                if (inUse) submenuLabels[i].text = options[i];
-            }
-
-            RefreshSubHighlight();
+            RefreshSubmenuDisplay();
             listeningIconRow = false;
             listeningSubmenu = true;
         }
@@ -135,7 +130,7 @@ namespace Game.Combat
             {
                 if (dir == MenuDirection.UP) subCursor = Wrap(subCursor - 1, currentSubOptions.Count);
                 else if (dir == MenuDirection.DOWN) subCursor = Wrap(subCursor + 1, currentSubOptions.Count);
-                RefreshSubHighlight();
+                RefreshSubmenuDisplay();
             }
         }
 
@@ -144,7 +139,7 @@ namespace Game.Combat
             if (listeningIconRow)
                 onIconConfirmed?.Invoke(activeIconIndices[iconCursor]);
             else if (listeningSubmenu)
-                onSubOptionConfirmed?.Invoke(subCursor);
+                onSubOptionConfirmed?.Invoke(subCursor); // still an absolute index into currentSubOptions - callers are unaffected by scrolling
         }
 
         void HandleCancel()
@@ -161,10 +156,36 @@ namespace Game.Combat
                 icons[activeIconIndices[iconCursor]].color = highlightColor;
         }
 
-        void RefreshSubHighlight()
+        /// <summary>
+        /// Fills the fixed-size submenuLabels pool with a "window" of currentSubOptions, scrolling
+        /// that window so subCursor is always kept visible. Replaces the old RefreshSubHighlight -
+        /// that version indexed submenuLabels[i] for i up to currentSubOptions.Count, which would
+        /// throw once options.Count exceeded submenuLabels.Length.
+        /// </summary>
+        void RefreshSubmenuDisplay()
         {
-            for (int i = 0; i < currentSubOptions.Count; i++)
-                submenuLabels[i].color = (i == subCursor) ? highlightColor : normalColor;
+            int visibleCount = submenuLabels.Length;
+
+            if (subCursor < subScrollOffset)
+                subScrollOffset = subCursor;
+            else if (subCursor >= subScrollOffset + visibleCount)
+                subScrollOffset = subCursor - visibleCount + 1;
+
+            subScrollOffset = Mathf.Clamp(subScrollOffset, 0, Mathf.Max(0, currentSubOptions.Count - visibleCount));
+
+            for (int i = 0; i < submenuLabels.Length; i++)
+            {
+                int optionIndex = subScrollOffset + i;
+                bool inUse = optionIndex < currentSubOptions.Count;
+
+                submenuLabels[i].gameObject.SetActive(inUse);
+
+                if (inUse)
+                {
+                    submenuLabels[i].text = currentSubOptions[optionIndex];
+                    submenuLabels[i].color = (optionIndex == subCursor) ? highlightColor : normalColor;
+                }
+            }
         }
 
         static int Wrap(int value, int count) => count <= 0 ? 0 : (value % count + count) % count;

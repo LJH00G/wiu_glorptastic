@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.SO.Data.Item.Sellable.Battle.WeaponItemSO
   <Name>k__BackingField: Weapon3
   <Sprite>k__BackingField: {fileID: -4298257812403107812, guid: 73e3569b5fa8bfc4a9199c9ede85c5f7, type: 3}
-  <Description>k__BackingField: <shake>glorp glorp glorp glorptastic till i shimi
-    my glorp on the limilimi hululu</shake>
+  <Description>k__BackingField: <rainbow>glorp glorp glorp glorptastic till i shimi
+    my glorp on the limilimi hululu</rainbow>
   <SellValue>k__BackingField: 123
   <curseAbilityList>k__BackingField: []
   <Dmage>k__BackingField: 123

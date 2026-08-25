@@ -118,6 +118,6 @@ MonoBehaviour:
     cost:
       itemStacks:
       - item: {fileID: 11400000, guid: 7a0605f60fa9bdf45a76bbf7c4dd476c, type: 2}
-        count: 0
+        count: 1
       useShell: 0
       shell: 6767
