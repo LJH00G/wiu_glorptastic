@@ -3,6 +3,7 @@ using Game.SO.EventChannel.Context;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Utility.Math;
 
 public class DeathScreenAnimator : MonoBehaviour
 {
@@ -13,16 +14,18 @@ public class DeathScreenAnimator : MonoBehaviour
     [SerializeField] TextMeshProUGUI deathText;
     [SerializeField] CanvasGroup deathTextCGroup;
     [SerializeField] float deathTextAppearTime;
-    float deathTextAppearTimer;
+    float deathTextAppearTime_inv;
+    [SerializeField] float deathTextAppearTimer;
 
     [Header("Button")]
     [SerializeField] Button loadSaveBtn;
     [SerializeField] Button sceneSwitchBtn;
     [SerializeField] CanvasGroup ButtonCGroup;
     [SerializeField] float buttonDelayTime;
-    float buttonDelayTimer;
+    [SerializeField] float buttonDelayTimer;
     [SerializeField] float buttonAppearTime;
-    float buttonAppearTimer;
+    float buttonAppearTime_inv;
+    [SerializeField] float buttonAppearTimer;
 
 
 
@@ -51,8 +54,11 @@ public class DeathScreenAnimator : MonoBehaviour
 
     private void Awake()
     {
-        
+        deathTextCGroup.alpha = 0;
+        ButtonCGroup.alpha = 0;
 
+        deathTextAppearTime_inv = 1 / deathTextAppearTime;
+        buttonAppearTime_inv = 1 / buttonAppearTime;
 
     }
 
@@ -62,11 +68,22 @@ public class DeathScreenAnimator : MonoBehaviour
 
         deathTextAppearTimer += dt;
         buttonDelayTimer += dt;
-        buttonAppearTimer += dt;
-        
 
-        
+        if (deathTextAppearTimer < deathTextAppearTime)
+        {
+            float t = Math_Ease.Ease(EASE.IN_OUT_SIN, deathTextAppearTimer * deathTextAppearTime_inv);
+            deathTextCGroup.alpha = t;
+            deathText.color = Color.Lerp(Color.white, Color.red, t);
+        }
 
+        if (buttonDelayTimer > buttonDelayTime)
+        {
+            buttonAppearTimer += dt;
+            if (buttonAppearTimer < buttonAppearTime)
+            {
+                ButtonCGroup.alpha = Math_Ease.Ease(EASE.IN_OUT_SIN, buttonAppearTimer * buttonAppearTime_inv);
+            }
+        }
     }
 
 
