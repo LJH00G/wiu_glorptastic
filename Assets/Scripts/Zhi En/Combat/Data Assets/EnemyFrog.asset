@@ -29,3 +29,4 @@ MonoBehaviour:
     attackDamageMultiplier: 1.5
     flavourText: frog very hungry
   loopMoveOrder: 1
+  enemyLootTable: {fileID: 11400000, guid: a8c2a8bba00f34047b0c543455c57678, type: 2}
