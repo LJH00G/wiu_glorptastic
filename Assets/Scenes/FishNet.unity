@@ -501,7 +501,8 @@ MonoBehaviour:
   dialogueConversationEventChannel: {fileID: 11400000, guid: 44508743f5b9d8341ab1fa10572170f0, type: 2}
   sceneSwitchEventChannel: {fileID: 11400000, guid: d99eee56572e0f540b7dc2913fe66e56, type: 2}
   sceneSwitchContext:
-    loadScene: TestSceneForOverworld
+    setting: 0
+    scene: 
     delay: 0
     playMusicContext:
       music: {fileID: 0}
@@ -514,7 +515,8 @@ MonoBehaviour:
       fadeOffOther: 0
       fadeOffOther_Time: 0
       fadeForceSetVolume: 0
-    unloadOldScene: 0
+    timePause: 0
+    setSceneAsMain: 0
     ignoreableObjs: []
   testConvo1: {fileID: 11400000, guid: 6eb9ccc3237ab404c9fa2eb07aaa120f, type: 2}
   testConvo2: {fileID: 11400000, guid: 2fb6cc53f80ab6b4c9625131f83b482c, type: 2}
@@ -753,6 +755,51 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6473455761877912804, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
   m_PrefabInstance: {fileID: 767815027}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &808526098
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 808526100}
+  - component: {fileID: 808526099}
+  m_Layer: 0
+  m_Name: GameStateSetter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &808526099
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 808526098}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 790c5f8d4bfac3f489fb92383e501fc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameStateSetter
+  thisGameState: 1
+--- !u!4 &808526100
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 808526098}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &828279311
 GameObject:
   m_ObjectHideFlags: 0
@@ -1996,6 +2043,8 @@ MonoBehaviour:
   speechSFXEventChannel: {fileID: 11400000, guid: 692bad48a20fddf448c41da6c0212144, type: 2}
   speechPresets: {fileID: 11400000, guid: 6394698099c217e4f964ea8a214ab042, type: 2}
   sfxPresets: {fileID: 11400000, guid: 92e05db07ec9ab442a4ca5fcf0259198, type: 2}
+  useDefaultText: 0
+  defaultText: 
   <WaitForInput>k__BackingField: 0
   <ReachedEnd>k__BackingField: 0
   <PrintInterval>k__BackingField: 0
@@ -2397,7 +2446,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5.625
+  orthographic size: 1.671875
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -38939,6 +38988,8 @@ MonoBehaviour:
   speechSFXEventChannel: {fileID: 11400000, guid: 692bad48a20fddf448c41da6c0212144, type: 2}
   speechPresets: {fileID: 11400000, guid: 6394698099c217e4f964ea8a214ab042, type: 2}
   sfxPresets: {fileID: 11400000, guid: 92e05db07ec9ab442a4ca5fcf0259198, type: 2}
+  useDefaultText: 0
+  defaultText: 
   <WaitForInput>k__BackingField: 0
   <ReachedEnd>k__BackingField: 0
   <PrintInterval>k__BackingField: 0
@@ -39652,4 +39703,5 @@ SceneRoots:
   - {fileID: 1970705965}
   - {fileID: 291176231}
   - {fileID: 438083891}
+  - {fileID: 808526100}
   - {fileID: 1273126483}

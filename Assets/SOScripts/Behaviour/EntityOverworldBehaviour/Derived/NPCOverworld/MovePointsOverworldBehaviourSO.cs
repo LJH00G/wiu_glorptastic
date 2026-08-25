@@ -4,8 +4,10 @@ using UnityEngine;
 using Utility.Math;
 using Game.GlobalVariable.OverworldNPCMovePoints;
 
+
 namespace Game.SO.Behaviour.EntityOverworld.InstanceData
 {
+    [System.Serializable]
     public class MovePointsOverworldBehaviourInstanceData : EntityOverworldBehaviourInstanceData
     {
         public string MovePointsKey;
