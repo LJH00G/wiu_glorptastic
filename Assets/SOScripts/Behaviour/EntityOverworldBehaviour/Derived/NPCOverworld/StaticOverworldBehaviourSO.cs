@@ -9,7 +9,7 @@ namespace Game.SO.Behaviour.EntityOverworld.InstanceData
     [Serializable]
     public class StaticOverworldBehaviourInstanceData : EntityOverworldBehaviourInstanceData
     {
-
+        public Vector2 defaultDirection;
     }
 }
 
@@ -19,14 +19,10 @@ namespace Game.SO.Behaviour.EntityOverworld
     [CreateAssetMenu(fileName = "StaticOverworld_Behaviour", menuName = "Scriptable Objects/Behaviour/EntityOverworld/NPCOverworld/StaticOverworldBehaviourSO")]
     public class StaticOverworldBehaviourSO : NPCOverworldBehaviourSO
     {
-        [Header("Static")]
-        [SerializeField] Vector2 defaultDirection;
-
-
         public override void BehaviourStart(EntityOverworldController controller)
         {
-            if (controller.InstanceData is not FollowObjectOverworldBehaviourInstanceData)
-                controller.InstanceData = new FollowObjectOverworldBehaviourInstanceData();
+            if (controller.InstanceData is not StaticOverworldBehaviourInstanceData)
+                controller.InstanceData = new StaticOverworldBehaviourInstanceData();
 
             controller.AIPath.orientation = Pathfinding.OrientationMode.YAxisForward;
             controller.AIPath.maxSpeed = speed;
@@ -38,10 +34,10 @@ namespace Game.SO.Behaviour.EntityOverworld
 
         public override void BehaviourUpdate(EntityOverworldController controller, float dt)
         {
-            if (controller.InstanceData is not FollowObjectOverworldBehaviourInstanceData instanceData)
+            if (controller.InstanceData is not StaticOverworldBehaviourInstanceData instanceData)
                 return;
 
-            instanceData.facingDire = defaultDirection;
+            instanceData.facingDire = instanceData.defaultDirection;
         }
 
     }

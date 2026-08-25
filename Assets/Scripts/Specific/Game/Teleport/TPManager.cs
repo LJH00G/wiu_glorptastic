@@ -1,5 +1,6 @@
 using Game.SO.EventChannel;
 using System.Collections;
+using Unity.Cinemachine;
 using UnityEngine;
 using Utility.VisualizableDictionary;
 
@@ -70,12 +71,16 @@ namespace Game.TPManager
 
             if (player != null)
             {
+                Vector3 positionDelta = currentTP.position - (Vector2)player.position;
                 player.transform.position = currentTP.position;
+                CinemachineCore.OnTargetObjectWarped(player, positionDelta);
                 player.GetComponent<EntityOverworldController>().RefreshMovement();
             }
             if (follower != null)
             {
+                Vector3 positionDelta = currentTP.position - (Vector2)follower.position;
                 follower.transform.position = currentTP.position;
+                CinemachineCore.OnTargetObjectWarped(follower, positionDelta);
                 follower.GetComponent<EntityOverworldController>().RefreshMovement();
             }
 

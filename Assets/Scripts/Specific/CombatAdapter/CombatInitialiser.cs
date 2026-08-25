@@ -5,6 +5,7 @@ using Game.Inventory;
 using Game.OverworldDisableManager;
 using Game.SO.Data.Buddy;
 using Game.SO.Data.Item;
+using Game.SO.Data.Item.Sellable;
 using Game.SO.EventChannel;
 using Game.SO.EventChannel.Context;
 using System.Collections.Generic;
@@ -31,7 +32,7 @@ public class CombatInitialiser : MonoBehaviour
         PlayerLoadoutSO player = StaticGlobalVariable.PlayerLoadout;
         PartnerLoadoutSO partner = GameManager.CurrentUserData.CurrentEquipedBuddy.Loadout;
 
-        player.inventory = InventoryManager.GetItemList();
+        InventoryManager.TryGetItemInList<ConsumableItemSO>(out player.inventory);
         player.equippedGem = InventoryManager.TryGetItemInList(out CurseGemItemSO gem) ? gem : null;
         player.equippedWeapon = InventoryManager.GetEquipedWeapon();
         player.equippedArmor = InventoryManager.GetEquipedArmour();
@@ -41,16 +42,26 @@ public class CombatInitialiser : MonoBehaviour
         tunnelDataTunnel.playerLoadout = player;
         tunnelDataTunnel.partnerLoadout = partner;
 
-        enemyInitiated = data.enemy;
+        enemyInitiated = data.overworldPresetationObject;
         scene = SceneManager.GetActiveScene();
         GameManager.SetAllCanMove(false);
 
-        List<GameObject> list = new List<GameObject>();
-        list.Add(this.gameObject);
-        PlayMusicEventContext music = PlayMusicEventContext.FadeAllOut_2s;
-        SceneSwitchEventContext context = new(SCENE_SWITCH_SETTING.LOAD_ADDITIVE, "Combat Scene", 2, music, SCENE_SWITCH_PAUSE.PAUSE_DURING_LOAD, true, list);
+        List<GameObject> list = new()
+        {
+            gameObject
+        };
+
+
         GameManager.SetGameState(GAME_STATE.BATTLE);
-        onSwitch.Raise(context);
+        onSwitch.Raise(new(
+            SCENE_SWITCH_SETTING.LOAD_ADDITIVE,
+            "Combat Scene",
+            1,
+            PlayMusicEventContext.FadeAllOut_1s,
+            SCENE_SWITCH_PAUSE.PAUSE_DURING_LOAD,
+            true,
+            list
+            ));
     }
 
     public void EndCombat(CombatEndEventContextSO context)
@@ -64,10 +75,14 @@ public class CombatInitialiser : MonoBehaviour
 
         enemyInitiated = null;
 
-        List<GameObject> list = new List<GameObject>();
-        PlayMusicEventContext music = PlayMusicEventContext.FadeAllOut_2s;
-        SceneSwitchEventContext switchContext = new(SCENE_SWITCH_SETTING.UNLOAD, scene.name, 2, music, SCENE_SWITCH_PAUSE.PAUSE_AT_START, true, list);
-        onSwitch.Raise(switchContext);
+        onSwitch.Raise(new(
+            SCENE_SWITCH_SETTING.UNLOAD,
+            scene.name,
+            2,
+            PlayMusicEventContext.FadeAllOut_2s,
+            SCENE_SWITCH_PAUSE.PAUSE_AT_START,
+            true
+            ));
 
         GameManager.SetAllCanMove(true);
         GameManager.SetGameState(GAME_STATE.OVERWORLD);
