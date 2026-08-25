@@ -11,8 +11,6 @@ public class ShopSlotUI : MonoBehaviour
     [SerializeField] Image icon;
     [SerializeField] Button button;
 
-    static readonly Dictionary<Texture2D, Sprite> spriteCache = new();
-
     public int TradeIndex { get; private set; } = -1;
     public event Action<int> OnSlotClicked;
 
@@ -33,22 +31,8 @@ public class ShopSlotUI : MonoBehaviour
         if (icon)
         {
             icon.enabled = displayItem != null;
-            icon.sprite = displayItem ? TextureToSprite(displayItem.Texture) : null;
+            icon.sprite = displayItem ? displayItem.Sprite : null;
         }
     }
 
-    static Sprite TextureToSprite(Texture2D texture)
-    {
-        if (!texture)
-        {
-            return null;
-        }
-        if (!spriteCache.TryGetValue(texture, out Sprite sprite))
-        {
-            sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
-            spriteCache[texture] = sprite;
-        }
-
-        return sprite;
-    }
 }

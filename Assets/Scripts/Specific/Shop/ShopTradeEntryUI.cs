@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -8,25 +8,23 @@ public class ShopTradeEntryUI : MonoBehaviour
 {
     [Header("Refs")]
     [SerializeField] Image icon;
-    [SerializeField] TMP_Text nameText;
+    [SerializeField] TextMarkupTypeWriter nameText;
     [SerializeField] TMP_Text countText;
 
     [Header("Shell Display")]
     [SerializeField] Sprite shellIcon;
-
-    static readonly Dictionary<Texture2D, Sprite> spriteCache = new();
 
     public void SetItem(ItemSO item, uint count)
     {
         if (icon)
         {
             icon.enabled = item != null;
-            icon.sprite = item ? TextureToSprite(item.Texture) : null;
+            icon.sprite = item ? item.Sprite : null;
         }
 
         if (nameText)
         {
-            nameText.text = item ? item.Name : "???";
+            nameText.StartNewTypeWriting(item ? item.Name : "???");
         }
         if (countText)
         {
@@ -44,7 +42,7 @@ public class ShopTradeEntryUI : MonoBehaviour
 
         if (nameText)
         {
-            nameText.text = "Shell";
+            nameText.StartNewTypeWriting("Shell");
         }
         if (countText)
         {
@@ -52,19 +50,4 @@ public class ShopTradeEntryUI : MonoBehaviour
         }
     }
 
-    static Sprite TextureToSprite(Texture2D texture)
-    {
-        if (!texture)
-        {
-            return null;
-        }
-
-        if (!spriteCache.TryGetValue(texture, out Sprite sprite))
-        {
-            sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
-            spriteCache[texture] = sprite;
-        }
-
-        return sprite;
-    }
 }

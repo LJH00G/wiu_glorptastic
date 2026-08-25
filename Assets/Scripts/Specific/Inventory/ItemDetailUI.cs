@@ -1,9 +1,8 @@
-using Game.SO.Data.Inventory;
+
 using Game.SO.Data.Item;
 using Game.SO.Data.Item.Sellable;
 using Game.SO.Data.Item.Sellable.Battle;
 using Game.SO.Data.Shop;
-using System.Collections.Generic;
 using System.Text;
 using TMPro;
 using UnityEngine;
@@ -19,9 +18,9 @@ namespace Game.Inventory
         [Header("Refs")]
         [SerializeField] GameObject panelRoot;
         [SerializeField] Image icon;
-        [SerializeField] TMP_Text titleText;
-        [SerializeField] TMP_Text descriptionText;
-        [SerializeField] TMP_Text statsText;
+        [SerializeField] TextMarkupTypeWriter titleText;
+        [SerializeField] TextMarkupTypeWriter descriptionText;
+        [SerializeField] TextMarkupTypeWriter statsText;
         [SerializeField] Button equipButton;
         [SerializeField] Button unequipButton;
         [SerializeField] Button closeButton;
@@ -29,8 +28,6 @@ namespace Game.Inventory
         [SerializeField] Button sellButton;
         [SerializeField] Button dontSellButton;
         [SerializeField] ShopPurchaseConfirmUI shopConfirmUI;
-
-        static readonly Dictionary<Texture2D, Sprite> spriteCache = new();
 
         ItemSO currentItem;
         int currentAccessorySlotIndex = -1;
@@ -90,19 +87,19 @@ namespace Game.Inventory
             }
             if (icon)
             {
-                icon.sprite = TextureToSprite(currentItem.Texture);
+                icon.sprite = currentItem.Sprite;
             }
             if (titleText)
             {
-                titleText.text = currentItem.Name;
+                titleText.StartNewTypeWriting(currentItem.Name);
             }
             if (descriptionText)
             {
-                descriptionText.text = currentItem.Description;
+                descriptionText.StartNewTypeWriting(currentItem.Description, true, 0.05f);
             }
             if (statsText)
             {
-                statsText.text = BuildStatsText(currentItem);
+                statsText.StartNewTypeWriting(BuildStatsText(currentItem), true, 0.025f);
             }
             UpdateButtons();
         }
@@ -145,6 +142,10 @@ namespace Game.Inventory
             {
                 return true;
             }
+            if (InventoryManager.GetEquipedArmour() == item)
+            {
+                return true;
+            }
             var accessories = InventoryManager.GetEquipedAccessories();
             for (int i = 0; i < accessories.Length; i++)
             {
@@ -171,6 +172,10 @@ namespace Game.Inventory
             if (currentItem is WeaponItemSO)
             {
                 InventoryManager.UnequipWeapon();
+            }
+            if (currentItem is ArmourItemSO)
+            {
+                InventoryManager.UnequipArmour();
             }
             else if (currentItem is AccessoryItemSO && currentAccessorySlotIndex >= 0)
             {
@@ -241,50 +246,118 @@ namespace Game.Inventory
             //    }
             //}
 
-            if (item is WeaponItemSO weapon)
+            switch (item)
             {
-                sb.AppendLine($"Weapon Damage: {weapon.Dmage}");
-            }
-            if (item is CurseGemItemSO curseGem)
-            {
-                if (curseGem.ExtraMaxHP != 0)
-                {
-                    sb.AppendLine($"Max HP: +{curseGem.ExtraMaxHP}");
-                }
-                if (curseGem.ExtraMaxCurse != 0)
-                {
-                    sb.AppendLine($"Max Curse: +{curseGem.ExtraMaxCurse}");
-                }
-                if (curseGem.ExtraDamage != 0)
-                {
-                    sb.AppendLine($"Damage: +{curseGem.ExtraDamage}");
-                }
-                if (curseGem.ExtraDefence != 0)
-                {
-                    sb.AppendLine($"Defence: +{curseGem.ExtraDefence}");
-                }
+                case WeaponItemSO weapon:
+                    if (weapon.curseAbilityList.Length != 0)
+                    {
+                        sb.AppendLine($"Ability: ");
+                        for (int i = 0; i < weapon.curseAbilityList.Length; i++)
+                        {
+                            var ability = weapon.curseAbilityList[i];
+                            sb.AppendLine($"{i}. {ability.name} | cost: {ability.curseCost}");
+                        }
+                    }
+                    sb.AppendLine($"Weapon Damage: {weapon.Dmage}");
+                    break;
+
+                case ArmourItemSO armour:
+                    sb.AppendLine($"Weapon Defence: {armour.Defence}");
+                    break;
+
+                case AccessoryItemSO accessoryItem:
+                    if (accessoryItem.curseAbilityList.Length != 0)
+                    {
+                        sb.AppendLine($"Ability: ");
+                        for (int i = 0; i < accessoryItem.curseAbilityList.Length; i++)
+                        {
+                            var ability = accessoryItem.curseAbilityList[i];
+                            sb.AppendLine($"{i}. {ability.name} | cost: {ability.curseCost}");
+                        }
+                    }
+                    if (accessoryItem.ExtraMaxHP != 0)
+                    {
+                        sb.AppendLine($"Extra Max HP: {accessoryItem.ExtraMaxHP}");
+                    }
+                    if (accessoryItem.ExtraMaxCurse != 0)
+                    {
+                        sb.AppendLine($"Extra Max Curse: {accessoryItem.ExtraMaxCurse}");
+                    }
+                    if (accessoryItem.ExtraDamage != 0)
+                    {
+                        sb.AppendLine($"Extra Damage: {accessoryItem.ExtraDamage}");
+                    }
+                    if (accessoryItem.ExtraDefence != 0)
+                    {
+                        sb.AppendLine($"Extra Defence: {accessoryItem.ExtraDefence}");
+                    }
+                    if (accessoryItem.MasteryWindowWidthMultiplier != 1)
+                    {
+                        sb.AppendLine($"Mastery Multiplier: {accessoryItem.MasteryWindowWidthMultiplier}");
+                    }
+                    if (accessoryItem.HPRegenPerTurn != 0)
+                    {
+                        sb.AppendLine($"HP Regen Per Turn: {accessoryItem.HPRegenPerTurn}");
+                    }
+                    if (accessoryItem.CSRegenPerTurn != 0)
+                    {
+                        sb.AppendLine($"CS Regen Per Turn: {accessoryItem.CSRegenPerTurn}");
+                    }
+                    break;
+
+                case CurseGemItemSO curseGem:
+                    if (curseGem.ExtraMaxHP != 0)
+                    {
+                        sb.AppendLine($"Extra Max HP: {curseGem.ExtraMaxHP}");
+                    }
+                    if (curseGem.ExtraMaxCurse != 0)
+                    {
+                        sb.AppendLine($"Extra Max Curse: {curseGem.ExtraMaxCurse}");
+                    }
+                    if (curseGem.ExtraDamage != 0)
+                    {
+                        sb.AppendLine($"Extra Damage: {curseGem.ExtraDamage}");
+                    }
+                    if (curseGem.ExtraDefence != 0)
+                    {
+                        sb.AppendLine($"Extra Defence: {curseGem.ExtraDefence}");
+                    }
+                    break;
+
+                case ConsumableItemSO consumable:
+                    if (consumable.Effects.Count != 0)
+                    {
+                        sb.AppendLine($"Effect: ");
+
+                        for (int i = 0; i < consumable.Effects.Count; i++)
+                        {
+                            var effectEntry = consumable.Effects[i];
+
+                            string effectTxt = "";
+                            if (effectEntry.power != 0)
+                                effectTxt = $"{effectEntry.effect}: {effectEntry.power}";
+                            string statusEffectTxt = "";
+                            if (effectEntry.duration != 0)
+                                statusEffectTxt = $"{effectEntry.status}: {effectEntry.duration}";
+
+                            string spliter = "";
+                            if (effectTxt != "" && statusEffectTxt != "")
+                                spliter = " | ";
+
+                            sb.AppendLine($"{i}. {effectTxt}{spliter}{statusEffectTxt}");
+                        }
+                    }
+                    sb.AppendLine($"Target: {consumable.TargetType}");
+                    sb.AppendLine($"Is Single Use: {consumable.ConsumeOnUse}");
+                    break;
+
+                default:
+                    break;
             }
 
-            if (item is ConsumableItemSO consumable)
-            {
-                sb.AppendLine($"Effect: {consumable.Effects} ({consumable.ConsumeOnUse})");
-            }
+
             return sb.Length > 0 ? sb.ToString() : "No additional stats";
         }
 
-        static Sprite TextureToSprite(Texture2D texture)
-        {
-            if (!texture)
-            {
-                return null;
-            }
-            if (!spriteCache.TryGetValue(texture, out Sprite sprite))
-            {
-                sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
-                spriteCache[texture] = sprite;
-            }
-
-            return sprite;
-        }
     }
 }

@@ -787,7 +787,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   player: {fileID: 2087693728}
   follower: {fileID: 1455610210}
-  InventorySceneName: 
+  InventorySceneName: SceneSampleSwap
 --- !u!4 &828279313
 Transform:
   m_ObjectHideFlags: 0

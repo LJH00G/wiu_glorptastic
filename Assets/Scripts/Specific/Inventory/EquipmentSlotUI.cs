@@ -12,8 +12,6 @@ namespace Game.Inventory
         [SerializeField] Image icon;
         [SerializeField] Button clickButton;
 
-        static readonly Dictionary<Texture2D, Sprite> spriteCache = new();
-
         public ItemSO BoundItem { get; private set; }
         public event Action<ItemSO> OnSlotClicked;
 
@@ -34,22 +32,7 @@ namespace Game.Inventory
                 return;
             }
             icon.enabled = item != null;
-            icon.sprite = item ? TextureToSprite(item.Texture) : null;
-        }
-
-        static Sprite TextureToSprite(Texture2D texture)
-        {
-            if (!texture)
-            {
-                return null;
-            }
-            if (!spriteCache.TryGetValue(texture, out Sprite sprite))
-            {
-                sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
-                spriteCache[texture] = sprite;
-            }
-
-            return sprite;
+            icon.sprite = item ? item.Sprite : null;
         }
     }
 }

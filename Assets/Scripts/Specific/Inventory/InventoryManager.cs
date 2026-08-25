@@ -343,6 +343,10 @@ namespace Game.Inventory
             {
                 return EquipWeapon(weapon);
             }
+            if (item is ArmourItemSO armour)
+            {
+                return EquipArmour(armour);
+            }
             if (item is AccessoryItemSO accessory)
             {
                 return EquipAccessory(accessory);
