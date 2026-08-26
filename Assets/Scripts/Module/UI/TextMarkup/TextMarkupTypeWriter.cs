@@ -8,16 +8,23 @@ using UnityEngine;
 [RequireComponent(typeof(TextMeshProUGUI))]
 public class TextMarkupTypeWriter : MonoBehaviour
 {
-    [Header("Event Broadcasting Channel")]
-    public PlaySFXEventChannelSO SFXEventChannel;
-    public PlaySFXEventChannelSO speechSFXEventChannel;
+    [field: Header("Event Broadcasting Channel")]
+    [field: SerializeField]
+    public PlaySFXEventChannelSO SFXEventChannel { get; set; }
+    [field: SerializeField]
+    public PlaySFXEventChannelSO SpeechSFXEventChannel { get; set; }
 
     [Header("Preset Data")]
     [SerializeField] TextMarkupAudioPresetSO speechPresets;
     [SerializeField] TextMarkupAudioPresetSO sfxPresets;
 
+    [Header("Default Text")]
+    [SerializeField] bool useDefaultText;
+    [SerializeField] string defaultText;
 
     [field: Header("Info")]
+    [field: SerializeField, DisplayOnly]
+    public TextMeshProUGUI TMPText { get; private set; }
     [field: SerializeField, DisplayOnly]
     public bool WaitForInput { get; set; }
     [field: SerializeField, DisplayOnly]
@@ -49,7 +56,6 @@ public class TextMarkupTypeWriter : MonoBehaviour
     List<TextMarkupOperation.IndexedCommand> commandList;
 
 
-    TextMeshProUGUI tmpText;
     CharacterVertex[] workingVertices = new CharacterVertex[4];
 
 
@@ -67,14 +73,17 @@ public class TextMarkupTypeWriter : MonoBehaviour
         currentCharacterIndex = -1;
         effectStack.Clear();
 
-        tmpText.text = "";
+        TMPText.text = "";
         canTypeWrite = false;
     }
 
-    public void StartNewTypeWriting(string text)
+    public void StartNewTypeWriting(string text, bool useCustomPrintSpeed = false, float customSpeed = 0)
     {
         ResetTypeWriting();
         canTypeWrite = true;
+
+        if (useCustomPrintSpeed)
+            text = $"<interval time=\"{customSpeed}\"/>" + text + "<end/>";
 
         TextMarkupOperation.SFXPresets = sfxPresets;
         TextMarkupOperation.SpeechPresets = speechPresets;
@@ -82,11 +91,11 @@ public class TextMarkupTypeWriter : MonoBehaviour
         TextMarkupOperation.ProccessMarkup(ref text, out commandList, out List<TextMarkupOperation.IndexedEffect> effectList, out List<int> effectPopList);
 
 
-        tmpText.text = text;
+        TMPText.text = text;
 
 
-        tmpText.ForceMeshUpdate();
-        TMP_TextInfo textInfo = tmpText.textInfo;
+        TMPText.ForceMeshUpdate();
+        TMP_TextInfo textInfo = TMPText.textInfo;
         
         charDataList.Clear();
         charDataList.Capacity = textInfo.characterCount;
@@ -223,9 +232,14 @@ public class TextMarkupTypeWriter : MonoBehaviour
 
     private void Awake()
     {
-        tmpText = GetComponent<TextMeshProUGUI>();
+        TMPText = GetComponent<TextMeshProUGUI>();
     }
 
+    private void Start()
+    {
+        if (useDefaultText)
+            StartNewTypeWriting(defaultText, true);
+    }
 
     private void Update()
     {
@@ -308,7 +322,7 @@ public class TextMarkupTypeWriter : MonoBehaviour
             printTimer = PrintInterval;
 
         // animation
-        TMP_TextInfo textInfo = tmpText.textInfo;
+        TMP_TextInfo textInfo = TMPText.textInfo;
 
         for (int i = 0; i < charDataList.Count; i++)
         {
@@ -347,7 +361,7 @@ public class TextMarkupTypeWriter : MonoBehaviour
             charDataList[i] = charData;
         }
 
-        tmpText.UpdateVertexData(TMP_VertexDataUpdateFlags.Vertices | TMP_VertexDataUpdateFlags.Colors32);
+        TMPText.UpdateVertexData(TMP_VertexDataUpdateFlags.Vertices | TMP_VertexDataUpdateFlags.Colors32);
 
     }
 

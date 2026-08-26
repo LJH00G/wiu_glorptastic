@@ -1,10 +1,12 @@
 
 using Game.SO.Behaviour.EntityOverworld.InstanceData;
+using System;
 using UnityEngine;
 
 
 namespace Game.SO.Behaviour.EntityOverworld.InstanceData
 {
+    [Serializable]
     public class FollowObjectOverworldBehaviourInstanceData : EntityOverworldBehaviourInstanceData
     {
         public Transform targetForm;
@@ -18,7 +20,7 @@ namespace Game.SO.Behaviour.EntityOverworld
     public class FollowObjectOverworldBehaviourSO : NPCOverworldBehaviourSO
     {
         [Header("Follow Object")]
-        [SerializeField] float followDist;
+        [SerializeField] float followDistMult;
         [SerializeField] bool defaultTargetsPlayer;
 
 
@@ -30,11 +32,11 @@ namespace Game.SO.Behaviour.EntityOverworld
             controller.AIPath.orientation = Pathfinding.OrientationMode.YAxisForward;
             controller.AIPath.maxSpeed = speed;
             controller.AIPath.maxAcceleration = acceleration;
-            controller.AIPath.pickNextWaypointDist = followDist * 1.5f;
-            controller.AIPath.slowdownDistance = followDist * 1.5f;
-            controller.AIPath.endReachedDistance = followDist;
+            controller.AIPath.pickNextWaypointDist = controller.Radius * 3 * followDistMult;
+            controller.AIPath.slowdownDistance = controller.Radius * 4 * followDistMult;
+            controller.AIPath.endReachedDistance = controller.Radius * 2 * followDistMult;
 
-            if (defaultTargetsPlayer)
+            if (defaultTargetsPlayer && controller.InstanceData != null)
                 ((FollowObjectOverworldBehaviourInstanceData)controller.InstanceData).targetForm = GameManager.Player.transform;
         }
 

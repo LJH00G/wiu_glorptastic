@@ -14,5 +14,11 @@ namespace Game.SO.Data.Item
         public int ExtraDamage { get; private set; }
         [field: SerializeField]
         public int ExtraDefence { get; private set; }
+        [field: SerializeField]
+        public float MasteryWindowWidthMultiplier { get; private set; } = 1f;
+        [field: SerializeField]
+        public int HPRegenPerTurn { get; private set; }
+        [field: SerializeField]
+        public int CSRegenPerTurn { get; private set; }
     }
 }

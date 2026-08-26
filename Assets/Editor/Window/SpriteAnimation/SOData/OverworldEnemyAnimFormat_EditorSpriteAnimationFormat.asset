@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7b6934144decd644ab713db792afca3, type: 3}
+  m_Name: OverworldEnemyAnimFormat_EditorSpriteAnimationFormat
+  m_EditorClassIdentifier: Assembly-CSharp-Editor::SpriteAnimationFormatSO
+  <AnimationSuffix>k__BackingField: 
+  <FrameRate>k__BackingField: 30
+  <Loop>k__BackingField: 1
+  <KeyDefinitions>k__BackingField:
+  - spriteIndex: 0
+    frames: 1
+  <RepetitionSuffixes>k__BackingField:
+  - Right
+  - Left
+  <RepetitionSpriteIndexGapSpacing>k__BackingField: 0
+  <RepetitionSpriteIndexActualOffset>k__BackingField: 1

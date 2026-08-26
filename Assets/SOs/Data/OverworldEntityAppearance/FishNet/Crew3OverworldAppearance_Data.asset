@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04105dac61d86214f9e03980de04fefd, type: 3}
+  m_Name: Crew3OverworldAppearance_Data
+  m_EditorClassIdentifier: Assembly-CSharp::OverworldEntityAppearanceSO
+  <AnimCtrller>k__BackingField: {fileID: 9100000, guid: 0a33772d44f498b42b3c869b42a71f08, type: 2}
+  <DefaultSprite>k__BackingField: {fileID: 2095581748, guid: 90ad1fc3f2ac2bf4e8016ae0bba10629, type: 3}

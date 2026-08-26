@@ -8,10 +8,17 @@ public static class RunClueChecker
         int current = 0;
         foreach (bool filled in filledCells)
         {
-            if (filled) current++;
-            else if (current > 0) { actualRuns.Add(current); current = 0; }
+            if (filled) 
+                current++;
+
+            else if (current > 0) 
+            { 
+                actualRuns.Add(current); 
+                current = 0; 
+            }
         }
-        if (current > 0) actualRuns.Add(current);
+        if (current > 0) 
+            actualRuns.Add(current);
 
         if (actualRuns.Count != expectedRuns.Length) 
             return false;

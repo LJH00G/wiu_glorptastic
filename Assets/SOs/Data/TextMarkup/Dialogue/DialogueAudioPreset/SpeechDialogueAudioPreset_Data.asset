@@ -16,6 +16,12 @@ MonoBehaviour:
     serializableList:
     - key: Player
       value: {fileID: 8300000, guid: 53ed08031de58534d9eafd1c8ab15dc8, type: 3}
+    - key: DinoMike
+      value: {fileID: 8300000, guid: 428cfad45c81ce648921fdd289253561, type: 3}
+    - key: PiaoFu
+      value: {fileID: 8300000, guid: 3ccd021508c815f4c800a9ddeac9f240, type: 3}
+    - key: NoahLedge
+      value: {fileID: 8300000, guid: 1d55ddbabd6e24146bae9f039bc13287, type: 3}
     - key: Sans
       value: {fileID: 8300000, guid: f4219ad9d433c1d49bda1656847c6b8f, type: 3}
     - key: Narrator
