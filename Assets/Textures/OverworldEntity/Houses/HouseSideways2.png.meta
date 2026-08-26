@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 001641c3d37e8554c93fe6809594a8b3
+guid: cef06809ee4efd544a607135b69ae70b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 3699393556198472868
-    second: Blacksmith1_0
+      213: 2969856159962946194
+    second: HouseSideways2_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -126,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Blacksmith1_0
+      name: HouseSideways2_0
       rect:
         serializedVersion: 2
-        x: 9
-        y: 73
-        width: 238
-        height: 130
+        x: 35
+        y: 0
+        width: 186
+        height: 245
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +141,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 4ac3491d6d2e65330800000000000000
-      internalID: 3699393556198472868
+      spriteID: 29ad898417c073920800000000000000
+      internalID: 2969856159962946194
       vertices: []
       indices: 
       edges: []
@@ -161,7 +161,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Blacksmith1_0: 3699393556198472868
+      HouseSideways2_0: 2969856159962946194
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
