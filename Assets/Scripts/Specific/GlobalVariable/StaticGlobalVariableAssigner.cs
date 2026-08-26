@@ -8,15 +8,15 @@ namespace Game.GlobalVariable
     [DefaultExecutionOrder(-99999)]
     public class StaticGlobalVariableAssigner : MonoBehaviour
     {
-        [SerializeField]
-        PlayerLoadoutSO playerLoadout;
-        [SerializeField]
-        FollowObjectOverworldBehaviourSO followerBehaviour;
+        [SerializeField] PlayerLoadoutSO playerLoadout;
+        [SerializeField] FollowObjectOverworldBehaviourSO followerBehaviour;
+        [SerializeField] ToastEventChannelSO toastEventChannel;
 
         private void Awake()
         {
             StaticGlobalVariable.PlayerLoadout = playerLoadout;
             StaticGlobalVariable.FollowerBehaviour = followerBehaviour;
+            StaticGlobalVariable.ToastEventChannel = toastEventChannel;
         }
 
 #if UNITY_EDITOR
@@ -31,5 +31,6 @@ namespace Game.GlobalVariable
     {
         static public PlayerLoadoutSO PlayerLoadout { get; set; }
         static public FollowObjectOverworldBehaviourSO FollowerBehaviour { get; set; }
+        static public ToastEventChannelSO ToastEventChannel { get; set; }
     }
 }

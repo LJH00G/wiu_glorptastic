@@ -1302,7 +1302,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &194182321
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2622,6 +2622,108 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 436545430}
   m_CullTransparentMesh: 1
+--- !u!1 &459588361
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 459588365}
+  - component: {fileID: 459588364}
+  - component: {fileID: 459588363}
+  - component: {fileID: 459588362}
+  m_Layer: 5
+  m_Name: Canvas_toast
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &459588362
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 459588361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.GraphicRaycaster
+  m_IgnoreReversedGraphics: 1
+  m_BlockingObjects: 0
+  m_BlockingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+--- !u!114 &459588363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 459588361}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.CanvasScaler
+  m_UiScaleMode: 1
+  m_ReferencePixelsPerUnit: 100
+  m_ScaleFactor: 1
+  m_ReferenceResolution: {x: 1920, y: 1080}
+  m_ScreenMatchMode: 0
+  m_MatchWidthOrHeight: 0
+  m_PhysicalUnit: 3
+  m_FallbackScreenDPI: 96
+  m_DefaultSpriteDPI: 96
+  m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
+--- !u!223 &459588364
+Canvas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 459588361}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_RenderMode: 0
+  m_Camera: {fileID: 0}
+  m_PlaneDistance: 100
+  m_PixelPerfect: 0
+  m_ReceivesEvents: 1
+  m_OverrideSorting: 0
+  m_OverridePixelPerfect: 0
+  m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
+  m_AdditionalShaderChannelsFlag: 25
+  m_UpdateRectTransformForStandalone: 0
+  m_SortingLayerID: 0
+  m_SortingOrder: 2
+  m_TargetDisplay: 0
+--- !u!224 &459588365
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 459588361}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1942221287}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0, y: 0}
 --- !u!1 &467328155
 GameObject:
   m_ObjectHideFlags: 0
@@ -3171,12 +3273,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4d76fc43ed00fd4d99b26ce80d72e68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextMarkupTypeWriter
-  SFXEventChannel: {fileID: 11400000, guid: 692bad48a20fddf448c41da6c0212144, type: 2}
-  speechSFXEventChannel: {fileID: 11400000, guid: 692bad48a20fddf448c41da6c0212144, type: 2}
+  <SFXEventChannel>k__BackingField: {fileID: 0}
+  <SpeechSFXEventChannel>k__BackingField: {fileID: 0}
   speechPresets: {fileID: 11400000, guid: 6394698099c217e4f964ea8a214ab042, type: 2}
   sfxPresets: {fileID: 11400000, guid: 92e05db07ec9ab442a4ca5fcf0259198, type: 2}
   useDefaultText: 0
   defaultText: 
+  <TMPText>k__BackingField: {fileID: 0}
   <WaitForInput>k__BackingField: 0
   <ReachedEnd>k__BackingField: 0
   <PrintInterval>k__BackingField: 0
@@ -3616,12 +3719,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4d76fc43ed00fd4d99b26ce80d72e68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextMarkupTypeWriter
-  SFXEventChannel: {fileID: 11400000, guid: 692bad48a20fddf448c41da6c0212144, type: 2}
-  speechSFXEventChannel: {fileID: 11400000, guid: 692bad48a20fddf448c41da6c0212144, type: 2}
+  <SFXEventChannel>k__BackingField: {fileID: 0}
+  <SpeechSFXEventChannel>k__BackingField: {fileID: 0}
   speechPresets: {fileID: 11400000, guid: 6394698099c217e4f964ea8a214ab042, type: 2}
   sfxPresets: {fileID: 11400000, guid: 92e05db07ec9ab442a4ca5fcf0259198, type: 2}
   useDefaultText: 0
   defaultText: 
+  <TMPText>k__BackingField: {fileID: 0}
   <WaitForInput>k__BackingField: 0
   <ReachedEnd>k__BackingField: 0
   <PrintInterval>k__BackingField: 0
@@ -7313,12 +7417,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4d76fc43ed00fd4d99b26ce80d72e68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextMarkupTypeWriter
-  SFXEventChannel: {fileID: 11400000, guid: 692bad48a20fddf448c41da6c0212144, type: 2}
-  speechSFXEventChannel: {fileID: 11400000, guid: 692bad48a20fddf448c41da6c0212144, type: 2}
+  <SFXEventChannel>k__BackingField: {fileID: 0}
+  <SpeechSFXEventChannel>k__BackingField: {fileID: 0}
   speechPresets: {fileID: 11400000, guid: 6394698099c217e4f964ea8a214ab042, type: 2}
   sfxPresets: {fileID: 11400000, guid: 92e05db07ec9ab442a4ca5fcf0259198, type: 2}
   useDefaultText: 0
   defaultText: 
+  <TMPText>k__BackingField: {fileID: 0}
   <WaitForInput>k__BackingField: 0
   <ReachedEnd>k__BackingField: 0
   <PrintInterval>k__BackingField: 0
@@ -7664,6 +7769,41 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1658681219}
   m_CullTransparentMesh: 1
+--- !u!1 &1660041542
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1660041543}
+  m_Layer: 5
+  m_Name: ToastContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1660041543
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1660041542}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1942221287}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 1, y: 0}
 --- !u!1 &1687939251
 GameObject:
   m_ObjectHideFlags: 0
@@ -8039,7 +8179,7 @@ GameObject:
   - component: {fileID: 1719542493}
   - component: {fileID: 1719542492}
   m_Layer: 5
-  m_Name: Canvas
+  m_Name: Canvas_textbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8400,12 +8540,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4d76fc43ed00fd4d99b26ce80d72e68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextMarkupTypeWriter
-  SFXEventChannel: {fileID: 11400000, guid: 692bad48a20fddf448c41da6c0212144, type: 2}
-  speechSFXEventChannel: {fileID: 11400000, guid: 692bad48a20fddf448c41da6c0212144, type: 2}
+  <SFXEventChannel>k__BackingField: {fileID: 0}
+  <SpeechSFXEventChannel>k__BackingField: {fileID: 0}
   speechPresets: {fileID: 11400000, guid: 6394698099c217e4f964ea8a214ab042, type: 2}
   sfxPresets: {fileID: 11400000, guid: 92e05db07ec9ab442a4ca5fcf0259198, type: 2}
   useDefaultText: 0
   defaultText: 
+  <TMPText>k__BackingField: {fileID: 0}
   <WaitForInput>k__BackingField: 0
   <ReachedEnd>k__BackingField: 0
   <PrintInterval>k__BackingField: 0
@@ -8896,6 +9037,69 @@ MonoBehaviour:
       value: 0
     - key: 4
       value: 1
+--- !u!1 &1942221286
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1942221287}
+  - component: {fileID: 1942221288}
+  m_Layer: 5
+  m_Name: Toast
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1942221287
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1942221286}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1660041543}
+  m_Father: {fileID: 459588365}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1000, y: 540}
+  m_Pivot: {x: 1, y: 0}
+--- !u!114 &1942221288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1942221286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8433b32d10345be4a8d7420f2464e7cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ToastManager
+  toastEventChannel: {fileID: 11400000, guid: 7d499434d770b984db13a3f687b6bd45, type: 2}
+  toastContainer: {fileID: 1660041543}
+  toastPrefab: {fileID: 6676075361149061184, guid: 265726e5d2a005141a66a461ec957fee, type: 3}
+  disappearTime: 5
+  disappearFadeStartTime: 3
+  alphaFadeStartIndex: 5
+  alphaFadeEndIndex: 10
+  smoothFactor_inv: 7.5
+  offset: {x: 10, y: 25}
+  gap: 35
+  bufferTime: 0.1
+  bufferTimer: 0
+  bufferedToast: []
+  managedToast: []
 --- !u!1 &2014968303
 GameObject:
   m_ObjectHideFlags: 0
@@ -9188,12 +9392,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4d76fc43ed00fd4d99b26ce80d72e68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextMarkupTypeWriter
-  SFXEventChannel: {fileID: 11400000, guid: 692bad48a20fddf448c41da6c0212144, type: 2}
-  speechSFXEventChannel: {fileID: 11400000, guid: 692bad48a20fddf448c41da6c0212144, type: 2}
+  <SFXEventChannel>k__BackingField: {fileID: 0}
+  <SpeechSFXEventChannel>k__BackingField: {fileID: 0}
   speechPresets: {fileID: 11400000, guid: 6394698099c217e4f964ea8a214ab042, type: 2}
   sfxPresets: {fileID: 11400000, guid: 92e05db07ec9ab442a4ca5fcf0259198, type: 2}
   useDefaultText: 0
   defaultText: 
+  <TMPText>k__BackingField: {fileID: 0}
   <WaitForInput>k__BackingField: 0
   <ReachedEnd>k__BackingField: 0
   <PrintInterval>k__BackingField: 0
@@ -9824,6 +10029,7 @@ SceneRoots:
   - {fileID: 533421447}
   - {fileID: 1538157830}
   - {fileID: 1719542495}
+  - {fileID: 459588365}
   - {fileID: 322814028}
   - {fileID: 1937559901}
   - {fileID: 2014968304}
