@@ -10,7 +10,7 @@ public class FlagObjectManager : MonoBehaviour
         Remove,
         Add
     }
-
+    [System.Serializable]
     public class Flag
     {
         public string name;

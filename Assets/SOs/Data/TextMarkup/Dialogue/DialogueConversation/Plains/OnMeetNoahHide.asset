@@ -27,4 +27,4 @@ MonoBehaviour:
     endAction: {fileID: 0}
   - speaker: {fileID: 11400000, guid: 820cb9029b4ac8443b18636ed7bd5bb4, type: 2}
     text: Hold on, I'll get you out! <input/> <end/>
-    endAction: {fileID: 0}
+    endAction: {fileID: 11400000, guid: 1249f26d3f3c93a46a6bb95bd4f4e3bf, type: 2}

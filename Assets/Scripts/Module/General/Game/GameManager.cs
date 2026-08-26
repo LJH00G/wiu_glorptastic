@@ -90,6 +90,18 @@ namespace Game
             CurrentUserData = userData;
         }
 
+        static public void SetFlag(string key, bool value = true)
+        {
+            CurrentUserData.Flags[key] = value;
+        }
+
+        //creates the flag with defaultValue if it doesn't exist yet; leaves an existing value untouched
+        static public void EnsureFlag(string key, bool defaultValue = false)
+        {
+            if (!CurrentUserData.Flags.dict.ContainsKey(key))
+                CurrentUserData.Flags[key] = defaultValue;
+        }
+
         static public void SetCanInteract(bool canInteract)
         {
             CanInteract = canInteract;

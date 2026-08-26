@@ -595,7 +595,139 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FlagObjectManager
   flagObjectDictionary:
-    serializableList: []
+    serializableList:
+    - key:
+        name: 
+        status: 0
+        answered: 0
+        action: 0
+        transform: {fileID: 0}
+      value: {fileID: 0}
+--- !u!1 &206040545
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 206040546}
+  - component: {fileID: 206040548}
+  - component: {fileID: 206040547}
+  m_Layer: 10
+  m_Name: Interact DialogueCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &206040546
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 206040545}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -25.55, y: 31.24, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 267710966}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &206040547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 206040545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a048d282cfaf38548b1c736d60ad4476, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Interactable.TriggerHandler.Mass.DialogueTriggerHandler
+  <RequiresInteraction>k__BackingField: 1
+  offset: {x: 0, y: 0}
+  size: {x: 3.33, y: 3.22}
+  triggerCollider: {fileID: 206040548}
+  lockTimeAfterTrigger: 0
+  lockTimer: 0
+  defaultTriggerSequence:
+    index: 0
+    triggerables: []
+    cycleToStartWhenExhausted: 0
+    useExhaustedTriggerable: 0
+    exhaustedTriggerable:
+      type: {fileID: 0}
+      flag:
+        key: 
+        value: 0
+  flagOverrideTriggerSequences:
+    serializableList:
+    - key: NoahStuck
+      value:
+        index: 0
+        triggerables:
+        - type: {fileID: 11400000, guid: 24df7816374eda94f975e2297c1f810e, type: 2}
+          flag:
+            key: 
+            value: 0
+        cycleToStartWhenExhausted: 0
+        useExhaustedTriggerable: 0
+        exhaustedTriggerable:
+          type: {fileID: 0}
+          flag:
+            key: NoahStuck
+            value: 0
+  dialogueConversationEventChannel: {fileID: 11400000, guid: 44508743f5b9d8341ab1fa10572170f0, type: 2}
+--- !u!61 &206040548
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 206040545}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 3.33, y: 3.22}
+  m_EdgeRadius: 0
 --- !u!1 &234429825
 GameObject:
   m_ObjectHideFlags: 0
@@ -39217,61 +39349,8 @@ Transform:
   - {fileID: 2117768433}
   - {fileID: 1123762349}
   - {fileID: 1256895797}
+  - {fileID: 206040546}
   m_Father: {fileID: 1267852725}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &291176229
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 291176231}
-  - component: {fileID: 291176230}
-  m_Layer: 0
-  m_Name: NPCMovePointsManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &291176230
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 291176229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fcfbff2635a1334f8c7e255884bf6fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::OverworldNPCMovePointsManager
-  <MovePointsList>k__BackingField:
-    serializableList:
-    - key: test
-      value:
-        points:
-        - {x: -5, y: 2}
-        - {x: 5, y: -2}
-        - {x: 5, y: 2}
-        - {x: -5, y: -2}
-        debugColor: {r: 0, g: 0, b: 1, a: 1}
---- !u!4 &291176231
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 291176229}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 23.17468, y: 7.45396, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 953472293}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &297790962
 GameObject:
@@ -77496,7 +77575,7 @@ MonoBehaviour:
   lockTimeAfterTrigger: 2
   lockTimer: 0
   triggerable:
-    type: {fileID: 0}
+    type: {fileID: 11400000, guid: e59ef64d119fe3b4283100ebd927348e, type: 2}
     flag:
       key: 
       value: 0
@@ -127784,6 +127863,7 @@ GameObject:
   m_Component:
   - component: {fileID: 828279313}
   - component: {fileID: 828279312}
+  - component: {fileID: 828279314}
   m_Layer: 0
   m_Name: GameIniter
   m_TagString: Untagged
@@ -127805,6 +127885,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   player: {fileID: 2087693728}
   follower: {fileID: 1455610210}
+  Flags:
+  - SeenNoahTutorial
 --- !u!4 &828279313
 Transform:
   m_ObjectHideFlags: 0
@@ -127820,6 +127902,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1651286639}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &828279314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 828279311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c51fe8e16a6c794ea2dab11143e1b40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameIniter_test
+  buddyData: {fileID: 0}
 --- !u!1 &838927108
 GameObject:
   m_ObjectHideFlags: 0
@@ -128191,7 +128286,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 291176231}
   - {fileID: 438083891}
   - {fileID: 1970705965}
   - {fileID: 460586716}
@@ -128797,10 +128891,10 @@ MonoBehaviour:
   defaultTriggerSequence:
     index: 0
     triggerables:
-    - type: {fileID: 0}
+    - type: {fileID: 11400000, guid: b2093b33001a6494e811bbd98457120e, type: 2}
       flag:
-        key: 
-        value: 0
+        key: SeenNoahTutorial
+        value: 1
     cycleToStartWhenExhausted: 0
     useExhaustedTriggerable: 0
     exhaustedTriggerable:
@@ -128809,7 +128903,18 @@ MonoBehaviour:
         key: 
         value: 0
   flagOverrideTriggerSequences:
-    serializableList: []
+    serializableList:
+    - key: SeenNoahTutorial
+      value:
+        index: 0
+        triggerables: []
+        cycleToStartWhenExhausted: 0
+        useExhaustedTriggerable: 0
+        exhaustedTriggerable:
+          type: {fileID: 0}
+          flag:
+            key: 
+            value: 0
   dialogueConversationEventChannel: {fileID: 11400000, guid: 44508743f5b9d8341ab1fa10572170f0, type: 2}
 --- !u!61 &1256895799
 BoxCollider2D:
@@ -129249,6 +129354,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Follower
       objectReference: {fileID: 0}
+    - target: {fileID: 5511489128047036267, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6473455761877912804, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.6
@@ -129687,51 +129796,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1573169785
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1573169787}
-  - component: {fileID: 1573169786}
-  m_Layer: 0
-  m_Name: GameIniter_test
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1573169786
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1573169785}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c51fe8e16a6c794ea2dab11143e1b40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  buddyData: {fileID: 11400000, guid: 62a1b6e6c4070ec419c2cc7a1fd6b168, type: 2}
---- !u!4 &1573169787
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1573169785}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 23.17468, y: 7.45396, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1651286639}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1607528516
 GameObject:
   m_ObjectHideFlags: 0
@@ -129782,8 +129846,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4d76fc43ed00fd4d99b26ce80d72e68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextMarkupTypeWriter
-  <SFXEventChannel>k__BackingField: {fileID: 0}
-  <SpeechSFXEventChannel>k__BackingField: {fileID: 0}
+  <SFXEventChannel>k__BackingField: {fileID: 11400000, guid: 692bad48a20fddf448c41da6c0212144, type: 2}
+  <SpeechSFXEventChannel>k__BackingField: {fileID: 11400000, guid: 692bad48a20fddf448c41da6c0212144, type: 2}
   speechPresets: {fileID: 11400000, guid: 6394698099c217e4f964ea8a214ab042, type: 2}
   sfxPresets: {fileID: 11400000, guid: 92e05db07ec9ab442a4ca5fcf0259198, type: 2}
   useDefaultText: 0
@@ -130175,7 +130239,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1573169787}
   - {fileID: 828279313}
   m_Father: {fileID: 815766574}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -130750,7 +130813,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5.625
+  orthographic size: 2.9583333
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -130775,7 +130838,7 @@ Transform:
   m_GameObject: {fileID: 1731050904}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.838917, y: 0, z: -10}
+  m_LocalPosition: {x: -6.19846, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -131141,8 +131204,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4d76fc43ed00fd4d99b26ce80d72e68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextMarkupTypeWriter
-  <SFXEventChannel>k__BackingField: {fileID: 0}
-  <SpeechSFXEventChannel>k__BackingField: {fileID: 0}
+  <SFXEventChannel>k__BackingField: {fileID: 11400000, guid: 692bad48a20fddf448c41da6c0212144, type: 2}
+  <SpeechSFXEventChannel>k__BackingField: {fileID: 11400000, guid: 692bad48a20fddf448c41da6c0212144, type: 2}
   speechPresets: {fileID: 11400000, guid: 6394698099c217e4f964ea8a214ab042, type: 2}
   sfxPresets: {fileID: 11400000, guid: 92e05db07ec9ab442a4ca5fcf0259198, type: 2}
   useDefaultText: 0
@@ -131604,7 +131667,7 @@ Transform:
   m_GameObject: {fileID: 2053809404}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -29.11, y: 102.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -131624,7 +131687,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.Interactable.TriggerHandler.Single.TeleportTriggerHandler
   <RequiresInteraction>k__BackingField: 0
   offset: {x: 0, y: 0}
-  size: {x: 1, y: 1}
+  size: {x: 3.45, y: 0.2}
   triggerCollider: {fileID: 2053809407}
   lockTimeAfterTrigger: 0
   lockTimer: 0
@@ -131680,7 +131743,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 3.45, y: 0.2}
   m_EdgeRadius: 0
 --- !u!1 &2065278007
 GameObject:

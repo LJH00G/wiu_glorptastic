@@ -33,7 +33,7 @@ namespace Game.Interactable.TriggerHandler.Single
             string flagOverrideKey = "";
             foreach (var entry in flagOverrideTriggerables.dict)
             {
-                if (GameManager.CurrentUserData.Flags[entry.Key])
+                if (GameManager.CurrentUserData.Flags.dict.TryGetValue(entry.Key, out bool flagSet) && flagSet)
                 {
                     flagOverrideKey = entry.Key;
                     useFlagOverride = true;
@@ -63,23 +63,6 @@ namespace Game.Interactable.TriggerHandler.Single
         protected override void OnValidate()
         {
             base.OnValidate();
-
-            if (!string.IsNullOrEmpty(triggerable.flag.key) && !GameManager.CurrentUserData.Flags.dict.ContainsKey(triggerable.flag.key))
-                Debug.LogError($"triggerable contains invalid flag", this);
-
-            foreach (var entry in flagOverrideTriggerables.dict)
-            {
-                if (!GameManager.CurrentUserData.Flags.dict.ContainsKey(entry.Key))
-                {
-                    Debug.LogError($"flagOverrideTriggerables contains invalid flag", this);
-                }
-
-                if (!string.IsNullOrEmpty(entry.Value.flag.key) && !GameManager.CurrentUserData.Flags.dict.ContainsKey(entry.Value.flag.key))
-                {
-                    Debug.LogError($"flagOverrideTriggerables contains entry that has value with invalid flag", this);
-                }
-            }
-
         }
 #endif
     }

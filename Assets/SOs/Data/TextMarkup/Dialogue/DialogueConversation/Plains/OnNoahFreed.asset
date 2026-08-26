@@ -26,5 +26,5 @@ MonoBehaviour:
       I found some materials before getting stuck there! <input/> <end/>
     endAction: {fileID: 11400000, guid: ee64de4943c3aa84f8d594c98cf243c1, type: 2}
   - speaker: {fileID: 11400000, guid: 7f46410b7dc996640a3ba4dba065afd4, type: 2}
-    text: Here's my thanks! Now, lead the way!
+    text: Here's my thanks! Now, lead the way! <input/> <end/>
     endAction: {fileID: 0}
