@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Game;
+using Game.TPManager;
 
 public class SaveFlowController : MonoBehaviour
 {
@@ -12,6 +13,13 @@ public class SaveFlowController : MonoBehaviour
     [Header("New Game Defaults")]
     [SerializeField] string newGameSceneName;
     [SerializeField] string newGameCheckpointID;
+
+    [Header("Respawn Teleport")]
+    [SerializeField] float respawnFadeTime = 0.5f;
+
+    [Header("Screen Fade")]
+    [SerializeField] ScreenFader screenFader;
+    [SerializeField] float sceneTransitionFadeOutTime = 0.5f;
 
     static SaveFlowController instance;
 
@@ -61,6 +69,12 @@ public class SaveFlowController : MonoBehaviour
 
     IEnumerator LoadSceneAndRespawn(string sceneName, string checkpointID)
     {
+        if (screenFader)
+        {
+            screenFader.FadeIn();
+            yield return new WaitForSeconds(sceneTransitionFadeOutTime);
+        }
+
         var op = SceneManager.LoadSceneAsync(sceneName);
         while (!op.isDone)
         {
@@ -70,22 +84,51 @@ public class SaveFlowController : MonoBehaviour
 
         if (!GameManager.Player)
         {
-            Debug.LogWarning("SaveFlowController.LoadSceneAndRespawn() | scene loaded but GameManager.Player is still null, cannot position player");
-            yield break;
+            Debug.LogWarning("SaveFlowController.LoadSceneAndRespawn() | scene loaded but GameManager.Player is still null, cannot respawn player");
         }
-
-        var checkpoints = FindObjectsOfType<SaveCheckpointTrigger>();
-        foreach (var checkpoint in checkpoints)
+        else
         {
-            if (checkpoint.CheckpointID != checkpointID)
+            bool foundCheckpoint = false;
+            var checkpoints = FindObjectsOfType<SaveCheckpointTrigger>();
+
+            foreach (var checkpoint in checkpoints)
             {
-                continue;
+                if (checkpoint.CheckpointID != checkpointID)
+                {
+                    continue;
+                }
+                foundCheckpoint = true;
+                TPManager tpManager = FindObjectOfType<TPManager>();
+
+                if (tpManager)
+                {
+                    TPDefinition respawnDefinition = new TPDefinition
+                    {
+                        position = checkpoint.transform.position,
+                        time = respawnFadeTime
+                    };
+
+                    yield return tpManager.Teleport(respawnDefinition);
+                    Debug.Log($"SaveFlowController.LoadSceneAndRespawn() | teleported to checkpoint {checkpointID} via TPManager");
+                }
+                else
+                {
+                    Debug.LogWarning("SaveFlowController.LoadSceneAndRespawn() | no TPManager found in scene, falling back to instant position set");
+                    GameManager.Player.transform.position = checkpoint.transform.position;
+                }
+
+                break;
             }
-            GameManager.Player.transform.position = checkpoint.transform.position;
-            Debug.Log($"SaveFlowController.LoadSceneAndRespawn() | positioned player at checkpoint {checkpointID}");
-            yield break;
+
+            if (!foundCheckpoint)
+            {
+                Debug.LogWarning($"SaveFlowController.LoadSceneAndRespawn() | no checkpoint found matching ID '{checkpointID}' in scene '{sceneName}'");
+            }
         }
 
-        Debug.LogWarning($"SaveFlowController.LoadSceneAndRespawn() | no checkpoint found matching ID '{checkpointID}' in scene '{sceneName}'");
+        if (screenFader)
+        {
+            screenFader.FadeOut();
+        }
     }
 }
