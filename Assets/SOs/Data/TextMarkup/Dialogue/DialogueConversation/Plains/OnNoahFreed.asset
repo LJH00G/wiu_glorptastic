@@ -16,7 +16,7 @@ MonoBehaviour:
   - speaker: {fileID: 11400000, guid: ce3680aada77f414aba59c7b11af061c, type: 2}
     text: After a struggle, you manage to get the person out of the log <input/>
       <end/>
-    endAction: {fileID: 0}
+    endAction: {fileID: 11400000, guid: c01a7d9f145b4391acad3a09fce3eac3, type: 2}
   - speaker: {fileID: 11400000, guid: 7f46410b7dc996640a3ba4dba065afd4, type: 2}
     text: Thank You! I was in there for quite some time! <input/> Say, I dont exactly
       recognise you<interval time="0.1"/> ... <input/> <end/>
@@ -27,4 +27,4 @@ MonoBehaviour:
     endAction: {fileID: 11400000, guid: ee64de4943c3aa84f8d594c98cf243c1, type: 2}
   - speaker: {fileID: 11400000, guid: 7f46410b7dc996640a3ba4dba065afd4, type: 2}
     text: Here's my thanks! Now, lead the way! <input/> <end/>
-    endAction: {fileID: 0}
+    endAction: {fileID: 11400000, guid: 1216e8bf0f8144908d78b867ceb0cff7, type: 2}

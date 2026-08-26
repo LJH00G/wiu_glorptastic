@@ -62,6 +62,7 @@ public class UserData
         }
         CurrentEquipedBuddy = buddyData;
         EntityOverworldController controller = GameManager.Follower.GetComponent<EntityOverworldController>();
+        controller.gameObject.SetActive(true);
         controller.SetAppearance(CurrentEquipedBuddy.OverworldAppearance);
         controller.SetBehaviour(StaticGlobalVariable.FollowerBehaviour);
     }

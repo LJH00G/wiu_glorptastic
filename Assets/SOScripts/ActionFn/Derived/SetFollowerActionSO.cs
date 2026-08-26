@@ -1,25 +1,12 @@
-using System;
 using UnityEngine;
-using Game.SO.Data.Item;
-using Game.Inventory;
+using Game.SO.Data.Buddy;
 
 namespace Game.SO.ActionFn
 {
     [CreateAssetMenu(fileName = "SetFollower", menuName = "Scriptable Objects/ActionFn/SetFollower")]
     public class SetFollowerActionSO : ActionSO
     {
-        public GameObject follower;
-        public Vector3 location;
-        public override void Invoke()
-        {
-            follower.transform.position = location;
-
-            Instantiate(follower);
-
-            GameManager.SetFollower(follower);
-
-
-        }
+        [SerializeField] BuddyDataSO buddy;
+        public override void Invoke() => GameManager.CurrentUserData.SetCurrentBuddy(buddy);
     }
-    
 }

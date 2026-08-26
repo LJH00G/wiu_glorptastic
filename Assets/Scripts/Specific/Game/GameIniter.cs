@@ -15,6 +15,8 @@ public class GameIniter : MonoBehaviour
     {
         GameManager.SetPlayer(player);
         GameManager.SetFollower(follower);
+        if (GameManager.CurrentUserData.CurrentEquipedBuddy)
+            GameManager.CurrentUserData.SetCurrentBuddy(GameManager.CurrentUserData.CurrentEquipedBuddy);
         InventoryManager.ManageInventory(GameManager.CurrentUserData.Inventory);
         GameManager.SetGameState(GAME_STATE.OVERWORLD);
         GameManager.SetOverWorldState(OVERWORLD_STATE.GENERAL);

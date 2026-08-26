@@ -597,12 +597,12 @@ MonoBehaviour:
   flagObjectDictionary:
     serializableList:
     - key:
-        name: 
+        name: NoahVisible
         status: 0
         answered: 0
-        action: 0
-        transform: {fileID: 0}
-      value: {fileID: 0}
+        action: 1
+        transform: {fileID: 206040546}
+      value: {fileID: 5511489128047036267, guid: 44f12f1f874743d68a576cf4dbc44de7, type: 3}
 --- !u!1 &206040545
 GameObject:
   m_ObjectHideFlags: 0
@@ -630,7 +630,7 @@ Transform:
   m_GameObject: {fileID: 206040545}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -25.55, y: 31.24, z: 0}
+  m_LocalPosition: {x: -1, y: 0.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -128291,6 +128291,7 @@ Transform:
   - {fileID: 460586716}
   - {fileID: 1352289981}
   - {fileID: 148182056}
+  - {fileID: 1168715118}
   m_Father: {fileID: 815766574}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1085842139
@@ -128732,6 +128733,52 @@ MonoBehaviour:
     pivotPointRoot: {fileID: 0}
     spreadOutCount: 1
   showGraphs: 1
+--- !u!1 &1168715117
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1168715118}
+  - component: {fileID: 1168715119}
+  m_Layer: 0
+  m_Name: MovePointManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1168715118
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1168715117}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 953472293}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1168715119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1168715117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fcfbff2635a1334f8c7e255884bf6fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.GlobalVariable.OverworldNPCMovePoints.OverworldNPCMovePointsManager
+  <MovePointsList>k__BackingField:
+    serializableList: []
 --- !u!1 &1193187911
 GameObject:
   m_ObjectHideFlags: 0
@@ -129338,13 +129385,17 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1713845868}
     m_Modifications:
+    - target: {fileID: 5511489128047036267, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2380481618570473884, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: offset
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3500526049272365041, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_Sprite
-      value: 
+      value:
       objectReference: {fileID: 577998304, guid: e20bc7d1e02398343aaf1a2548bbfc2c, type: 3}
     - target: {fileID: 3500526049272365041, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_WasSpriteAssigned
