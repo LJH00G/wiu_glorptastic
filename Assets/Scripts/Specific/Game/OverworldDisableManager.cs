@@ -2,6 +2,7 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Game.OverworldDisableManager
 {
@@ -11,8 +12,9 @@ namespace Game.OverworldDisableManager
         public static bool DisableAllObjects(Scene scene, List<GameObject> ignorableObjects)
         {
             GameObject[] allObjs = scene.GetRootGameObjects();
-            bool disabler = true;
-
+            List<Transform> validTransform = new List<Transform>();
+            validTransform = allObjs.Join(ignorableObjects, obj => obj.transform, ignoreObj => ignoreObj.transform.root, (obj, ignoreObj) => obj.transform).Distinct().ToList();
+            
             Debug.Log("Ignorable Object Dump:");
             foreach (GameObject obj in ignorableObjects)
             {
@@ -20,27 +22,10 @@ namespace Game.OverworldDisableManager
             }
 
             foreach (GameObject obj in allObjs)
-            {
-                if (ignorableObjects.Contains(obj))
-                    disabler = false;
-                foreach(Transform child in obj.transform)
-                {
-                    GameObject childObj = child.gameObject;
-
-                    if(ignorableObjects.Contains(childObj))
-                    {
-                        disabler = false;
-                        break;
-                    }
-
-
-                }
-
-                if(disabler)
-                obj.SetActive(false);
-                disabler = true;
-
-            }
+                if (!validTransform.Contains(obj.transform))
+                    obj.SetActive(false);
+                
+            
 
             return true;
         }
@@ -61,7 +46,6 @@ namespace Game.OverworldDisableManager
         {
             GameObject[] allObjs = scene.GetRootGameObjects();
 
-            bool enabler = true;
 
             Debug.Log("Ignorable Object Dump:");
             foreach(GameObject obj in ignorableObjects)
@@ -69,26 +53,12 @@ namespace Game.OverworldDisableManager
                 Debug.Log($"Obj: {obj.name}");
             }
 
+            List<Transform> validTransform = new List<Transform>();
+            validTransform = allObjs.Join(ignorableObjects, obj => obj.transform, ignoreObj => ignoreObj.transform.root, (obj, ignoreObj) => obj.transform).Distinct().ToList();
+
             foreach (GameObject obj in allObjs)
-            {
-                foreach (Transform child in obj.transform)
-                {
-                    GameObject childObj = child.gameObject;
-
-                    if (ignorableObjects.Contains(childObj))
-                    {
-                        enabler = false;
-                        break;
-                    }
-
-
-                }
-
-                if (enabler)
+                if (!validTransform.Contains(obj.transform))
                     obj.SetActive(true);
-
-
-            }
 
             return true;
         }
