@@ -51,6 +51,11 @@ public class EntityOverworldController : MonoBehaviour
         AIPath.destination = transform.position;
     }
 
+    public void Teleport(Vector3 position)
+    {
+        AIPath.Teleport(position);
+    }
+
 
     void Start()
     {
