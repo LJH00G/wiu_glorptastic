@@ -158,11 +158,11 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 17
-        width: 7
-        height: 7
+        y: 0
+        width: 24
+        height: 24
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -175,121 +175,11 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
-    - serializedVersion: 2
-      name: blipunknown_1
-      rect:
-        serializedVersion: 2
-        x: 7
-        y: 9
-        width: 13
-        height: 14
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: f1470f45258477290800000000000000
-      internalID: -7892760303493942241
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: blipunknown_2
-      rect:
-        serializedVersion: 2
-        x: 17
-        y: 17
-        width: 7
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 2fac81aee8e38c710800000000000000
-      internalID: 1713688441748245234
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: blipunknown_3
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 7
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 309057bb8ad594ae0800000000000000
-      internalID: -1564616416253638397
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: blipunknown_4
-      rect:
-        serializedVersion: 2
-        x: 9
-        y: 3
-        width: 6
-        height: 6
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 7ff05e015d8faccd0800000000000000
-      internalID: -2536941846074683401
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: blipunknown_5
-      rect:
-        serializedVersion: 2
-        x: 17
-        y: 0
-        width: 7
-        height: 7
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 998d67bf2507a1cf0800000000000000
-      internalID: -280788525048735591
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 7e5f86e5ed587924690e54ee11a4b59f
     internalID: 0
     vertices: []
     indices: 
@@ -297,14 +187,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":24.0,"y":24.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
       blipunknown_0: 3941979914148169810
-      blipunknown_1: -7892760303493942241
-      blipunknown_2: 1713688441748245234
-      blipunknown_3: -1564616416253638397
-      blipunknown_4: -2536941846074683401
-      blipunknown_5: -280788525048735591
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

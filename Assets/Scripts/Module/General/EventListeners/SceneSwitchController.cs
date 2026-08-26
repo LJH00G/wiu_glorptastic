@@ -2,6 +2,7 @@ using Game.SO.EventChannel.Context;
 using Game.SO.EventChannel;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Game.OverworldDisableManager;
 
 public class SceneSwitchController : MonoBehaviour
 {
@@ -14,35 +15,99 @@ public class SceneSwitchController : MonoBehaviour
 
     public void SwitchScene(SceneSwitchEventContext context)
     {
-        Time.timeScale = 0f;
+        Debug.Log($"trying to scene switch to {context}", this);
+
+        if (context.timePause == SCENE_SWITCH_PAUSE.PAUSE_AT_START)
+            Time.timeScale = 0f;
 
         playMusicEventChannel.Raise(context.playMusicContext);
 
-        delayedCallbackEventChannel.Raise(new DelayedCallbackEventContext(
-            () =>
+        if (context.delay <= 0)
+            PerformSceneSwitch();
+        else
+            delayedCallbackEventChannel.Raise(new DelayedCallbackEventContext(
+                PerformSceneSwitch,
+                context.delay,
+                false
+            ));
+
+
+        void PerformSceneSwitch()
         {
             Scene oldScene = SceneManager.GetActiveScene();
 
+            if (context.setting == SCENE_SWITCH_SETTING.UNLOAD)
+            {
+
+                SceneManager.UnloadSceneAsync(oldScene);
+
+
+                if (!context.setSceneAsMain)
+                    return;
+
+
+                Scene scene = SceneManager.GetSceneByName(context.scene);
+                OverworldDisableManager.EnableAllObjects(scene);
+                SceneManager.SetActiveScene(scene);
+
+                GameObject[] rootList = scene.GetRootGameObjects();
+                foreach (GameObject root in rootList)
+                {
+                    Camera cam = root.GetComponent<Camera>();
+                    if (cam)
+                    {
+                        cam.tag = "MainCamera";
+                        cam.enabled = true;
+                    }
+                }
+            }
+            else
+            {
+                SceneManager.sceneLoaded += OnSceneLoaded;
+
+                SceneManager.LoadSceneAsync(context.scene, LoadSceneMode.Additive);
+
+                if (context.timePause == SCENE_SWITCH_PAUSE.PAUSE_DURING_LOAD)
+                    Time.timeScale = 0f;
+
+                if (!context.setSceneAsMain)
+                    return;
+
+
+                Camera main = Camera.main;
+                if (main)
+                {
+                    main.enabled = false;
+                    main.tag = "Untagged";
+                }
+
+                OverworldDisableManager.DisableAllObjects(oldScene, context.ignoreableObjs);
+            }
+
+
             void OnSceneLoaded(Scene scene, LoadSceneMode mode)
             {
-                if (scene.name != context.loadScene)
+                if (scene.name != context.scene)
                     return;
 
                 SceneManager.sceneLoaded -= OnSceneLoaded;
 
-                SceneManager.SetActiveScene(scene);
+                if (context.setSceneAsMain)
+                    SceneManager.SetActiveScene(scene);
+
                 Time.timeScale = 1f;
 
-                SceneManager.UnloadSceneAsync(oldScene);
+                if (context.setting == SCENE_SWITCH_SETTING.LOAD_ADDITIVE)
+                {
+                    Debug.Log($"unloading skipped, specified no unloading");
+                }
+                else
+                {
+                    Debug.Log($"unloading old scene: {oldScene}");
+                    SceneManager.UnloadSceneAsync(oldScene);
+                }
             }
-
-            SceneManager.sceneLoaded += OnSceneLoaded;
-            SceneManager.LoadSceneAsync(context.loadScene, LoadSceneMode.Additive);
-            Camera.main.tag = "Untagged";
-        },
-            context.delay
-        ));
-
+        }
     }
 
     private void OnEnable()

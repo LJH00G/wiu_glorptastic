@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: e9ba615d9fa4bdc499a8ef332beba977
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - triggerCollider: {instanceID: 0}
+  - tpEventChannel: {fileID: 11400000, guid: 3e5be222a1f877441946e26d6736f794, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

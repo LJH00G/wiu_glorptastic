@@ -1,3 +1,4 @@
+using Game.SO.ActionFn;
 using Game.TextMarkup;
 using System;
 using UnityEngine;
@@ -14,6 +15,7 @@ namespace Game.SO.Data.TextMarkup.Dialogue
         {
             public DialogueSpeakerSO speaker;
             [TextArea] public string text;
+            public ActionSO endAction;
         }
 
         [field: SerializeField]

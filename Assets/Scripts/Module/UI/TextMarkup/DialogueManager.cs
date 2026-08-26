@@ -1,3 +1,4 @@
+using Game;
 using Game.SO.Data.TextMarkup.Dialogue;
 using Game.SO.EventChannel;
 using Game.TextMarkup;
@@ -42,12 +43,15 @@ public class DialogueManager : MonoBehaviour
         currentConversation = dialogueConversation;
         hasOngoingConversation = true;
         Show = true;
-        animTimer = 0;
+        animTimer = Mathf.Max(animTime - animTimer, 0);
         dialogueIndex = -1;
         tryTriggerFirstDialogue = true;
 
+        //GameManager.SetPlayerCanMove(false);
+        //GameManager.SetCanInteract(false);
+
         textWriter.ResetTypeWriting();
-        speakerNameWriter.StartNewTypeWriting("<interval time=\"0\"/>" + currentConversation.Dialogues[0].speaker.Name + "<end/>");
+        speakerNameWriter.StartNewTypeWriting(currentConversation.Dialogues[0].speaker.Name, true);
     }
 
 
@@ -65,6 +69,14 @@ public class DialogueManager : MonoBehaviour
 
     bool TryAdvanceNextDialogue()
     {
+        if (dialogueIndex >= 0)
+        {
+            var prevDialogueEndAction = currentConversation.Dialogues[dialogueIndex].endAction;
+            if (prevDialogueEndAction)
+                prevDialogueEndAction.Invoke();
+        }
+
+
         dialogueIndex++;
 
         if (dialogueIndex >= currentConversation.Dialogues.Length)
@@ -72,7 +84,7 @@ public class DialogueManager : MonoBehaviour
 
         var thisDialogue = currentConversation.Dialogues[dialogueIndex];
 
-        speakerNameWriter.StartNewTypeWriting("<interval time=\"0\"/>" + thisDialogue.speaker.Name + "<end/>");
+        speakerNameWriter.StartNewTypeWriting(thisDialogue.speaker.Name, true);
 
         
         List<TextMarkupEffect> defaultEffects = new()
@@ -86,10 +98,32 @@ public class DialogueManager : MonoBehaviour
     }
 
 
+    void OnDialogueEnd()
+    {
+        hasOngoingConversation = false;
+        Show = false;
+        animTimer = Mathf.Max(animTime - animTimer, 0);
+
+        //GameManager.SetPlayerCanMove(true);
+        //GameManager.SetCanInteract(true);
+        GameManager.EndConversation();
+    }
+
+
     private void Awake()
     {
         rectForm = GetComponent<RectTransform>();
         cGroup = GetComponent<CanvasGroup>();
+
+        Show = false;
+
+        var rectPos = rectForm.anchoredPosition;
+        rectPos.y = hidePosY;
+        rectForm.anchoredPosition = rectPos;
+
+        cGroup.alpha = 0;
+
+        animTimer = animTime;
     }
 
 
@@ -104,14 +138,14 @@ public class DialogueManager : MonoBehaviour
             rectPos.y = Mathf.Lerp(
                 !Show ? showPosY : hidePosY,
                 Show ? showPosY : hidePosY,
-                Math_Ease.Ease(EASE.OUT_SIN, animTimer * animTime_inv)
+                Math_Ease.Ease(EASE.IN_OUT_SIN, animTimer * animTime_inv)
                 );
             rectForm.anchoredPosition = rectPos;
 
             cGroup.alpha = Mathf.Lerp(
                 !Show ? 1 : 0,
                 Show ? 1 : 0,
-                Math_Ease.Ease(EASE.OUT_SIN, animTimer * animTime_inv)
+                Math_Ease.Ease(EASE.IN_OUT_SIN, animTimer * animTime_inv)
                 );
         }
         else if (Show && tryTriggerFirstDialogue)
@@ -125,14 +159,8 @@ public class DialogueManager : MonoBehaviour
             return;
 
         if (textWriter.ReachedEnd)
-        {
             if (!TryAdvanceNextDialogue())
-            {
-                hasOngoingConversation = false;
-                Show = false;
-                animTimer = 0;
-            }
-        }
+                OnDialogueEnd();
     }
 
 
@@ -156,7 +184,8 @@ public class DialogueManager : MonoBehaviour
 
     private void OnValidate()
     {
-        Awake();
+        rectForm = GetComponent<RectTransform>();
+        cGroup = GetComponent<CanvasGroup>();
 
         if (animTime != 0)
             animTime_inv = 1 / animTime;

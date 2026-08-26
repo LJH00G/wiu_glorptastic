@@ -1,6 +1,6 @@
 using Game.SO.EventChannel;
 using System.Collections;
-using Unity.VisualScripting;
+using Unity.Cinemachine;
 using UnityEngine;
 using Utility.VisualizableDictionary;
 
@@ -30,8 +30,6 @@ namespace Game.TPManager
 
         void PerformTeleport(string TPName)
         {
-           
-
             if(TPPointDef.dict.TryGetValue(TPName, out TPDefinition currentTP))
             {
                 StartCoroutine(Teleport(currentTP));
@@ -40,8 +38,8 @@ namespace Game.TPManager
 
         public IEnumerator Teleport(TPDefinition currentTP)
         {
-
             
+
             Transform player = null;
             Transform follower = null;
 
@@ -71,12 +69,18 @@ namespace Game.TPManager
 
             yield return new WaitForSeconds(currentTP.time);
 
-            if(player != null)
-                player.transform.position = currentTP.position;
-
-            if(follower != null)
-                follower.transform.position = currentTP.position;
-        
+            if (player != null)
+            {
+                Vector3 positionDelta = currentTP.position - (Vector2)player.position;
+                player.GetComponent<EntityOverworldController>().Teleport(currentTP.position);
+                CinemachineCore.OnTargetObjectWarped(player, positionDelta);
+            }
+            if (follower != null)
+            {
+                Vector3 positionDelta = currentTP.position - (Vector2)follower.position;
+                follower.GetComponent<EntityOverworldController>().Teleport(currentTP.position);
+                CinemachineCore.OnTargetObjectWarped(follower, positionDelta);
+            }
 
             TPAnimChannel.Raise(false);
 
@@ -96,10 +100,10 @@ namespace Game.TPManager
             TPPointDef.OnValidate();
         }
 
-        void OnDrawGizmos()
+        void OnDrawGizmosSelected()
         {
             Gizmos.color = new Color(0, 0, 1);
-            Vector3 Gizmossize = new Vector3(1, 1, 1);
+            Vector3 Gizmossize = new Vector3(1, 1, 1) * 0.5f;
             foreach(TPDefinition TP in TPPointDef.dict.Values)
             {
                 

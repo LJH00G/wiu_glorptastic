@@ -1,43 +1,64 @@
 using UnityEngine;
+using Game.SO.Data.Item;
 
 namespace Game.Inventory
 {
     public class EquipmentUI : MonoBehaviour
     {
-        [Header("Source")]
-        [SerializeField] InventoryManager inventoryManager;
 
         [Header("Slots")]
         [SerializeField] EquipmentSlotUI weaponSlot;
+        [SerializeField] EquipmentSlotUI armourSlot;
         [SerializeField] EquipmentSlotUI[] accessorySlots;
 
         void Awake()
         {
-            weaponSlot.OnUnequipRequested += () => inventoryManager.UnequipWeapon();
+            weaponSlot.OnSlotClicked += item =>
+            {
+                if (item)
+                {
+                    InventoryManager.UnequipWeapon();
+                }
+            };
+
+            armourSlot.OnSlotClicked += item =>
+            {
+                if (item)
+                {
+                    InventoryManager.UnequipArmour();
+                }
+            };
 
             for (int i = 0; i < accessorySlots.Length; i++)
             {
                 int slotIndex = i;
-                accessorySlots[i].OnUnequipRequested += () => inventoryManager.UnequipAccessory(slotIndex);
+                accessorySlots[i].OnSlotClicked += item =>
+                {
+                    if (item)
+                    {
+                        InventoryManager.UnequipAccessory(slotIndex);
+                    }
+                };
             }
         }
 
         void OnEnable()
         {
-            inventoryManager.OnInventoryChanged += Refresh;
+            InventoryManager.OnInventoryChanged.Subscribe(Refresh, 0);
             Refresh();
         }
 
         void OnDisable()
         {
-            inventoryManager.OnInventoryChanged -= Refresh;
+            InventoryManager.OnInventoryChanged.Unsubscribe(Refresh);
         }
 
         void Refresh()
         {
-            weaponSlot.SetItem(inventoryManager.GetEquipedWeapon());
+            weaponSlot.SetItem(InventoryManager.GetEquipedWeapon());
+            armourSlot.SetItem(InventoryManager.GetEquipedArmour());
 
-            var accessories = inventoryManager.GetEquipedAccessories();
+            var accessories = InventoryManager.GetEquipedAccessories();
             for (int i = 0; i < accessorySlots.Length && i < accessories.Length; i++)
             {
                 accessorySlots[i].SetItem(accessories[i]);

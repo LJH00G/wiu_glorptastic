@@ -15,13 +15,113 @@ MonoBehaviour:
   <TradeTable>k__BackingField:
   - product:
       itemStacks:
-      - item: {fileID: 0}
-        count: 0
+      - item: {fileID: 11400000, guid: ec03b2cb75205f746a16e34fda1bc517, type: 2}
+        count: 1
       useShell: 0
       shell: 0
     cost:
       itemStacks:
       - item: {fileID: 0}
         count: 0
+      useShell: 1
+      shell: 10
+  - product:
+      itemStacks:
+      - item: {fileID: 11400000, guid: ec03b2cb75205f746a16e34fda1bc517, type: 2}
+        count: 0
+      useShell: 1
+      shell: 50
+    cost:
+      itemStacks:
+      - item: {fileID: 11400000, guid: 85fbbe1a210510b4bb300ee0f3a91def, type: 2}
+        count: 1
+      - item: {fileID: 11400000, guid: 5cbec6e07058a0f428b859a951d25440, type: 2}
+        count: 1
       useShell: 0
       shell: 0
+  - product:
+      itemStacks:
+      - item: {fileID: 11400000, guid: 7a0605f60fa9bdf45a76bbf7c4dd476c, type: 2}
+        count: 1
+      useShell: 0
+      shell: 0
+    cost:
+      itemStacks:
+      - item: {fileID: 11400000, guid: 0092074cf81b1a74b9cb37040cfaaee6, type: 2}
+        count: 1
+      - item: {fileID: 11400000, guid: a6cec7aee8149ec4ea2d40f39c7b453f, type: 2}
+        count: 1
+      useShell: 1
+      shell: 15
+  - product:
+      itemStacks:
+      - item: {fileID: 11400000, guid: 0092074cf81b1a74b9cb37040cfaaee6, type: 2}
+        count: 1
+      useShell: 0
+      shell: 0
+    cost:
+      itemStacks:
+      - item: {fileID: 0}
+        count: 0
+      useShell: 1
+      shell: 25
+  - product:
+      itemStacks:
+      - item: {fileID: 11400000, guid: 5cbec6e07058a0f428b859a951d25440, type: 2}
+        count: 1
+      useShell: 0
+      shell: 0
+    cost:
+      itemStacks:
+      - item: {fileID: 0}
+        count: 0
+      useShell: 1
+      shell: 45
+  - product:
+      itemStacks:
+      - item: {fileID: 11400000, guid: 343512e7ac4653b43850e03b501175d9, type: 2}
+        count: 1
+      useShell: 0
+      shell: 0
+    cost:
+      itemStacks:
+      - item: {fileID: 0}
+        count: 0
+      useShell: 1
+      shell: 25
+  - product:
+      itemStacks:
+      - item: {fileID: 11400000, guid: e6c331a60795dde4084c30c812d5b1b7, type: 2}
+        count: 1
+      useShell: 0
+      shell: 0
+    cost:
+      itemStacks:
+      - item: {fileID: 0}
+        count: 0
+      useShell: 1
+      shell: 45
+  - product:
+      itemStacks:
+      - item: {fileID: 11400000, guid: ef90e82c4b4f1704986f15b2b1f9e841, type: 2}
+        count: 1
+      useShell: 0
+      shell: 0
+    cost:
+      itemStacks:
+      - item: {fileID: 11400000, guid: a6cec7aee8149ec4ea2d40f39c7b453f, type: 2}
+        count: 0
+      useShell: 0
+      shell: 67
+  - product:
+      itemStacks:
+      - item: {fileID: 11400000, guid: d96144da2ca78c94283401f20dabc597, type: 2}
+        count: 67
+      useShell: 0
+      shell: 0
+    cost:
+      itemStacks:
+      - item: {fileID: 11400000, guid: 7a0605f60fa9bdf45a76bbf7c4dd476c, type: 2}
+        count: 1
+      useShell: 0
+      shell: 6767

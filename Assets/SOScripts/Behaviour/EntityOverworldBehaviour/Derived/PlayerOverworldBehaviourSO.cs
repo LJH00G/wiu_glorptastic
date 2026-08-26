@@ -1,16 +1,17 @@
 
+using Game.Interactable;
 using Game.SO.Behaviour.EntityOverworld.InstanceData;
-using Pathfinding;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEngine.RuleTile.TilingRuleOutput;
 
 
 namespace Game.SO.Behaviour.EntityOverworld.InstanceData
 {
+    [Serializable]
     public class PlayerOverworldBehaviourInstanceData : EntityOverworldBehaviourInstanceData
     {
-        public Vector2 facingDire;
+        
     }
 }
 
@@ -31,9 +32,10 @@ namespace Game.SO.Behaviour.EntityOverworld
             controller.AIPath.orientation = Pathfinding.OrientationMode.YAxisForward;
             controller.AIPath.maxSpeed = speed;
             controller.AIPath.maxAcceleration = acceleration;
-            controller.AIPath.pickNextWaypointDist = 0.5f;
-            controller.AIPath.slowdownDistance = 0;
-            controller.AIPath.endReachedDistance = 0;
+            controller.AIPath.pickNextWaypointDist = controller.Radius;
+            controller.AIPath.slowdownDistance = controller.Radius * 0.9f;
+            controller.AIPath.endReachedDistance = controller.Radius * 0.75f;
+            controller.AIPath.destination = controller.transform.position;
 
         }
 
@@ -44,30 +46,42 @@ namespace Game.SO.Behaviour.EntityOverworld
             
 
             // movement
-            Vector2 dire = InputSystem.actions["Move"].ReadValue<Vector2>();
-            if (!GameManager.AllCanMove)
-                controller.AIPath.destination = controller.transform.position;
+            Vector2 dire = GameManager.PlayerCanMove ?
+                InputSystem.actions["Move"].ReadValue<Vector2>() : Vector2.zero;
 
             if (dire != Vector2.zero)
-                instanceData.facingDire = dire;
-
-            controller.AIPath.destination = (Vector2)controller.transform.position + dire * 0.1f;
-
-            
-            // interact
-            if (InputSystem.actions["Interact"].triggered && GameManager.CanInteract)
             {
-                Vector2 offset = instanceData.facingDire * (controller.Radius + interactionSize * 0.5f);
+                instanceData.SetFacingDire(dire);
 
-                var collider = Physics2D.OverlapBox(
-                        (Vector2)controller.transform.position + offset,
-                        new Vector2(interactionSize, interactionSize),
+                controller.AIPath.destination = (Vector2)controller.transform.position + dire * controller.Radius;
+            }
+
+            // interact
+            if (InputSystem.actions["Interact"].WasPressedThisFrame() && GameManager.CanInteract)
+            {
+                Vector2 offset = instanceData.GetVector2Dire() * (controller.Radius + interactionSize * 0.5f);
+                Vector2 interactionPos = (Vector2)controller.transform.position + offset;
+                Vector2 interactionSize_vec2 = new(interactionSize, interactionSize);
+
+                var colliders = Physics2D.OverlapBoxAll(
+                        interactionPos,
+                        interactionSize_vec2,
                         0,
-                        LayerMask.NameToLayer("Interactable")
+                        LayerMask.GetMask("Interactable")
                     );
 
-                if (collider && collider.TryGetComponent(out ActionTriggerHandler handler) && handler.RequiresInteraction)
-                    handler.TriggerInteraction();
+                DebugDraw.Box(interactionPos, interactionSize_vec2);
+
+
+                foreach (var collider in colliders)
+                {
+                    if (collider.TryGetComponent(out I_Interactable interactable))
+                    {
+                        interactable?.Interact();
+                        break;
+                    }
+                }
+                    
 
             }
         }

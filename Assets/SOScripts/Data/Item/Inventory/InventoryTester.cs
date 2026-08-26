@@ -11,8 +11,6 @@ namespace Game.Inventory
     /// </summary>
     public class InventoryTester : MonoBehaviour
     {
-        [Header("Target")]
-        [SerializeField] InventoryManager inventoryManager;
 
         [Header("One Sample Per Item Type")]
         [SerializeField] QuestItemSO sampleQuestItem;
@@ -37,7 +35,7 @@ namespace Game.Inventory
         {
             foreach (var item in AllSamples)
             {
-                inventoryManager.AddItem(item, 1);
+                InventoryManager.AddItem(item, 1);
             }
         }
 
@@ -47,24 +45,24 @@ namespace Game.Inventory
             foreach (var item in AllSamples)
                 RemoveSafely(item);
         }
-        public void AddQuestItem() => inventoryManager.AddItem(sampleQuestItem, 1);
+        public void AddQuestItem() => InventoryManager.AddItem(sampleQuestItem, 1);
         public void RemoveQuestItem() => RemoveSafely(sampleQuestItem);
-        public void AddResourceItem() => inventoryManager.AddItem(sampleResourceItem, 1);
+        public void AddResourceItem() => InventoryManager.AddItem(sampleResourceItem, 1);
         public void RemoveResourceItem() => RemoveSafely(sampleResourceItem);
-        public void AddConsumableItem() => inventoryManager.AddItem(sampleConsumableItem, 1);
+        public void AddConsumableItem() => InventoryManager.AddItem(sampleConsumableItem, 1);
         public void RemoveConsumableItem() => RemoveSafely(sampleConsumableItem);
-        public void AddWeaponItem() => inventoryManager.AddItem(sampleWeaponItem, 1);
+        public void AddWeaponItem() => InventoryManager.AddItem(sampleWeaponItem, 1);
         public void RemoveWeaponItem() => RemoveSafely(sampleWeaponItem);
-        public void AddAccessoryItem() => inventoryManager.AddItem(sampleAccessoryItem, 1);
+        public void AddAccessoryItem() => InventoryManager.AddItem(sampleAccessoryItem, 1);
         public void RemoveAccessoryItem() => RemoveSafely(sampleAccessoryItem);
-        public void AddCurseGemItem() => inventoryManager.AddItem(sampleCurseGemItem, 1);
+        public void AddCurseGemItem() => InventoryManager.AddItem(sampleCurseGemItem, 1);
         public void RemoveCurseGemItem() => RemoveSafely(sampleCurseGemItem);
 
         void RemoveSafely(ItemSO item)
         {
-            if (inventoryManager.HasItemInList(item, out _))
+            if (InventoryManager.HasItemInList(item, out _))
             {
-                inventoryManager.RemoveItem(item, 1);
+                InventoryManager.RemoveItem(item, 1);
             }
         }
     }

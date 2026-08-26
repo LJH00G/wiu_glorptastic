@@ -1,6 +1,5 @@
 using Game.Inventory;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -9,7 +8,7 @@ namespace Game.SO.Data.Shop
     [Serializable]
     public struct Shopable
     {
-        public List<ItemStack> itemStacks;
+        public ItemStack[] itemStacks;
         public bool useShell;
         public int shell;
     }
@@ -25,6 +24,6 @@ namespace Game.SO.Data.Shop
     public class ShopPresetSO : ScriptableObject
     {
         [field: SerializeField]
-        public List<ShopTrade> TradeTable { get; private set; }
+        public ShopTrade[] TradeTable { get; private set; }
     }
 }
