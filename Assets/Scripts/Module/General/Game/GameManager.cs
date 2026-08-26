@@ -102,6 +102,8 @@ namespace Game
 
         static public void SetPlayerCanMove(bool value)
         {
+            UnityEngine.Debug.Log($"GameManager: seting player can move, value({value})");
+
             PlayerCanMove = value;
 
             if (PlayerCanMove)

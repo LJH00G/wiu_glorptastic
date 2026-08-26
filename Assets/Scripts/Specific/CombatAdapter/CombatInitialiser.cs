@@ -67,9 +67,9 @@ public class CombatInitialiser : MonoBehaviour
     {
         if (context.state == CombatState.BATTLE_WON && enemyInitiated)
         {
-            Destroy(enemyInitiated);
+            enemyInitiated.SetActive(false);
             AddLootToInventory(context);
-        } else 
+        } else
         if(context.state == CombatState.BATTLE_LOST)
         {
             List<GameObject> list = new();

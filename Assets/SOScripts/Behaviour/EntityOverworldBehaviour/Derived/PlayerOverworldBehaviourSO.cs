@@ -43,7 +43,6 @@ namespace Game.SO.Behaviour.EntityOverworld
         {
             if (controller.InstanceData is not PlayerOverworldBehaviourInstanceData instanceData)
                 return;
-            
 
             // movement
             Vector2 dire = GameManager.PlayerCanMove ?

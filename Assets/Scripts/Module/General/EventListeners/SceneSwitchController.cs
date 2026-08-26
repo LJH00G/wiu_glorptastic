@@ -41,6 +41,7 @@ public class SceneSwitchController : MonoBehaviour
 
                 SceneManager.UnloadSceneAsync(oldScene);
 
+                Time.timeScale = 1f;
 
                 if (!context.setSceneAsMain)
                     return;

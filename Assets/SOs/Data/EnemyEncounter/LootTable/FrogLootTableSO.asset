@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2be33d5b7c95d8f4a9eed7b00399511e, type: 3}
   m_Name: FrogLootTableSO
   m_EditorClassIdentifier: Assembly-CSharp::Game.Combat.LootTableSO
-  rolls: 5000
+  rolls: 2
   itemList:
   - odds: 5
     amount: 3
