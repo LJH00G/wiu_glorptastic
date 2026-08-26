@@ -1,11 +1,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Game.SO.Data.Item;
+using Game.SO.EventChannel;
 
 namespace Game.Inventory
 {
     public class InventoryUI : MonoBehaviour
     {
+        [Header("Event Listening Channel")]
+        [SerializeField] EventChannelSO openSellableInventoryEventChannel;
 
         [Header("List (goes inside your ScrollRect's Content)")]
         [SerializeField] Transform contentParent;
@@ -35,18 +38,31 @@ namespace Game.Inventory
 
         void OnEnable()
         {
+            openSellableInventoryEventChannel.Subscribe(ShowSellableInventory);
             InventoryManager.OnInventoryChanged.Subscribe(Refresh, 0);
             Refresh();
         }
 
         void OnDisable()
         {
+            openSellableInventoryEventChannel.Unsubscribe(ShowSellableInventory);
             InventoryManager.OnInventoryChanged.Unsubscribe(Refresh);
         }
 
-        public void Show(bool sellModeEnabled = false)//
+        public void ShowSellableInventory()
         {
-            sellMode = sellModeEnabled;
+            sellMode = true;
+
+            if (panelRoot)
+            {
+                panelRoot.SetActive(true);
+            }
+            Refresh();
+        }
+
+        public void Show()
+        {
+            sellMode = false;
 
             if (panelRoot)
             {

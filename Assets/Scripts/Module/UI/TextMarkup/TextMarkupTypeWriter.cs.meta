@@ -4,10 +4,11 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - SFXEventChannel: {fileID: 11400000, guid: 692bad48a20fddf448c41da6c0212144, type: 2}
-  - speechSFXEventChannel: {fileID: 11400000, guid: 692bad48a20fddf448c41da6c0212144, type: 2}
+  - <SFXEventChannel>k__BackingField: {fileID: 11400000, guid: 692bad48a20fddf448c41da6c0212144, type: 2}
+  - <SpeechSFXEventChannel>k__BackingField: {fileID: 11400000, guid: 692bad48a20fddf448c41da6c0212144, type: 2}
   - speechPresets: {fileID: 11400000, guid: 6394698099c217e4f964ea8a214ab042, type: 2}
   - sfxPresets: {fileID: 11400000, guid: 92e05db07ec9ab442a4ca5fcf0259198, type: 2}
+  - <TMPText>k__BackingField: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

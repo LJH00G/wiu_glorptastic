@@ -150,8 +150,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4d76fc43ed00fd4d99b26ce80d72e68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextMarkupTypeWriter
-  <SFXEventChannel>k__BackingField: {fileID: 0}
-  <SpeechSFXEventChannel>k__BackingField: {fileID: 0}
+  <SFXEventChannel>k__BackingField: {fileID: 11400000, guid: 692bad48a20fddf448c41da6c0212144, type: 2}
+  <SpeechSFXEventChannel>k__BackingField: {fileID: 11400000, guid: 692bad48a20fddf448c41da6c0212144, type: 2}
   speechPresets: {fileID: 11400000, guid: 6394698099c217e4f964ea8a214ab042, type: 2}
   sfxPresets: {fileID: 11400000, guid: 92e05db07ec9ab442a4ca5fcf0259198, type: 2}
   useDefaultText: 0

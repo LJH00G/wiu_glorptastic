@@ -17,9 +17,8 @@ namespace Game.Inventory
 
             if (Keyboard.current != null && Keyboard.current[hotkey].wasPressedThisFrame)
             {
-                
                 if(CheckGameState())
-                Toggle();
+                    Toggle();
             }
         }
         //hello glorptastic teammates its 2am am losing my mand

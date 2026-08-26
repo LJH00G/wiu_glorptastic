@@ -43,13 +43,15 @@ namespace Game.Inventory
                 StaticGlobalVariable.ToastEventChannel.Raise(new MessageToastEventContext($"you need {cost.shell - ManagedInventory.ShellCurrency} more shells!", true));
                 canBuy = false;
             }
-
-            foreach (var stack in cost.itemStacks)
+            if (cost.itemStacks != null)
             {
-                if (!HasItemInList(stack.item, out uint amountInInv) || amountInInv < stack.count)
+                foreach (var stack in cost.itemStacks)
                 {
-                    StaticGlobalVariable.ToastEventChannel.Raise(new MessageToastEventContext($"you need {stack.count - amountInInv} more {stack.item.Name}!", true, stack.item.Sprite));
-                    canBuy = false;
+                    if (!HasItemInList(stack.item, out uint amountInInv) || amountInInv < stack.count)
+                    {
+                        StaticGlobalVariable.ToastEventChannel.Raise(new MessageToastEventContext($"you need {stack.count - amountInInv} more {stack.item.Name}!", true, stack.item.Sprite));
+                        canBuy = false;
+                    }
                 }
             }
 
@@ -59,24 +61,18 @@ namespace Game.Inventory
 
             // remove resource
             if (cost.useShell)
-            {
                 DeductShell(cost.shell);
-            }
-            foreach (var stack in cost.itemStacks)
-            {
-                RemoveItem(stack.item, stack.count);
-            }
+            if (cost.itemStacks != null)
+                foreach (var stack in cost.itemStacks)
+                    RemoveItem(stack.item, stack.count);
 
             // add resource
             ref Shopable product = ref trade.product;
             if (product.useShell)
-            {
                 RecieveShell(product.shell);
-            }
-            foreach (var stack in product.itemStacks)
-            {
-                AddItem(stack.item, stack.count);
-            }
+            if (product.itemStacks != null)
+                foreach (var stack in product.itemStacks)
+                    AddItem(stack.item, stack.count);
 
             return true;
         }
