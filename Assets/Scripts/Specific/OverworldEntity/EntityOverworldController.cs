@@ -54,6 +54,7 @@ public class EntityOverworldController : MonoBehaviour
     public void Teleport(Vector3 position)
     {
         AIPath.Teleport(position);
+        RefreshMovement();
     }
 
 
