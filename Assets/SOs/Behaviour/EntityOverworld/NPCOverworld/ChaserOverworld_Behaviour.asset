@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 324303b537543ef44a76c9750397b485, type: 3}
   m_Name: ChaserOverworld_Behaviour
   m_EditorClassIdentifier: Assembly-CSharp::Game.SO.Behaviour.EntityOverworld.EnemyOverworldBehaviourSO
-  animCtrller: {fileID: 0}
-  <DefaultSprite>k__BackingField: {fileID: 0}
   speed: 3.5
   acceleration: 10
   useExternalTriggerDetection: 0

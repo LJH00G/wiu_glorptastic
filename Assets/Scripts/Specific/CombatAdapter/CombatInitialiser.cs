@@ -6,7 +6,6 @@ using Game.SO.Data.Item;
 using Game.SO.Data.Item.Sellable;
 using Game.SO.EventChannel;
 using Game.SO.EventChannel.Context;
-using NUnit.Framework;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -70,18 +69,15 @@ public class CombatInitialiser : MonoBehaviour
         {
             Destroy(enemyInitiated);
             AddLootToInventory(context);
-        } else if (context.state == CombatState.FLED)
-        {
-            PauseEnemy(enemyInitiated);
-        } else if(context.state == CombatState.BATTLE_LOST)
+        } else 
+        if(context.state == CombatState.BATTLE_LOST)
         {
             List<GameObject> list = new();
-            onSwitch.Raise(new(SCENE_SWITCH_SETTING.LOAD_SEQUENTIALLY, "DeathScene"), 0, PlayMusicEventContext.FadeAllOut_1s, SCENE_SWITCH_PAUSE.PAUSE_DURING_LOAD, true, list));
+            onSwitch.Raise(new(SCENE_SWITCH_SETTING.LOAD_SEQUENTIALLY, "DeathScene", 0, PlayMusicEventContext.FadeAllOut_1s, SCENE_SWITCH_PAUSE.PAUSE_DURING_LOAD, true, list));
         }
             
 
-        enemyInitiated = null;
-
+      
         onSwitch.Raise(new(
             SCENE_SWITCH_SETTING.UNLOAD,
             scene.name,
@@ -94,6 +90,13 @@ public class CombatInitialiser : MonoBehaviour
         GameManager.SetAllCanMove(true);
         GameManager.SetGameState(GAME_STATE.OVERWORLD);
 
+        if (context.state == CombatState.FLED && enemyInitiated)
+        {
+            Debug.Log("Freeze Started");
+            StartCoroutine(PauseEnemy(enemyInitiated));
+        }
+
+        enemyInitiated = null;
     }
 
     public void AddLootToInventory(CombatEndEventContextSO context)
@@ -106,11 +109,13 @@ public class CombatInitialiser : MonoBehaviour
 
     IEnumerator PauseEnemy(GameObject enemy)
     {
-        enemy.isStatic = true;
+        var controller = enemy.GetComponent<EntityOverworldController>();
+        controller.SetFrozen(true);
 
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(5);
 
-        enemy.isStatic = false;
+        Debug.Log("Freeze Ended");
+        controller.SetFrozen(false);
     }
 
     private void OnEnable()
