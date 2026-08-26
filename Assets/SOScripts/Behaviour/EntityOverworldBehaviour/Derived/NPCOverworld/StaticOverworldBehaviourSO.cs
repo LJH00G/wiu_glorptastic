@@ -9,7 +9,7 @@ namespace Game.SO.Behaviour.EntityOverworld.InstanceData
     [Serializable]
     public class StaticOverworldBehaviourInstanceData : EntityOverworldBehaviourInstanceData
     {
-        public Vector2 defaultDirection;
+        public DIRECTION defaultDirection;
     }
 }
 

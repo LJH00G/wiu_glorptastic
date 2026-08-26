@@ -1,3 +1,4 @@
+using Game.SO.Behaviour.EntityOverworld.InstanceData;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "OverworldAppearance_Data", menuName = "Scriptable Objects/Data/OverworldEntity/OverworldEntityAppearanceSO")]
@@ -22,29 +23,34 @@ public class OverworldEntityAppearanceSO : ScriptableObject
 
         if (speed > 0.1f)
         {
-
             float theta = Vector2.SignedAngle(Vector2.right, controller.AIPath.desiredVelocity);
 
             if (Mathf.Abs(theta) < 44)
-            {
-                controller.Animator.SetInteger("Direction", 0);
-                controller.InstanceData.facingDire = Vector2.right;
-            }
+                controller.InstanceData.facingDire = DIRECTION.RIGHT;
             else if (theta < 136 && theta > 44)
-            {
-                controller.Animator.SetInteger("Direction", 1);
-                controller.InstanceData.facingDire = Vector2.up;
-            }
+                controller.InstanceData.facingDire = DIRECTION.UP;
             else if (Mathf.Abs(theta) > 136)
-            {
-                controller.Animator.SetInteger("Direction", 2);
-                controller.InstanceData.facingDire = Vector2.left;
-            }
+                controller.InstanceData.facingDire = DIRECTION.LEFT;
             else
-            {
+                controller.InstanceData.facingDire = DIRECTION.DOWN;
+        }
+
+
+        switch (controller.InstanceData.facingDire)
+        {
+            default:
+            case DIRECTION.DOWN:
                 controller.Animator.SetInteger("Direction", 3);
-                controller.InstanceData.facingDire = Vector2.down;
-            }
+                break;
+            case DIRECTION.UP:
+                controller.Animator.SetInteger("Direction", 1);
+                break;
+            case DIRECTION.RIGHT:
+                controller.Animator.SetInteger("Direction", 0);
+                break;
+            case DIRECTION.LEFT:
+                controller.Animator.SetInteger("Direction", 2);
+                break;
         }
 
 

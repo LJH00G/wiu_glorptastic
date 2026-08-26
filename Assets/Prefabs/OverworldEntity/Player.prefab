@@ -227,7 +227,7 @@ MonoBehaviour:
     - rid: 1000
       type: {class: PlayerOverworldBehaviourInstanceData, ns: Game.SO.Behaviour.EntityOverworld.InstanceData, asm: Assembly-CSharp}
       data:
-        facingDire: {x: 0, y: 0}
+        facingDire: 0
 --- !u!1 &7618617631642094810
 GameObject:
   m_ObjectHideFlags: 0

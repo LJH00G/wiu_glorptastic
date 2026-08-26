@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 45b7f2f21ec3039488f8c63149cbd489
+guid: 02e84124fd32c754aba2fddc20e15ae3
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1549908062087650922
-    second: gordom_ramsea_cursed_0
+      213: 1316320693844837313
+    second: emilia_aerhart_cursed_0
   - first:
-      213: 4902747767019127634
-    second: gordom_ramsea_cursed_1
+      213: -4282381742075570762
+    second: emilia_aerhart_cursed_1
   - first:
-      213: 2891458200399309829
-    second: gordom_ramsea_cursed_2
+      213: -8965160382786264637
+    second: emilia_aerhart_cursed_2
   - first:
-      213: 3372504563548631596
-    second: gordom_ramsea_cursed_3
+      213: -5080453694140450890
+    second: emilia_aerhart_cursed_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -122,7 +122,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: gordom_ramsea_cursed_0
+      name: emilia_aerhart_cursed_0
       rect:
         serializedVersion: 2
         x: 0
@@ -137,14 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f1def8d01a67b9d43848fb7fe42a1e5e
-      internalID: 1045260603
+      spriteID: 61b527e05feb8484082acf69ec8f74b9
+      internalID: -1358056595
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: gordom_ramsea_cursed_1
+      name: emilia_aerhart_cursed_1
       rect:
         serializedVersion: 2
         x: 32
@@ -159,14 +159,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c7de1ccc93025f042a378aa208f142f3
-      internalID: 1420719031
+      spriteID: 0bf07f11ddd774c41ae955c9a0bfcabc
+      internalID: 1796380994
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: gordom_ramsea_cursed_2
+      name: emilia_aerhart_cursed_2
       rect:
         serializedVersion: 2
         x: 64
@@ -181,14 +181,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d45f1792d805a914093d1cee5b509b08
-      internalID: -947262079
+      spriteID: af90e3074a235d14283e4e3c186fe54c
+      internalID: 379009645
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: gordom_ramsea_cursed_3
+      name: emilia_aerhart_cursed_3
       rect:
         serializedVersion: 2
         x: 96
@@ -203,8 +203,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 13e02e8918268b345aabdee253bdeb50
-      internalID: -1397614240
+      spriteID: 9ce60c0d704a0cd43b19b8e4c9abc4b7
+      internalID: 1737264249
       vertices: []
       indices: 
       edges: []
@@ -225,10 +225,10 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":4.0,"y":1.0},"gridSpriteSize":{"x":32.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.03125},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":9,"pivotUnitMode":1,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      gordom_ramsea_cursed_0: 1045260603
-      gordom_ramsea_cursed_1: 1420719031
-      gordom_ramsea_cursed_2: -947262079
-      gordom_ramsea_cursed_3: -1397614240
+      emilia_aerhart_cursed_0: -1358056595
+      emilia_aerhart_cursed_1: 1796380994
+      emilia_aerhart_cursed_2: 379009645
+      emilia_aerhart_cursed_3: 1737264249
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

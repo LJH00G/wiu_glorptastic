@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: 45b7f2f21ec3039488f8c63149cbd489
+guid: d1202132dcd4b2748847279c795dcbdf
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1549908062087650922
-    second: gordom_ramsea_cursed_0
+      213: -6279154196246922544
+    second: steward_coal_cursed_0
   - first:
-      213: 4902747767019127634
-    second: gordom_ramsea_cursed_1
+      213: 7058756712632548068
+    second: steward_coal_cursed_1
   - first:
-      213: 2891458200399309829
-    second: gordom_ramsea_cursed_2
+      213: -4339152798786668403
+    second: steward_coal_cursed_2
   - first:
-      213: 3372504563548631596
-    second: gordom_ramsea_cursed_3
+      213: -8800046569766587853
+    second: steward_coal_cursed_3
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -122,7 +122,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: gordom_ramsea_cursed_0
+      name: steward_coal_cursed_0
       rect:
         serializedVersion: 2
         x: 0
@@ -137,14 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f1def8d01a67b9d43848fb7fe42a1e5e
-      internalID: 1045260603
+      spriteID: b41e54b8c9e76a648afb364ac00b5c7a
+      internalID: 96708511
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: gordom_ramsea_cursed_1
+      name: steward_coal_cursed_1
       rect:
         serializedVersion: 2
         x: 32
@@ -159,14 +159,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c7de1ccc93025f042a378aa208f142f3
-      internalID: 1420719031
+      spriteID: 98eb73997cc4f3d4f8ed0dc9aa3c7eb3
+      internalID: 1710991851
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: gordom_ramsea_cursed_2
+      name: steward_coal_cursed_2
       rect:
         serializedVersion: 2
         x: 64
@@ -181,14 +181,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d45f1792d805a914093d1cee5b509b08
-      internalID: -947262079
+      spriteID: 4fd7a4db39b123f479f7e50ee2a30542
+      internalID: 1003705282
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: gordom_ramsea_cursed_3
+      name: steward_coal_cursed_3
       rect:
         serializedVersion: 2
         x: 96
@@ -203,8 +203,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 13e02e8918268b345aabdee253bdeb50
-      internalID: -1397614240
+      spriteID: 4df89f4aa74dd7a4a8d1ad4bd56e7d7c
+      internalID: -2146091423
       vertices: []
       indices: 
       edges: []
@@ -225,10 +225,10 @@ TextureImporter:
       - key: SpriteEditor.SliceSettings
         value: '{"sliceOnImport":false,"gridCellCount":{"x":4.0,"y":1.0},"gridSpriteSize":{"x":32.0,"y":32.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.03125},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":9,"pivotUnitMode":1,"slicingType":2,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      gordom_ramsea_cursed_0: 1045260603
-      gordom_ramsea_cursed_1: 1420719031
-      gordom_ramsea_cursed_2: -947262079
-      gordom_ramsea_cursed_3: -1397614240
+      steward_coal_cursed_0: 96708511
+      steward_coal_cursed_1: 1710991851
+      steward_coal_cursed_2: 1003705282
+      steward_coal_cursed_3: -2146091423
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
