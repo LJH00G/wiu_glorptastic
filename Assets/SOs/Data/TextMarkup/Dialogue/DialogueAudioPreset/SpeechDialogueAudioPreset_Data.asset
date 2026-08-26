@@ -18,3 +18,5 @@ MonoBehaviour:
       value: {fileID: 8300000, guid: 53ed08031de58534d9eafd1c8ab15dc8, type: 3}
     - key: Sans
       value: {fileID: 8300000, guid: f4219ad9d433c1d49bda1656847c6b8f, type: 3}
+    - key: Narrator
+      value: {fileID: 8300000, guid: 0321912612249334c9e6e63160bef5b8, type: 3}
