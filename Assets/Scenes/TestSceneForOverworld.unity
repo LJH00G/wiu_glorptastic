@@ -173,11 +173,21 @@ MonoBehaviour:
   defaultTriggerSequence:
     index: 0
     triggerables:
-    - {fileID: 11400000, guid: 0c182ecde89c1dd4094026ed176fcd97, type: 2}
-    - {fileID: 11400000, guid: d4bdbbbdddcef184a916b504e1fd42ea, type: 2}
+    - type: {fileID: 11400000, guid: 2fb6cc53f80ab6b4c9625131f83b482c, type: 2}
+      flag:
+        key: 
+        value: 0
+    - type: {fileID: 11400000, guid: d4bdbbbdddcef184a916b504e1fd42ea, type: 2}
+      flag:
+        key: 
+        value: 0
     cycleToStartWhenExhausted: 0
     useExhaustedTriggerable: 1
-    exhaustedTriggerable: {fileID: 11400000, guid: 2fb6cc53f80ab6b4c9625131f83b482c, type: 2}
+    exhaustedTriggerable:
+      type: {fileID: 0}
+      flag:
+        key: 
+        value: 0
   flagOverrideTriggerSequences:
     serializableList: []
   dialogueConversationEventChannel: {fileID: 11400000, guid: 44508743f5b9d8341ab1fa10572170f0, type: 2}
@@ -453,7 +463,11 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: d4c15c19cc3225441b81e498606499b2, type: 2}
     - target: {fileID: 7404118726747510102, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: maxSpeed
-      value: 3.5
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404118726747510102, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+      propertyPath: maxAcceleration
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 7404118726747510102, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: slowdownDistance
@@ -461,7 +475,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7404118726747510102, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: endReachedDistance
-      value: 0.25
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7404118726747510102, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: pickNextWaypointDist
@@ -965,11 +979,21 @@ MonoBehaviour:
   defaultTriggerSequence:
     index: 0
     triggerables:
-    - {fileID: 11400000, guid: 0c182ecde89c1dd4094026ed176fcd97, type: 2}
-    - {fileID: 11400000, guid: d4bdbbbdddcef184a916b504e1fd42ea, type: 2}
+    - type: {fileID: 11400000, guid: 0c182ecde89c1dd4094026ed176fcd97, type: 2}
+      flag:
+        key: 
+        value: 0
+    - type: {fileID: 11400000, guid: 6eb9ccc3237ab404c9fa2eb07aaa120f, type: 2}
+      flag:
+        key: 
+        value: 0
     cycleToStartWhenExhausted: 0
     useExhaustedTriggerable: 1
-    exhaustedTriggerable: {fileID: 11400000, guid: 2fb6cc53f80ab6b4c9625131f83b482c, type: 2}
+    exhaustedTriggerable:
+      type: {fileID: 0}
+      flag:
+        key: 
+        value: 0
   flagOverrideTriggerSequences:
     serializableList: []
   dialogueConversationEventChannel: {fileID: 11400000, guid: 44508743f5b9d8341ab1fa10572170f0, type: 2}
@@ -1499,7 +1523,11 @@ MonoBehaviour:
   triggerCollider: {fileID: 961520130}
   lockTimeAfterTrigger: 1
   lockTimer: 0
-  triggerable: Test2
+  triggerable:
+    type: Test2
+    flag:
+      key: 
+      value: 0
   flagOverrideTriggerables:
     serializableList: []
   tpEventChannel: {fileID: 11400000, guid: 3e5be222a1f877441946e26d6736f794, type: 2}
@@ -1615,7 +1643,7 @@ MonoBehaviour:
   prioritizeGraphs: 0
   prioritizeGraphsLimit: 1
   colorSettings:
-    _SolidColor: {r: 0.11764706, g: 0.4, b: 0.7882353, a: 0.9}
+    _SolidColor: {r: 0.11764706, g: 0.4, b: 0.7882353, a: 0.4509804}
     _UnwalkableNode: {r: 1, g: 0, b: 0, a: 0.5}
     _BoundsHandles: {r: 0.29, g: 0.454, b: 0.741, a: 0.9}
     _ConnectionLowLerp: {r: 0, g: 1, b: 0, a: 0.5}
@@ -1795,7 +1823,11 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 0ed8d968f7394b142b24ee26ef52002d, type: 2}
     - target: {fileID: 7404118726747510102, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: maxSpeed
-      value: 3
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404118726747510102, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+      propertyPath: maxAcceleration
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 7404118726747510102, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: slowdownDistance
@@ -1926,7 +1958,7 @@ Transform:
   m_GameObject: {fileID: 1513504548}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0.6, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1952,7 +1984,7 @@ MonoBehaviour:
   m_StreamingVersion: 20241001
   m_LegacyPriority: 0
   Target:
-    TrackingTarget: {fileID: 2087693730}
+    TrackingTarget: {fileID: 6985838758087980584}
     LookAtTarget: {fileID: 0}
     CustomLookAtTarget: 0
   Lens:
@@ -2152,7 +2184,11 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: 1ad2863dca6276449a2a9dad2a146412, type: 2}
     - target: {fileID: 7404118726747510102, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: maxSpeed
-      value: 2
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404118726747510102, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+      propertyPath: maxAcceleration
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 7404118726747510102, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: slowdownDistance
@@ -2775,12 +2811,25 @@ MonoBehaviour:
   defaultTriggerSequence:
     index: 0
     triggerables:
-    - {fileID: 11400000, guid: 6eb9ccc3237ab404c9fa2eb07aaa120f, type: 2}
-    - {fileID: 11400000, guid: 2fb6cc53f80ab6b4c9625131f83b482c, type: 2}
-    - {fileID: 11400000, guid: 0c182ecde89c1dd4094026ed176fcd97, type: 2}
+    - type: {fileID: 0}
+      flag:
+        key: 
+        value: 0
+    - type: {fileID: 0}
+      flag:
+        key: 
+        value: 0
+    - type: {fileID: 0}
+      flag:
+        key: 
+        value: 0
     cycleToStartWhenExhausted: 0
     useExhaustedTriggerable: 0
-    exhaustedTriggerable: {fileID: 11400000, guid: d4bdbbbdddcef184a916b504e1fd42ea, type: 2}
+    exhaustedTriggerable:
+      type: {fileID: 0}
+      flag:
+        key: 
+        value: 0
   flagOverrideTriggerSequences:
     serializableList: []
   dialogueConversationEventChannel: {fileID: 11400000, guid: 44508743f5b9d8341ab1fa10572170f0, type: 2}
@@ -3061,7 +3110,7 @@ Transform:
   m_GameObject: {fileID: 1731050904}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 0, y: 0.6, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -39697,7 +39746,11 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: ed314f3b3f3a6f54a9163abd0dafcbb3, type: 2}
     - target: {fileID: 7404118726747510102, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: maxSpeed
-      value: 2
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404118726747510102, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+      propertyPath: maxAcceleration
+      value: 0.01
       objectReference: {fileID: 0}
     - target: {fileID: 7404118726747510102, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: slowdownDistance
@@ -39737,6 +39790,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8628031461048391037, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: managedReferences[6120680488739274917].battleData
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8628031461048391037, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+      propertyPath: managedReferences[6120680488739274918].facingDire
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8628031461048391037, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
@@ -39981,7 +40038,11 @@ MonoBehaviour:
   triggerCollider: {fileID: 2073146634}
   lockTimeAfterTrigger: 5
   lockTimer: 0
-  triggerable: {fileID: 11400000, guid: e59ef64d119fe3b4283100ebd927348e, type: 2}
+  triggerable:
+    type: {fileID: 11400000, guid: e59ef64d119fe3b4283100ebd927348e, type: 2}
+    flag:
+      key: 
+      value: 0
   flagOverrideTriggerables:
     serializableList: []
   initializeCombatEventChannel: {fileID: 11400000, guid: 6473217a41b61ad448a433824b5ce524, type: 2}
@@ -40141,10 +40202,17 @@ MonoBehaviour:
   defaultTriggerSequence:
     index: 0
     triggerables:
-    - {fileID: 11400000, guid: 674083db310a37d48b2c297ff0e97bd4, type: 2}
+    - type: {fileID: 11400000, guid: 674083db310a37d48b2c297ff0e97bd4, type: 2}
+      flag:
+        key: 
+        value: 0
     cycleToStartWhenExhausted: 0
     useExhaustedTriggerable: 0
-    exhaustedTriggerable: {fileID: 0}
+    exhaustedTriggerable:
+      type: {fileID: 0}
+      flag:
+        key: 
+        value: 0
   flagOverrideTriggerSequences:
     serializableList: []
   dialogueConversationEventChannel: {fileID: 11400000, guid: 44508743f5b9d8341ab1fa10572170f0, type: 2}
@@ -40208,6 +40276,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7404118726747510102, guid: aed70e6b2ae4e0643936b4830c13e4d1, type: 3}
+      propertyPath: maxSpeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404118726747510102, guid: aed70e6b2ae4e0643936b4830c13e4d1, type: 3}
+      propertyPath: maxAcceleration
+      value: 0.01
+      objectReference: {fileID: 0}
     - target: {fileID: 8628031461048391037, guid: aed70e6b2ae4e0643936b4830c13e4d1, type: 3}
       propertyPath: <Behaviour>k__BackingField
       value: 
@@ -40221,6 +40297,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aed70e6b2ae4e0643936b4830c13e4d1, type: 3}
+--- !u!4 &6985838758087980584 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6093560234488348937, guid: aed70e6b2ae4e0643936b4830c13e4d1, type: 3}
+  m_PrefabInstance: {fileID: 6985838758087980583}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

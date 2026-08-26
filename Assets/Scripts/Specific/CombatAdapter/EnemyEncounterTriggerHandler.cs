@@ -7,10 +7,10 @@ namespace Game.Interactable.TriggerHandler.Single
     {
         [SerializeField] InitializeCombatEventChannelSO initializeCombatEventChannel;
 
-        protected override void TriggerTriggerable(ref EnemyEncounterDataSO triggerable)
+        protected override void TriggerType(ref EnemyEncounterDataSO type)
         {
-            triggerable.overworldPresetationObject = transform.parent.gameObject;
-            initializeCombatEventChannel.Raise(triggerable);
+            type.overworldPresetationObject = transform.parent.gameObject;
+            initializeCombatEventChannel.Raise(type);
         }
     }
 }

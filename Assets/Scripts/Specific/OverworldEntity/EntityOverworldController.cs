@@ -48,6 +48,8 @@ public class EntityOverworldController : MonoBehaviour
 
     public void RefreshMovement()
     {
+        if (Behaviour is PlayerOverworldBehaviourSO)
+            Debug.Log("refreshed movement", this);
         AIPath.destination = transform.position;
     }
 

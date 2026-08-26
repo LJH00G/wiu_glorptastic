@@ -13,9 +13,9 @@ namespace Game.Interactable.TriggerHandler.Single
         [Header("Event Broadcasting Channel")]
         [SerializeField] StringEventChannelSO tpEventChannel;
 
-        protected override void TriggerTriggerable(ref string triggerable)
+        protected override void TriggerType(ref string type)
         {
-            tpEventChannel.Raise(triggerable);
+            tpEventChannel.Raise(type);
         }
 
 

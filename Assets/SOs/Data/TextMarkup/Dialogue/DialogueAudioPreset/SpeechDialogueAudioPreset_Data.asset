@@ -20,3 +20,17 @@ MonoBehaviour:
       value: {fileID: 8300000, guid: f4219ad9d433c1d49bda1656847c6b8f, type: 3}
     - key: Narrator
       value: {fileID: 8300000, guid: 0321912612249334c9e6e63160bef5b8, type: 3}
+    - key: NoahLedge
+      value: {fileID: 8300000, guid: 913051ab05803564690c9c5716f9137f, type: 3}
+    - key: PiaoFu
+      value: {fileID: 8300000, guid: 3ccd021508c815f4c800a9ddeac9f240, type: 3}
+    - key: DinoMike
+      value: {fileID: 8300000, guid: 428cfad45c81ce648921fdd289253561, type: 3}
+    - key: Gordom
+      value: {fileID: 8300000, guid: be2bf2891f193344a933e7d0c1d3a47b, type: 3}
+    - key: Emilia
+      value: {fileID: 8300000, guid: 1d55ddbabd6e24146bae9f039bc13287, type: 3}
+    - key: Steward
+      value: {fileID: 8300000, guid: 0b7738625a596194988dde094b67232d, type: 3}
+    - key: Edward
+      value: {fileID: 8300000, guid: 2caa521738b603443865241551c4cefd, type: 3}

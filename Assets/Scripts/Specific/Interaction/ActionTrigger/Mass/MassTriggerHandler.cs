@@ -9,17 +9,25 @@ namespace Game.Interactable.TriggerHandler.Mass
     [RequireComponent(typeof(BoxCollider2D))]
     public abstract class MassTriggerHandler<T> : TriggerHandler
     {
-        public abstract class TriggerableSequence<T_Triggerable>
+        [Serializable]
+        public class Triggerable
+        {
+            public T type;
+            public DictEntry<string, bool> flag;
+        }
+
+        [Serializable]
+        public class TriggerableSequence
         {
             [SerializeField] int index = 0;
-            [SerializeField] T_Triggerable[] triggerables;
+            [SerializeField] Triggerable[] triggerables;
             /// <summary>if useExhaustedTriggerable, this will have no effect</summary>
             [Tooltip("if useExhaustedTriggerable, this will have no effect")]
             [SerializeField] bool cycleToStartWhenExhausted;
             [SerializeField] bool useExhaustedTriggerable;
-            [SerializeField] T_Triggerable exhaustedTriggerable;
+            [SerializeField] Triggerable exhaustedTriggerable;
 
-            public bool TryGetTriggerable(out T_Triggerable triggerable)
+            public bool TryGetTriggerable(out Triggerable triggerable)
             {
                 triggerable = exhaustedTriggerable;
 
@@ -46,24 +54,25 @@ namespace Game.Interactable.TriggerHandler.Mass
 #if UNITY_EDITOR
             public void OnValidate()
             {
-                if (useExhaustedTriggerable && typeof(T_Triggerable).IsClass && exhaustedTriggerable == null)
-                    Debug.LogError($"TriggerableList<T_Triggerable> | useExhaustedTriggerable == true, T_Triggerable is a class, exhaustedTriggerable cannot be left empty");
+                for (int i = 0; i < triggerables.Length; i++)
+                {
+                    var triggerable = triggerables[i];
+                    if (!string.IsNullOrEmpty(triggerable.flag.key) && GameManager.CurrentUserData.Flags.dict.ContainsKey(triggerable.flag.key))
+                        Debug.LogError($"TriggerableList<Triggerable<{typeof(T)}>> | triggerables contains entry that has value with invalid flag");
+                }
+
+                if (useExhaustedTriggerable && typeof(Triggerable).IsClass && exhaustedTriggerable == null)
+                    Debug.LogError($"TriggerableList<Triggerable<{typeof(T)}>> | useExhaustedTriggerable == true, T_Triggerable is a class, exhaustedTriggerable cannot be left empty");
             }
 #endif
         }
 
-        [Serializable]
-        public class TypedTriggerableSequence : TriggerableSequence<T>
-        {
-
-        }
-
 
         [Header("Triggerable Sequence")]
-        [SerializeField] TypedTriggerableSequence defaultTriggerSequence = new();
-        [SerializeField] VisualizableDict<string, TypedTriggerableSequence> flagOverrideTriggerSequences = new();
+        [SerializeField] TriggerableSequence defaultTriggerSequence = new();
+        [SerializeField] VisualizableDict<string, TriggerableSequence> flagOverrideTriggerSequences = new();
 
-        protected abstract void TriggerTriggerable(ref T triggerable);
+        protected abstract void TriggerType(ref T triggerable);
 
         public override void Trigger()
         {
@@ -86,15 +95,17 @@ namespace Game.Interactable.TriggerHandler.Mass
 
             if (useFlagOverride)
             {
-                if (flagOverrideTriggerSequences[flagOverrideKey].TryGetTriggerable(out T triggerable))
+                if (flagOverrideTriggerSequences[flagOverrideKey].TryGetTriggerable(out Triggerable triggerable))
                 {
-                    TriggerTriggerable(ref triggerable);
+                    TriggerType(ref triggerable.type);
+                    GameManager.CurrentUserData.Flags[triggerable.flag.key] = triggerable.flag.value;
                     ResetLockTimer();
                 }
             }
-            else if (defaultTriggerSequence.TryGetTriggerable(out T triggerable))
+            else if (defaultTriggerSequence.TryGetTriggerable(out Triggerable triggerable))
             {
-                TriggerTriggerable(ref triggerable);
+                TriggerType(ref triggerable.type);
+                GameManager.CurrentUserData.Flags[triggerable.flag.key] = triggerable.flag.value;
                 ResetLockTimer();
             }
 
@@ -111,15 +122,17 @@ namespace Game.Interactable.TriggerHandler.Mass
 
             flagOverrideTriggerSequences.OnValidate();
 
+            Debug.Log($"validating flagOverrideTriggerSequences", this);
             foreach (var entry in flagOverrideTriggerSequences.dict)
             {
                 entry.Value.OnValidate();
-                if (!GameManager.CurrentUserData.Flags.dict.TryGetValue(entry.Key, out bool _))
+                if (!GameManager.CurrentUserData.Flags.dict.ContainsKey(entry.Key))
                 {
                     Debug.LogError($"flagOverrideTriggerSequences contains invalid flag", this);
                 }
             }
 
+            Debug.Log($"validating defaultTriggerSequence", this);
             defaultTriggerSequence.OnValidate();
 
         }

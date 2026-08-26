@@ -13,9 +13,9 @@ namespace Game.Interactable.TriggerHandler.Single
         [Header("Event Broadcasting Channel")]
         [SerializeField] PuzzleStartEventChannelSO tpEventChannel;
 
-        protected override void TriggerTriggerable(ref PuzzleData triggerable)
+        protected override void TriggerType(ref PuzzleData type)
         {
-            tpEventChannel.Raise(triggerable);
+            tpEventChannel.Raise(type);
         }
 
 

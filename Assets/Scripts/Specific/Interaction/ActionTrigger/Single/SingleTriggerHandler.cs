@@ -1,4 +1,5 @@
 
+using System;
 using UnityEngine;
 using Utility.VisualizableDictionary;
 
@@ -9,11 +10,18 @@ namespace Game.Interactable.TriggerHandler.Single
     [RequireComponent(typeof(BoxCollider2D))]
     public abstract class SingleTriggerHandler<T> : TriggerHandler
     {
-        [Header("Triggerable")]
-        [SerializeField] T triggerable;
-        [SerializeField] VisualizableDict<string, T> flagOverrideTriggerables = new();
+        [Serializable]
+        public class Triggerable
+        {
+            public T type;
+            public DictEntry<string, bool> flag;
+        }
 
-        protected abstract void TriggerTriggerable(ref T triggerable);
+        [Header("Triggerable")]
+        [SerializeField] Triggerable triggerable;
+        [SerializeField] VisualizableDict<string, Triggerable> flagOverrideTriggerables = new();
+
+        protected abstract void TriggerType(ref T type);
 
         public override void Trigger()
         {
@@ -37,10 +45,14 @@ namespace Game.Interactable.TriggerHandler.Single
             if (useFlagOverride)
             {
                 var triggerable = flagOverrideTriggerables.dict[flagOverrideKey];
-                TriggerTriggerable(ref triggerable);
+                TriggerType(ref triggerable.type);
+                GameManager.CurrentUserData.Flags[triggerable.flag.key] = triggerable.flag.value;
             }
             else
-                TriggerTriggerable(ref triggerable);
+            {
+                TriggerType(ref triggerable.type);
+                GameManager.CurrentUserData.Flags[triggerable.flag.key] = triggerable.flag.value;
+            }
 
             ResetLockTimer();
         }
@@ -52,11 +64,19 @@ namespace Game.Interactable.TriggerHandler.Single
         {
             base.OnValidate();
 
+            if (!string.IsNullOrEmpty(triggerable.flag.key) && !GameManager.CurrentUserData.Flags.dict.ContainsKey(triggerable.flag.key))
+                Debug.LogError($"triggerable contains invalid flag", this);
+
             foreach (var entry in flagOverrideTriggerables.dict)
             {
-                if (!GameManager.CurrentUserData.Flags.dict.TryGetValue(entry.Key, out bool _))
+                if (!GameManager.CurrentUserData.Flags.dict.ContainsKey(entry.Key))
                 {
-                    Debug.LogError($"flagOverrideTriggerLists contains invalid flag", this);
+                    Debug.LogError($"flagOverrideTriggerables contains invalid flag", this);
+                }
+
+                if (!string.IsNullOrEmpty(entry.Value.flag.key) && !GameManager.CurrentUserData.Flags.dict.ContainsKey(entry.Value.flag.key))
+                {
+                    Debug.LogError($"flagOverrideTriggerables contains entry that has value with invalid flag", this);
                 }
             }
 

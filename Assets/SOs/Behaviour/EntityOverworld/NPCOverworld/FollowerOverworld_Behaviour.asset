@@ -12,9 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af8f6c5cbac94514590c359325573a4f, type: 3}
   m_Name: FollowerOverworld_Behaviour
   m_EditorClassIdentifier: Assembly-CSharp::Game.SO.Behaviour.EntityOverworld.FollowObjectOverworldBehaviourSO
-  animCtrller: {fileID: 9100000, guid: 0ed8d968f7394b142b24ee26ef52002d, type: 2}
-  <DefaultSprite>k__BackingField: {fileID: 577998304, guid: e20bc7d1e02398343aaf1a2548bbfc2c, type: 3}
-  speed: 3
-  acceleration: 10
+  <Speed>k__BackingField: 3
+  <Acceleration>k__BackingField: 10
   followDistMult: 1
   defaultTargetsPlayer: 1

@@ -21,7 +21,7 @@ public class OverworldEntityAppearanceSO : ScriptableObject
     {
         var speed = controller.AIPath.desiredVelocity.magnitude;
 
-        if (speed > 0.1f)
+        if (speed > controller.Behaviour.Speed * 0.05f)
         {
             float theta = Vector2.SignedAngle(Vector2.right, controller.AIPath.desiredVelocity);
 

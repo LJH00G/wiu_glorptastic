@@ -49,8 +49,10 @@ namespace Game.SO.Behaviour.EntityOverworld.InstanceData
 {
     public abstract class EntityOverworldBehaviourSO : ScriptableObject
     {
-        [SerializeField] protected float speed = 2;
-        [SerializeField] protected float acceleration = 10;
+        [field: SerializeField]
+        public float Speed { get; private set; } = 2;
+        [field: SerializeField]
+        public float Acceleration { get; private set; } = 10;
 
         public abstract void BehaviourStart(EntityOverworldController controller);
         public abstract void BehaviourUpdate(EntityOverworldController controller, float dt);

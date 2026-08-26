@@ -29,7 +29,7 @@ namespace Game
     /// - can move
     /// - functions that forcefully set players position based on where they need or want to go, like teleporting after interacting with a portal of sorts
     /// </summary>
-    public class GameManager
+    static public class GameManager
     {
         static public bool Debug { get; private set; } = true;
         static public GameObject Player { get; private set; }
@@ -102,8 +102,6 @@ namespace Game
 
         static public void SetPlayerCanMove(bool value)
         {
-            UnityEngine.Debug.Log($"GameManager: seting player can move, value({value})");
-
             PlayerCanMove = value;
 
             if (PlayerCanMove)
@@ -112,6 +110,8 @@ namespace Game
 
         static public void SetAllCanMove(bool value)
         {
+            UnityEngine.Debug.Log($"GameManager: seting player can move, value({value})");
+
             AllCanMove = value;
 
             if (AllCanMove)

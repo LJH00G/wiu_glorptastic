@@ -12,12 +12,12 @@ namespace Game.Interactable.TriggerHandler.Mass
         [Header("Event Broadcasting Channel")]
         [SerializeField] DialogueConversationEventChannelSO dialogueConversationEventChannel;
 
-        protected override void TriggerTriggerable(ref DialogueConversationSO triggerable)
+        protected override void TriggerType(ref DialogueConversationSO type)
         {
             transform.parent.TryGetComponent(out EntityOverworldController npcController);
             GameManager.StartConversation(npcController);
 
-            dialogueConversationEventChannel.Raise(triggerable);
+            dialogueConversationEventChannel.Raise(type);
         }
 
 #if UNITY_EDITOR

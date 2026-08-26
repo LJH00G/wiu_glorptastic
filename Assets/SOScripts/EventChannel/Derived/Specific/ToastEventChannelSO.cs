@@ -1,18 +1,21 @@
 using Game.Inventory;
 using Game.SO.EventChannel;
 using Game.SO.EventChannel.Context;
+using System;
 using UnityEngine;
 
 
 
 namespace Game.SO.EventChannel.Context
 {
+    [Serializable]
     public abstract class ToastEventContext
     {
         public Color color;
         public abstract string GetToastMessage();
     }
-    
+
+    [Serializable]
     public class MessageToastEventContext : ToastEventContext
     {
         public string message;
@@ -32,6 +35,7 @@ namespace Game.SO.EventChannel.Context
         }
     }
 
+    [Serializable]
     public class ItemStackToastEventContext : ToastEventContext
     {
         public ItemStack itemStack;
@@ -53,6 +57,7 @@ namespace Game.SO.EventChannel.Context
         }
     }
 
+    [Serializable]
     public class ShellToastEventContext : ToastEventContext
     {
         public int amount;

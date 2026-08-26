@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 563190cba4a05e145b42c725a7f2dc77, type: 3}
   m_Name: RandomMovePointsOverworld_Behaviour
   m_EditorClassIdentifier: Assembly-CSharp::Game.SO.Behaviour.EntityOverworld.MovePointsOverworldBehaviourSO
-  speed: 2
-  acceleration: 10
+  <Speed>k__BackingField: 2
+  <Acceleration>k__BackingField: 10
   isCycle: 0
   isRandom: 1
   maxPauseDurationAtPoint: 1

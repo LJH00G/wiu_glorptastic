@@ -41,8 +41,13 @@ public class ToastManager : MonoBehaviour
     [SerializeField, DisplayOnly] float bufferTimer;
 
     [Header("Dont Touch")]
-    [SerializeField] List<Toast> bufferedToast = new();
+    [SerializeReference] List<ToastEventContext> bufferedToast = new();
     [SerializeField] List<Toast> managedToast = new();
+
+    public void AppendToast(ToastEventContext context)
+    {
+        bufferedToast.Add(context);
+    }
 
     public void GenerateToast(ToastEventContext context)
     {
@@ -112,7 +117,8 @@ public class ToastManager : MonoBehaviour
         // type write again to fix offset issues
         typeWriter.StartNewTypeWriting(msg, true);
 
-        bufferedToast.Add(
+        managedToast.Insert(
+            0,
             new()
             {
                 rectForm = toastRectForm,
@@ -141,7 +147,7 @@ public class ToastManager : MonoBehaviour
         else if (bufferedToast.Count > 0)
         {
             bufferTimer += bufferTime;
-            managedToast.Insert(0, bufferedToast[0]);
+            GenerateToast(bufferedToast[0]);
             bufferedToast.RemoveAt(0);
         }
 
@@ -215,12 +221,12 @@ public class ToastManager : MonoBehaviour
 
     private void OnEnable()
     {
-        toastEventChannel.Subscribe(GenerateToast);
+        toastEventChannel.Subscribe(AppendToast);
     }
 
     private void OnDisable()
     {
-        toastEventChannel.Unsubscribe(GenerateToast);
+        toastEventChannel.Unsubscribe(AppendToast);
     }
 
 }
