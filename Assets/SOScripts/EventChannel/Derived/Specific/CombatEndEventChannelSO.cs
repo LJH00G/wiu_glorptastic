@@ -10,12 +10,12 @@ namespace Game.SO.EventChannel.Context
 {
     public class CombatEndEventContextSO
     {
-        public bool won;
+        public CombatState state;
         public List<LootData> lootCollected;
 
-        public CombatEndEventContextSO(bool won, List<LootData> loot)
+        public CombatEndEventContextSO(CombatState state, List<LootData> loot)
         {
-            this.won = won;
+            this.state = state;
             this.lootCollected = loot;
         }
     }

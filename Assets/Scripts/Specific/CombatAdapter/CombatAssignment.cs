@@ -43,11 +43,11 @@ namespace Game.Combat.Integration
             );
         }
 
-        public void WipeDataAssignment(bool won)
+        public void WipeDataAssignment(CombatState state)
         {
 
             List<LootData> loot = null;
-            if (won)
+            if (state == CombatState.BATTLE_WON)
             {
                 List<LootTableSO> lootPool = ObtainLootPool(dataTunnel);
                 if(lootPool.Count > 0)
@@ -56,7 +56,7 @@ namespace Game.Combat.Integration
             
 
             dataTunnel.WipeCall();
-            CombatEndEventContextSO context = new(won, loot);
+            CombatEndEventContextSO context = new(state, loot);
             combatEnd.Raise(context);
         }
 

@@ -959,11 +959,9 @@ namespace Game.Combat
             }
 
             bool playerDown = !player.isAlive;
-            bool partnerDown =
-                partner == null ||
-                !partner.isAlive;
+            
 
-            if (playerDown && partnerDown)
+            if (playerDown)
             {
                 state = CombatState.BATTLE_LOST;
 
@@ -985,7 +983,7 @@ namespace Game.Combat
             );
 
             input.InputEnabled = false;
-            combatAssigner.WipeDataAssignment(won);
+            combatAssigner.WipeDataAssignment(state);
             
         }
     }

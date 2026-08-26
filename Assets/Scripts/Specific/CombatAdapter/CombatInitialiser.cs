@@ -2,12 +2,12 @@ using Game;
 using Game.Combat;
 using Game.GlobalVariable;
 using Game.Inventory;
-using Game.OverworldDisableManager;
-using Game.SO.Data.Buddy;
 using Game.SO.Data.Item;
 using Game.SO.Data.Item.Sellable;
 using Game.SO.EventChannel;
 using Game.SO.EventChannel.Context;
+using NUnit.Framework;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -66,10 +66,17 @@ public class CombatInitialiser : MonoBehaviour
 
     public void EndCombat(CombatEndEventContextSO context)
     {
-        if (context.won && enemyInitiated)
+        if (context.state == CombatState.BATTLE_WON && enemyInitiated)
         {
             Destroy(enemyInitiated);
             AddLootToInventory(context);
+        } else if (context.state == CombatState.FLED)
+        {
+            PauseEnemy(enemyInitiated);
+        } else if(context.state == CombatState.BATTLE_LOST)
+        {
+            List<GameObject> list = new();
+            onSwitch.Raise(new(SCENE_SWITCH_SETTING.LOAD_SEQUENTIALLY, "DeathScene"), 0, PlayMusicEventContext.FadeAllOut_1s, SCENE_SWITCH_PAUSE.PAUSE_DURING_LOAD, true, list));
         }
             
 
@@ -95,6 +102,15 @@ public class CombatInitialiser : MonoBehaviour
         {
             InventoryManager.AddItem(loot.item, (uint)loot.count);
         }
+    }
+
+    IEnumerator PauseEnemy(GameObject enemy)
+    {
+        enemy.isStatic = true;
+
+        yield return new WaitForSeconds(1);
+
+        enemy.isStatic = false;
     }
 
     private void OnEnable()
