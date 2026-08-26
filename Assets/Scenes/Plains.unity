@@ -496,10 +496,14 @@ MonoBehaviour:
   triggerCollider: {fileID: 142686875}
   lockTimeAfterTrigger: 0
   lockTimer: 0
-  triggerable: {fileID: 11400000, guid: 146a6253bd349e54c8c4d45b7b156f50, type: 2}
+  triggerable:
+    type: {fileID: 0}
+    flag:
+      key: 
+      value: 0
   flagOverrideTriggerables:
     serializableList: []
-  tpEventChannel: {fileID: 0}
+  tpEventChannel: {fileID: 11400000, guid: 6fc0b7e63b0900946816fcc4210813ca, type: 2}
 --- !u!61 &142686875
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -546,6 +550,52 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 3.46, y: 2.33}
   m_EdgeRadius: 0
+--- !u!1 &148182055
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 148182056}
+  - component: {fileID: 148182057}
+  m_Layer: 0
+  m_Name: FlagObjectHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &148182056
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 148182055}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 953472293}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &148182057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 148182055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10968430b18bbb34c9fecf05a46fa035, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlagObjectManager
+  flagObjectDictionary:
+    serializableList: []
 --- !u!1 &234429825
 GameObject:
   m_ObjectHideFlags: 0
@@ -39166,6 +39216,7 @@ Transform:
   - {fileID: 1120251437}
   - {fileID: 2117768433}
   - {fileID: 1123762349}
+  - {fileID: 1256895797}
   m_Father: {fileID: 1267852725}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &291176229
@@ -77232,7 +77283,11 @@ MonoBehaviour:
   triggerCollider: {fileID: 454282616}
   lockTimeAfterTrigger: 2
   lockTimer: 0
-  triggerable: {fileID: 11400000, guid: e59ef64d119fe3b4283100ebd927348e, type: 2}
+  triggerable:
+    type: {fileID: 0}
+    flag:
+      key: 
+      value: 0
   flagOverrideTriggerables:
     serializableList: []
   initializeCombatEventChannel: {fileID: 11400000, guid: 6473217a41b61ad448a433824b5ce524, type: 2}
@@ -77440,7 +77495,11 @@ MonoBehaviour:
   triggerCollider: {fileID: 600197539}
   lockTimeAfterTrigger: 2
   lockTimer: 0
-  triggerable: {fileID: 11400000, guid: e59ef64d119fe3b4283100ebd927348e, type: 2}
+  triggerable:
+    type: {fileID: 0}
+    flag:
+      key: 
+      value: 0
   flagOverrideTriggerables:
     serializableList: []
   initializeCombatEventChannel: {fileID: 11400000, guid: 6473217a41b61ad448a433824b5ce524, type: 2}
@@ -127588,10 +127647,17 @@ MonoBehaviour:
   defaultTriggerSequence:
     index: 0
     triggerables:
-    - {fileID: 11400000, guid: 9773fead88d9a4a469cf5654e45d4353, type: 2}
+    - type: {fileID: 11400000, guid: 9773fead88d9a4a469cf5654e45d4353, type: 2}
+      flag:
+        key: 
+        value: 0
     cycleToStartWhenExhausted: 0
     useExhaustedTriggerable: 0
-    exhaustedTriggerable: {fileID: 0}
+    exhaustedTriggerable:
+      type: {fileID: 0}
+      flag:
+        key: 
+        value: 0
   flagOverrideTriggerSequences:
     serializableList: []
 --- !u!61 &799445908
@@ -128130,6 +128196,7 @@ Transform:
   - {fileID: 1970705965}
   - {fileID: 460586716}
   - {fileID: 1352289981}
+  - {fileID: 148182056}
   m_Father: {fileID: 815766574}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1085842139
@@ -128293,7 +128360,11 @@ MonoBehaviour:
   triggerCollider: {fileID: 1120251439}
   lockTimeAfterTrigger: 0
   lockTimer: 0
-  triggerable: Area1EndingTP
+  triggerable:
+    type: Area1EndingTP
+    flag:
+      key: 
+      value: 0
   flagOverrideTriggerables:
     serializableList: []
   tpEventChannel: {fileID: 11400000, guid: 3e5be222a1f877441946e26d6736f794, type: 2}
@@ -128394,7 +128465,11 @@ MonoBehaviour:
   triggerCollider: {fileID: 1123762351}
   lockTimeAfterTrigger: 0
   lockTimer: 0
-  triggerable: Area4StartTP
+  triggerable:
+    type: Area4StartTP
+    flag:
+      key: 
+      value: 0
   flagOverrideTriggerables:
     serializableList: []
   tpEventChannel: {fileID: 11400000, guid: 3e5be222a1f877441946e26d6736f794, type: 2}
@@ -128614,7 +128689,11 @@ MonoBehaviour:
   triggerCollider: {fileID: 1193187914}
   lockTimeAfterTrigger: 2
   lockTimer: 0
-  triggerable: {fileID: 11400000, guid: e59ef64d119fe3b4283100ebd927348e, type: 2}
+  triggerable:
+    type: {fileID: 0}
+    flag:
+      key: 
+      value: 0
   flagOverrideTriggerables:
     serializableList: []
   initializeCombatEventChannel: {fileID: 11400000, guid: 6473217a41b61ad448a433824b5ce524, type: 2}
@@ -128625,6 +128704,120 @@ BoxCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1193187911}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!1 &1256895796
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1256895797}
+  - component: {fileID: 1256895799}
+  - component: {fileID: 1256895798}
+  m_Layer: 10
+  m_Name: Starting DialogueCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1256895797
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256895796}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 267710966}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1256895798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256895796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a048d282cfaf38548b1c736d60ad4476, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Interactable.TriggerHandler.Mass.DialogueTriggerHandler
+  <RequiresInteraction>k__BackingField: 0
+  offset: {x: 0, y: 0}
+  size: {x: 1, y: 1}
+  triggerCollider: {fileID: 1256895799}
+  lockTimeAfterTrigger: 0
+  lockTimer: 0
+  defaultTriggerSequence:
+    index: 0
+    triggerables:
+    - type: {fileID: 0}
+      flag:
+        key: 
+        value: 0
+    cycleToStartWhenExhausted: 0
+    useExhaustedTriggerable: 0
+    exhaustedTriggerable:
+      type: {fileID: 0}
+      flag:
+        key: 
+        value: 0
+  flagOverrideTriggerSequences:
+    serializableList: []
+  dialogueConversationEventChannel: {fileID: 11400000, guid: 44508743f5b9d8341ab1fa10572170f0, type: 2}
+--- !u!61 &1256895799
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256895796}
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
@@ -128813,10 +129006,17 @@ MonoBehaviour:
   defaultTriggerSequence:
     index: 0
     triggerables:
-    - {fileID: 11400000, guid: 9773fead88d9a4a469cf5654e45d4353, type: 2}
+    - type: {fileID: 11400000, guid: 9773fead88d9a4a469cf5654e45d4353, type: 2}
+      flag:
+        key: 
+        value: 0
     cycleToStartWhenExhausted: 0
     useExhaustedTriggerable: 0
-    exhaustedTriggerable: {fileID: 0}
+    exhaustedTriggerable:
+      type: {fileID: 0}
+      flag:
+        key: 
+        value: 0
   flagOverrideTriggerSequences:
     serializableList: []
 --- !u!61 &1285050801
@@ -128916,7 +129116,11 @@ MonoBehaviour:
   triggerCollider: {fileID: 1290355096}
   lockTimeAfterTrigger: 0
   lockTimer: 0
-  triggerable: Area2BeginningTP
+  triggerable:
+    type: Area2BeginningTP
+    flag:
+      key: 
+      value: 0
   flagOverrideTriggerables:
     serializableList: []
   tpEventChannel: {fileID: 11400000, guid: 3e5be222a1f877441946e26d6736f794, type: 2}
@@ -129783,7 +129987,11 @@ MonoBehaviour:
   triggerCollider: {fileID: 1640078898}
   lockTimeAfterTrigger: 0
   lockTimer: 0
-  triggerable: Area5StartTP
+  triggerable:
+    type: Area5StartTP
+    flag:
+      key: 
+      value: 0
   flagOverrideTriggerables:
     serializableList: []
   tpEventChannel: {fileID: 11400000, guid: 3e5be222a1f877441946e26d6736f794, type: 2}
@@ -129884,7 +130092,11 @@ MonoBehaviour:
   triggerCollider: {fileID: 1647601467}
   lockTimeAfterTrigger: 0
   lockTimer: 0
-  triggerable: HouseTP
+  triggerable:
+    type: HouseTP
+    flag:
+      key: 
+      value: 0
   flagOverrideTriggerables:
     serializableList: []
   tpEventChannel: {fileID: 11400000, guid: 3e5be222a1f877441946e26d6736f794, type: 2}
@@ -130720,7 +130932,11 @@ MonoBehaviour:
   triggerCollider: {fileID: 1826189029}
   lockTimeAfterTrigger: 0
   lockTimer: 0
-  triggerable: Area3HouseTP
+  triggerable:
+    type: Area3HouseTP
+    flag:
+      key: 
+      value: 0
   flagOverrideTriggerables:
     serializableList: []
   tpEventChannel: {fileID: 11400000, guid: 3e5be222a1f877441946e26d6736f794, type: 2}
@@ -130821,7 +131037,11 @@ MonoBehaviour:
   triggerCollider: {fileID: 1876600475}
   lockTimeAfterTrigger: 0
   lockTimer: 0
-  triggerable: Area2TopTP
+  triggerable:
+    type: Area2TopTP
+    flag:
+      key: 
+      value: 0
   flagOverrideTriggerables:
     serializableList: []
   tpEventChannel: {fileID: 11400000, guid: 3e5be222a1f877441946e26d6736f794, type: 2}
@@ -131303,7 +131523,11 @@ MonoBehaviour:
   triggerCollider: {fileID: 1988533349}
   lockTimeAfterTrigger: 0
   lockTimer: 0
-  triggerable: Area2SideTP
+  triggerable:
+    type: Area2SideTP
+    flag:
+      key: 
+      value: 0
   flagOverrideTriggerables:
     serializableList: []
   tpEventChannel: {fileID: 11400000, guid: 3e5be222a1f877441946e26d6736f794, type: 2}
@@ -131398,13 +131622,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7375fc3aae0df5144b64b3371b800b89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Interactable.TriggerHandler.Single.TeleportTriggerHandler
-  <RequiresInteraction>k__BackingField: 1
+  <RequiresInteraction>k__BackingField: 0
   offset: {x: 0, y: 0}
   size: {x: 1, y: 1}
   triggerCollider: {fileID: 2053809407}
   lockTimeAfterTrigger: 0
   lockTimer: 0
-  triggerable: Area4TopTP
+  triggerable:
+    type: Area4TopTP
+    flag:
+      key: 
+      value: 0
   flagOverrideTriggerables:
     serializableList: []
   tpEventChannel: {fileID: 11400000, guid: 3e5be222a1f877441946e26d6736f794, type: 2}
@@ -131531,7 +131759,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5511489128047036267, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6473455761877912804, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -131744,7 +131972,11 @@ MonoBehaviour:
   triggerCollider: {fileID: 2117768435}
   lockTimeAfterTrigger: 0
   lockTimer: 0
-  triggerable: Area3BeginningTP
+  triggerable:
+    type: Area3BeginningTP
+    flag:
+      key: 
+      value: 0
   flagOverrideTriggerables:
     serializableList: []
   tpEventChannel: {fileID: 11400000, guid: 3e5be222a1f877441946e26d6736f794, type: 2}
@@ -131991,6 +132223,10 @@ PrefabInstance:
     - target: {fileID: 6473455761877912804, guid: aed70e6b2ae4e0643936b4830c13e4d1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404118726747510102, guid: aed70e6b2ae4e0643936b4830c13e4d1, type: 3}
+      propertyPath: maxSpeed
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8628031461048391037, guid: aed70e6b2ae4e0643936b4830c13e4d1, type: 3}
       propertyPath: <Behaviour>k__BackingField
