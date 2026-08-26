@@ -1,5 +1,7 @@
+using Game.GlobalVariable;
 using Game.Inventory;
 using Game.SO.Data.Shop;
+using Game.SO.EventChannel.Context;
 using UnityEngine;
 
 public class ShopBaseController : MonoBehaviour

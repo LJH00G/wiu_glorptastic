@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Game.CSEvent;
 using Unity.VisualScripting;
+using Game.GlobalVariable;
+using Game.SO.EventChannel.Context;
 
 
 namespace Game.Inventory
@@ -37,22 +39,22 @@ namespace Game.Inventory
             bool canBuy = true;
 
             if (cost.useShell && cost.shell > ManagedInventory.ShellCurrency)
+            {
+                StaticGlobalVariable.ToastEventChannel.Raise(new MessageToastEventContext($"you need {cost.shell - ManagedInventory.ShellCurrency} more shells!", true));
                 canBuy = false;
+            }
 
             foreach (var stack in cost.itemStacks)
             {
-                if (!HasItemInList(stack.item, out uint amount) || amount < stack.count)
+                if (!HasItemInList(stack.item, out uint amountInInv) || amountInInv < stack.count)
                 {
+                    StaticGlobalVariable.ToastEventChannel.Raise(new MessageToastEventContext($"you need {stack.count - amountInInv} more {stack.item.Name}!", true, stack.item.Sprite));
                     canBuy = false;
-                    break;
                 }
             }
 
             if (!canBuy)
-            {
-                // toast notif event
                 return false;
-            }
 
 
             // remove resource
@@ -76,8 +78,6 @@ namespace Game.Inventory
                 AddItem(stack.item, stack.count);
             }
 
-            // toast notif event
-
             return true;
         }
 
@@ -94,12 +94,17 @@ namespace Game.Inventory
                 {
                     itemStack.count += amount;
                     itemList[i] = itemStack;
+
+                    StaticGlobalVariable.ToastEventChannel.Raise(new ItemStackToastEventContext(new(itemStack.item, amount)));
                     OnInventoryChanged.Raise();
                     return;
                 }
             }
 
-            itemList.Add(new(item, amount));
+            ItemStack newStack = new(item, amount);
+            itemList.Add(newStack);
+
+            StaticGlobalVariable.ToastEventChannel.Raise(new ItemStackToastEventContext(newStack));
             OnInventoryChanged.Raise();
         }
 
@@ -272,16 +277,19 @@ namespace Game.Inventory
                     if (amount > itemStack.count)
                     {
                         itemList.RemoveAt(i);
+                        StaticGlobalVariable.ToastEventChannel.Raise(new ItemStackToastEventContext(itemStack, false));
                         Debug.LogWarning($"InventoryManager.RemoveItem() | tried to remove more items than whats in the inventory");
                     }
                     else if (amount == itemStack.count)
                     {
                         itemList.RemoveAt(i);
+                        StaticGlobalVariable.ToastEventChannel.Raise(new ItemStackToastEventContext(itemStack, false));
                     }
                     else
                     {
                         itemStack.count -= amount;
                         itemList[i] = itemStack;
+                        StaticGlobalVariable.ToastEventChannel.Raise(new ItemStackToastEventContext(new ItemStack(itemStack.item, amount), false));
                     }
                     OnInventoryChanged.Raise();
                     return;
@@ -301,12 +309,16 @@ namespace Game.Inventory
         static public void DeductShell(int amount)
         {
             ManagedInventory.ShellCurrency -= amount;
+
+            StaticGlobalVariable.ToastEventChannel.Raise(new ShellToastEventContext(amount, false));
             OnInventoryChanged.Raise();
         }
 
         static public void RecieveShell(int amount)
         {
             ManagedInventory.ShellCurrency += amount;
+
+            StaticGlobalVariable.ToastEventChannel.Raise(new ShellToastEventContext(amount));
             OnInventoryChanged.Raise();
         }
 
@@ -491,19 +503,9 @@ namespace Game.Inventory
         {
             if (inv != null)
                 ManagedInventory = inv;
+            else
+                Debug.LogWarning($"InventoryManager.ManageInventory() | trying to set ManagedInventory as a null inventory, current ManagedInventory: {ManagedInventory}");
         }
-
-
-
-        //private void OnEnable()
-        //{
-        //    shopPurchaseEventChannel.Subscribe(HandleShopPurchase);
-        //}
-
-        //private void OnDisable()
-        //{
-        //    shopPurchaseEventChannel.Unsubscribe(HandleShopPurchase);
-        //}
 
     }
 }
