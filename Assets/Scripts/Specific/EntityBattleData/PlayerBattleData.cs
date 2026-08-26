@@ -10,6 +10,12 @@ namespace Game.Combat.Integration
         public int MaxHP { get; private set; }
         [field: SerializeField]
         public int MaxCurse { get; private set; }
+        /// shimi shimi
+        //[field: SerializeField, DisplayOnly]
+        //public string LastCheckpointID { get; private set; } = "";
+
+        //[field: SerializeField, DisplayOnly]
+        //public string LastSceneName { get; private set; } = "";
         [SerializeField]
         int currentHP;
         public int CurrentHP
@@ -59,7 +65,13 @@ namespace Game.Combat.Integration
             CurrentHP = currentHP;
             CurrentCurse = currentCurse;
         }
-
+        public void SetFromSave(int maxHP, int maxCurse, int currentHP, int currentCurse)
+        {
+            MaxHP = maxHP;
+            MaxCurse = maxCurse;
+            CurrentHP = currentHP;
+            CurrentCurse = currentCurse;
+        }
 
         public PlayerBattleData() { }
         public PlayerBattleData(PlayerBattleData other)

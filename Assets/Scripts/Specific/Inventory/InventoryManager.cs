@@ -33,7 +33,7 @@ namespace Game.Inventory
         static public bool TryShopPurchase(ref ShopTrade trade)
         {
             ref Shopable cost = ref trade.cost;
-
+            
 
             // check can buy
             bool canBuy = true;

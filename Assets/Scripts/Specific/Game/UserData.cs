@@ -17,7 +17,12 @@ public class UserData
     public double PlayTime { get; set; }
     [field: SerializeField, DisplayOnly]
     public int SaveSlotIndex { get; private set; }
+    //
+    [field: SerializeField, DisplayOnly]
+    public string LastCheckpointID { get; private set; } = "";
 
+    [field: SerializeField, DisplayOnly]
+    public string LastSceneName { get; private set; } = "";
 
     [field: Header("Buddy")]
     [field: SerializeField]
@@ -43,18 +48,32 @@ public class UserData
     [field: SerializeField]
     public VisualizableDict<string, int> Statistics { get; set; } = new();
 
+    public void SetCurrentBuddyData(BuddyDataSO buddyData)
+    {
+        CurrentEquipedBuddy = buddyData;
+    }
 
+    //skibidi sigma super soaker meow meow
     public void SetCurrentBuddy(BuddyDataSO buddyData)
     {
         if (!buddyData)
+        {
             return;
-
+        }
         CurrentEquipedBuddy = buddyData;
         EntityOverworldController controller = GameManager.Follower.GetComponent<EntityOverworldController>();
         controller.SetAppearance(CurrentEquipedBuddy.OverworldAppearance);
         controller.SetBehaviour(StaticGlobalVariable.FollowerBehaviour);
     }
-
+    public void SetCheckpoint(string checkpointID, string sceneName = null)
+    {
+        LastCheckpointID = checkpointID;
+        LastSceneName = sceneName ?? (string.IsNullOrEmpty(GameplaySceneTracker.CurrentGameplayScene) ? UnityEngine.SceneManagement.SceneManager.GetActiveScene().name : GameplaySceneTracker.CurrentGameplayScene);
+    }
+    public void SetSaveSlotIndex(int index)
+    {
+        SaveSlotIndex = index;
+    }
     public UserData Clone(int saveSlotIndex)
     {
         UserData cloned = new();
@@ -73,7 +92,6 @@ public class UserData
         
         return cloned;
     }
-
 
 #if UNITY_EDITOR //this stuff only exists in editor
 

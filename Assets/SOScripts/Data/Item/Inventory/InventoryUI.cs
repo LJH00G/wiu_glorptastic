@@ -81,6 +81,11 @@ namespace Game.Inventory
 
         void Refresh()
         {
+            if (InventoryManager.ManagedInventory == null)
+            {
+                return;
+            }
+
             var stacks = InventoryManager.GetItemList();
 
             while (spawned.Count < stacks.Count)
