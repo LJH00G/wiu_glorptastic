@@ -12,20 +12,14 @@ EditorBuildSettings:
     path: Assets/Scenes/Combat Scene.unity
     guid: ccecf358ba1a6674f8dc3d00b174a67f
   - enabled: 1
-    path: Assets/Scenes/TestSceneForOverworld.unity
-    guid: 1ca072f3602643844940dd81e3e88e66
-  - enabled: 1
     path: Assets/Scenes/GeneralUIOverlay.unity
     guid: aeca1387534edd942908ccaac154bf3a
   - enabled: 1
     path: Assets/Scenes/FishNet.unity
-    guid: 0a9f586551c431148b9dbcf35c292296
+    guid: a52f0ef245cd86e47b71dc22ffdb646b
   - enabled: 1
     path: Assets/Scenes/Plains.unity
     guid: 07b1e7b66d0cc7743986648650256537
-  - enabled: 1
-    path: Assets/Scenes/jagen.unity
-    guid: d6071b8dcadc80b4087a33b4120f438f
   - enabled: 1
     path: Assets/Scenes/DeathScene.unity
     guid: 59e91473538513547b12b7df4d8dac0d
