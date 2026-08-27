@@ -19,7 +19,8 @@ public class PlayerHUD : MonoBehaviour
 
     void Update()
     {
-        bool showHUD = GameManager.GameState != GAME_STATE.MAIN_MENU;
+        bool showHUD = GameManager.GameState == GAME_STATE.OVERWORLD;
+
 
         if (hudRoot)
         {
