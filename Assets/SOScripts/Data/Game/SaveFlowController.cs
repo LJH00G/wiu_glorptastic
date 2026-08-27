@@ -88,16 +88,11 @@ public class SaveFlowController : MonoBehaviour
 
     IEnumerator LoadSceneAndRespawn(string sceneName, string checkpointID)
     {
-        if (screenFader)
-        {
-            screenFader.FadeIn(1);
-
-            yield return new WaitForSecondsRealtime(sceneTransitionFadeOutTime);
-        }
+        
         var context = new SceneSwitchEventContext(
             SCENE_SWITCH_SETTING.LOAD_SEQUENTIALLY,
             sceneName,
-            0f,
+            2f,
             PlayMusicEventContext.InstantSilent,
             SCENE_SWITCH_PAUSE.NONE,
             true
@@ -105,19 +100,7 @@ public class SaveFlowController : MonoBehaviour
         sceneSwitchEventChannel.Raise(context);
 
         float elapsed = 0f;
-        while (GameplaySceneTracker.CurrentGameplayScene != sceneName)
-        {
-            elapsed += Time.unscaledDeltaTime;
-            if (elapsed >= sceneSwitchTimeoutSeconds)
-            {
-                Debug.LogError($"SaveFlowController.LoadSceneAndRespawn() | timed out waiting for scene switch to '{sceneName}'");
-                if (screenFader) screenFader.FadeOut(1);
-                {
-                    yield break;
-                }
-            }
-            yield return null;
-        }
+        
 
         yield return null;
 
@@ -164,11 +147,6 @@ public class SaveFlowController : MonoBehaviour
             }
         }
 
-        if (screenFader)
-        {
-
-            screenFader.FadeOut(1);
-
-        }
+        
     }
 }
