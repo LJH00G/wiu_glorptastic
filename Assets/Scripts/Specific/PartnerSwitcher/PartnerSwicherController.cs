@@ -138,7 +138,7 @@ public class PartnerSwicherController : MonoBehaviour
             if (Keyboard.current[Key.P].wasPressedThisFrame)
                 ShowUI(!Show);
         }
-        else
+        else if (Show)
             ShowUI(false);
 
         noOneImage.gameObject.SetActive(true);

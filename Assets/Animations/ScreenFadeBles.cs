@@ -12,11 +12,13 @@ public class ScreenFader : MonoBehaviour
     {
         animator.speed = timeTaken;
         animator.SetTrigger("FadeIn");
+        BlockRaycast();
     }
     public void FadeOut(float timeTaken)
     {
         animator.speed = timeTaken;
         animator.SetTrigger("FadeOut");
+        UnblockRaycast();
     }
 
     public void BlockRaycast()

@@ -8044,8 +8044,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: fadeinfadeoutCanva
       objectReference: {fileID: 0}
-    - target: {fileID: 4079838014869116469, guid: 0e12dcb2550d3f340a42da0c275d29f9, type: 3}
-      propertyPath: m_IsActive
+    - target: {fileID: 8292925266994157645, guid: 0e12dcb2550d3f340a42da0c275d29f9, type: 3}
+      propertyPath: m_RaycastTarget
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -16263,7 +16263,6 @@ MonoBehaviour:
   - {fileID: 573841288}
   - {fileID: 2114935602}
   - {fileID: 1696358153}
-  ShopCloseButton: {fileID: 0}
   confirmUI: {fileID: 194182324}
   panelRoot: {fileID: 1538157826}
   shopEvent: {fileID: 11400000, guid: 26a86935d98ab964b82baa677f866c8f, type: 2}
