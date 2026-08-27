@@ -43771,7 +43771,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5.625
+  orthographic size: 2.03125
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -45153,7 +45153,7 @@ MonoBehaviour:
         position: {x: 3.9, y: 30.52}
         time: 1
   TPCallChannel: {fileID: 11400000, guid: 3e5be222a1f877441946e26d6736f794, type: 2}
-  TPAnimChannel: {fileID: 11400000, guid: 766170cf3df1348458917531b831cb76, type: 2}
+  TPAnimChannel: {fileID: 11400000, guid: 30369db42a4b3cf40bd0170eee7c4ddb, type: 2}
 --- !u!4 &1970705965
 Transform:
   m_ObjectHideFlags: 0
