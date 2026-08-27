@@ -10,8 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2cfe465b3d8f94f47afeb436f921fae4, type: 3}
-  m_Name: BermudaShardQuest_Data
+  m_Name: ChillGrassQuest_Data
   m_EditorClassIdentifier: Assembly-CSharp::Game.SO.Data.Item.QuestItemSO
-  <Name>k__BackingField: <color value="#00FF00FF">Bermuda Shard</color>
-  <Sprite>k__BackingField: {fileID: 6361107084037979665, guid: 17d2919c4f4309e47b97f680d12d898e, type: 3}
-  <Description>k__BackingField: a mysterious green glowing shard?
+  <Name>k__BackingField: <color value="#88FFD9FF">Chill Grass</color>
+  <Sprite>k__BackingField: {fileID: -5124499230769034695, guid: caf8097d15675054bb2a1742eabef414, type: 3}
+  <Description>k__BackingField: A very chill grass, wonder why does it grow on a
+    purple field?
