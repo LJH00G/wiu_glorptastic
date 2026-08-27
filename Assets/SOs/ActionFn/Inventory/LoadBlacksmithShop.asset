@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0fef845114511c40aa080173eebdc34, type: 3}
+  m_Name: LoadBlacksmithShop
+  m_EditorClassIdentifier: Assembly-CSharp::Game.SO.ActionFn.ShopPresetLoadEventChannelActionSO
+  eventChannel: {fileID: 11400000, guid: 26a86935d98ab964b82baa677f866c8f, type: 2}
+  context: {fileID: 11400000, guid: 8faa9cbce99c3234d925c4ebb883c705, type: 2}
+  eventChannel: {fileID: 0}
+  context: {fileID: 11400000, guid: 781250da88dce7b43b0cae17fa421959, type: 2}
