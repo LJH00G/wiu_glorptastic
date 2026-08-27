@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34f2ff470233db34a958620f483cd295, type: 3}
+  m_Name: FreeingDinoMike
+  m_EditorClassIdentifier: Assembly-CSharp::Game.SO.Data.TextMarkup.Dialogue.DialogueConversationSO
+  <Dialogues>k__BackingField:
+  - speaker: {fileID: 11400000, guid: f9c57879b036a7848b608257b20350d8, type: 2}
+    text: Help! I'm stuck here! <input/> <end/>
+    endAction: {fileID: 0}
+  - speaker: {fileID: 11400000, guid: f9c57879b036a7848b608257b20350d8, type: 2}
+    text: That bug took my tools! <input/> <end/>
+    endAction: {fileID: 0}
+  - speaker: {fileID: 11400000, guid: f9c57879b036a7848b608257b20350d8, type: 2}
+    text: Kill it now! <input/> <end/>
+    endAction: {fileID: 11400000, guid: ae7c110bd15cc7640856cb2b146a20ce, type: 2}
