@@ -27,6 +27,7 @@ namespace Puzzle
 
         public void OnBeginDrag(PointerEventData eventData)
         {
+            Debug.Log("Drag Fired");
             _placedThisDrag = false;
             if (_canvasGroup != null) _canvasGroup.blocksRaycasts = false;
         }

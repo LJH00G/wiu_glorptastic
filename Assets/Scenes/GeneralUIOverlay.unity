@@ -866,6 +866,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ScreenFader
   animator: {fileID: 91931840}
+  fadeImage: {fileID: 91931841}
 --- !u!95 &91931840
 Animator:
   serializedVersion: 7

@@ -194,20 +194,20 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 263098528329391435, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_Size.x
-      value: 0.5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 263098528329391435, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_Size.y
-      value: 0.25
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 263098528329391435, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_Offset.y
-      value: 0.125
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3500526049272365041, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -1088114224, guid: 8c1732a7d5f973a418496a213e66ee7d, type: 3}
+      objectReference: {fileID: 301008002742590906, guid: 38e5fdbb5e3ac0c4b9e9f60cc92147ad, type: 3}
     - target: {fileID: 5511489128047036267, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_Name
       value: Enemy2
@@ -218,7 +218,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5511489128047036267, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6473455761877912804, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 6473455761877912804, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 6473455761877912804, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6473455761877912804, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -263,7 +275,7 @@ PrefabInstance:
     - target: {fileID: 7152738851224056702, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 1ad2863dca6276449a2a9dad2a146412, type: 2}
+      objectReference: {fileID: 9100000, guid: 742e517480d95014c97bcc7f6996e214, type: 2}
     - target: {fileID: 7404118726747510102, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: radius
       value: 0.25
@@ -299,7 +311,7 @@ PrefabInstance:
     - target: {fileID: 8628031461048391037, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: <Appearance>k__BackingField
       value: 
-      objectReference: {fileID: 11400000, guid: c1796691d8a57db4abdf823388499652, type: 2}
+      objectReference: {fileID: 11400000, guid: d358818d520e2b44f8060116b5e4e228, type: 2}
     - target: {fileID: 8628031461048391037, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: <InstanceData>k__BackingField
       value: 4526794395752333416
@@ -397,6 +409,7 @@ GameObject:
   - component: {fileID: 142686872}
   - component: {fileID: 142686875}
   - component: {fileID: 142686874}
+  - component: {fileID: 142686876}
   m_Layer: 10
   m_Name: Scrap - Mechanical - Generator 2 - Colorful_0
   m_TagString: Untagged
@@ -472,7 +485,7 @@ Transform:
   m_GameObject: {fileID: 142686871}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -25.73, y: 74.11, z: 0}
+  m_LocalPosition: {x: -2.43, y: 0.42, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -497,7 +510,7 @@ MonoBehaviour:
   lockTimeAfterTrigger: 0
   lockTimer: 0
   triggerable:
-    type: {fileID: 0}
+    type: {fileID: 11400000, guid: 146a6253bd349e54c8c4d45b7b156f50, type: 2}
     flag:
       key: 
       value: 0
@@ -550,6 +563,22 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 3.46, y: 2.33}
   m_EdgeRadius: 0
+--- !u!114 &142686876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 142686871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 183748dd497aa473a98ff0cd8cb67fc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AstarPathfindingProject::Pathfinding.DynamicGridObstacle
+  version: 1
+  uniqueID: 6714975253146621585
+  updateError: 1
+  checkTime: 0.2
 --- !u!1 &148182055
 GameObject:
   m_ObjectHideFlags: 0
@@ -630,7 +659,7 @@ Transform:
   m_GameObject: {fileID: 206040545}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1, y: 0.4, z: 0}
+  m_LocalPosition: {x: -25.38, y: 31.38, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -77363,7 +77392,7 @@ MonoBehaviour:
   lockTimeAfterTrigger: 2
   lockTimer: 0
   triggerable:
-    type: {fileID: 0}
+    type: {fileID: 11400000, guid: 1c819da335c557347b3b1cfa583eb78d, type: 2}
     flag:
       key: 
       value: 0
@@ -128027,6 +128056,7 @@ Transform:
   - {fileID: 142686873}
   - {fileID: 2146970684}
   - {fileID: 1932508198}
+  - {fileID: 1012921945}
   m_Father: {fileID: 14404440}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &893177480
@@ -128063,7 +128093,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5511489128047036267, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6473455761877912804, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -128293,6 +128323,37 @@ Transform:
   - {fileID: 148182056}
   - {fileID: 1168715118}
   m_Father: {fileID: 815766574}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1012921944
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1012921945}
+  m_Layer: 0
+  m_Name: Car Anchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1012921945
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1012921944}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -23.99, y: 76.49, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 867815267}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1085842139
 GameObject:
@@ -128911,7 +128972,7 @@ Transform:
   m_GameObject: {fileID: 1256895796}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -27.97, y: 29.14, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -128931,7 +128992,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Game.Interactable.TriggerHandler.Mass.DialogueTriggerHandler
   <RequiresInteraction>k__BackingField: 0
   offset: {x: 0, y: 0}
-  size: {x: 1, y: 1}
+  size: {x: 5.12, y: 4.94}
   triggerCollider: {fileID: 1256895799}
   lockTimeAfterTrigger: 0
   lockTimer: 0
@@ -129007,7 +129068,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 5.12, y: 4.94}
   m_EdgeRadius: 0
 --- !u!1 &1267852724
 GameObject:
@@ -129375,6 +129436,8 @@ MonoBehaviour:
   viewRegistry:
   - key: 2
     value: {fileID: 2226435416877481207, guid: bcb85dd2d4857db499c63aa1fc4e61e0, type: 3}
+  - key: 5
+    value: {fileID: 7087020143805963501, guid: bafb2a972d92fa94cb9ae8c7e7888124, type: 3}
   OnCompletePuzzle: {fileID: 11400000, guid: 408a34ea0932ad24b84105ab3c0b210e, type: 2}
   OnEnterPuzzle: {fileID: 11400000, guid: 6fc0b7e63b0900946816fcc4210813ca, type: 2}
 --- !u!1001 &1455610208
@@ -129385,17 +129448,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1713845868}
     m_Modifications:
-    - target: {fileID: 5511489128047036267, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2380481618570473884, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: offset
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3500526049272365041, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_Sprite
-      value:
+      value: 
       objectReference: {fileID: 577998304, guid: e20bc7d1e02398343aaf1a2548bbfc2c, type: 3}
     - target: {fileID: 3500526049272365041, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_WasSpriteAssigned
@@ -130864,7 +130923,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 2.9583333
+  orthographic size: 5.625
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -130889,7 +130948,7 @@ Transform:
   m_GameObject: {fileID: 1731050904}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.19846, y: 0, z: -10}
+  m_LocalPosition: {x: -6.8389177, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -132151,6 +132210,7 @@ GameObject:
   - component: {fileID: 2146970684}
   - component: {fileID: 2146970683}
   - component: {fileID: 2146970685}
+  - component: {fileID: 2146970686}
   m_Layer: 7
   m_Name: Scrap - Vehicle - Car 2 - Chrome_0
   m_TagString: Untagged
@@ -132278,6 +132338,22 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 6.23, y: 3.25}
   m_EdgeRadius: 0
+--- !u!114 &2146970686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146970682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc3c9a002a32c0f418df41bbc1c3b4f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CarMoveOnPuzzleCompletion
+  puzzleSolved: {fileID: 11400000, guid: 408a34ea0932ad24b84105ab3c0b210e, type: 2}
+  flagName: CarMoved
+  blockingCollider: {fileID: 2146970685}
+  anchor: {fileID: 1012921945}
 --- !u!1001 &6985838758087980583
 PrefabInstance:
   m_ObjectHideFlags: 0
