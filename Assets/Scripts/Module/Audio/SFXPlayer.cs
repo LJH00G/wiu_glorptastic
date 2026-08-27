@@ -8,11 +8,21 @@ public class SFXPlayer : MonoBehaviour
 {
     [Header("Event Listening Channel")]
     [SerializeField] PlaySFXEventChannelSO playSFXEventChannel;
+    [SerializeField] BoolEventChannelSO canPlaySFXEventChannel;
+    [SerializeField] bool canPlaySFX;
 
     AudioSource SFXSource;
 
+    public void CanPlaySFX(bool value)
+    {
+        canPlaySFX = value;
+    }
+
     void HandlePlaySFXEvent(PlaySFXEventContext context)
     {
+        if (!canPlaySFX)
+            return;
+
         if (!context.playOrStop)
         {
             SFXSource.Stop();
@@ -29,6 +39,8 @@ public class SFXPlayer : MonoBehaviour
                 SFXSource.Play();
             }
         }
+
+        Debug.Log($"Handled {context}", this);
     }
 
     void Awake()
@@ -40,10 +52,12 @@ public class SFXPlayer : MonoBehaviour
     private void OnEnable()
     {
         playSFXEventChannel.Subscribe(HandlePlaySFXEvent);
+        canPlaySFXEventChannel.Subscribe(CanPlaySFX);
     }
 
     private void OnDisable()
     {
         playSFXEventChannel.Unsubscribe(HandlePlaySFXEvent);
+        canPlaySFXEventChannel.Unsubscribe(CanPlaySFX);
     }
 }

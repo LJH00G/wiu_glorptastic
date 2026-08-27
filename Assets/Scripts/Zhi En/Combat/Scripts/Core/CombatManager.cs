@@ -5,6 +5,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using FX;
 
 namespace Game.Combat
 {
@@ -41,6 +42,8 @@ namespace Game.Combat
         [SerializeField] FleeMinigameController flee;
         [SerializeField] AttackMasteryController mastery;
         [SerializeField] CombatAssigmment combatAssigner;
+
+        [SerializeField] private AudioReferences audioReferences;
 
         CombatState state;
         CombatantRuntime player;
@@ -212,6 +215,8 @@ namespace Game.Combat
 
                 int dealt = actor.TakePoisonDamage(poison.power);
 
+                FX.EffectManager.RecieveSignal(audioReferences.hitSFX); //play hit sound
+
                 hud.ShowDescription(
                     $"{actor.displayName} takes {dealt} poison damage!"
                 );
@@ -289,6 +294,9 @@ namespace Game.Combat
             bool isPlayer,
             CombatMenuOption option)
         {
+            FX.EffectManager.RecieveSignal(audioReferences.selectSFX); //play select sound
+            Debug.Log("Sound should be played here");
+
             switch (option)
             {
                 case CombatMenuOption.COMBAT:
@@ -350,6 +358,8 @@ namespace Game.Combat
                 actor.anchor,
                 idx =>
                 {
+                    FX.EffectManager.RecieveSignal(audioReferences.selectSFX); //play select sound
+
                     if (showSwitch && idx == 0)
                     {
                         // Swap only this round.
@@ -467,6 +477,8 @@ namespace Game.Combat
 
             menuUI.ShowSubmenu(labels, actor.anchor, idx =>
             {
+                FX.EffectManager.RecieveSignal(audioReferences.selectSFX); //play select sound
+
                 var stack = inventory.ElementAtOrDefault(idx);
 
                 if (stack.count <= 0)
@@ -521,6 +533,8 @@ namespace Game.Combat
             CombatantRuntime actor,
             int idx)
         {
+            FX.EffectManager.RecieveSignal(audioReferences.selectSFX); //play select sound
+
             var subOption = (CombatSubOption)idx;
 
             if (subOption == CombatSubOption.ATTACK)
@@ -552,7 +566,6 @@ namespace Game.Combat
                 ResolveDefend(actor);
             }
         }
-
 
         void ResolveAttack(
             CombatantRuntime actor,
@@ -588,10 +601,19 @@ namespace Game.Combat
             CombatantRuntime target,
             int masteryBonus)
         {
+            FX.EffectManager.RecieveSignal(audioReferences.attackSFX); //play attack sound
+
             int dealt =
                 target.ApplyDamage(
                     actor.damage + masteryBonus
                 );
+
+            FX.EffectManager.RecieveSignal(audioReferences.hitSFX); //play hit sound
+
+            if (!target.isAlive && target.actorType == ActorType.ENEMY)
+            {
+                FX.EffectManager.RecieveSignal(audioReferences.killedSFX); //play killed sound
+            }
 
             hud.ShowDescription(
                 $"{actor.displayName} hits {target.displayName} for {dealt}!"
@@ -603,6 +625,8 @@ namespace Game.Combat
 
         void ResolveDefend(CombatantRuntime actor)
         {
+            FX.EffectManager.RecieveSignal(audioReferences.defendSFX); //play defend sound
+
             actor.isDefending = true;
             actor.GainCurse(5);
 
@@ -618,6 +642,8 @@ namespace Game.Combat
             AbilitySO ability,
             List<CombatantRuntime> targets)
         {
+            FX.EffectManager.RecieveSignal(audioReferences.spellSFX); //play spell sound
+
             hud.ClearTargetArrows();
 
             // IMPORTANT BUG FIX:
@@ -670,6 +696,8 @@ namespace Game.Combat
             ConsumableItemSO item,
             List<CombatantRuntime> targets)
         {
+            FX.EffectManager.RecieveSignal(audioReferences.eatSFX); //play eat sound
+
             hud.ClearTargetArrows();
 
             // New feature:
@@ -707,6 +735,14 @@ namespace Game.Combat
             {
                 case EffectType.DAMAGE:
                     target.ApplyDamage(entry.power);
+
+                    FX.EffectManager.RecieveSignal(audioReferences.hitSFX); //play hit sound
+
+                    if (!target.isAlive && target.actorType == ActorType.ENEMY)
+                    {
+                        FX.EffectManager.RecieveSignal(audioReferences.killedSFX); //play killed sound
+                    }
+
                     break;
 
                 case EffectType.HEAL_HP:
@@ -762,12 +798,13 @@ namespace Game.Combat
             {
                 if (success)
                 {
+                    FX.EffectManager.RecieveSignal(audioReferences.escapeSFX);
+
                     state = CombatState.FLED;
 
                     hud.ShowDescription(
                         "Got away safely!"
                     );
-
                     EndBattle(won: false);
                 }
                 else
@@ -874,15 +911,15 @@ namespace Game.Combat
             BeginAllyRound();
         }
 
-    void ResolveEnemyMove(CombatantRuntime enemy, EnemyMove move)
-    {
-        List<CombatantRuntime> targets =
-        move.targetType switch
+        void ResolveEnemyMove(CombatantRuntime enemy, EnemyMove move)
+        {
+            List<CombatantRuntime> targets =
+            move.targetType switch
             {
                 CombatTargetType.SELF =>
                     new List<CombatantRuntime>
                     {
-                        enemy
+                            enemy
                     },
 
                 CombatTargetType.ALL_ENEMIES =>
@@ -898,7 +935,7 @@ namespace Game.Combat
                 _ =>
                     new List<CombatantRuntime>
                     {
-                        player.isAlive ? player : null
+                            player.isAlive ? player : null
                     }
             };
 
@@ -915,9 +952,13 @@ namespace Game.Combat
 
                 if (move.moveType == EnemyMoveType.ATTACK)
                 {
+                    FX.EffectManager.RecieveSignal(audioReferences.attackSFX); //play attack sound
+
                     int dmg = Mathf.RoundToInt(enemy.damage * (move.attackDamageMultiplier <= 0 ? 1f : move.attackDamageMultiplier));
 
                     int dealt = target.ApplyDamage(dmg);
+
+                    FX.EffectManager.RecieveSignal(audioReferences.hitSFX); //play hit sound
 
                     hud.ShowDescription(
                         string.IsNullOrEmpty(move.flavourText)
@@ -927,6 +968,8 @@ namespace Game.Combat
                 }
                 else if (move.ability != null)
                 {
+                    FX.EffectManager.RecieveSignal(audioReferences.spellSFX); //play spell sound
+
                     // Enemy abilities also use the multi-entry effect system.
                     foreach (var entry in move.ability.effects)
                     {
@@ -959,7 +1002,6 @@ namespace Game.Combat
             }
 
             bool playerDown = !player.isAlive;
-            
 
             if (playerDown)
             {
@@ -984,7 +1026,6 @@ namespace Game.Combat
 
             input.InputEnabled = false;
             combatAssigner.WipeDataAssignment(state, player.currentHP, player.currentCS);
-            
         }
     }
 }
