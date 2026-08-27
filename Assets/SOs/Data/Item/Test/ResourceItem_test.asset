@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9d582575254e7f44837c2e7e27a2a4b, type: 3}
   m_Name: ResourceItem_test
   m_EditorClassIdentifier: Assembly-CSharp::Game.SO.Data.Item.Sellable.ResourceSO
-  <Name>k__BackingField: resource item
-  <Texture>k__BackingField: {fileID: 2800000, guid: 9ae274b4a1a11374dbb47368c9c05ec2, type: 3}
-  <Description>k__BackingField: thingalingus selling my shit until i stroke my cat
-  <SellValue>k__BackingField: 67
+  <Name>k__BackingField: Dummy trhing
+  <Sprite>k__BackingField: {fileID: -300394245976103344, guid: 61ed70a9f0ba69248bfde2a49ee30d19, type: 3}
+  <Description>k__BackingField: Standard currency used by the residents of the Fishnet
+  <SellValue>k__BackingField: 1
