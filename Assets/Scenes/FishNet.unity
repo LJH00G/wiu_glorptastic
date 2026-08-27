@@ -15314,6 +15314,17 @@ MonoBehaviour:
   tunnelDataTunnel: {fileID: 11400000, guid: 95b4e3211af86b547a9a57f22b14da68, type: 2}
   onSwitch: {fileID: 11400000, guid: d99eee56572e0f540b7dc2913fe66e56, type: 2}
   overworldCamera: {fileID: 1731050906}
+  endCombatPlayMusicEventContext:
+    music: {fileID: 0}
+    playOrStop: 0
+    restartIfPlay: 0
+    delayToPlay: 0
+    fadeThis: 0
+    fadeThis_Time: 0
+    turnOffOther: 0
+    fadeOffOther: 0
+    fadeOffOther_Time: 0
+    fadeForceSetVolume: 0
 --- !u!4 &438083891
 Transform:
   m_ObjectHideFlags: 0
@@ -39022,6 +39033,17 @@ MonoBehaviour:
   player: {fileID: 2087693728}
   follower: {fileID: 1455610210}
   Flags: []
+  playMusicEventContext:
+    music: {fileID: 0}
+    playOrStop: 0
+    restartIfPlay: 0
+    delayToPlay: 0
+    fadeThis: 0
+    fadeThis_Time: 0
+    turnOffOther: 0
+    fadeOffOther: 0
+    fadeOffOther_Time: 0
+    fadeForceSetVolume: 0
 --- !u!4 &828279313
 Transform:
   m_ObjectHideFlags: 0
@@ -42581,7 +42603,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 2.03125
+  orthographic size: 5.625
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2

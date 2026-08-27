@@ -28,6 +28,6 @@ MonoBehaviour:
       fadeOffOther: 0
       fadeOffOther_Time: 0
       fadeForceSetVolume: 0
-    timePause: 2
+    timePause: 0
     setSceneAsMain: 1
     ignoreableObjs: []
