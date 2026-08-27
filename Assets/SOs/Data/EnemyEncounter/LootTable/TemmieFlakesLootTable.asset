@@ -16,4 +16,4 @@ MonoBehaviour:
   itemList:
   - odds: 1
     amount: 1
-    item: {fileID: 11400000, guid: c12a6ec94422eea47a776e101504b5a5, type: 2}
+    item: {fileID: 11400000, guid: 033459d03db3f6b45babe3f0c8c820b5, type: 2}

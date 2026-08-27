@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TemmieFlakesQuest_Data
   m_EditorClassIdentifier: Assembly-CSharp::Game.SO.Data.Item.QuestItemSO
   <Name>k__BackingField: <rainbow>Temmie Flakes</rainbow>
-  <Sprite>k__BackingField: {fileID: -5124499230769034695, guid: caf8097d15675054bb2a1742eabef414, type: 3}
+  <Sprite>k__BackingField: {fileID: 96861726117684550, guid: 07f08b2d4dd188842b9f2399bc26603a, type: 3}
   <Description>k__BackingField: 'Temmie Flakes! Original breakfast.
 
     (its not
