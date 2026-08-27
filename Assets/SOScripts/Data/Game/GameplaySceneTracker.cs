@@ -8,37 +8,7 @@ public static class GameplaySceneTracker
 
     public static void HandleSceneChanged(string sceneName)
     {
+        Debug.Log($"GameplaySceneTracker.HandleSceneChanged() | called with '{sceneName}'");
         CurrentGameplayScene = sceneName;
-    }
-}
-
-public class GameplaySceneTrackerListener : MonoBehaviour
-{
-    [Header("Event Listening Channel")]
-    [SerializeField] StringEventChannelSO gameplaySceneChangedEventChannel;
-
-    static GameplaySceneTrackerListener instance;
-
-    void Awake()
-    {
-        GameplaySceneTracker.HandleSceneChanged(SceneManager.GetActiveScene().name);
-
-        if (instance && instance != this)
-        {
-            Destroy(gameObject);
-            return;
-        }
-        instance = this;
-        DontDestroyOnLoad(gameObject);
-    }
-
-    void OnEnable()
-    {
-        gameplaySceneChangedEventChannel.Subscribe(GameplaySceneTracker.HandleSceneChanged);
-    }
-
-    void OnDisable()
-    {
-        gameplaySceneChangedEventChannel.Unsubscribe(GameplaySceneTracker.HandleSceneChanged);
     }
 }

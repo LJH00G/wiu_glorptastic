@@ -17,7 +17,7 @@ MonoBehaviour:
     <SaveSlotIndex>k__BackingField: 0
     <LastCheckpointID>k__BackingField: 
     <LastSceneName>k__BackingField: 
-    <CurrentEquipedBuddy>k__BackingField: {fileID: 11400000, guid: 910c9485c734e584ab0441d0b80cc1e0, type: 2}
+    <CurrentEquipedBuddy>k__BackingField: {fileID: 11400000, guid: 62a1b6e6c4070ec419c2cc7a1fd6b168, type: 2}
     <Inventory>k__BackingField:
       <ItemList>k__BackingField: []
       <ShellCurrency>k__BackingField: 0

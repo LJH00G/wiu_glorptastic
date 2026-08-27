@@ -88,7 +88,6 @@ public class SaveFlowController : MonoBehaviour
 
     IEnumerator LoadSceneAndRespawn(string sceneName, string checkpointID)
     {
-        
         var context = new SceneSwitchEventContext(
             SCENE_SWITCH_SETTING.LOAD_SEQUENTIALLY,
             sceneName,
@@ -100,9 +99,19 @@ public class SaveFlowController : MonoBehaviour
         sceneSwitchEventChannel.Raise(context);
 
         float elapsed = 0f;
-        
+        while (GameplaySceneTracker.CurrentGameplayScene != sceneName)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            if (elapsed >= sceneSwitchTimeoutSeconds)
+            {
+                Debug.LogError($"SaveFlowController.LoadSceneAndRespawn() | timed out waiting for scene switch to '{sceneName}'");
+                if (screenFader) screenFader.FadeOut(1);
+                yield break;
+            }
+            yield return null;
+        }
 
-        yield return null;
+        yield return null; // extra frame so the new scene's Awake/OnEnable/Start have all run
 
         if (!GameManager.Player)
         {
@@ -147,6 +156,7 @@ public class SaveFlowController : MonoBehaviour
             }
         }
 
-        
+        if (screenFader)
+            screenFader.FadeOut(1);
     }
 }
