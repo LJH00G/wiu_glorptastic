@@ -12,9 +12,6 @@ namespace Game.TPManager
         [SerializeField] VisualizableDict<string, TPDefinition> TPPointDef;
         [SerializeField] StringEventChannelSO TPCallChannel;
         [SerializeField] BoolEventChannelSO TPAnimChannel;
-        private float fadeTime;
-        
-
 
         
         void OnEnable()
@@ -100,13 +97,12 @@ namespace Game.TPManager
             TPPointDef.OnValidate();
         }
 
-        void OnDrawGizmosSelected()
+        private void OnDrawGizmosSelected()
         {
             Gizmos.color = new Color(0, 0, 1);
             Vector3 Gizmossize = new Vector3(1, 1, 1) * 0.5f;
-            foreach(TPDefinition TP in TPPointDef.dict.Values)
+            foreach (TPDefinition TP in TPPointDef.dict.Values)
             {
-                
                 Gizmos.DrawWireCube(new Vector3(TP.position.x, TP.position.y, 0), Gizmossize);
             }
         }
