@@ -19,6 +19,7 @@ MonoBehaviour:
     endAction: {fileID: 0}
   - speaker: {fileID: 11400000, guid: 7f46410b7dc996640a3ba4dba065afd4, type: 2}
     text: Oh, Dino Mike! You were here? What are you doing, fighing some random bug?
+      <input/> <end/>
     endAction: {fileID: 0}
   - speaker: {fileID: 11400000, guid: f9c57879b036a7848b608257b20350d8, type: 2}
     text: I was trying to fetch my own tools, but that darn bug took my dynamite
@@ -31,13 +32,16 @@ MonoBehaviour:
     text: Oh, its this, weird glowing shard <input/> <end/>
     endAction: {fileID: 0}
   - speaker: {fileID: 11400000, guid: f9c57879b036a7848b608257b20350d8, type: 2}
-    text: Holy, jeebers, ain't that one shiny gem aint it? Mighty green ain't it.
-      <input/> <end/>
+    text: 'Holy, jeebers, ain''t that one shiny gem aint it? Mighty green ain''t
+      it. <input/> <end/>
+
+'
     endAction: {fileID: 0}
   - speaker: {fileID: 11400000, guid: 7f46410b7dc996640a3ba4dba065afd4, type: 2}
     text: Wait, isn't this the gem that Emilia Aerhart wanted? She was building that
       machine to locate all other shards. We should give it to her. <input/> <end/>
     endAction: {fileID: 0}
   - speaker: {fileID: 11400000, guid: 7f46410b7dc996640a3ba4dba065afd4, type: 2}
-    text: 
-    endAction: {fileID: 0}
+    text: Well shoot, I best get this on over to Emilia then - gotta run! <input/>
+      <end/>
+    endAction: {fileID: 11400000, guid: dd3b592cc022f3f42b8b4ac082dc069e, type: 2}

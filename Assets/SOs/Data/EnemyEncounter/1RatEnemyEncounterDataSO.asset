@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45230dd24da17804cb7f1558c4aea0a6, type: 3}
+  m_Name: 1RatEnemyEncounterDataSO
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyEncounterDataSO
+  overworldPresetationObject: {fileID: 0}
+  dataList:
+  - {fileID: 11400000, guid: a0517d36a2de10d4da9b577cdb79daf2, type: 2}
+  encounterLootTable: {fileID: 11400000, guid: 01a6408eff6049147bf8d3d2f620ed1f, type: 2}

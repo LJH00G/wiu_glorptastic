@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee048157992d0a54caf48b5c5fff2b9d, type: 3}
+  m_Name: SnakeEnemy
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Combat.EnemyDataSO
+  enemyName: Snake
+  sprite: {fileID: -1721448698, guid: b631ed305dfd43c488e0f8edf5c829bc, type: 3}
+  maxHP: 30
+  damage: 5
+  defense: 0
+  moveOrder:
+  - moveType: 1
+    targetType: 0
+    ability: {fileID: 11400000, guid: 9cf93293614d63d41acc985a9bcacc3e, type: 2}
+    attackDamageMultiplier: 1
+    flavourText: Snake poison you oo aaa
+  loopMoveOrder: 1
+  enemyLootTable: {fileID: 11400000, guid: a9357f3f78ef1114c8bde269807bb207, type: 2}

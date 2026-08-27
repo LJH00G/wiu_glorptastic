@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2be33d5b7c95d8f4a9eed7b00399511e, type: 3}
+  m_Name: SnakeEnemyLootTable
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Combat.LootTableSO
+  rolls: 2
+  itemList:
+  - odds: 1
+    amount: 1
+    item: {fileID: 11400000, guid: eb5bab1998e18cc4e8fcc97f7412d6cb, type: 2}
+  - odds: 1
+    amount: 1
+    item: {fileID: 11400000, guid: 343512e7ac4653b43850e03b501175d9, type: 2}

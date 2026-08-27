@@ -83,7 +83,7 @@ public class CombatInitialiser : MonoBehaviour
         if(context.state == CombatState.BATTLE_LOST)
         {
             List<GameObject> list = new();
-            onSwitch.Raise(new(SCENE_SWITCH_SETTING.LOAD_SEQUENTIALLY, "DeathScene", 0, PlayMusicEventContext.FadeAllOut_1s, SCENE_SWITCH_PAUSE.PAUSE_DURING_LOAD, true, list));
+                SceneManager.LoadScene("DeathScene");
             return;
         }
             
