@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aca77b464a3c090499a53b4ffe36c908, type: 3}
+  m_Name: Ez Mastery
+  m_EditorClassIdentifier: Assembly-CSharp::Game.SO.Data.Item.Sellable.Battle.AccessoryItemSO
+  <Name>k__BackingField: Ez Mastery
+  <Sprite>k__BackingField: {fileID: -137746822333591392, guid: fcf49a93ce5a4e243a2cd225e12034ce, type: 3}
+  <Description>k__BackingField: Dis gem make you attack mastery easier
+  <SellValue>k__BackingField: 0
+  <curseAbilityList>k__BackingField: []
+  <ExtraMaxHP>k__BackingField: 0
+  <ExtraMaxCurse>k__BackingField: 0
+  <ExtraDamage>k__BackingField: 0
+  <ExtraDefence>k__BackingField: 0
+  <MasteryWindowWidthMultiplier>k__BackingField: 2
+  <HPRegenPerTurn>k__BackingField: 0
+  <CSRegenPerTurn>k__BackingField: 0

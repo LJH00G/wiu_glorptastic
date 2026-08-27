@@ -15710,6 +15710,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 706468512}
     m_Modifications:
+    - target: {fileID: 263098528329391435, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 263098528329391435, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 263098528329391435, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3500526049272365041, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -15717,6 +15729,10 @@ PrefabInstance:
     - target: {fileID: 5511489128047036267, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_Name
       value: Gordom Ramsea
+      objectReference: {fileID: 0}
+    - target: {fileID: 5511489128047036267, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6473455761877912804, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15762,6 +15778,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: d4c15c19cc3225441b81e498606499b2, type: 2}
+    - target: {fileID: 7404118726747510102, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+      propertyPath: maxSpeed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7404118726747510102, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: slowdownDistance
       value: 1
@@ -16090,16 +16110,68 @@ PrefabInstance:
       propertyPath: managedReferences[5148004216364859480].contactFilter.useOutsideNormalAngle
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9062674364703694953, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.02
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5511489128047036267, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 313162017}
   m_SourcePrefab: {fileID: 100100000, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
 --- !u!4 &313162014 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6473455761877912804, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
   m_PrefabInstance: {fileID: 313162013}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &313162015 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5511489128047036267, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+  m_PrefabInstance: {fileID: 313162013}
+  m_PrefabAsset: {fileID: 0}
+--- !u!61 &313162016 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 263098528329391435, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+  m_PrefabInstance: {fileID: 313162013}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &313162017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 313162015}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a048d282cfaf38548b1c736d60ad4476, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Interactable.TriggerHandler.Mass.DialogueTriggerHandler
+  <RequiresInteraction>k__BackingField: 1
+  offset: {x: 0, y: 0}
+  size: {x: 1, y: 1}
+  triggerCollider: {fileID: 313162016}
+  lockTimeAfterTrigger: 0
+  lockTimer: 0
+  defaultTriggerSequence:
+    index: 0
+    triggerables:
+    - type: {fileID: 11400000, guid: d16324355c32f6049aabbfa879fec0a1, type: 2}
+      flag:
+        key: 
+        value: 0
+    cycleToStartWhenExhausted: 0
+    useExhaustedTriggerable: 0
+    exhaustedTriggerable:
+      type: {fileID: 0}
+      flag:
+        key: 
+        value: 0
+  flagOverrideTriggerSequences:
+    serializableList: []
+  dialogueConversationEventChannel: {fileID: 11400000, guid: 44508743f5b9d8341ab1fa10572170f0, type: 2}
 --- !u!1 &337884310
 GameObject:
   m_ObjectHideFlags: 0
@@ -16681,6 +16753,11 @@ Transform:
   - {fileID: 622919972}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &558774420 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5511489128047036267, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+  m_PrefabInstance: {fileID: 1848201683}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &615690456
 GameObject:
   m_ObjectHideFlags: 0
@@ -42597,51 +42674,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1563434221}
   m_CullTransparentMesh: 1
---- !u!1 &1573169785
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1573169787}
-  - component: {fileID: 1573169786}
-  m_Layer: 0
-  m_Name: GameIniter_test
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1573169786
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1573169785}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c51fe8e16a6c794ea2dab11143e1b40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  buddyData: {fileID: 11400000, guid: 62a1b6e6c4070ec419c2cc7a1fd6b168, type: 2}
---- !u!4 &1573169787
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1573169785}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1575548786
 GameObject:
   m_ObjectHideFlags: 0
@@ -43846,7 +43878,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 2.03125
+  orthographic size: 5.625
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -44195,6 +44227,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 706468512}
     m_Modifications:
+    - target: {fileID: 263098528329391435, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+      propertyPath: m_Size.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 263098528329391435, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+      propertyPath: m_Size.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 263098528329391435, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+      propertyPath: m_Offset.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3500526049272365041, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -44202,6 +44246,10 @@ PrefabInstance:
     - target: {fileID: 5511489128047036267, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_Name
       value: Edward Penniesworth
+      objectReference: {fileID: 0}
+    - target: {fileID: 5511489128047036267, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 6473455761877912804, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -44247,6 +44295,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 4bb0683998f9aee4aa2cabf70a8e53fb, type: 2}
+    - target: {fileID: 7404118726747510102, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+      propertyPath: maxSpeed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 7404118726747510102, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: slowdownDistance
       value: 1
@@ -44578,13 +44630,56 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5511489128047036267, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1848201691}
   m_SourcePrefab: {fileID: 100100000, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
 --- !u!4 &1848201684 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6473455761877912804, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
   m_PrefabInstance: {fileID: 1848201683}
   m_PrefabAsset: {fileID: 0}
+--- !u!61 &1848201689 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 263098528329391435, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+  m_PrefabInstance: {fileID: 1848201683}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1848201691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 558774420}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a048d282cfaf38548b1c736d60ad4476, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Interactable.TriggerHandler.Mass.DialogueTriggerHandler
+  <RequiresInteraction>k__BackingField: 1
+  offset: {x: 0, y: 0}
+  size: {x: 1, y: 1}
+  triggerCollider: {fileID: 1848201689}
+  lockTimeAfterTrigger: 0
+  lockTimer: 0
+  defaultTriggerSequence:
+    index: 0
+    triggerables:
+    - type: {fileID: 11400000, guid: bc07c71e9e6368b419bffbc0bd121c13, type: 2}
+      flag:
+        key: 
+        value: 0
+    cycleToStartWhenExhausted: 0
+    useExhaustedTriggerable: 0
+    exhaustedTriggerable:
+      type: {fileID: 0}
+      flag:
+        key: 
+        value: 0
+  flagOverrideTriggerSequences:
+    serializableList: []
+  dialogueConversationEventChannel: {fileID: 11400000, guid: 44508743f5b9d8341ab1fa10572170f0, type: 2}
 --- !u!1 &1922796151
 GameObject:
   m_ObjectHideFlags: 0
@@ -45571,6 +45666,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Blockage
       objectReference: {fileID: 0}
+    - target: {fileID: 6371158825235628102, guid: d63ddeca2afc0ad4b878b6836eb86bf3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -45661,7 +45760,6 @@ SceneRoots:
   - {fileID: 345977986}
   - {fileID: 460586716}
   - {fileID: 828279313}
-  - {fileID: 1573169787}
   - {fileID: 107229449}
   - {fileID: 1970705965}
   - {fileID: 291176231}
