@@ -52,7 +52,7 @@ namespace Game.SO.Behaviour.EntityOverworld
             {
                 instanceData.SetFacingDire(dire);
 
-                controller.AIPath.destination = (Vector2)controller.transform.position + dire * controller.Radius * 8f;
+                controller.AIPath.destination = (Vector2)controller.transform.position + dire * controller.Radius * 1.2f;
             }
 
             // interact

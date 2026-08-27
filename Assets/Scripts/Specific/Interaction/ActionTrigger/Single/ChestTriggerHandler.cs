@@ -2,60 +2,36 @@
 using System;
 using UnityEngine;
 using Utility.VisualizableDictionary;
+using System.Collections.Generic;
+using Game.Combat;
+using Game.Combat.Integration;
+using Game.Inventory;
 
 
 namespace Game.Interactable.TriggerHandler.Single
 {
 
     [RequireComponent(typeof(BoxCollider2D))]
-    public abstract class SingleTriggerHandler<T> : TriggerHandler
+    public class ChestTriggerHandler : SingleTriggerHandler<List<LootTableSO>>
     {
-        [Serializable]
-        public class Triggerable
+
+        public bool openableMultipleTimes;
+        protected override void TriggerType(ref List<LootTableSO> table)
         {
-            public T type;
-            public DictEntry<string, bool> flag;
+            List<LootData> loot = CombatAssigmment.LootCalculation(table);
+            foreach (LootData lootData in loot)
+            {
+                InventoryManager.AddItem(lootData.item, (uint)lootData.count);
+            }
+
+            if (!openableMultipleTimes)
+                gameObject.SetActive(false);
         }
+        
 
-        [Header("Triggerable")]
-        [SerializeField] Triggerable triggerable;
-        [SerializeField] VisualizableDict<string, Triggerable> flagOverrideTriggerables = new();
+        
 
-        protected abstract void TriggerType(ref T type);
-
-        public override void Trigger()
-        {
-            if (Locked)
-                return;
-
-
-            bool useFlagOverride = false;
-            string flagOverrideKey = "";
-            foreach (var entry in flagOverrideTriggerables.dict)
-            {
-                if (GameManager.CurrentUserData.Flags.dict.TryGetValue(entry.Key, out bool flagSet) && flagSet)
-                {
-                    flagOverrideKey = entry.Key;
-                    useFlagOverride = true;
-                    break;
-                }
-            }
-
-
-            if (useFlagOverride)
-            {
-                var triggerable = flagOverrideTriggerables.dict[flagOverrideKey];
-                TriggerType(ref triggerable.type);
-                GameManager.CurrentUserData.Flags[triggerable.flag.key] = triggerable.flag.value;
-            }
-            else
-            {
-                TriggerType(ref triggerable.type);
-                GameManager.CurrentUserData.Flags[triggerable.flag.key] = triggerable.flag.value;
-            }
-
-            ResetLockTimer();
-        }
+        
 
 
 #if UNITY_EDITOR
