@@ -43,7 +43,7 @@ namespace Game.Combat.Integration
             );
         }
 
-        public void WipeDataAssignment(CombatState state)
+        public void WipeDataAssignment(CombatState state, int hp, int curse)
         {
 
             List<LootData> loot = null;
@@ -56,7 +56,7 @@ namespace Game.Combat.Integration
             
 
             dataTunnel.WipeCall();
-            CombatEndEventContextSO context = new(state, loot);
+            CombatEndEventContextSO context = new(state, loot, hp, curse);
             combatEnd.Raise(context);
         }
 

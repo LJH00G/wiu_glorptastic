@@ -84,7 +84,6 @@ namespace Game
             Time.timeScale = 1;
         }
 
-        //called once while the save file is loaded right alongside SetPlayer() in the same step
         static public void SetUserData(UserData userData)
         {
             CurrentUserData = userData;
@@ -95,7 +94,6 @@ namespace Game
             CurrentUserData.Flags[key] = value;
         }
 
-        //creates the flag with defaultValue if it doesn't exist yet; leaves an existing value untouched
         static public void EnsureFlag(string key, bool defaultValue = false)
         {
             if (!CurrentUserData.Flags.dict.ContainsKey(key))

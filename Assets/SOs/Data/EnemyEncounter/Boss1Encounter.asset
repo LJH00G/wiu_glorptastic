@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45230dd24da17804cb7f1558c4aea0a6, type: 3}
+  m_Name: Boss1Encounter
+  m_EditorClassIdentifier: Assembly-CSharp::EnemyEncounterDataSO
+  overworldPresetationObject: {fileID: 0}
+  dataList:
+  - {fileID: 11400000, guid: c5a3fddfda5037e48b40ff1df82e1baa, type: 2}
+  encounterLootTable: {fileID: 11400000, guid: 0c39a22483a04d747a44030dec3ec121, type: 2}

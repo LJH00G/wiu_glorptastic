@@ -1,14 +1,18 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using Game;
 using Game.TPManager;
+using Game.SO.EventChannel;
+using Game.SO.EventChannel.Context;
 
 public class SaveFlowController : MonoBehaviour
 {
     [Header("Databases")]
     [SerializeField] ItemDatabaseSO itemDatabase;
     [SerializeField] BuddyDatabaseSO buddyDatabase;
+
+    [Header("Event Broadcasting Channel")]
+    [SerializeField] SceneSwitchEventChannelSO sceneSwitchEventChannel;
 
     [Header("New Game Defaults")]
     [SerializeField] string newGameSceneName;
@@ -20,6 +24,9 @@ public class SaveFlowController : MonoBehaviour
     [Header("Screen Fade")]
     [SerializeField] ScreenFader screenFader;
     [SerializeField] float sceneTransitionFadeOutTime = 0.5f;
+
+    [Header("Safety")]
+    [SerializeField] float sceneSwitchTimeoutSeconds = 15f;
 
     static SaveFlowController instance;
 
@@ -37,6 +44,12 @@ public class SaveFlowController : MonoBehaviour
 
     public bool SlotHasSave(int slotIndex) => SaveManager.HasSave(slotIndex);
 
+    [ContextMenu("Log Save Path")]
+    void LogSavePath()
+    {
+        Debug.Log(Application.persistentDataPath);
+    }
+
     public void StartNewSave(int slotIndex)
     {
         UserData fresh = new UserData();
@@ -48,6 +61,12 @@ public class SaveFlowController : MonoBehaviour
         Debug.Log($"SaveFlowController.StartNewSave() | started new save in slot {slotIndex}");
 
         StartCoroutine(LoadSceneAndRespawn(newGameSceneName, newGameCheckpointID));
+    }
+
+    public void LoadMostRecentSave()
+    {
+        Time.timeScale = 1f;
+        LoadSave(SaveManager.CurrentSlot);
     }
 
     public void LoadSave(int slotIndex)
@@ -71,15 +90,39 @@ public class SaveFlowController : MonoBehaviour
     {
         if (screenFader)
         {
-            screenFader.FadeIn();
+<<<<<<< Updated upstream
+            screenFader.FadeOut();
+=======
+
+            screenFader.FadeIn(1);
+>>>>>>> Stashed changes
             yield return new WaitForSeconds(sceneTransitionFadeOutTime);
         }
+        var context = new SceneSwitchEventContext(
+            SCENE_SWITCH_SETTING.LOAD_SEQUENTIALLY,
+            sceneName,
+            0f,
+            PlayMusicEventContext.InstantSilent,
+            SCENE_SWITCH_PAUSE.NONE,
+            true
+        );
+        sceneSwitchEventChannel.Raise(context);
 
-        var op = SceneManager.LoadSceneAsync(sceneName);
-        while (!op.isDone)
+        float elapsed = 0f;
+        while (GameplaySceneTracker.CurrentGameplayScene != sceneName)
         {
+            elapsed += Time.unscaledDeltaTime;
+            if (elapsed >= sceneSwitchTimeoutSeconds)
+            {
+                Debug.LogError($"SaveFlowController.LoadSceneAndRespawn() | timed out waiting for scene switch to '{sceneName}'");
+                if (screenFader) screenFader.FadeIn();
+                {
+                    yield break;
+                }
+            }
             yield return null;
         }
+
         yield return null;
 
         if (!GameManager.Player)
@@ -94,9 +137,8 @@ public class SaveFlowController : MonoBehaviour
             foreach (var checkpoint in checkpoints)
             {
                 if (checkpoint.CheckpointID != checkpointID)
-                {
                     continue;
-                }
+
                 foundCheckpoint = true;
                 TPManager tpManager = FindObjectOfType<TPManager>();
 
@@ -128,7 +170,11 @@ public class SaveFlowController : MonoBehaviour
 
         if (screenFader)
         {
-            screenFader.FadeOut();
+<<<<<<< Updated upstream
+            screenFader.FadeIn();
+=======
+            screenFader.FadeOut(1);
+>>>>>>> Stashed changes
         }
     }
 }

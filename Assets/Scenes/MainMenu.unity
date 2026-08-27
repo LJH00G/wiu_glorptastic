@@ -667,7 +667,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &220739971
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2678,7 +2678,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 10, y: 12.2}
+  m_AnchoredPosition: {x: 0, y: 12.2}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &468581239
@@ -4088,7 +4088,7 @@ MonoBehaviour:
   thingalingus: {fileID: 11400000, guid: d99eee56572e0f540b7dc2913fe66e56, type: 2}
   grongelator:
     setting: 1
-    scene: jagen
+    scene: Plains
     delay: 1
     playMusicContext:
       music: {fileID: 0}
@@ -4589,7 +4589,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 10, y: 12.20002}
+  m_AnchoredPosition: {x: 0, y: 12.20002}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &959907323
@@ -7229,7 +7229,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 10, y: 12.20002}
+  m_AnchoredPosition: {x: 0, y: 12.20002}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1553042292
@@ -7408,7 +7408,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1637184426
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7545,7 +7545,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1703436322
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8336,11 +8336,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SaveFlowController
   itemDatabase: {fileID: 11400000, guid: 1178fa58270f32e4898baa2237636ae3, type: 2}
   buddyDatabase: {fileID: 11400000, guid: 9da85eb3271a84543a707f203cdae81b, type: 2}
-  newGameSceneName: jagen
-  newGameCheckpointID: 676769420
+  sceneSwitchEventChannel: {fileID: 11400000, guid: d99eee56572e0f540b7dc2913fe66e56, type: 2}
+  newGameSceneName: Plains
+  newGameCheckpointID: 67
   respawnFadeTime: 1.8
   screenFader: {fileID: 1496989601}
   sceneTransitionFadeOutTime: 1.8
+  sceneSwitchTimeoutSeconds: 15
 --- !u!1 &1970442268
 GameObject:
   m_ObjectHideFlags: 0

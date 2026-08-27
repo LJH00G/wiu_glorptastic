@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: BermudaShardQuest_Data
   m_EditorClassIdentifier: Assembly-CSharp::Game.SO.Data.Item.QuestItemSO
   <Name>k__BackingField: Bermuda Shard
-  <Texture>k__BackingField: {fileID: 0}
+  <Sprite>k__BackingField: {fileID: 6361107084037979665, guid: 17d2919c4f4309e47b97f680d12d898e, type: 3}
   <Description>k__BackingField: a mysterious green glowing shard?

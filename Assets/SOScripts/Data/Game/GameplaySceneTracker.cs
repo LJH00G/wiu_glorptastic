@@ -4,6 +4,7 @@ using Game.SO.EventChannel;
 public static class GameplaySceneTracker
 {
     public static string CurrentGameplayScene { get; private set; } = "";
+
     public static void HandleSceneChanged(string sceneName)
     {
         CurrentGameplayScene = sceneName;
@@ -27,6 +28,8 @@ public class GameplaySceneTrackerListener : MonoBehaviour
 
         instance = this;
         DontDestroyOnLoad(gameObject);
+
+        GameplaySceneTracker.HandleSceneChanged(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 
     void OnEnable()

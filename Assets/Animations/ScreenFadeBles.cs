@@ -1,29 +1,50 @@
 using UnityEngine;
 using UnityEngine.UI;
+using Game.SO.EventChannel;
+using Game.SO.EventChannel.Context;
 
 public class ScreenFader : MonoBehaviour
 {
     [SerializeField] private Animator animator;
     [SerializeField] private Image fadeImage;
-
-    public void FadeIn()
+    [SerializeField] private FadeEventChannelSO onTPChannel;
+    public void FadeIn(float timeTaken)
     {
+        animator.speed = timeTaken;
         animator.SetTrigger("FadeIn");
     }
-    public void FadeOut()
+    public void FadeOut(float timeTaken)
     {
+        animator.speed = timeTaken;
         animator.SetTrigger("FadeOut");
     }
 
-    // called via Animation Event on the FadeOut clip, once the screen is fully covered
     public void BlockRaycast()
     {
         fadeImage.raycastTarget = true;
     }
 
-    // called via Animation Event on the FadeIn clip, once the screen is fully clear
     public void UnblockRaycast()
     {
         fadeImage.raycastTarget = false;
+    }
+
+    public void FadeDecider(FadeEventChannelContext context)
+    {
+        if (context.isFade)
+            FadeIn(context.time);
+        else 
+            FadeOut(context.time);
+    }
+
+    private void OnEnable()
+    {
+        onTPChannel.Subscribe(FadeDecider);
+
+    }
+
+    private void OnDisable()
+    {
+        onTPChannel.Unsubscribe(FadeDecider);
     }
 }

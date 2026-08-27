@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 04105dac61d86214f9e03980de04fefd, type: 3}
-  m_Name: Bug OverworldAppearanceData
+  m_Name: Boss1OverworldAppearanceData
   m_EditorClassIdentifier: Assembly-CSharp::OverworldEntityAppearanceSO
-  <AnimCtrller>k__BackingField: {fileID: 9100000, guid: 39a61c3d584a96b499c06a1ec9d13dc7, type: 2}
-  <DefaultSprite>k__BackingField: {fileID: 301008002742590906, guid: 38e5fdbb5e3ac0c4b9e9f60cc92147ad, type: 3}
+  <AnimCtrller>k__BackingField: {fileID: 9100000, guid: f1bdd75199f33314e96354c53938c2dc, type: 2}
+  <DefaultSprite>k__BackingField: {fileID: 6303985549460649939, guid: 38e5fdbb5e3ac0c4b9e9f60cc92147ad, type: 3}

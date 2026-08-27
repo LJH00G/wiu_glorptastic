@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee048157992d0a54caf48b5c5fff2b9d, type: 3}
+  m_Name: Boss1
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Combat.EnemyDataSO
+  enemyName: Boss1
+  sprite: {fileID: 6303985549460649939, guid: 38e5fdbb5e3ac0c4b9e9f60cc92147ad, type: 3}
+  maxHP: 50
+  damage: 2
+  defense: 0
+  moveOrder:
+  - moveType: 0
+    targetType: 0
+    ability: {fileID: 0}
+    attackDamageMultiplier: 1
+    flavourText: Bug Attacks with his shell!
+  - moveType: 1
+    targetType: 2
+    ability: {fileID: 11400000, guid: ed98127d601b1154eacc57f51795a3f4, type: 2}
+    attackDamageMultiplier: 0
+    flavourText: Bug sharpens his shell!
+  loopMoveOrder: 1
+  enemyLootTable: {fileID: 11400000, guid: 860da34e720026a4bbbbaa7a47b672a3, type: 2}

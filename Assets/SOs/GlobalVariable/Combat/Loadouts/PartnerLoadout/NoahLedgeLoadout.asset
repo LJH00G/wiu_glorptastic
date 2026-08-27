@@ -18,4 +18,5 @@ MonoBehaviour:
   baseDefense: 0
   maxHP: 50
   maxCS: 0
-  knownAbilities: []
+  knownAbilities:
+  - {fileID: 11400000, guid: ed98127d601b1154eacc57f51795a3f4, type: 2}
