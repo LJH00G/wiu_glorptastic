@@ -56,6 +56,7 @@ public class EntityOverworldController : MonoBehaviour
     public void Teleport(Vector3 position)
     {
         AIPath.Teleport(position);
+        GetComponent<Rigidbody2D>().position = position;
         RefreshMovement();
     }
 

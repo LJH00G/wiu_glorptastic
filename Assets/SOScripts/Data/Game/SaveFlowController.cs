@@ -90,12 +90,8 @@ public class SaveFlowController : MonoBehaviour
     {
         if (screenFader)
         {
-<<<<<<< Updated upstream
-            screenFader.FadeOut();
-=======
-
             screenFader.FadeIn(1);
->>>>>>> Stashed changes
+
             yield return new WaitForSeconds(sceneTransitionFadeOutTime);
         }
         var context = new SceneSwitchEventContext(
@@ -115,7 +111,7 @@ public class SaveFlowController : MonoBehaviour
             if (elapsed >= sceneSwitchTimeoutSeconds)
             {
                 Debug.LogError($"SaveFlowController.LoadSceneAndRespawn() | timed out waiting for scene switch to '{sceneName}'");
-                if (screenFader) screenFader.FadeIn();
+                if (screenFader) screenFader.FadeIn(1);
                 {
                     yield break;
                 }
@@ -170,11 +166,9 @@ public class SaveFlowController : MonoBehaviour
 
         if (screenFader)
         {
-<<<<<<< Updated upstream
-            screenFader.FadeIn();
-=======
+
             screenFader.FadeOut(1);
->>>>>>> Stashed changes
+
         }
     }
 }
