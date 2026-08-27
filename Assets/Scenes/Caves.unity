@@ -3193,6 +3193,17 @@ MonoBehaviour:
   tunnelDataTunnel: {fileID: 11400000, guid: 95b4e3211af86b547a9a57f22b14da68, type: 2}
   onSwitch: {fileID: 11400000, guid: d99eee56572e0f540b7dc2913fe66e56, type: 2}
   overworldCamera: {fileID: 1731050906}
+  endCombatPlayMusicEventContext:
+    music: {fileID: 0}
+    playOrStop: 0
+    restartIfPlay: 0
+    delayToPlay: 0
+    fadeThis: 0
+    fadeThis_Time: 0
+    turnOffOther: 0
+    fadeOffOther: 0
+    fadeOffOther_Time: 0
+    fadeForceSetVolume: 0
 --- !u!4 &438083891
 Transform:
   m_ObjectHideFlags: 0
@@ -20023,8 +20034,8 @@ MonoBehaviour:
   follower: {fileID: 1455610210}
   Flags: []
   playMusicEventContext:
-    music: {fileID: 0}
-    playOrStop: 0
+    music: {fileID: 8300000, guid: cdf0dc42a2a25874ebf5950e61658774, type: 3}
+    playOrStop: 1
     restartIfPlay: 0
     delayToPlay: 0
     fadeThis: 0
