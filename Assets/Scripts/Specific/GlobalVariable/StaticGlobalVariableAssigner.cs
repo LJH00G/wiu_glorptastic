@@ -23,6 +23,7 @@ namespace Game.GlobalVariable
             StaticGlobalVariable.ToastEventChannel = toastEventChannel;
             StaticGlobalVariable.GenerateParticleEventChannel = generateParticleEventChannel;
             StaticGlobalVariable.PlaySFXEventChannel = playSFXEventChannel;
+            StaticGlobalVariable.PlayMusicEventChannel = playMusicEventChannel;
         }
 
 #if UNITY_EDITOR
