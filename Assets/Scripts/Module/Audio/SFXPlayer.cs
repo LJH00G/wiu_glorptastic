@@ -9,7 +9,7 @@ public class SFXPlayer : MonoBehaviour
     [Header("Event Listening Channel")]
     [SerializeField] PlaySFXEventChannelSO playSFXEventChannel;
     [SerializeField] BoolEventChannelSO canPlaySFXEventChannel;
-    [SerializeField] bool canPlaySFX;
+    [SerializeField] bool canPlaySFX = true;
 
     AudioSource SFXSource;
 

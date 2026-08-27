@@ -789,7 +789,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SFXPlayer
   playSFXEventChannel: {fileID: 11400000, guid: 692bad48a20fddf448c41da6c0212144, type: 2}
   canPlaySFXEventChannel: {fileID: 11400000, guid: 2e3d85e90d2326b40b74c9588a9ad3a3, type: 2}
-  canPlaySFX: 0
+  canPlaySFX: 1
 --- !u!1 &7991352821989283716
 GameObject:
   m_ObjectHideFlags: 0

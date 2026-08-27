@@ -10,9 +10,6 @@ public class ShopUI : MonoBehaviour
     [Header("Slots (must be exactly 9)")]
     [SerializeField] ShopSlotUI[] slots = new ShopSlotUI[9];
 
-    [Header("ShopCloseButton")]
-    [SerializeField] Button ShopCloseButton;
-
     [Header("Confirm Panel")]
     [SerializeField] ShopPurchaseConfirmUI confirmUI;
 

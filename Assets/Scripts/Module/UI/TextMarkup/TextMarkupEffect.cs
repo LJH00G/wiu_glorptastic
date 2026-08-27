@@ -32,7 +32,10 @@ namespace Game.TextMarkup
             played = true;
 
             if (speechSFX && !writer.WasSkipTextScrolling && writer.PrintInterval != 0)
+            {
+                Debug.Log($"writer: {writer == null}, writer.SpeechSFXEventChannel: {writer.SpeechSFXEventChannel == null}, speechSFX: {speechSFX == null}");
                 writer.SpeechSFXEventChannel.Raise(new PlaySFXEventContext(speechSFX));
+            }
         }
 
         public override TextMarkupEffect Clone()

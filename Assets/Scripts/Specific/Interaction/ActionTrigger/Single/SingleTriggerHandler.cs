@@ -46,15 +46,24 @@ namespace Game.Interactable.TriggerHandler.Single
             {
                 var triggerable = flagOverrideTriggerables.dict[flagOverrideKey];
                 TriggerType(ref triggerable.type);
-                GameManager.CurrentUserData.Flags[triggerable.flag.key] = triggerable.flag.value;
+                GameManager.SetFlag(triggerable.flag.key, triggerable.flag.value);
             }
             else
             {
                 TriggerType(ref triggerable.type);
-                GameManager.CurrentUserData.Flags[triggerable.flag.key] = triggerable.flag.value;
+                GameManager.SetFlag(triggerable.flag.key, triggerable.flag.value);
             }
 
             ResetLockTimer();
+        }
+
+        private void Start()
+        {
+
+            GameManager.EnsureFlag(triggerable.flag.key, triggerable.flag.value);
+
+            foreach (var entry in flagOverrideTriggerables.dict)
+                GameManager.EnsureFlag(entry.Value.flag.key, entry.Value.flag.value);
         }
 
 
