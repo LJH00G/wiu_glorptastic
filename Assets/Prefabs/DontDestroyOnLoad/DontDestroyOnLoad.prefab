@@ -47,6 +47,8 @@ MonoBehaviour:
   playerLoadout: {fileID: 11400000, guid: 47422620c8858604fa97fcd0926635c4, type: 2}
   followerBehaviour: {fileID: 11400000, guid: 6c82395bdba3ac14da5f6a9daf76606c, type: 2}
   toastEventChannel: {fileID: 11400000, guid: 7d499434d770b984db13a3f687b6bd45, type: 2}
+  generateParticleEventChannel: {fileID: 11400000, guid: 079ef489a58d7934cbb8c3b5b5f132be, type: 2}
+  playSFXEventChannel: {fileID: 11400000, guid: 692bad48a20fddf448c41da6c0212144, type: 2}
 --- !u!1 &850396615452843615
 GameObject:
   m_ObjectHideFlags: 0

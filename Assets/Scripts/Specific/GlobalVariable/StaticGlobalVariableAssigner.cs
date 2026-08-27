@@ -1,5 +1,6 @@
 using Game.Combat;
 using Game.SO.Behaviour.EntityOverworld;
+using Game.SO.EventChannel;
 using UnityEngine;
 
 
@@ -11,12 +12,16 @@ namespace Game.GlobalVariable
         [SerializeField] PlayerLoadoutSO playerLoadout;
         [SerializeField] FollowObjectOverworldBehaviourSO followerBehaviour;
         [SerializeField] ToastEventChannelSO toastEventChannel;
+        [SerializeField] GenerateParticleEventChannelSO generateParticleEventChannel;
+        [SerializeField] PlaySFXEventChannelSO playSFXEventChannel;
 
         private void Awake()
         {
             StaticGlobalVariable.PlayerLoadout = playerLoadout;
             StaticGlobalVariable.FollowerBehaviour = followerBehaviour;
             StaticGlobalVariable.ToastEventChannel = toastEventChannel;
+            StaticGlobalVariable.GenerateParticleEventChannel = generateParticleEventChannel;
+            StaticGlobalVariable.PlaySFXEventChannel = playSFXEventChannel;
         }
 
 #if UNITY_EDITOR
@@ -32,5 +37,8 @@ namespace Game.GlobalVariable
         static public PlayerLoadoutSO PlayerLoadout { get; set; }
         static public FollowObjectOverworldBehaviourSO FollowerBehaviour { get; set; }
         static public ToastEventChannelSO ToastEventChannel { get; set; }
+        static public PlaySFXEventChannelSO PlaySFXEventChannel { get; set; }
+
+        static public GenerateParticleEventChannelSO GenerateParticleEventChannel { get; set; }
     }
 }

@@ -3,7 +3,6 @@ using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
 using Utility.VisualizableDictionary;
-using Game.SO.EventChannel.Context;
 
 
 namespace Game.TPManager
@@ -12,10 +11,7 @@ namespace Game.TPManager
     {
         [SerializeField] VisualizableDict<string, TPDefinition> TPPointDef;
         [SerializeField] StringEventChannelSO TPCallChannel;
-        [SerializeField] FadeEventChannelSO TPAnimChannel;
-        private float fadeTime;
-        
-
+        [SerializeField] BoolEventChannelSO TPAnimChannel;
 
         
         void OnEnable()
@@ -46,6 +42,7 @@ namespace Game.TPManager
 
             if (GameManager.Player != null)
             {
+
                 player = GameManager.Player.transform;
                 GameManager.SetPlayerCanMove(false);
             }
@@ -65,10 +62,9 @@ namespace Game.TPManager
                 Debug.Log("No Follower Reference Exists in GameManager");
             }
 
-            FadeEventChannelContext fade = new FadeEventChannelContext(true, currentTP.time);
-            TPAnimChannel.Raise(fade);
+            TPAnimChannel.Raise(true);
 
-            yield return new WaitForSeconds(2f / currentTP.time);
+            yield return new WaitForSeconds(currentTP.time);
 
             if (player != null)
             {
@@ -82,10 +78,10 @@ namespace Game.TPManager
                 follower.GetComponent<EntityOverworldController>().Teleport(currentTP.position);
                 CinemachineCore.OnTargetObjectWarped(follower, positionDelta);
             }
-            fade.isFade = false;
-            TPAnimChannel.Raise(fade);
 
-            yield return new WaitForSeconds(2f / currentTP.time);
+            TPAnimChannel.Raise(false);
+
+            yield return new WaitForSeconds(currentTP.time);
 
             GameManager.SetPlayerCanMove(true);
         }
@@ -101,13 +97,12 @@ namespace Game.TPManager
             TPPointDef.OnValidate();
         }
 
-        void OnDrawGizmosSelected()
+        private void OnDrawGizmosSelected()
         {
             Gizmos.color = new Color(0, 0, 1);
             Vector3 Gizmossize = new Vector3(1, 1, 1) * 0.5f;
-            foreach(TPDefinition TP in TPPointDef.dict.Values)
+            foreach (TPDefinition TP in TPPointDef.dict.Values)
             {
-                
                 Gizmos.DrawWireCube(new Vector3(TP.position.x, TP.position.y, 0), Gizmossize);
             }
         }
