@@ -1931,6 +1931,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 706049848966332778, guid: 8f763c3d0b8422e4f86be0ca0a24cd38, type: 3}
+      propertyPath: playMusicEventChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: 29bc08d3cdf6f4f44b394bf310f101f0, type: 2}
     - target: {fileID: 3489570660293557245, guid: 8f763c3d0b8422e4f86be0ca0a24cd38, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1975,6 +1979,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: DontDestroyOnLoad
       objectReference: {fileID: 0}
+    - target: {fileID: 8149752759846515886, guid: 8f763c3d0b8422e4f86be0ca0a24cd38, type: 3}
+      propertyPath: fadeEvent
+      value: 
+      objectReference: {fileID: 11400000, guid: 30369db42a4b3cf40bd0170eee7c4ddb, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -8356,7 +8364,7 @@ MonoBehaviour:
   itemDatabase: {fileID: 11400000, guid: 1178fa58270f32e4898baa2237636ae3, type: 2}
   buddyDatabase: {fileID: 11400000, guid: 9da85eb3271a84543a707f203cdae81b, type: 2}
   sceneSwitchEventChannel: {fileID: 11400000, guid: d99eee56572e0f540b7dc2913fe66e56, type: 2}
-  newGameSceneName: Fishnet
+  newGameSceneName: FishNet
   newGameCheckpointID: 1236767
   respawnFadeTime: 1.8
   screenFader: {fileID: 1496989601}

@@ -16,7 +16,7 @@ MonoBehaviour:
   context:
     setting: 1
     scene: Plains
-    delay: 0
+    delay: 1
     playMusicContext:
       music: {fileID: 0}
       playOrStop: 0
@@ -28,6 +28,6 @@ MonoBehaviour:
       fadeOffOther: 0
       fadeOffOther_Time: 0
       fadeForceSetVolume: 0
-    timePause: 0
-    setSceneAsMain: 0
+    timePause: 1
+    setSceneAsMain: 1
     ignoreableObjs: []

@@ -98,6 +98,7 @@ MonoBehaviour:
   delayedCallbackEventChannel: {fileID: 11400000, guid: f657aa2dfb0d6be4c8a6401eda5e217c, type: 2}
   playMusicEventChannel: {fileID: 11400000, guid: 29bc08d3cdf6f4f44b394bf310f101f0, type: 2}
   gameplaySceneChangedEventChannel: {fileID: 11400000, guid: 681e376678804c23bd7fd3157c981890, type: 2}
+  fadeEvent: {fileID: 11400000, guid: 30369db42a4b3cf40bd0170eee7c4ddb, type: 2}
 --- !u!1 &1470065001499939150
 GameObject:
   m_ObjectHideFlags: 0

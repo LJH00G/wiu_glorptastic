@@ -14,9 +14,14 @@ public class SceneSwitchController : MonoBehaviour
     [SerializeField] PlayMusicEventChannelSO playMusicEventChannel;
     [SerializeField] StringEventChannelSO gameplaySceneChangedEventChannel;
 
+    [SerializeField] FadeEventChannelSO fadeEvent;
+
     public void SwitchScene(SceneSwitchEventContext context)
     {
         Debug.Log($"trying to scene switch to {context}", this);
+
+        FadeEventChannelContext fadeContext = new FadeEventChannelContext(true, 1 * context.delay);
+        fadeEvent.Raise(fadeContext);
 
         if (context.timePause == SCENE_SWITCH_PAUSE.PAUSE_AT_START)
         {
@@ -67,6 +72,10 @@ public class SceneSwitchController : MonoBehaviour
                         cam.enabled = true;
                     }
                 }
+
+                fadeContext.isFade = false;
+
+                fadeEvent.Raise(fadeContext);
             }
             else
             {
@@ -91,10 +100,16 @@ public class SceneSwitchController : MonoBehaviour
                 }
 
                 OverworldDisableManager.DisableAllObjects(oldScene, context.ignoreableObjs);
+
+                
             }
 
             void OnSceneLoaded(Scene scene, LoadSceneMode mode)
             {
+                fadeContext.isFade = false;
+
+                fadeEvent.Raise(fadeContext);
+
                 if (scene.name != context.scene)
                 {
                     return;
@@ -118,6 +133,8 @@ public class SceneSwitchController : MonoBehaviour
                     Debug.Log($"unloading old scene: {oldScene}");
                     SceneManager.UnloadSceneAsync(oldScene);
                 }
+
+                
             }
         }
     }
@@ -125,6 +142,7 @@ public class SceneSwitchController : MonoBehaviour
     private void OnEnable()
     {
         sceneSwitchEventChannel.Subscribe(SwitchScene);
+        
     }
 
     private void OnDisable()
