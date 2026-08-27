@@ -19,19 +19,23 @@ public class SceneSwitchController : MonoBehaviour
         Debug.Log($"trying to scene switch to {context}", this);
 
         if (context.timePause == SCENE_SWITCH_PAUSE.PAUSE_AT_START)
+        {
             Time.timeScale = 0f;
-
+        }
         playMusicEventChannel.Raise(context.playMusicContext);
 
         if (context.delay <= 0)
+        {
             PerformSceneSwitch();
+        }
         else
+        {
             delayedCallbackEventChannel.Raise(new DelayedCallbackEventContext(
                 PerformSceneSwitch,
                 context.delay,
                 false
             ));
-
+        }
 
         void PerformSceneSwitch()
         {
@@ -45,12 +49,13 @@ public class SceneSwitchController : MonoBehaviour
                 Time.timeScale = 1f;
 
                 if (!context.setSceneAsMain)
+                {
                     return;
-
-
+                }
                 Scene scene = SceneManager.GetSceneByName(context.scene);
                 OverworldDisableManager.EnableAllObjects(scene);
                 SceneManager.SetActiveScene(scene);
+                gameplaySceneChangedEventChannel.Raise(scene.name);
 
                 GameObject[] rootList = scene.GetRootGameObjects();
                 foreach (GameObject root in rootList)
@@ -70,11 +75,13 @@ public class SceneSwitchController : MonoBehaviour
                 SceneManager.LoadSceneAsync(context.scene, LoadSceneMode.Additive);
 
                 if (context.timePause == SCENE_SWITCH_PAUSE.PAUSE_DURING_LOAD)
+                {
                     Time.timeScale = 0f;
-
+                }
                 if (!context.setSceneAsMain)
+                {
                     return;
-
+                }
 
                 Camera main = Camera.main;
                 if (main)
@@ -89,8 +96,9 @@ public class SceneSwitchController : MonoBehaviour
             void OnSceneLoaded(Scene scene, LoadSceneMode mode)
             {
                 if (scene.name != context.scene)
+                {
                     return;
-
+                }
                 SceneManager.sceneLoaded -= OnSceneLoaded;
 
                 if (context.setSceneAsMain)
