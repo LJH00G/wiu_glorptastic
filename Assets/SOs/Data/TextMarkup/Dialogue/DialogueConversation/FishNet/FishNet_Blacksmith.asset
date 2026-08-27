@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 34f2ff470233db34a958620f483cd295, type: 3}
-  m_Name: FishNet_shop_Edward_sellshop_dial_data
+  m_Name: FishNet_Blacksmith
   m_EditorClassIdentifier: Assembly-CSharp::Game.SO.Data.TextMarkup.Dialogue.DialogueConversationSO
   <Dialogues>k__BackingField:
-  - speaker: {fileID: 11400000, guid: 2ffe29eb28eddae4280062714ddbfeb1, type: 2}
-    text: What do you want to sell?<input/><end/>
-    endAction: {fileID: 11400000, guid: abfd917f9124bbb4fb8c79d575ce105c, type: 2}
+  - speaker: {fileID: 11400000, guid: 0c2c4ea017efed64bb52138d29598ece, type: 2}
+    text: Howdy, care for some gear?<input/><end/>
+    endAction: {fileID: 11400000, guid: edc83a395ba41574fb5030c079a378fd, type: 2}
