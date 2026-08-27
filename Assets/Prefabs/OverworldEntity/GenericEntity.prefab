@@ -155,7 +155,7 @@ MonoBehaviour:
   radius: 0.25
   height: 2
   canMove: 1
-  maxSpeed: 2
+  maxSpeed: 3.5
   gravity: {x: 0, y: 0, z: 0}
   groundMask:
     serializedVersion: 2
@@ -174,9 +174,9 @@ MonoBehaviour:
   targetCompatibility: {fileID: 0}
   maxAcceleration: 10
   rotationSpeed: 360
-  slowdownDistance: 0
-  pickNextWaypointDist: 0.5
-  endReachedDistance: 0
+  slowdownDistance: 1
+  pickNextWaypointDist: 0.75
+  endReachedDistance: 0.25
   alwaysDrawGizmos: 0
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
@@ -191,7 +191,7 @@ Animator:
   m_GameObject: {fileID: 5511489128047036267}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0ed8d968f7394b142b24ee26ef52002d, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -308,7 +308,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 86489958, guid: 5292a0151f3283648ab371a071b83c1e, type: 3}
+  m_Sprite: {fileID: 577998304, guid: e20bc7d1e02398343aaf1a2548bbfc2c, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
