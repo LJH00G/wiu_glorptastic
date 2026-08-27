@@ -15113,6 +15113,92 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1 &265922687 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7618617631642094810, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+  m_PrefabInstance: {fileID: 1848201683}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &265922691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265922687}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a048d282cfaf38548b1c736d60ad4476, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Interactable.TriggerHandler.Mass.DialogueTriggerHandler
+  <RequiresInteraction>k__BackingField: 1
+  offset: {x: 0, y: 0}
+  size: {x: 1, y: 1}
+  triggerCollider: {fileID: 265922692}
+  lockTimeAfterTrigger: 0
+  lockTimer: 0
+  defaultTriggerSequence:
+    index: 0
+    triggerables:
+    - type: {fileID: 11400000, guid: bc07c71e9e6368b419bffbc0bd121c13, type: 2}
+      flag:
+        key: 
+        value: 0
+    cycleToStartWhenExhausted: 0
+    useExhaustedTriggerable: 0
+    exhaustedTriggerable:
+      type: {fileID: 0}
+      flag:
+        key: 
+        value: 0
+  flagOverrideTriggerSequences:
+    serializableList: []
+  dialogueConversationEventChannel: {fileID: 11400000, guid: 44508743f5b9d8341ab1fa10572170f0, type: 2}
+--- !u!61 &265922692
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 265922687}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.03125}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
 --- !u!1 &289974614
 GameObject:
   m_ObjectHideFlags: 0
@@ -15712,15 +15798,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 263098528329391435, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_Size.x
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 263098528329391435, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_Size.y
-      value: 1
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 263098528329391435, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_Offset.y
-      value: 0
+      value: 0.125
       objectReference: {fileID: 0}
     - target: {fileID: 3500526049272365041, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_Sprite
@@ -15793,6 +15879,10 @@ PrefabInstance:
     - target: {fileID: 7404118726747510102, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: pickNextWaypointDist
       value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 7618617631642094810, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8628031461048391037, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: <Behaviour>k__BackingField
@@ -16118,60 +16208,18 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5511489128047036267, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 7618617631642094810, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 313162017}
+      addedObject: {fileID: 895646641}
+    - targetCorrespondingSourceObject: {fileID: 7618617631642094810, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 895646640}
   m_SourcePrefab: {fileID: 100100000, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
 --- !u!4 &313162014 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6473455761877912804, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
   m_PrefabInstance: {fileID: 313162013}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &313162015 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5511489128047036267, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
-  m_PrefabInstance: {fileID: 313162013}
-  m_PrefabAsset: {fileID: 0}
---- !u!61 &313162016 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: 263098528329391435, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
-  m_PrefabInstance: {fileID: 313162013}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &313162017
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 313162015}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a048d282cfaf38548b1c736d60ad4476, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Interactable.TriggerHandler.Mass.DialogueTriggerHandler
-  <RequiresInteraction>k__BackingField: 1
-  offset: {x: 0, y: 0}
-  size: {x: 1, y: 1}
-  triggerCollider: {fileID: 313162016}
-  lockTimeAfterTrigger: 0
-  lockTimer: 0
-  defaultTriggerSequence:
-    index: 0
-    triggerables:
-    - type: {fileID: 11400000, guid: d16324355c32f6049aabbfa879fec0a1, type: 2}
-      flag:
-        key: 
-        value: 0
-    cycleToStartWhenExhausted: 0
-    useExhaustedTriggerable: 0
-    exhaustedTriggerable:
-      type: {fileID: 0}
-      flag:
-        key: 
-        value: 0
-  flagOverrideTriggerSequences:
-    serializableList: []
-  dialogueConversationEventChannel: {fileID: 11400000, guid: 44508743f5b9d8341ab1fa10572170f0, type: 2}
 --- !u!1 &337884310
 GameObject:
   m_ObjectHideFlags: 0
@@ -16753,11 +16801,6 @@ Transform:
   - {fileID: 622919972}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &558774420 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5511489128047036267, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
-  m_PrefabInstance: {fileID: 1848201683}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &615690456
 GameObject:
   m_ObjectHideFlags: 0
@@ -40179,7 +40222,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: '::'
   player: {fileID: 2087693728}
-  follower: {fileID: 0}
+  follower: {fileID: 906114393}
   Flags: []
   playMusicEventContext:
     music: {fileID: 8300000, guid: ad07a3767ea21fa46aa0cd3f0468ea36, type: 3}
@@ -40282,6 +40325,159 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 838927108}
   m_CullTransparentMesh: 1
+--- !u!1 &895646636 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7618617631642094810, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+  m_PrefabInstance: {fileID: 313162013}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &895646640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895646636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a048d282cfaf38548b1c736d60ad4476, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Interactable.TriggerHandler.Mass.DialogueTriggerHandler
+  <RequiresInteraction>k__BackingField: 1
+  offset: {x: 0, y: 0}
+  size: {x: 1, y: 1}
+  triggerCollider: {fileID: 895646641}
+  lockTimeAfterTrigger: 0
+  lockTimer: 0
+  defaultTriggerSequence:
+    index: 0
+    triggerables:
+    - type: {fileID: 11400000, guid: d16324355c32f6049aabbfa879fec0a1, type: 2}
+      flag:
+        key: 
+        value: 0
+    cycleToStartWhenExhausted: 0
+    useExhaustedTriggerable: 0
+    exhaustedTriggerable:
+      type: {fileID: 0}
+      flag:
+        key: 
+        value: 0
+  flagOverrideTriggerSequences:
+    serializableList: []
+  dialogueConversationEventChannel: {fileID: 11400000, guid: 44508743f5b9d8341ab1fa10572170f0, type: 2}
+--- !u!61 &895646641
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 895646636}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.03125}
+    oldSize: {x: 1, y: 1}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!1001 &906114392
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 1713845868}
+    m_Modifications:
+    - target: {fileID: 5511489128047036267, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+      propertyPath: m_Name
+      value: Follower
+      objectReference: {fileID: 0}
+    - target: {fileID: 6473455761877912804, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -1.8713
+      objectReference: {fileID: 0}
+    - target: {fileID: 6473455761877912804, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -34.67
+      objectReference: {fileID: 0}
+    - target: {fileID: 6473455761877912804, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6473455761877912804, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6473455761877912804, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6473455761877912804, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6473455761877912804, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6473455761877912804, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6473455761877912804, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6473455761877912804, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+--- !u!1 &906114393 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5511489128047036267, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+  m_PrefabInstance: {fileID: 906114392}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &906114394 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6473455761877912804, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+  m_PrefabInstance: {fileID: 906114392}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &906158556
 GameObject:
   m_ObjectHideFlags: 0
@@ -43812,6 +44008,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2087693730}
+  - {fileID: 906114394}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1731050904
@@ -44229,15 +44426,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 263098528329391435, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_Size.x
-      value: 1
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 263098528329391435, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_Size.y
-      value: 1
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 263098528329391435, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_Offset.y
-      value: 0
+      value: 0.125
       objectReference: {fileID: 0}
     - target: {fileID: 3500526049272365041, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_Sprite
@@ -44310,6 +44507,10 @@ PrefabInstance:
     - target: {fileID: 7404118726747510102, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: pickNextWaypointDist
       value: 0.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 7618617631642094810, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8628031461048391037, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: <Behaviour>k__BackingField
@@ -44631,55 +44832,18 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5511489128047036267, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+    - targetCorrespondingSourceObject: {fileID: 7618617631642094810, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1848201691}
+      addedObject: {fileID: 265922692}
+    - targetCorrespondingSourceObject: {fileID: 7618617631642094810, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 265922691}
   m_SourcePrefab: {fileID: 100100000, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
 --- !u!4 &1848201684 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6473455761877912804, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
   m_PrefabInstance: {fileID: 1848201683}
   m_PrefabAsset: {fileID: 0}
---- !u!61 &1848201689 stripped
-BoxCollider2D:
-  m_CorrespondingSourceObject: {fileID: 263098528329391435, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
-  m_PrefabInstance: {fileID: 1848201683}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1848201691
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 558774420}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a048d282cfaf38548b1c736d60ad4476, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Game.Interactable.TriggerHandler.Mass.DialogueTriggerHandler
-  <RequiresInteraction>k__BackingField: 1
-  offset: {x: 0, y: 0}
-  size: {x: 1, y: 1}
-  triggerCollider: {fileID: 1848201689}
-  lockTimeAfterTrigger: 0
-  lockTimer: 0
-  defaultTriggerSequence:
-    index: 0
-    triggerables:
-    - type: {fileID: 11400000, guid: bc07c71e9e6368b419bffbc0bd121c13, type: 2}
-      flag:
-        key: 
-        value: 0
-    cycleToStartWhenExhausted: 0
-    useExhaustedTriggerable: 0
-    exhaustedTriggerable:
-      type: {fileID: 0}
-      flag:
-        key: 
-        value: 0
-  flagOverrideTriggerSequences:
-    serializableList: []
-  dialogueConversationEventChannel: {fileID: 11400000, guid: 44508743f5b9d8341ab1fa10572170f0, type: 2}
 --- !u!1 &1922796151
 GameObject:
   m_ObjectHideFlags: 0
