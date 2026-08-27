@@ -8337,8 +8337,8 @@ MonoBehaviour:
   itemDatabase: {fileID: 11400000, guid: 1178fa58270f32e4898baa2237636ae3, type: 2}
   buddyDatabase: {fileID: 11400000, guid: 9da85eb3271a84543a707f203cdae81b, type: 2}
   sceneSwitchEventChannel: {fileID: 11400000, guid: d99eee56572e0f540b7dc2913fe66e56, type: 2}
-  newGameSceneName: Plains
-  newGameCheckpointID: 67
+  newGameSceneName: Scrapyard
+  newGameCheckpointID: 1236767
   respawnFadeTime: 1.8
   screenFader: {fileID: 1496989601}
   sceneTransitionFadeOutTime: 1.8
