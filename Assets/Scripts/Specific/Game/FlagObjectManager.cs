@@ -95,9 +95,16 @@ public class FlagObjectManager : MonoBehaviour
                     triggeredFlag.answered = true;
                 }
             }
+            else if (obj != null && obj.scene.IsValid())
+            {
+                // obj is a direct reference to a pre-placed scene object (not something this
+                // manager instantiated) - just hide it instead of requiring an Add step first.
+                obj.SetActive(false);
+                triggeredFlag.answered = true;
+            }
             else
             {
-                Debug.LogError($"Tried to remove a Flag object with no tracked instance (never added, or already removed): {triggeredFlag} , {obj}");
+                Debug.LogError($"Tried to remove a Flag object with no tracked instance and no valid scene reference: {triggeredFlag} , {obj}");
                 triggeredFlag.answered = true;
             }
         }
