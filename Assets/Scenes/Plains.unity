@@ -77718,7 +77718,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 460586716}
-  - component: {fileID: 460586715}
+  - component: {fileID: 460586717}
   m_Layer: 0
   m_Name: TestController
   m_TagString: Untagged
@@ -77726,44 +77726,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &460586715
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 460586714}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb8a1033e67214a459b339f10a00b80b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  dialogueInputEventChannel: {fileID: 11400000, guid: 7cda93fb6d5667d4fb118f85ce57ea4b, type: 2}
-  skipDialogueScrollingEventChannel: {fileID: 11400000, guid: 99c2f7a618ed3974d9b7780e0a3a99c6, type: 2}
-  dialogueConversationEventChannel: {fileID: 11400000, guid: 44508743f5b9d8341ab1fa10572170f0, type: 2}
-  sceneSwitchEventChannel: {fileID: 11400000, guid: d99eee56572e0f540b7dc2913fe66e56, type: 2}
-  sceneSwitchContext:
-    setting: 0
-    scene: 
-    delay: 0
-    playMusicContext:
-      music: {fileID: 0}
-      playOrStop: 0
-      restartIfPlay: 0
-      delayToPlay: 0
-      fadeThis: 0
-      fadeThis_Time: 0
-      turnOffOther: 0
-      fadeOffOther: 0
-      fadeOffOther_Time: 0
-      fadeForceSetVolume: 0
-    timePause: 0
-    setSceneAsMain: 0
-    ignoreableObjs: []
-  testConvo1: {fileID: 11400000, guid: 6eb9ccc3237ab404c9fa2eb07aaa120f, type: 2}
-  testConvo2: {fileID: 11400000, guid: 2fb6cc53f80ab6b4c9625131f83b482c, type: 2}
-  testConvo3: {fileID: 11400000, guid: 0c182ecde89c1dd4094026ed176fcd97, type: 2}
-  testConvo4: {fileID: 11400000, guid: d4bdbbbdddcef184a916b504e1fd42ea, type: 2}
 --- !u!4 &460586716
 Transform:
   m_ObjectHideFlags: 0
@@ -77779,6 +77741,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 953472293}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &460586717
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 460586714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b228098f136b66b4ba2ac5910af4ccb8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DialogueInputer
+  dialogueInputEventChannel: {fileID: 11400000, guid: 7cda93fb6d5667d4fb118f85ce57ea4b, type: 2}
+  skipDialogueScrollingEventChannel: {fileID: 11400000, guid: 99c2f7a618ed3974d9b7780e0a3a99c6, type: 2}
 --- !u!1 &600197536
 GameObject:
   m_ObjectHideFlags: 0
@@ -131984,7 +131960,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 1.984375
+  orthographic size: 5.625
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
