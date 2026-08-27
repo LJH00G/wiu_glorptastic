@@ -15,4 +15,4 @@ MonoBehaviour:
   <Dialogues>k__BackingField:
   - speaker: {fileID: 11400000, guid: 2ffe29eb28eddae4280062714ddbfeb1, type: 2}
     text: What do you want to sell?<input/><end/>
-    endAction: {fileID: 11400000, guid: c791be29702bf7b46813767441c6f135, type: 2}
+    endAction: {fileID: 11400000, guid: abfd917f9124bbb4fb8c79d575ce105c, type: 2}
