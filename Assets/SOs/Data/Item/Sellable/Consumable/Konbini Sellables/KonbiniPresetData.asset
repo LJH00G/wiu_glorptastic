@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6f445e8de8fd518499776aceb868153b, type: 3}
-  m_Name: ShopPreset_Data
+  m_Name: KonbiniPresetData
   m_EditorClassIdentifier: Assembly-CSharp::Game.SO.Data.Shop.ShopPresetSO
   <TradeTable>k__BackingField:
   - product:
@@ -25,14 +25,14 @@ MonoBehaviour:
       shell: 10
   - product:
       itemStacks:
-      - item: {fileID: 11400000, guid: 43a1fb9d255639442b8c3b2bbf1d8e22, type: 2}
+      - item: {fileID: 11400000, guid: a7dad325ffa8c804aad44df2574373cf, type: 2}
         count: 1
       useShell: 0
       shell: 0
     cost:
       itemStacks: []
       useShell: 1
-      shell: 10
+      shell: 20
   - product:
       itemStacks:
       - item: {fileID: 11400000, guid: 54fd3e4a2eef92548b4e15ea5a23483a, type: 2}
@@ -45,7 +45,7 @@ MonoBehaviour:
       shell: 10
   - product:
       itemStacks:
-      - item: {fileID: 11400000, guid: 069dab330cbad3346ac7dd9c134d428a, type: 2}
+      - item: {fileID: 11400000, guid: 749b86e075c4bb741918d3714ef309d5, type: 2}
         count: 1
       useShell: 0
       shell: 0
@@ -55,7 +55,7 @@ MonoBehaviour:
       shell: 10
   - product:
       itemStacks:
-      - item: {fileID: 11400000, guid: 07b5c56db964af0489af12262b86e862, type: 2}
+      - item: {fileID: 11400000, guid: 1d64611584a958d42854763809dcf5f0, type: 2}
         count: 1
       useShell: 0
       shell: 0
@@ -65,7 +65,7 @@ MonoBehaviour:
       shell: 10
   - product:
       itemStacks:
-      - item: {fileID: 11400000, guid: 2d28413801139524abac794c546a8833, type: 2}
+      - item: {fileID: 11400000, guid: 3e0d4978716d12e489860ff9664bace7, type: 2}
         count: 1
       useShell: 0
       shell: 0
@@ -75,7 +75,17 @@ MonoBehaviour:
       shell: 20
   - product:
       itemStacks:
-      - item: {fileID: 11400000, guid: 07b5c56db964af0489af12262b86e862, type: 2}
+      - item: {fileID: 11400000, guid: e7e67b9ade58f2a4d9a91249d8aa0e73, type: 2}
+        count: 1
+      useShell: 0
+      shell: 0
+    cost:
+      itemStacks: []
+      useShell: 1
+      shell: 15
+  - product:
+      itemStacks:
+      - item: {fileID: 11400000, guid: 74cf315d77a87ba41ae17053531ed1d0, type: 2}
         count: 1
       useShell: 0
       shell: 0
@@ -85,17 +95,7 @@ MonoBehaviour:
       shell: 10
   - product:
       itemStacks:
-      - item: {fileID: 11400000, guid: 07b5c56db964af0489af12262b86e862, type: 2}
-        count: 1
-      useShell: 0
-      shell: 0
-    cost:
-      itemStacks: []
-      useShell: 1
-      shell: 10
-  - product:
-      itemStacks:
-      - item: {fileID: 11400000, guid: 07b5c56db964af0489af12262b86e862, type: 2}
+      - item: {fileID: 11400000, guid: 1a0a1da876e127e44b3664ebb2af7d6d, type: 2}
         count: 1
       useShell: 0
       shell: 0
