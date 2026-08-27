@@ -29,6 +29,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DeathScene.unity
     guid: 59e91473538513547b12b7df4d8dac0d
+  - enabled: 1
+    path: Assets/Scenes/Scrapyard.unity
+    guid: 4de74edd2d8e4864a94f34da130e7baf
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0

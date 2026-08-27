@@ -92,7 +92,7 @@ public class SaveFlowController : MonoBehaviour
         {
             screenFader.FadeIn(1);
 
-            yield return new WaitForSeconds(sceneTransitionFadeOutTime);
+            yield return new WaitForSecondsRealtime(sceneTransitionFadeOutTime);
         }
         var context = new SceneSwitchEventContext(
             SCENE_SWITCH_SETTING.LOAD_SEQUENTIALLY,
@@ -111,7 +111,7 @@ public class SaveFlowController : MonoBehaviour
             if (elapsed >= sceneSwitchTimeoutSeconds)
             {
                 Debug.LogError($"SaveFlowController.LoadSceneAndRespawn() | timed out waiting for scene switch to '{sceneName}'");
-                if (screenFader) screenFader.FadeIn(1);
+                if (screenFader) screenFader.FadeOut(1);
                 {
                     yield break;
                 }

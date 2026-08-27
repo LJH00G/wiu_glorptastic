@@ -35,12 +35,12 @@ public class SaveSlotPanel : MonoBehaviour
 
         if (!hasSave)
         {
-            statusText.text = "Empty Slot";
+            //statusText.text = "Empty Slot";
             return;
         }
 
         SaveData data = SaveManager.Load(slotIndex);
-        statusText.text = $"Play Time: {FormatPlayTime(data.playTime)}";
+        //statusText.text = $"Play Time: {FormatPlayTime(data.playTime)}";
     }
 
     void OnLoadClicked()

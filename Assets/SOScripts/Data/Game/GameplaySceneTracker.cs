@@ -1,5 +1,6 @@
-using UnityEngine;
 using Game.SO.EventChannel;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public static class GameplaySceneTracker
 {
@@ -20,16 +21,15 @@ public class GameplaySceneTrackerListener : MonoBehaviour
 
     void Awake()
     {
+        GameplaySceneTracker.HandleSceneChanged(SceneManager.GetActiveScene().name);
+
         if (instance && instance != this)
         {
             Destroy(gameObject);
             return;
         }
-
         instance = this;
         DontDestroyOnLoad(gameObject);
-
-        GameplaySceneTracker.HandleSceneChanged(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     }
 
     void OnEnable()

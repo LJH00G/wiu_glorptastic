@@ -212,7 +212,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SaveSlotPanel
   slotIndex: 1
-  statusText: {fileID: 1703436323}
+  statusText: {fileID: 0}
   loadButton: {fileID: 315426117}
   newGameButton: {fileID: 81257959}
 --- !u!1 &51942830
@@ -5431,7 +5431,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SaveSlotPanel
   slotIndex: 2
-  statusText: {fileID: 220739972}
+  statusText: {fileID: 0}
   loadButton: {fileID: 700317554}
   newGameButton: {fileID: 271072545}
 --- !u!1 &1221232911
@@ -8356,7 +8356,7 @@ MonoBehaviour:
   itemDatabase: {fileID: 11400000, guid: 1178fa58270f32e4898baa2237636ae3, type: 2}
   buddyDatabase: {fileID: 11400000, guid: 9da85eb3271a84543a707f203cdae81b, type: 2}
   sceneSwitchEventChannel: {fileID: 11400000, guid: d99eee56572e0f540b7dc2913fe66e56, type: 2}
-  newGameSceneName: Scrapyard
+  newGameSceneName: Fishnet
   newGameCheckpointID: 1236767
   respawnFadeTime: 1.8
   screenFader: {fileID: 1496989601}
@@ -8825,7 +8825,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SaveSlotPanel
   slotIndex: 0
-  statusText: {fileID: 1637184427}
+  statusText: {fileID: 0}
   loadButton: {fileID: 593527236}
   newGameButton: {fileID: 1558589723}
 --- !u!1 &2035887428
