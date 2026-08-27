@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34f2ff470233db34a958620f483cd295, type: 3}
+  m_Name: FishNet_Diner
+  m_EditorClassIdentifier: Assembly-CSharp::Game.SO.Data.TextMarkup.Dialogue.DialogueConversationSO
+  <Dialogues>k__BackingField:
+  - speaker: {fileID: 11400000, guid: c57078aefbf979f4d882485fa4fd7fca, type: 2}
+    text: We have nice food.<input/><end/>
+    endAction: {fileID: 11400000, guid: c791be29702bf7b46813767441c6f135, type: 2}
