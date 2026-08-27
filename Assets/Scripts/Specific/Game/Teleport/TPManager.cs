@@ -45,7 +45,6 @@ namespace Game.TPManager
 
             if (GameManager.Player != null)
             {
-
                 player = GameManager.Player.transform;
                 GameManager.SetPlayerCanMove(false);
             }
