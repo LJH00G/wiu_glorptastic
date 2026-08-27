@@ -48,7 +48,7 @@ public class UserData
     [field: SerializeField]
     public VisualizableDict<string, int> Statistics { get; set; } = new();
 
-    public void SetCurrentBuddyData(BuddyDataSO buddyData)
+    public void SetCurrentBuddy_Pure(BuddyDataSO buddyData)
     {
         CurrentEquipedBuddy = buddyData;
     }
