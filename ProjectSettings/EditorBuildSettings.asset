@@ -32,6 +32,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Scrapyard.unity
     guid: 4de74edd2d8e4864a94f34da130e7baf
+  - enabled: 1
+    path: Assets/Scenes/Win Scene.unity
+    guid: 99106aa90daa26342bc139fd13d9299a
+  - enabled: 1
+    path: Assets/Scenes/Caves.unity
+    guid: fe0d1775c2ba1e147a06ef3a8c2c1978
   m_configObjects:
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
   m_UseUCBPForAssetBundles: 0
