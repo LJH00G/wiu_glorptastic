@@ -798,12 +798,13 @@ namespace Game.Combat
             {
                 if (success)
                 {
+                    FX.EffectManager.RecieveSignal(audioReferences.escapeSFX);
+
                     state = CombatState.FLED;
 
                     hud.ShowDescription(
                         "Got away safely!"
                     );
-
                     EndBattle(won: false);
                 }
                 else

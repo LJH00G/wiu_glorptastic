@@ -10,4 +10,5 @@ public class AudioReferences : MonoBehaviour
     public Effect spellSFX;
     public Effect killedSFX;
     public Effect eatSFX;
+    public Effect escapeSFX;
 }
