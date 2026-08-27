@@ -3194,12 +3194,12 @@ MonoBehaviour:
   onSwitch: {fileID: 11400000, guid: d99eee56572e0f540b7dc2913fe66e56, type: 2}
   overworldCamera: {fileID: 1731050906}
   endCombatPlayMusicEventContext:
-    music: {fileID: 0}
-    playOrStop: 0
+    music: {fileID: 8300000, guid: cdf0dc42a2a25874ebf5950e61658774, type: 3}
+    playOrStop: 1
     restartIfPlay: 0
     delayToPlay: 0
-    fadeThis: 0
-    fadeThis_Time: 0
+    fadeThis: 1
+    fadeThis_Time: 2
     turnOffOther: 0
     fadeOffOther: 0
     fadeOffOther_Time: 0
@@ -20038,8 +20038,8 @@ MonoBehaviour:
     playOrStop: 1
     restartIfPlay: 0
     delayToPlay: 0
-    fadeThis: 0
-    fadeThis_Time: 0
+    fadeThis: 1
+    fadeThis_Time: 2
     turnOffOther: 0
     fadeOffOther: 0
     fadeOffOther_Time: 0
@@ -40789,11 +40789,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6473455761877912804, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -26.82
+      value: -39.44
       objectReference: {fileID: 0}
     - target: {fileID: 6473455761877912804, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.01
+      value: -1.29
       objectReference: {fileID: 0}
     - target: {fileID: 6473455761877912804, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_LocalPosition.z
