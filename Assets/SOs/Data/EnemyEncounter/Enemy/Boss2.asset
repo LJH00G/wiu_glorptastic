@@ -1,0 +1,37 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee048157992d0a54caf48b5c5fff2b9d, type: 3}
+  m_Name: Boss2
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Combat.EnemyDataSO
+  enemyName: 
+  sprite: {fileID: -1721448698, guid: b631ed305dfd43c488e0f8edf5c829bc, type: 3}
+  maxHP: 30
+  damage: 5
+  defense: 0
+  moveOrder:
+  - moveType: 1
+    targetType: 0
+    ability: {fileID: 11400000, guid: ddb3d59058dda30409932d874268e630, type: 2}
+    attackDamageMultiplier: 10
+    flavourText: 
+  - moveType: 1
+    targetType: 0
+    ability: {fileID: 11400000, guid: 9cf93293614d63d41acc985a9bcacc3e, type: 2}
+    attackDamageMultiplier: 1
+    flavourText: 
+  - moveType: 0
+    targetType: 1
+    ability: {fileID: 11400000, guid: 9cf93293614d63d41acc985a9bcacc3e, type: 2}
+    attackDamageMultiplier: 3
+    flavourText: 
+  loopMoveOrder: 1
+  enemyLootTable: {fileID: 11400000, guid: fd5af0cdcfe1f90409ce3b7a54d8eca7, type: 2}

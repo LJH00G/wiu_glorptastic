@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f629cca181c4a0aa58f33291252d57c, type: 3}
   m_Name: SetDinoBuddyFlag
   m_EditorClassIdentifier: Assembly-CSharp::SetFlagActionSO
-  flagKey: DinoBuddy
+  flagKey: Level 1 Done
   value: 1

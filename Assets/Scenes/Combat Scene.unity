@@ -1702,7 +1702,7 @@ MonoBehaviour:
     delayToPlay: 0
     fadeThis: 0
     fadeThis_Time: 0
-    turnOffOther: 0
+    turnOffOther: 1
     fadeOffOther: 0
     fadeOffOther_Time: 0
     fadeForceSetVolume: 0

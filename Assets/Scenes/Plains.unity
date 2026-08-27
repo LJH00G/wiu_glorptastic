@@ -77579,8 +77579,8 @@ MonoBehaviour:
   onSwitch: {fileID: 11400000, guid: d99eee56572e0f540b7dc2913fe66e56, type: 2}
   overworldCamera: {fileID: 1731050906}
   endCombatPlayMusicEventContext:
-    music: {fileID: 0}
-    playOrStop: 0
+    music: {fileID: 8300000, guid: bcd57b099b3cd764bbb7c71a2f0f3c03, type: 3}
+    playOrStop: 1
     restartIfPlay: 0
     delayToPlay: 0
     fadeThis: 0
@@ -128310,8 +128310,8 @@ MonoBehaviour:
   Flags:
   - SeenNoahTutorial
   playMusicEventContext:
-    music: {fileID: 0}
-    playOrStop: 0
+    music: {fileID: 8300000, guid: bcd57b099b3cd764bbb7c71a2f0f3c03, type: 3}
+    playOrStop: 1
     restartIfPlay: 0
     delayToPlay: 0
     fadeThis: 0
@@ -130627,9 +130627,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24def87c3b23a1e7adff571455821176, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FollowerWalksOffThenSwapsBuddy
-  walkOffChannel: {fileID: 0}
-  walkOffDestination: {fileID: 0}
-  newBuddy: {fileID: 0}
+  walkOffChannel: {fileID: 11400000, guid: f68c0ab23ffcd7e9d57175c9f4d1f5e4, type: 2}
+  walkOffDestination: {fileID: 1012921945}
+  newBuddy: {fileID: 11400000, guid: 62a1b6e6c4070ec419c2cc7a1fd6b168, type: 2}
+  standaloneNpcToHide: {fileID: 1083918377}
 --- !u!1 &1573051412
 GameObject:
   m_ObjectHideFlags: 0
@@ -132812,6 +132813,50 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4635711440640789515, guid: 88b2a2ca6d7fd004c8d5f96406608d15, type: 3}
+      propertyPath: <Behaviour>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: d4f1dfadc976bf24091a2db4924f17ff, type: 2}
+    - target: {fileID: 4635711440640789515, guid: 88b2a2ca6d7fd004c8d5f96406608d15, type: 3}
+      propertyPath: <InstanceData>k__BackingField
+      value: 4526794446109147216
+      objectReference: {fileID: 0}
+    - target: {fileID: 4635711440640789515, guid: 88b2a2ca6d7fd004c8d5f96406608d15, type: 3}
+      propertyPath: 'managedReferences[4526794446109147215]'
+      value: Assembly-CSharp Game.SO.Behaviour.EntityOverworld.InstanceData.MovePointsOverworldBehaviourInstanceData
+      objectReference: {fileID: 0}
+    - target: {fileID: 4635711440640789515, guid: 88b2a2ca6d7fd004c8d5f96406608d15, type: 3}
+      propertyPath: 'managedReferences[4526794446109147216]'
+      value: Assembly-CSharp Game.SO.Behaviour.EntityOverworld.InstanceData.StaticOverworldBehaviourInstanceData
+      objectReference: {fileID: 0}
+    - target: {fileID: 4635711440640789515, guid: 88b2a2ca6d7fd004c8d5f96406608d15, type: 3}
+      propertyPath: managedReferences[4526794446109147215].facingDire
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4635711440640789515, guid: 88b2a2ca6d7fd004c8d5f96406608d15, type: 3}
+      propertyPath: managedReferences[4526794446109147215].pauseTimer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4635711440640789515, guid: 88b2a2ca6d7fd004c8d5f96406608d15, type: 3}
+      propertyPath: managedReferences[4526794446109147216].facingDire
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4635711440640789515, guid: 88b2a2ca6d7fd004c8d5f96406608d15, type: 3}
+      propertyPath: managedReferences[4526794446109147215].isIncrement
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4635711440640789515, guid: 88b2a2ca6d7fd004c8d5f96406608d15, type: 3}
+      propertyPath: managedReferences[4526794446109147215].toPointIndex
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4635711440640789515, guid: 88b2a2ca6d7fd004c8d5f96406608d15, type: 3}
+      propertyPath: managedReferences[4526794446109147215].MovePointsKey
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4635711440640789515, guid: 88b2a2ca6d7fd004c8d5f96406608d15, type: 3}
+      propertyPath: managedReferences[4526794446109147216].defaultDirection
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5344823095339727135, guid: 88b2a2ca6d7fd004c8d5f96406608d15, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.04
