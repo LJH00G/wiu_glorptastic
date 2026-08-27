@@ -31,7 +31,10 @@ public class GameIniter : MonoBehaviour
         GameManager.SetOverWorldState(OVERWORLD_STATE.GENERAL);
         foreach(string flagName in Flags)
             GameManager.EnsureFlag(flagName);
+    }
 
+    private void Start()
+    {
         StaticGlobalVariable.PlayMusicEventChannel.Raise(playMusicEventContext);
     }
 
