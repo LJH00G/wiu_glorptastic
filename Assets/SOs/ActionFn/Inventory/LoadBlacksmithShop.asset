@@ -13,6 +13,4 @@ MonoBehaviour:
   m_Name: LoadBlacksmithShop
   m_EditorClassIdentifier: Assembly-CSharp::Game.SO.ActionFn.ShopPresetLoadEventChannelActionSO
   eventChannel: {fileID: 11400000, guid: 26a86935d98ab964b82baa677f866c8f, type: 2}
-  context: {fileID: 11400000, guid: 8faa9cbce99c3234d925c4ebb883c705, type: 2}
-  eventChannel: {fileID: 0}
-  context: {fileID: 11400000, guid: 781250da88dce7b43b0cae17fa421959, type: 2}
+  context: {fileID: 11400000, guid: f5758ea81d0f1484196ae1efbe577cd1, type: 2}

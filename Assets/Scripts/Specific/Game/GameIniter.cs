@@ -31,10 +31,6 @@ public class GameIniter : MonoBehaviour
         GameManager.SetOverWorldState(OVERWORLD_STATE.GENERAL);
         foreach(string flagName in Flags)
             GameManager.EnsureFlag(flagName);
-
-        GameManager.CurrentUserData.PlayerBattleData.Refresh();
-        GameManager.CurrentUserData.PlayerBattleData.CurrentHP = GameManager.CurrentUserData.PlayerBattleData.MaxHP;
-        GameManager.CurrentUserData.PlayerBattleData.CurrentCurse = GameManager.CurrentUserData.PlayerBattleData.MaxCurse;
     }
 
     private void Start()
