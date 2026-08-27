@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15837d5d584e1b64a8e955c2cf100a75, type: 3}
+  m_Name: ScrapyardSceneSwitch
+  m_EditorClassIdentifier: Assembly-CSharp::Game.SO.ActionFn.Derived.EventChannel.SceneSwitchEventChannelActionSO
+  eventChannel: {fileID: 11400000, guid: d99eee56572e0f540b7dc2913fe66e56, type: 2}
+  context:
+    setting: 1
+    scene: Scrapyard
+    delay: 1
+    playMusicContext:
+      music: {fileID: 0}
+      playOrStop: 0
+      restartIfPlay: 0
+      delayToPlay: 0
+      fadeThis: 0
+      fadeThis_Time: 0
+      turnOffOther: 0
+      fadeOffOther: 0
+      fadeOffOther_Time: 0
+      fadeForceSetVolume: 0
+    timePause: 1
+    setSceneAsMain: 1
+    ignoreableObjs: []
