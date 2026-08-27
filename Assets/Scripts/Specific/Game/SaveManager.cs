@@ -94,7 +94,7 @@ public static class SaveManager
 
         if (!string.IsNullOrEmpty(data.equipedBuddyID))
         {
-            userData.SetCurrentBuddyData(buddyDatabase.GetByID(data.equipedBuddyID));
+            userData.SetCurrentBuddy_Pure(buddyDatabase.GetByID(data.equipedBuddyID));
         }
         userData.PlayerBattleData.SetFromSave(data.maxHP, data.maxCurse, data.currentHP, data.currentCurse);
 

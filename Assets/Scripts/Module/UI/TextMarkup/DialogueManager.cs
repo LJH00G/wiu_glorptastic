@@ -126,7 +126,6 @@ public class DialogueManager : MonoBehaviour
         animTimer = animTime;
     }
 
-
     private void Update()
     {
 

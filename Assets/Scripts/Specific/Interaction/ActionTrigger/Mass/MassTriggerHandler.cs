@@ -20,7 +20,7 @@ namespace Game.Interactable.TriggerHandler.Mass
         public class TriggerableSequence
         {
             [SerializeField] int index = 0;
-            [SerializeField] Triggerable[] triggerables;
+            [SerializeField] public Triggerable[] triggerables;
             /// <summary>if useExhaustedTriggerable, this will have no effect</summary>
             [Tooltip("if useExhaustedTriggerable, this will have no effect")]
             [SerializeField] bool cycleToStartWhenExhausted;
@@ -91,19 +91,29 @@ namespace Game.Interactable.TriggerHandler.Mass
                 if (flagOverrideTriggerSequences[flagOverrideKey].TryGetTriggerable(out Triggerable triggerable))
                 {
                     TriggerType(ref triggerable.type);
-                    GameManager.CurrentUserData.Flags[triggerable.flag.key] = triggerable.flag.value;
+                    GameManager.SetFlag(triggerable.flag.key, triggerable.flag.value);
                     ResetLockTimer();
                 }
             }
             else if (defaultTriggerSequence.TryGetTriggerable(out Triggerable triggerable))
             {
                 TriggerType(ref triggerable.type);
-                GameManager.CurrentUserData.Flags[triggerable.flag.key] = triggerable.flag.value;
+                GameManager.SetFlag(triggerable.flag.key, triggerable.flag.value);
                 ResetLockTimer();
             }
 
         }
 
+
+        private void Start()
+        {
+            foreach (var triggerable in defaultTriggerSequence.triggerables)
+                GameManager.EnsureFlag(triggerable.flag.key, triggerable.flag.value);
+
+            foreach (var entry in flagOverrideTriggerSequences.dict)
+                foreach (var triggerable in entry.Value.triggerables)
+                    GameManager.EnsureFlag(triggerable.flag.key, triggerable.flag.value);
+        }
 
 
 
