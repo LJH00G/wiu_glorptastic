@@ -7,5 +7,9 @@ public class SetFlagActionSO : ActionSO
 {
     [SerializeField] string flagKey;
     [SerializeField] bool value = true;
-    public override void Invoke() => GameManager.SetFlag(flagKey, value);
+    public override void Invoke()
+    {
+        GameManager.EnsureFlag(flagKey, value);
+        GameManager.SetFlag(flagKey, value);
+    }
 }

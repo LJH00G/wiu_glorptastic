@@ -79,6 +79,7 @@ namespace Game.Interactable.TriggerHandler.Mass
             {
                 if (GameManager.CurrentUserData.Flags.dict.TryGetValue(entry.Key, out bool flagSet) && flagSet)
                 {
+                    Debug.Log($"entry.Key: {entry.Key}, value: {flagSet}", this);
                     flagOverrideKey = entry.Key;
                     useFlagOverride = true;
                     break;
@@ -108,11 +109,11 @@ namespace Game.Interactable.TriggerHandler.Mass
         private void Start()
         {
             foreach (var triggerable in defaultTriggerSequence.triggerables)
-                GameManager.EnsureFlag(triggerable.flag.key, triggerable.flag.value);
+                GameManager.EnsureFlag(triggerable.flag.key, !triggerable.flag.value);
 
             foreach (var entry in flagOverrideTriggerSequences.dict)
                 foreach (var triggerable in entry.Value.triggerables)
-                    GameManager.EnsureFlag(triggerable.flag.key, triggerable.flag.value);
+                    GameManager.EnsureFlag(triggerable.flag.key, !triggerable.flag.value);
         }
 
 

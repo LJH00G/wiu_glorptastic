@@ -60,10 +60,10 @@ namespace Game.Interactable.TriggerHandler.Single
         private void Start()
         {
 
-            GameManager.EnsureFlag(triggerable.flag.key, triggerable.flag.value);
+            GameManager.EnsureFlag(triggerable.flag.key, !triggerable.flag.value);
 
             foreach (var entry in flagOverrideTriggerables.dict)
-                GameManager.EnsureFlag(entry.Value.flag.key, entry.Value.flag.value);
+                GameManager.EnsureFlag(entry.Value.flag.key, !entry.Value.flag.value);
         }
 
 

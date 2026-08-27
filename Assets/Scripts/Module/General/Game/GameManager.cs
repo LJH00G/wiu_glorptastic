@@ -92,13 +92,17 @@ namespace Game
 
         static public void SetFlag(string key, bool value = true)
         {
+            UnityEngine.Debug.Log($"setting flag: key({key}), value({value})");
             CurrentUserData.Flags[key] = value;
         }
 
         static public void EnsureFlag(string key, bool defaultValue = false)
         {
             if (!CurrentUserData.Flags.dict.ContainsKey(key))
+            {
                 CurrentUserData.Flags[key] = defaultValue;
+                UnityEngine.Debug.Log($"ensured flag: key({key}), defaultValue({defaultValue})");
+            }
         }
 
         static public void SetCanInteract(bool canInteract)
