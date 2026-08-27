@@ -11,6 +11,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Game.Combat.Integration;
 
 public class CombatInitialiser : MonoBehaviour
 {
@@ -96,7 +97,10 @@ public class CombatInitialiser : MonoBehaviour
 
         GameManager.SetAllCanMove(true);
         GameManager.SetGameState(GAME_STATE.OVERWORLD);
-
+        UserData data = GameManager.CurrentUserData;
+        PlayerBattleData battleData = data.PlayerBattleData;
+        battleData.CurrentHP = context.hp;
+        battleData.CurrentCurse = context.curse;
         if (context.state == CombatState.FLED && enemyInitiated)
         {
             Debug.Log("Freeze Started");

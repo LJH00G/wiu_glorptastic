@@ -52,7 +52,7 @@ namespace Game.SO.Behaviour.EntityOverworld
             {
                 instanceData.SetFacingDire(dire);
 
-                controller.AIPath.destination = (Vector2)controller.transform.position + dire * controller.Radius * 1.2f;
+                controller.AIPath.destination = (Vector2)controller.transform.position + dire * controller.Radius * 1.4f;
             }
 
             // interact
@@ -76,8 +76,10 @@ namespace Game.SO.Behaviour.EntityOverworld
                 {
                     if (collider.TryGetComponent(out I_Interactable interactable))
                     {
-                        interactable?.Interact();
-                        break;
+                        bool? success = interactable?.Interact();
+
+                        if (success.HasValue && success.Value)
+                            break;
                     }
                 }
 

@@ -27,10 +27,12 @@ namespace Game.Interactable.TriggerHandler
         }
 
 
-        public void Interact()
+        public bool Interact()
         {
             if (RequiresInteraction)
                 Trigger();
+
+            return RequiresInteraction;
         }
         public abstract void Trigger();
 

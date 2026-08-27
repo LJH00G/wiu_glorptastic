@@ -3,6 +3,7 @@ using System.Collections;
 using Unity.Cinemachine;
 using UnityEngine;
 using Utility.VisualizableDictionary;
+using Game.SO.EventChannel.Context;
 
 
 namespace Game.TPManager
@@ -11,7 +12,7 @@ namespace Game.TPManager
     {
         [SerializeField] VisualizableDict<string, TPDefinition> TPPointDef;
         [SerializeField] StringEventChannelSO TPCallChannel;
-        [SerializeField] BoolEventChannelSO TPAnimChannel;
+        [SerializeField] FadeEventChannelSO TPAnimChannel;
         private float fadeTime;
         
 
@@ -65,9 +66,10 @@ namespace Game.TPManager
                 Debug.Log("No Follower Reference Exists in GameManager");
             }
 
-            TPAnimChannel.Raise(true);
+            FadeEventChannelContext fade = new FadeEventChannelContext(true, currentTP.time);
+            TPAnimChannel.Raise(fade);
 
-            yield return new WaitForSeconds(currentTP.time);
+            yield return new WaitForSeconds(2f / currentTP.time);
 
             if (player != null)
             {
@@ -81,10 +83,10 @@ namespace Game.TPManager
                 follower.GetComponent<EntityOverworldController>().Teleport(currentTP.position);
                 CinemachineCore.OnTargetObjectWarped(follower, positionDelta);
             }
+            fade.isFade = false;
+            TPAnimChannel.Raise(fade);
 
-            TPAnimChannel.Raise(false);
-
-            yield return new WaitForSeconds(currentTP.time);
+            yield return new WaitForSeconds(2f / currentTP.time);
 
             GameManager.SetPlayerCanMove(true);
         }

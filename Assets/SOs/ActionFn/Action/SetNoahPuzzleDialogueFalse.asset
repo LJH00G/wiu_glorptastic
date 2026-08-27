@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: SetNoahPuzzleDialogueFalse
   m_EditorClassIdentifier: Assembly-CSharp::SetFlagActionSO
   flagKey: NoahPuzzleDialogue
-  value: 1
+  value: 0

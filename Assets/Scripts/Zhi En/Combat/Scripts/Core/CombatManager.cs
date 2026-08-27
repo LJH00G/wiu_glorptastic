@@ -983,7 +983,7 @@ namespace Game.Combat
             );
 
             input.InputEnabled = false;
-            combatAssigner.WipeDataAssignment(state);
+            combatAssigner.WipeDataAssignment(state, player.currentHP, player.currentCS);
             
         }
     }

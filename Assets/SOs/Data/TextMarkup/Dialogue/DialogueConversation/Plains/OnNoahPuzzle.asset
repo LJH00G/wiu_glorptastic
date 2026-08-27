@@ -31,6 +31,6 @@ MonoBehaviour:
     text: The machine stutters to life in idle <input/> <end/>
     endAction: {fileID: 0}
   - speaker: {fileID: 11400000, guid: ce3680aada77f414aba59c7b11af061c, type: 2}
-    text: There we go, have a try at solving this puzzle, there's way mroe scattered
+    text: There we go, have a try at solving this puzzle, there's way more scattered
       around the map. <input/> <end/>
-    endAction: {fileID: 0}
+    endAction: {fileID: 11400000, guid: bdf6b90f938a7eb419b1607466cb4347, type: 2}

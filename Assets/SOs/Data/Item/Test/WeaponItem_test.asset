@@ -16,5 +16,6 @@ MonoBehaviour:
   <Sprite>k__BackingField: {fileID: 2104150950025382515, guid: 0a69d18fcf7d9a94cacf0b29e92c92d0, type: 3}
   <Description>k__BackingField: ' weapons that weapon while i stroke my cat and cry'
   <SellValue>k__BackingField: 1321
-  <curseAbilityList>k__BackingField: []
-  <Dmage>k__BackingField: 1
+  <curseAbilityList>k__BackingField:
+  - {fileID: 11400000, guid: ddb3d59058dda30409932d874268e630, type: 2}
+  <Dmage>k__BackingField: 3
