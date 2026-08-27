@@ -13,8 +13,13 @@ MonoBehaviour:
   m_Name: TestItem_Bles
   m_EditorClassIdentifier: Assembly-CSharp::Game.SO.Data.Item.Sellable.ConsumableItemSO
   <Name>k__BackingField: Bles
-  <Texture>k__BackingField: {fileID: 2800000, guid: 9ae274b4a1a11374dbb47368c9c05ec2, type: 3}
+  <Sprite>k__BackingField: {fileID: 0}
   <Description>k__BackingField: i sell bles to the bles factory
   <SellValue>k__BackingField: 5
-  <Effect>k__BackingField: 0
-  <Value>k__BackingField: 5
+  <Effects>k__BackingField:
+  - effect: 1
+    power: 5
+    status: 0
+    duration: 0
+  <TargetType>k__BackingField: 2
+  <ConsumeOnUse>k__BackingField: 1

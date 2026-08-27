@@ -29,7 +29,12 @@ public class CombatInitialiser : MonoBehaviour
         Debug.Log(GameManager.CurrentUserData.CurrentEquipedBuddy, this);
 
         PlayerLoadoutSO player = StaticGlobalVariable.PlayerLoadout;
-        PartnerLoadoutSO partner = GameManager.CurrentUserData.CurrentEquipedBuddy.Loadout;
+        PartnerLoadoutSO partner = null;
+        if (GameManager.CurrentUserData.CurrentEquipedBuddy)
+        {
+            partner = GameManager.CurrentUserData.CurrentEquipedBuddy.Loadout;
+        }
+
 
         InventoryManager.TryGetItemInList<ConsumableItemSO>(out player.inventory);
         player.equippedGem = InventoryManager.TryGetItemInList(out CurseGemItemSO gem) ? gem : null;
@@ -39,7 +44,9 @@ public class CombatInitialiser : MonoBehaviour
 
         tunnelDataTunnel.enemyEncounterData = data;
         tunnelDataTunnel.playerLoadout = player;
-        tunnelDataTunnel.partnerLoadout = partner;
+
+        if(partner)
+            tunnelDataTunnel.partnerLoadout = partner;
 
         enemyInitiated = data.overworldPresetationObject;
         scene = SceneManager.GetActiveScene();

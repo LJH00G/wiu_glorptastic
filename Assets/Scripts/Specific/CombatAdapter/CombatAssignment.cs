@@ -60,7 +60,7 @@ namespace Game.Combat.Integration
             combatEnd.Raise(context);
         }
 
-        public List<LootData> LootCalculation(List<LootTableSO> lootChanceData)
+        static public List<LootData> LootCalculation(List<LootTableSO> lootChanceData)
         {
             List<LootData> loot = new();
             

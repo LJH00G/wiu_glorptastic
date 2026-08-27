@@ -54,11 +54,11 @@ namespace Game.TPManager
                 Debug.Log("No Player Reference Exists in GameManager!");
             }
 
-            if (GameManager.Follower != null)
+            if (GameManager.Follower != null && GameManager.Follower.activeInHierarchy)
             {
 
                 follower = GameManager.Follower.transform;
-                
+
             }
             else
             {
@@ -75,7 +75,7 @@ namespace Game.TPManager
                 player.GetComponent<EntityOverworldController>().Teleport(currentTP.position);
                 CinemachineCore.OnTargetObjectWarped(player, positionDelta);
             }
-            if (follower != null)
+            if (follower != null && GameManager.Follower.activeInHierarchy)
             {
                 Vector3 positionDelta = currentTP.position - (Vector2)follower.position;
                 follower.GetComponent<EntityOverworldController>().Teleport(currentTP.position);

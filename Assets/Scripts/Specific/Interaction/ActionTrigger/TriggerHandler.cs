@@ -53,7 +53,7 @@ namespace Game.Interactable.TriggerHandler
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            Debug.Log("trigger entered this MassTriggerHandler");
+            Debug.Log($"trigger entered this MassTriggerHandler {this.gameObject}" );
             if (!RequiresInteraction)
                 Trigger();
         }

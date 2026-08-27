@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34f2ff470233db34a958620f483cd295, type: 3}
+  m_Name: OnNoahPuzzle
+  m_EditorClassIdentifier: Assembly-CSharp::Game.SO.Data.TextMarkup.Dialogue.DialogueConversationSO
+  <Dialogues>k__BackingField:
+  - speaker: {fileID: 11400000, guid: 7f46410b7dc996640a3ba4dba065afd4, type: 2}
+    text: Wait! I recognise this machine.. <input/> <end/>
+    endAction: {fileID: 0}
+  - speaker: {fileID: 11400000, guid: 7f46410b7dc996640a3ba4dba065afd4, type: 2}
+    text: Its one of those generators, looks like this one was rigged up to the car
+      <input/> <end/>
+    endAction: {fileID: 0}
+  - speaker: {fileID: 11400000, guid: 7f46410b7dc996640a3ba4dba065afd4, type: 2}
+    text: Its one of those generators, looks like this one was rigged up to the car
+      <input/> <end/>
+    endAction: {fileID: 0}
+  - speaker: {fileID: 11400000, guid: 7f46410b7dc996640a3ba4dba065afd4, type: 2}
+    text: Hold on, let me just connect it for you.. <input/> <end/>
+    endAction: {fileID: 0}
+  - speaker: {fileID: 11400000, guid: ce3680aada77f414aba59c7b11af061c, type: 2}
+    text: The machine stutters to life in idle <input/> <end/>
+    endAction: {fileID: 0}
+  - speaker: {fileID: 11400000, guid: ce3680aada77f414aba59c7b11af061c, type: 2}
+    text: There we go, have a try at solving this puzzle, there's way mroe scattered
+      around the map. <input/> <end/>
+    endAction: {fileID: 0}

@@ -194,20 +194,20 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 263098528329391435, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_Size.x
-      value: 0.5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 263098528329391435, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_Size.y
-      value: 0.25
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 263098528329391435, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_Offset.y
-      value: 0.125
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3500526049272365041, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: -1088114224, guid: 8c1732a7d5f973a418496a213e66ee7d, type: 3}
+      objectReference: {fileID: 301008002742590906, guid: 38e5fdbb5e3ac0c4b9e9f60cc92147ad, type: 3}
     - target: {fileID: 5511489128047036267, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_Name
       value: Enemy2
@@ -218,7 +218,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5511489128047036267, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6473455761877912804, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 6473455761877912804, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.05
+      objectReference: {fileID: 0}
+    - target: {fileID: 6473455761877912804, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6473455761877912804, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -263,7 +275,7 @@ PrefabInstance:
     - target: {fileID: 7152738851224056702, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 1ad2863dca6276449a2a9dad2a146412, type: 2}
+      objectReference: {fileID: 9100000, guid: 742e517480d95014c97bcc7f6996e214, type: 2}
     - target: {fileID: 7404118726747510102, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: radius
       value: 0.25
@@ -299,7 +311,7 @@ PrefabInstance:
     - target: {fileID: 8628031461048391037, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: <Appearance>k__BackingField
       value: 
-      objectReference: {fileID: 11400000, guid: c1796691d8a57db4abdf823388499652, type: 2}
+      objectReference: {fileID: 11400000, guid: d358818d520e2b44f8060116b5e4e228, type: 2}
     - target: {fileID: 8628031461048391037, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: <InstanceData>k__BackingField
       value: 4526794395752333416
@@ -397,6 +409,7 @@ GameObject:
   - component: {fileID: 142686872}
   - component: {fileID: 142686875}
   - component: {fileID: 142686874}
+  - component: {fileID: 142686876}
   m_Layer: 10
   m_Name: Scrap - Mechanical - Generator 2 - Colorful_0
   m_TagString: Untagged
@@ -472,7 +485,7 @@ Transform:
   m_GameObject: {fileID: 142686871}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -25.73, y: 74.11, z: 0}
+  m_LocalPosition: {x: -2.43, y: 0.42, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -496,10 +509,14 @@ MonoBehaviour:
   triggerCollider: {fileID: 142686875}
   lockTimeAfterTrigger: 0
   lockTimer: 0
-  triggerable: {fileID: 11400000, guid: 146a6253bd349e54c8c4d45b7b156f50, type: 2}
+  triggerable:
+    type: {fileID: 11400000, guid: 146a6253bd349e54c8c4d45b7b156f50, type: 2}
+    flag:
+      key: 
+      value: 0
   flagOverrideTriggerables:
     serializableList: []
-  tpEventChannel: {fileID: 0}
+  tpEventChannel: {fileID: 11400000, guid: 6fc0b7e63b0900946816fcc4210813ca, type: 2}
 --- !u!61 &142686875
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -545,6 +562,200 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   m_Size: {x: 3.46, y: 2.33}
+  m_EdgeRadius: 0
+--- !u!114 &142686876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 142686871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 183748dd497aa473a98ff0cd8cb67fc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: AstarPathfindingProject::Pathfinding.DynamicGridObstacle
+  version: 1
+  uniqueID: 6714975253146621585
+  updateError: 1
+  checkTime: 0.2
+--- !u!1 &148182055
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 148182056}
+  - component: {fileID: 148182057}
+  m_Layer: 0
+  m_Name: FlagObjectHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &148182056
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 148182055}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 953472293}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &148182057
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 148182055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10968430b18bbb34c9fecf05a46fa035, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FlagObjectManager
+  flagObjectDictionary:
+    serializableList:
+    - key:
+        name: NoahVisible
+        status: 0
+        answered: 0
+        action: 1
+        transform: {fileID: 206040546}
+      value: {fileID: 5511489128047036267, guid: 44f12f1f874743d68a576cf4dbc44de7, type: 3}
+--- !u!1 &206040545
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 206040546}
+  - component: {fileID: 206040548}
+  - component: {fileID: 206040547}
+  m_Layer: 10
+  m_Name: Interact DialogueCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &206040546
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 206040545}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -25.38, y: 31.38, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 267710966}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &206040547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 206040545}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a048d282cfaf38548b1c736d60ad4476, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Interactable.TriggerHandler.Mass.DialogueTriggerHandler
+  <RequiresInteraction>k__BackingField: 1
+  offset: {x: 0, y: 0}
+  size: {x: 3.33, y: 3.22}
+  triggerCollider: {fileID: 206040548}
+  lockTimeAfterTrigger: 0
+  lockTimer: 0
+  defaultTriggerSequence:
+    index: 0
+    triggerables: []
+    cycleToStartWhenExhausted: 0
+    useExhaustedTriggerable: 0
+    exhaustedTriggerable:
+      type: {fileID: 0}
+      flag:
+        key: 
+        value: 0
+  flagOverrideTriggerSequences:
+    serializableList:
+    - key: NoahStuck
+      value:
+        index: 0
+        triggerables:
+        - type: {fileID: 11400000, guid: 24df7816374eda94f975e2297c1f810e, type: 2}
+          flag:
+            key: 
+            value: 0
+        cycleToStartWhenExhausted: 0
+        useExhaustedTriggerable: 0
+        exhaustedTriggerable:
+          type: {fileID: 0}
+          flag:
+            key: NoahStuck
+            value: 0
+  dialogueConversationEventChannel: {fileID: 11400000, guid: 44508743f5b9d8341ab1fa10572170f0, type: 2}
+--- !u!61 &206040548
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 206040545}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 3.33, y: 3.22}
   m_EdgeRadius: 0
 --- !u!1 &234429825
 GameObject:
@@ -39166,61 +39377,9 @@ Transform:
   - {fileID: 1120251437}
   - {fileID: 2117768433}
   - {fileID: 1123762349}
+  - {fileID: 1256895797}
+  - {fileID: 206040546}
   m_Father: {fileID: 1267852725}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &291176229
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 291176231}
-  - component: {fileID: 291176230}
-  m_Layer: 0
-  m_Name: NPCMovePointsManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &291176230
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 291176229}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fcfbff2635a1334f8c7e255884bf6fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::OverworldNPCMovePointsManager
-  <MovePointsList>k__BackingField:
-    serializableList:
-    - key: test
-      value:
-        points:
-        - {x: -5, y: 2}
-        - {x: 5, y: -2}
-        - {x: 5, y: 2}
-        - {x: -5, y: -2}
-        debugColor: {r: 0, g: 0, b: 1, a: 1}
---- !u!4 &291176231
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 291176229}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 23.17468, y: 7.45396, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 953472293}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &297790962
 GameObject:
@@ -77232,7 +77391,11 @@ MonoBehaviour:
   triggerCollider: {fileID: 454282616}
   lockTimeAfterTrigger: 2
   lockTimer: 0
-  triggerable: {fileID: 11400000, guid: e59ef64d119fe3b4283100ebd927348e, type: 2}
+  triggerable:
+    type: {fileID: 11400000, guid: 1c819da335c557347b3b1cfa583eb78d, type: 2}
+    flag:
+      key: 
+      value: 0
   flagOverrideTriggerables:
     serializableList: []
   initializeCombatEventChannel: {fileID: 11400000, guid: 6473217a41b61ad448a433824b5ce524, type: 2}
@@ -77440,7 +77603,11 @@ MonoBehaviour:
   triggerCollider: {fileID: 600197539}
   lockTimeAfterTrigger: 2
   lockTimer: 0
-  triggerable: {fileID: 11400000, guid: e59ef64d119fe3b4283100ebd927348e, type: 2}
+  triggerable:
+    type: {fileID: 11400000, guid: e59ef64d119fe3b4283100ebd927348e, type: 2}
+    flag:
+      key: 
+      value: 0
   flagOverrideTriggerables:
     serializableList: []
   initializeCombatEventChannel: {fileID: 11400000, guid: 6473217a41b61ad448a433824b5ce524, type: 2}
@@ -127588,10 +127755,17 @@ MonoBehaviour:
   defaultTriggerSequence:
     index: 0
     triggerables:
-    - {fileID: 11400000, guid: 9773fead88d9a4a469cf5654e45d4353, type: 2}
+    - type: {fileID: 11400000, guid: 9773fead88d9a4a469cf5654e45d4353, type: 2}
+      flag:
+        key: 
+        value: 0
     cycleToStartWhenExhausted: 0
     useExhaustedTriggerable: 0
-    exhaustedTriggerable: {fileID: 0}
+    exhaustedTriggerable:
+      type: {fileID: 0}
+      flag:
+        key: 
+        value: 0
   flagOverrideTriggerSequences:
     serializableList: []
 --- !u!61 &799445908
@@ -127718,6 +127892,7 @@ GameObject:
   m_Component:
   - component: {fileID: 828279313}
   - component: {fileID: 828279312}
+  - component: {fileID: 828279314}
   m_Layer: 0
   m_Name: GameIniter
   m_TagString: Untagged
@@ -127739,6 +127914,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   player: {fileID: 2087693728}
   follower: {fileID: 1455610210}
+  Flags:
+  - SeenNoahTutorial
 --- !u!4 &828279313
 Transform:
   m_ObjectHideFlags: 0
@@ -127754,6 +127931,19 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1651286639}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &828279314
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 828279311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c51fe8e16a6c794ea2dab11143e1b40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameIniter_test
+  buddyData: {fileID: 0}
 --- !u!1 &838927108
 GameObject:
   m_ObjectHideFlags: 0
@@ -127866,6 +128056,7 @@ Transform:
   - {fileID: 142686873}
   - {fileID: 2146970684}
   - {fileID: 1932508198}
+  - {fileID: 1012921945}
   m_Father: {fileID: 14404440}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &893177480
@@ -127902,7 +128093,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5511489128047036267, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6473455761877912804, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -128125,12 +128316,44 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 291176231}
   - {fileID: 438083891}
   - {fileID: 1970705965}
   - {fileID: 460586716}
   - {fileID: 1352289981}
+  - {fileID: 148182056}
+  - {fileID: 1168715118}
   m_Father: {fileID: 815766574}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1012921944
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1012921945}
+  m_Layer: 0
+  m_Name: Car Anchor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1012921945
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1012921944}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -23.99, y: 76.49, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 867815267}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1085842139
 GameObject:
@@ -128293,7 +128516,11 @@ MonoBehaviour:
   triggerCollider: {fileID: 1120251439}
   lockTimeAfterTrigger: 0
   lockTimer: 0
-  triggerable: Area1EndingTP
+  triggerable:
+    type: Area1EndingTP
+    flag:
+      key: 
+      value: 0
   flagOverrideTriggerables:
     serializableList: []
   tpEventChannel: {fileID: 11400000, guid: 3e5be222a1f877441946e26d6736f794, type: 2}
@@ -128394,7 +128621,11 @@ MonoBehaviour:
   triggerCollider: {fileID: 1123762351}
   lockTimeAfterTrigger: 0
   lockTimer: 0
-  triggerable: Area4StartTP
+  triggerable:
+    type: Area4StartTP
+    flag:
+      key: 
+      value: 0
   flagOverrideTriggerables:
     serializableList: []
   tpEventChannel: {fileID: 11400000, guid: 3e5be222a1f877441946e26d6736f794, type: 2}
@@ -128563,6 +128794,52 @@ MonoBehaviour:
     pivotPointRoot: {fileID: 0}
     spreadOutCount: 1
   showGraphs: 1
+--- !u!1 &1168715117
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1168715118}
+  - component: {fileID: 1168715119}
+  m_Layer: 0
+  m_Name: MovePointManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1168715118
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1168715117}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 953472293}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1168715119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1168715117}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8fcfbff2635a1334f8c7e255884bf6fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.GlobalVariable.OverworldNPCMovePoints.OverworldNPCMovePointsManager
+  <MovePointsList>k__BackingField:
+    serializableList: []
 --- !u!1 &1193187911
 GameObject:
   m_ObjectHideFlags: 0
@@ -128614,7 +128891,11 @@ MonoBehaviour:
   triggerCollider: {fileID: 1193187914}
   lockTimeAfterTrigger: 2
   lockTimer: 0
-  triggerable: {fileID: 11400000, guid: e59ef64d119fe3b4283100ebd927348e, type: 2}
+  triggerable:
+    type: {fileID: 0}
+    flag:
+      key: 
+      value: 0
   flagOverrideTriggerables:
     serializableList: []
   initializeCombatEventChannel: {fileID: 11400000, guid: 6473217a41b61ad448a433824b5ce524, type: 2}
@@ -128663,6 +128944,131 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 0
+--- !u!1 &1256895796
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1256895797}
+  - component: {fileID: 1256895799}
+  - component: {fileID: 1256895798}
+  m_Layer: 10
+  m_Name: Starting DialogueCollider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1256895797
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256895796}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -27.97, y: 29.14, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 267710966}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1256895798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256895796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a048d282cfaf38548b1c736d60ad4476, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Game.Interactable.TriggerHandler.Mass.DialogueTriggerHandler
+  <RequiresInteraction>k__BackingField: 0
+  offset: {x: 0, y: 0}
+  size: {x: 5.12, y: 4.94}
+  triggerCollider: {fileID: 1256895799}
+  lockTimeAfterTrigger: 0
+  lockTimer: 0
+  defaultTriggerSequence:
+    index: 0
+    triggerables:
+    - type: {fileID: 11400000, guid: b2093b33001a6494e811bbd98457120e, type: 2}
+      flag:
+        key: SeenNoahTutorial
+        value: 1
+    cycleToStartWhenExhausted: 0
+    useExhaustedTriggerable: 0
+    exhaustedTriggerable:
+      type: {fileID: 0}
+      flag:
+        key: 
+        value: 0
+  flagOverrideTriggerSequences:
+    serializableList:
+    - key: SeenNoahTutorial
+      value:
+        index: 0
+        triggerables: []
+        cycleToStartWhenExhausted: 0
+        useExhaustedTriggerable: 0
+        exhaustedTriggerable:
+          type: {fileID: 0}
+          flag:
+            key: 
+            value: 0
+  dialogueConversationEventChannel: {fileID: 11400000, guid: 44508743f5b9d8341ab1fa10572170f0, type: 2}
+--- !u!61 &1256895799
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1256895796}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Size: {x: 5.12, y: 4.94}
   m_EdgeRadius: 0
 --- !u!1 &1267852724
 GameObject:
@@ -128813,10 +129219,17 @@ MonoBehaviour:
   defaultTriggerSequence:
     index: 0
     triggerables:
-    - {fileID: 11400000, guid: 9773fead88d9a4a469cf5654e45d4353, type: 2}
+    - type: {fileID: 11400000, guid: 9773fead88d9a4a469cf5654e45d4353, type: 2}
+      flag:
+        key: 
+        value: 0
     cycleToStartWhenExhausted: 0
     useExhaustedTriggerable: 0
-    exhaustedTriggerable: {fileID: 0}
+    exhaustedTriggerable:
+      type: {fileID: 0}
+      flag:
+        key: 
+        value: 0
   flagOverrideTriggerSequences:
     serializableList: []
 --- !u!61 &1285050801
@@ -128916,7 +129329,11 @@ MonoBehaviour:
   triggerCollider: {fileID: 1290355096}
   lockTimeAfterTrigger: 0
   lockTimer: 0
-  triggerable: Area2BeginningTP
+  triggerable:
+    type: Area2BeginningTP
+    flag:
+      key: 
+      value: 0
   flagOverrideTriggerables:
     serializableList: []
   tpEventChannel: {fileID: 11400000, guid: 3e5be222a1f877441946e26d6736f794, type: 2}
@@ -129019,6 +129436,8 @@ MonoBehaviour:
   viewRegistry:
   - key: 2
     value: {fileID: 2226435416877481207, guid: bcb85dd2d4857db499c63aa1fc4e61e0, type: 3}
+  - key: 5
+    value: {fileID: 7087020143805963501, guid: bafb2a972d92fa94cb9ae8c7e7888124, type: 3}
   OnCompletePuzzle: {fileID: 11400000, guid: 408a34ea0932ad24b84105ab3c0b210e, type: 2}
   OnEnterPuzzle: {fileID: 11400000, guid: 6fc0b7e63b0900946816fcc4210813ca, type: 2}
 --- !u!1001 &1455610208
@@ -129044,6 +129463,10 @@ PrefabInstance:
     - target: {fileID: 5511489128047036267, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_Name
       value: Follower
+      objectReference: {fileID: 0}
+    - target: {fileID: 5511489128047036267, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6473455761877912804, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -129483,51 +129906,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1573169785
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1573169787}
-  - component: {fileID: 1573169786}
-  m_Layer: 0
-  m_Name: GameIniter_test
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1573169786
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1573169785}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c51fe8e16a6c794ea2dab11143e1b40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: '::'
-  buddyData: {fileID: 11400000, guid: 62a1b6e6c4070ec419c2cc7a1fd6b168, type: 2}
---- !u!4 &1573169787
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1573169785}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 23.17468, y: 7.45396, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1651286639}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1607528516
 GameObject:
   m_ObjectHideFlags: 0
@@ -129578,8 +129956,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4d76fc43ed00fd4d99b26ce80d72e68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextMarkupTypeWriter
-  <SFXEventChannel>k__BackingField: {fileID: 0}
-  <SpeechSFXEventChannel>k__BackingField: {fileID: 0}
+  <SFXEventChannel>k__BackingField: {fileID: 11400000, guid: 692bad48a20fddf448c41da6c0212144, type: 2}
+  <SpeechSFXEventChannel>k__BackingField: {fileID: 11400000, guid: 692bad48a20fddf448c41da6c0212144, type: 2}
   speechPresets: {fileID: 11400000, guid: 6394698099c217e4f964ea8a214ab042, type: 2}
   sfxPresets: {fileID: 11400000, guid: 92e05db07ec9ab442a4ca5fcf0259198, type: 2}
   useDefaultText: 0
@@ -129783,7 +130161,11 @@ MonoBehaviour:
   triggerCollider: {fileID: 1640078898}
   lockTimeAfterTrigger: 0
   lockTimer: 0
-  triggerable: Area5StartTP
+  triggerable:
+    type: Area5StartTP
+    flag:
+      key: 
+      value: 0
   flagOverrideTriggerables:
     serializableList: []
   tpEventChannel: {fileID: 11400000, guid: 3e5be222a1f877441946e26d6736f794, type: 2}
@@ -129884,7 +130266,11 @@ MonoBehaviour:
   triggerCollider: {fileID: 1647601467}
   lockTimeAfterTrigger: 0
   lockTimer: 0
-  triggerable: HouseTP
+  triggerable:
+    type: HouseTP
+    flag:
+      key: 
+      value: 0
   flagOverrideTriggerables:
     serializableList: []
   tpEventChannel: {fileID: 11400000, guid: 3e5be222a1f877441946e26d6736f794, type: 2}
@@ -129963,7 +130349,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1573169787}
   - {fileID: 828279313}
   m_Father: {fileID: 815766574}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -130563,7 +130948,7 @@ Transform:
   m_GameObject: {fileID: 1731050904}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.838917, y: 0, z: -10}
+  m_LocalPosition: {x: -6.8389177, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -130720,7 +131105,11 @@ MonoBehaviour:
   triggerCollider: {fileID: 1826189029}
   lockTimeAfterTrigger: 0
   lockTimer: 0
-  triggerable: Area3HouseTP
+  triggerable:
+    type: Area3HouseTP
+    flag:
+      key: 
+      value: 0
   flagOverrideTriggerables:
     serializableList: []
   tpEventChannel: {fileID: 11400000, guid: 3e5be222a1f877441946e26d6736f794, type: 2}
@@ -130821,7 +131210,11 @@ MonoBehaviour:
   triggerCollider: {fileID: 1876600475}
   lockTimeAfterTrigger: 0
   lockTimer: 0
-  triggerable: Area2TopTP
+  triggerable:
+    type: Area2TopTP
+    flag:
+      key: 
+      value: 0
   flagOverrideTriggerables:
     serializableList: []
   tpEventChannel: {fileID: 11400000, guid: 3e5be222a1f877441946e26d6736f794, type: 2}
@@ -130921,8 +131314,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4d76fc43ed00fd4d99b26ce80d72e68, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TextMarkupTypeWriter
-  <SFXEventChannel>k__BackingField: {fileID: 0}
-  <SpeechSFXEventChannel>k__BackingField: {fileID: 0}
+  <SFXEventChannel>k__BackingField: {fileID: 11400000, guid: 692bad48a20fddf448c41da6c0212144, type: 2}
+  <SpeechSFXEventChannel>k__BackingField: {fileID: 11400000, guid: 692bad48a20fddf448c41da6c0212144, type: 2}
   speechPresets: {fileID: 11400000, guid: 6394698099c217e4f964ea8a214ab042, type: 2}
   sfxPresets: {fileID: 11400000, guid: 92e05db07ec9ab442a4ca5fcf0259198, type: 2}
   useDefaultText: 0
@@ -131303,7 +131696,11 @@ MonoBehaviour:
   triggerCollider: {fileID: 1988533349}
   lockTimeAfterTrigger: 0
   lockTimer: 0
-  triggerable: Area2SideTP
+  triggerable:
+    type: Area2SideTP
+    flag:
+      key: 
+      value: 0
   flagOverrideTriggerables:
     serializableList: []
   tpEventChannel: {fileID: 11400000, guid: 3e5be222a1f877441946e26d6736f794, type: 2}
@@ -131380,7 +131777,7 @@ Transform:
   m_GameObject: {fileID: 2053809404}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -29.11, y: 102.2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -131398,13 +131795,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7375fc3aae0df5144b64b3371b800b89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Game.Interactable.TriggerHandler.Single.TeleportTriggerHandler
-  <RequiresInteraction>k__BackingField: 1
+  <RequiresInteraction>k__BackingField: 0
   offset: {x: 0, y: 0}
-  size: {x: 1, y: 1}
+  size: {x: 3.45, y: 0.2}
   triggerCollider: {fileID: 2053809407}
   lockTimeAfterTrigger: 0
   lockTimer: 0
-  triggerable: Area4TopTP
+  triggerable:
+    type: Area4TopTP
+    flag:
+      key: 
+      value: 0
   flagOverrideTriggerables:
     serializableList: []
   tpEventChannel: {fileID: 11400000, guid: 3e5be222a1f877441946e26d6736f794, type: 2}
@@ -131452,7 +131853,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 3.45, y: 0.2}
   m_EdgeRadius: 0
 --- !u!1 &2065278007
 GameObject:
@@ -131531,7 +131932,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5511489128047036267, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6473455761877912804, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -131744,7 +132145,11 @@ MonoBehaviour:
   triggerCollider: {fileID: 2117768435}
   lockTimeAfterTrigger: 0
   lockTimer: 0
-  triggerable: Area3BeginningTP
+  triggerable:
+    type: Area3BeginningTP
+    flag:
+      key: 
+      value: 0
   flagOverrideTriggerables:
     serializableList: []
   tpEventChannel: {fileID: 11400000, guid: 3e5be222a1f877441946e26d6736f794, type: 2}
@@ -131805,6 +132210,7 @@ GameObject:
   - component: {fileID: 2146970684}
   - component: {fileID: 2146970683}
   - component: {fileID: 2146970685}
+  - component: {fileID: 2146970686}
   m_Layer: 7
   m_Name: Scrap - Vehicle - Car 2 - Chrome_0
   m_TagString: Untagged
@@ -131932,6 +132338,22 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 6.23, y: 3.25}
   m_EdgeRadius: 0
+--- !u!114 &2146970686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2146970682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc3c9a002a32c0f418df41bbc1c3b4f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CarMoveOnPuzzleCompletion
+  puzzleSolved: {fileID: 11400000, guid: 408a34ea0932ad24b84105ab3c0b210e, type: 2}
+  flagName: CarMoved
+  blockingCollider: {fileID: 2146970685}
+  anchor: {fileID: 1012921945}
 --- !u!1001 &6985838758087980583
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -131991,6 +132413,10 @@ PrefabInstance:
     - target: {fileID: 6473455761877912804, guid: aed70e6b2ae4e0643936b4830c13e4d1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7404118726747510102, guid: aed70e6b2ae4e0643936b4830c13e4d1, type: 3}
+      propertyPath: maxSpeed
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8628031461048391037, guid: aed70e6b2ae4e0643936b4830c13e4d1, type: 3}
       propertyPath: <Behaviour>k__BackingField

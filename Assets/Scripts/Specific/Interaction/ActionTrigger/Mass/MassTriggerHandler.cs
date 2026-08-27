@@ -54,13 +54,6 @@ namespace Game.Interactable.TriggerHandler.Mass
 #if UNITY_EDITOR
             public void OnValidate()
             {
-                for (int i = 0; i < triggerables.Length; i++)
-                {
-                    var triggerable = triggerables[i];
-                    if (!string.IsNullOrEmpty(triggerable.flag.key) && GameManager.CurrentUserData.Flags.dict.ContainsKey(triggerable.flag.key))
-                        Debug.LogError($"TriggerableList<Triggerable<{typeof(T)}>> | triggerables contains entry that has value with invalid flag");
-                }
-
                 if (useExhaustedTriggerable && typeof(Triggerable).IsClass && exhaustedTriggerable == null)
                     Debug.LogError($"TriggerableList<Triggerable<{typeof(T)}>> | useExhaustedTriggerable == true, T_Triggerable is a class, exhaustedTriggerable cannot be left empty");
             }
@@ -84,7 +77,7 @@ namespace Game.Interactable.TriggerHandler.Mass
             string flagOverrideKey = "";
             foreach (var entry in flagOverrideTriggerSequences.dict)
             {
-                if (GameManager.CurrentUserData.Flags[entry.Key])
+                if (GameManager.CurrentUserData.Flags.dict.TryGetValue(entry.Key, out bool flagSet) && flagSet)
                 {
                     flagOverrideKey = entry.Key;
                     useFlagOverride = true;
@@ -122,17 +115,9 @@ namespace Game.Interactable.TriggerHandler.Mass
 
             flagOverrideTriggerSequences.OnValidate();
 
-            Debug.Log($"validating flagOverrideTriggerSequences", this);
             foreach (var entry in flagOverrideTriggerSequences.dict)
-            {
                 entry.Value.OnValidate();
-                if (!GameManager.CurrentUserData.Flags.dict.ContainsKey(entry.Key))
-                {
-                    Debug.LogError($"flagOverrideTriggerSequences contains invalid flag", this);
-                }
-            }
 
-            Debug.Log($"validating defaultTriggerSequence", this);
             defaultTriggerSequence.OnValidate();
 
         }

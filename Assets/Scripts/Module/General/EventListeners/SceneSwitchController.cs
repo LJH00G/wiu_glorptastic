@@ -12,6 +12,7 @@ public class SceneSwitchController : MonoBehaviour
     [Header("Event Broadcasting Channel")]
     [SerializeField] DelayedCallbackEventChannelSO delayedCallbackEventChannel;
     [SerializeField] PlayMusicEventChannelSO playMusicEventChannel;
+    [SerializeField] StringEventChannelSO gameplaySceneChangedEventChannel;
 
     public void SwitchScene(SceneSwitchEventContext context)
     {
@@ -85,7 +86,6 @@ public class SceneSwitchController : MonoBehaviour
                 OverworldDisableManager.DisableAllObjects(oldScene, context.ignoreableObjs);
             }
 
-
             void OnSceneLoaded(Scene scene, LoadSceneMode mode)
             {
                 if (scene.name != context.scene)
@@ -94,7 +94,10 @@ public class SceneSwitchController : MonoBehaviour
                 SceneManager.sceneLoaded -= OnSceneLoaded;
 
                 if (context.setSceneAsMain)
+                {
                     SceneManager.SetActiveScene(scene);
+                    gameplaySceneChangedEventChannel.Raise(scene.name);
+                }
 
                 Time.timeScale = 1f;
 

@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34f2ff470233db34a958620f483cd295, type: 3}
+  m_Name: OnNoahFreed
+  m_EditorClassIdentifier: Assembly-CSharp::Game.SO.Data.TextMarkup.Dialogue.DialogueConversationSO
+  <Dialogues>k__BackingField:
+  - speaker: {fileID: 11400000, guid: ce3680aada77f414aba59c7b11af061c, type: 2}
+    text: After a struggle, you manage to get the person out of the log <input/>
+      <end/>
+    endAction: {fileID: 11400000, guid: c01a7d9f145b4391acad3a09fce3eac3, type: 2}
+  - speaker: {fileID: 11400000, guid: 7f46410b7dc996640a3ba4dba065afd4, type: 2}
+    text: Thank You! I was in there for quite some time! <input/> Say, I dont exactly
+      recognise you<interval time="0.1"/> ... <input/> <end/>
+    endAction: {fileID: 0}
+  - speaker: {fileID: 11400000, guid: 7f46410b7dc996640a3ba4dba065afd4, type: 2}
+    text: You must be new here in the whirlpool! Here, let whilst I was walking around,
+      I found some materials before getting stuck there! <input/> <end/>
+    endAction: {fileID: 11400000, guid: ee64de4943c3aa84f8d594c98cf243c1, type: 2}
+  - speaker: {fileID: 11400000, guid: 7f46410b7dc996640a3ba4dba065afd4, type: 2}
+    text: Here's my thanks! Now, lead the way! <input/> <end/>
+    endAction: {fileID: 11400000, guid: 1216e8bf0f8144908d78b867ceb0cff7, type: 2}

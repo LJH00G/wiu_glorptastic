@@ -10,7 +10,7 @@ public class FlagObjectManager : MonoBehaviour
         Remove,
         Add
     }
-
+    [System.Serializable]
     public class Flag
     {
         public string name;
@@ -31,6 +31,20 @@ public class FlagObjectManager : MonoBehaviour
 
     public VisualizableDict<Flag, GameObject> flagObjectDictionary;
     private readonly Dictionary<Flag, GameObject> activeInstances = new Dictionary<Flag, GameObject>();
+
+    void Awake()
+    {
+#if UNITY_EDITOR
+        flagObjectDictionary.OnValidate();
+#endif
+    }
+
+#if UNITY_EDITOR
+    void OnValidate()
+    {
+        flagObjectDictionary.OnValidate();
+    }
+#endif
 
     void Update()
     {
