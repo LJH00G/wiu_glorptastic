@@ -13,5 +13,6 @@ MonoBehaviour:
   m_Name: Boss3
   m_EditorClassIdentifier: Assembly-CSharp::EnemyEncounterDataSO
   overworldPresetationObject: {fileID: 0}
-  dataList: []
+  dataList:
+  - {fileID: 11400000, guid: 7a1a3322a1cff9048af85c63c4124be2, type: 2}
   encounterLootTable: {fileID: 0}
