@@ -14,6 +14,7 @@ namespace Game.GlobalVariable
         [SerializeField] ToastEventChannelSO toastEventChannel;
         [SerializeField] GenerateParticleEventChannelSO generateParticleEventChannel;
         [SerializeField] PlaySFXEventChannelSO playSFXEventChannel;
+        [SerializeField] PlayMusicEventChannelSO playMusicEventChannel;
 
         private void Awake()
         {
@@ -38,7 +39,7 @@ namespace Game.GlobalVariable
         static public FollowObjectOverworldBehaviourSO FollowerBehaviour { get; set; }
         static public ToastEventChannelSO ToastEventChannel { get; set; }
         static public PlaySFXEventChannelSO PlaySFXEventChannel { get; set; }
-
         static public GenerateParticleEventChannelSO GenerateParticleEventChannel { get; set; }
+        static public PlayMusicEventChannelSO PlayMusicEventChannel { set; get; }
     }
 }
