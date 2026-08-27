@@ -22,6 +22,8 @@ public class CombatInitialiser : MonoBehaviour
     [SerializeField] SceneSwitchEventChannelSO onSwitch;
     [SerializeField] Camera overworldCamera;
 
+    [SerializeField] PlayMusicEventContext endCombatPlayMusicEventContext;
+
     GameObject enemyInitiated;
     Scene scene;
 
@@ -82,6 +84,7 @@ public class CombatInitialiser : MonoBehaviour
         {
             List<GameObject> list = new();
             onSwitch.Raise(new(SCENE_SWITCH_SETTING.LOAD_SEQUENTIALLY, "DeathScene", 0, PlayMusicEventContext.FadeAllOut_1s, SCENE_SWITCH_PAUSE.PAUSE_DURING_LOAD, true, list));
+            return;
         }
             
 
@@ -90,7 +93,7 @@ public class CombatInitialiser : MonoBehaviour
             SCENE_SWITCH_SETTING.UNLOAD,
             scene.name,
             2,
-            PlayMusicEventContext.FadeAllOut_2s,
+            endCombatPlayMusicEventContext,
             SCENE_SWITCH_PAUSE.PAUSE_AT_START,
             true
             ));

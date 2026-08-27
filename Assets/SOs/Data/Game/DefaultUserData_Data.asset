@@ -13,14 +13,21 @@ MonoBehaviour:
   m_Name: DefaultUserData_Data
   m_EditorClassIdentifier: Assembly-CSharp::Game.SO.Data.Game.UserDataSO
   <UserData>k__BackingField:
+    <PlayTime>k__BackingField: 0
+    <SaveSlotIndex>k__BackingField: 0
+    <LastCheckpointID>k__BackingField: 
+    <LastSceneName>k__BackingField: 
+    <CurrentEquipedBuddy>k__BackingField: {fileID: 11400000, guid: 910c9485c734e584ab0441d0b80cc1e0, type: 2}
     <Inventory>k__BackingField:
       <ItemList>k__BackingField: []
       <ShellCurrency>k__BackingField: 0
       <EquipedWeapon>k__BackingField: {fileID: 0}
+      <EquipedArmour>k__BackingField: {fileID: 0}
       <EquipedAccessoryList>k__BackingField:
       - {fileID: 0}
       - {fileID: 0}
       - {fileID: 0}
+      <CurrentGem>k__BackingField: {fileID: 0}
     <Flags>k__BackingField:
       serializableList: []
     <Statistics>k__BackingField:

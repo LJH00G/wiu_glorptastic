@@ -15,7 +15,13 @@ public class EscMenuToggle : MonoBehaviour
         }
         if (Keyboard.current.escapeKey.wasPressedThisFrame)
         {
-            canvas.SetActive(!canvas.activeSelf);
+            ToggleMenu();
         }
     }
+
+    public void ToggleMenu()
+    {
+        canvas.SetActive(!canvas.activeSelf);
+    }
+
 }
