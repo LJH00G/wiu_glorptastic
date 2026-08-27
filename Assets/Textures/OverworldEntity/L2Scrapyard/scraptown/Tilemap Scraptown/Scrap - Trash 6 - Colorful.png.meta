@@ -1,0 +1,715 @@
+fileFormatVersion: 2
+guid: d356b0ba3aa313c4594cb3f85016a854
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3684765753368472423
+    second: Scrap - Trash 6 - Colorful_0
+  - first:
+      213: -5813129209918466423
+    second: Scrap - Trash 6 - Colorful_1
+  - first:
+      213: 7779416349810559077
+    second: Scrap - Trash 6 - Colorful_2
+  - first:
+      213: -656775452987135678
+    second: Scrap - Trash 6 - Colorful_3
+  - first:
+      213: -8957364356568336590
+    second: Scrap - Trash 6 - Colorful_4
+  - first:
+      213: 2852662863252991347
+    second: Scrap - Trash 6 - Colorful_5
+  - first:
+      213: 7324009390988360292
+    second: Scrap - Trash 6 - Colorful_6
+  - first:
+      213: 3584129756260390942
+    second: Scrap - Trash 6 - Colorful_7
+  - first:
+      213: 5254587051182411624
+    second: Scrap - Trash 6 - Colorful_8
+  - first:
+      213: 5352009173763962373
+    second: Scrap - Trash 6 - Colorful_9
+  - first:
+      213: -5720467341578162450
+    second: Scrap - Trash 6 - Colorful_10
+  - first:
+      213: -2269003910613457841
+    second: Scrap - Trash 6 - Colorful_11
+  - first:
+      213: 2328424947833297794
+    second: Scrap - Trash 6 - Colorful_12
+  - first:
+      213: 7643209069613421963
+    second: Scrap - Trash 6 - Colorful_13
+  - first:
+      213: 624898566628100332
+    second: Scrap - Trash 6 - Colorful_14
+  - first:
+      213: 1206437827386736488
+    second: Scrap - Trash 6 - Colorful_15
+  - first:
+      213: 355952523926582086
+    second: Scrap - Trash 6 - Colorful_16
+  - first:
+      213: -2446454484388682845
+    second: Scrap - Trash 6 - Colorful_17
+  - first:
+      213: 275819954161021498
+    second: Scrap - Trash 6 - Colorful_18
+  - first:
+      213: -3830344004873594758
+    second: Scrap - Trash 6 - Colorful_19
+  - first:
+      213: -2122663858192908530
+    second: Scrap - Trash 6 - Colorful_20
+  - first:
+      213: -3575852497274214059
+    second: Scrap - Trash 6 - Colorful_21
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Scrap - Trash 6 - Colorful_0
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 165
+        width: 13
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99492fde1151ddcc0800000000000000
+      internalID: -3684765753368472423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Scrap - Trash 6 - Colorful_1
+      rect:
+        serializedVersion: 2
+        x: 93
+        y: 158
+        width: 40
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 986dc5968cd935fa0800000000000000
+      internalID: -5813129209918466423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Scrap - Trash 6 - Colorful_2
+      rect:
+        serializedVersion: 2
+        x: 129
+        y: 160
+        width: 23
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 568035af3f906fb60800000000000000
+      internalID: 7779416349810559077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Scrap - Trash 6 - Colorful_3
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 166
+        width: 8
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 249618b843aa2e6f0800000000000000
+      internalID: -656775452987135678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Scrap - Trash 6 - Colorful_4
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 163
+        width: 9
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 237bffa639c01b380800000000000000
+      internalID: -8957364356568336590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Scrap - Trash 6 - Colorful_5
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 156
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37da42492c1b69720800000000000000
+      internalID: 2852662863252991347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Scrap - Trash 6 - Colorful_6
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 99
+        width: 46
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 46a7c71acbb14a560800000000000000
+      internalID: 7324009390988360292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Scrap - Trash 6 - Colorful_7
+      rect:
+        serializedVersion: 2
+        x: 93
+        y: 83
+        width: 32
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e18dec616036db130800000000000000
+      internalID: 3584129756260390942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Scrap - Trash 6 - Colorful_8
+      rect:
+        serializedVersion: 2
+        x: 203
+        y: 126
+        width: 22
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86f4813451b0ce840800000000000000
+      internalID: 5254587051182411624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Scrap - Trash 6 - Colorful_9
+      rect:
+        serializedVersion: 2
+        x: 229
+        y: 106
+        width: 45
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50635d4ccf7264a40800000000000000
+      internalID: 5352009173763962373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Scrap - Trash 6 - Colorful_10
+      rect:
+        serializedVersion: 2
+        x: 279
+        y: 110
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eeea20cd241dc90b0800000000000000
+      internalID: -5720467341578162450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Scrap - Trash 6 - Colorful_11
+      rect:
+        serializedVersion: 2
+        x: 37
+        y: 92
+        width: 22
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f44a9e907f0e280e0800000000000000
+      internalID: -2269003910613457841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Scrap - Trash 6 - Colorful_12
+      rect:
+        serializedVersion: 2
+        x: 139
+        y: 87
+        width: 14
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28bd2cd472a305020800000000000000
+      internalID: 2328424947833297794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Scrap - Trash 6 - Colorful_13
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 86
+        width: 10
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b851a524722221a60800000000000000
+      internalID: 7643209069613421963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Scrap - Trash 6 - Colorful_14
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 93
+        width: 7
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce8c48c7fe51ca800800000000000000
+      internalID: 624898566628100332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Scrap - Trash 6 - Colorful_15
+      rect:
+        serializedVersion: 2
+        x: 114
+        y: 67
+        width: 25
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86ffaf0efc02eb010800000000000000
+      internalID: 1206437827386736488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Scrap - Trash 6 - Colorful_16
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 51
+        width: 18
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6433c814fe890f400800000000000000
+      internalID: 355952523926582086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Scrap - Trash 6 - Colorful_17
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 35
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a3e9dabb927c0ed0800000000000000
+      internalID: -2446454484388682845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Scrap - Trash 6 - Colorful_18
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 32
+        width: 20
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a327bb579c8e3d300800000000000000
+      internalID: 275819954161021498
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Scrap - Trash 6 - Colorful_19
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 39
+        width: 14
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7856fdeb62e7dac0800000000000000
+      internalID: -3830344004873594758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Scrap - Trash 6 - Colorful_20
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 23
+        width: 13
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0ff9d2a778ca82e0800000000000000
+      internalID: -2122663858192908530
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Scrap - Trash 6 - Colorful_21
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 14
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 559e6c27915006ec0800000000000000
+      internalID: -3575852497274214059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Scrap - Trash 6 - Colorful_0: -3684765753368472423
+      Scrap - Trash 6 - Colorful_1: -5813129209918466423
+      Scrap - Trash 6 - Colorful_10: -5720467341578162450
+      Scrap - Trash 6 - Colorful_11: -2269003910613457841
+      Scrap - Trash 6 - Colorful_12: 2328424947833297794
+      Scrap - Trash 6 - Colorful_13: 7643209069613421963
+      Scrap - Trash 6 - Colorful_14: 624898566628100332
+      Scrap - Trash 6 - Colorful_15: 1206437827386736488
+      Scrap - Trash 6 - Colorful_16: 355952523926582086
+      Scrap - Trash 6 - Colorful_17: -2446454484388682845
+      Scrap - Trash 6 - Colorful_18: 275819954161021498
+      Scrap - Trash 6 - Colorful_19: -3830344004873594758
+      Scrap - Trash 6 - Colorful_2: 7779416349810559077
+      Scrap - Trash 6 - Colorful_20: -2122663858192908530
+      Scrap - Trash 6 - Colorful_21: -3575852497274214059
+      Scrap - Trash 6 - Colorful_3: -656775452987135678
+      Scrap - Trash 6 - Colorful_4: -8957364356568336590
+      Scrap - Trash 6 - Colorful_5: 2852662863252991347
+      Scrap - Trash 6 - Colorful_6: 7324009390988360292
+      Scrap - Trash 6 - Colorful_7: 3584129756260390942
+      Scrap - Trash 6 - Colorful_8: 5254587051182411624
+      Scrap - Trash 6 - Colorful_9: 5352009173763962373
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
