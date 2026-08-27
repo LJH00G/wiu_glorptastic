@@ -25,8 +25,8 @@ MonoBehaviour:
       fadeThis: 0
       fadeThis_Time: 0
       turnOffOther: 0
-      fadeOffOther: 0
-      fadeOffOther_Time: 0
+      fadeOffOther: 1
+      fadeOffOther_Time: 2
       fadeForceSetVolume: 0
     timePause: 2
     setSceneAsMain: 1
