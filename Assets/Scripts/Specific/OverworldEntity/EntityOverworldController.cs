@@ -3,6 +3,7 @@ using Game.SO.Behaviour.EntityOverworld;
 using Game.SO.Behaviour.EntityOverworld.InstanceData;
 using Pathfinding;
 using UnityEngine;
+using static UnityEngine.InputSystem.OnScreen.OnScreenStick;
 
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -18,11 +19,11 @@ public class EntityOverworldController : MonoBehaviour
 
     [field: Header("Appearance")]
     [field: SerializeField]
-    public OverworldEntityAppearanceSO Appearance { get; set; }
+    public OverworldEntityAppearanceSO Appearance { get; private set; }
 
     [field: Header("Behaviour")]
     [field: SerializeField]
-    public EntityOverworldBehaviourSO Behaviour { get; set; }
+    public EntityOverworldBehaviourSO Behaviour { get; private set; }
     [field: SerializeReference]
     public EntityOverworldBehaviourInstanceData InstanceData { get; set; }
     [field: SerializeField]
@@ -35,12 +36,20 @@ public class EntityOverworldController : MonoBehaviour
 
     public void SetBehaviour(EntityOverworldBehaviourSO behaviour)
     {
+        Debug.Log($"{gameObject.name} trying to set behaviour as {behaviour}", this);
+        if (!behaviour)
+            return;
+
         Behaviour = behaviour;
         Behaviour.BehaviourStart(this);
     }
 
     public void SetAppearance(OverworldEntityAppearanceSO appearance)
     {
+        Debug.Log($"{gameObject.name} trying to set appearance as {appearance}", this);
+        if (!appearance)
+            return;
+
         Appearance = appearance;
         Appearance.UpdateAppearance(this);
     }

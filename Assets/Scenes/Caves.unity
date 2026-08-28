@@ -40546,10 +40546,10 @@ PrefabInstance:
     - target: {fileID: 3500526049272365041, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 577998304, guid: e20bc7d1e02398343aaf1a2548bbfc2c, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 3500526049272365041, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_WasSpriteAssigned
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5511489128047036267, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_Name
@@ -40598,7 +40598,7 @@ PrefabInstance:
     - target: {fileID: 7152738851224056702, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: m_Controller
       value: 
-      objectReference: {fileID: 9100000, guid: 0ed8d968f7394b142b24ee26ef52002d, type: 2}
+      objectReference: {fileID: 9100000, guid: 58f68f9e82dad4443a4778f7ee35384e, type: 2}
     - target: {fileID: 7404118726747510102, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: maxSpeed
       value: 3
@@ -40626,7 +40626,7 @@ PrefabInstance:
     - target: {fileID: 8628031461048391037, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: <Appearance>k__BackingField
       value: 
-      objectReference: {fileID: 11400000, guid: 436867ed5133bd24a96ed8261078dd46, type: 2}
+      objectReference: {fileID: 11400000, guid: b97b3702347c54e4b823b89c7ff15275, type: 2}
     - target: {fileID: 8628031461048391037, guid: fc56e08e58504d346ad3e711e79d23c4, type: 3}
       propertyPath: <InstanceData>k__BackingField
       value: 6120680488739274940

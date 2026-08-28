@@ -16,6 +16,8 @@ public class GameIniter : MonoBehaviour
 
     private void Awake()
     {
+        Debug.Log($"game initer awaked in scene {gameObject.scene.name}", this);
+
         GameManager.SetPlayer(player);
         GameManager.SetFollower(follower);
 
@@ -29,6 +31,8 @@ public class GameIniter : MonoBehaviour
 
     private void Start()
     {
+        Debug.Log($"game initer started in scene {gameObject.scene.name}", this);
+
         StaticGlobalVariable.PlayMusicEventChannel.Raise(playMusicEventContext);
         if (GameManager.CurrentUserData.CurrentEquipedBuddy)
             GameManager.CurrentUserData.SetCurrentBuddy(GameManager.CurrentUserData.CurrentEquipedBuddy);

@@ -51,6 +51,7 @@ public class PartnerSwicherController : MonoBehaviour
 
     public void ShowUI(bool value)
     {
+        Debug.Log($"trying to set partner switch ui {value}", this);
         Show = value;
         animTimer = Mathf.Max(animTime - animTimer, 0);
     }
@@ -133,6 +134,7 @@ public class PartnerSwicherController : MonoBehaviour
         cGroup.alpha = 0;
 
         animTimer = animTime;
+        animTime_inv = 1 / animTime;
     }
 
     private void Start()

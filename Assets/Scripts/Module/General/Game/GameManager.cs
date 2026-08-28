@@ -53,6 +53,8 @@ namespace Game
 
         static public void SetPlayer(GameObject player)
         {
+            UnityEngine.Debug.Log($"GameManager.SetPlayer() | trying to set player as {player}");
+
             if (!player.TryGetComponent<EntityOverworldController>(out _))
             {
                 UnityEngine.Debug.LogWarning("GameManager.SetPlayer() | cannot set a game object without EntityOverworldController as player");
@@ -64,6 +66,8 @@ namespace Game
 
         static public void SetFollower(GameObject follower)
         {
+            UnityEngine.Debug.Log($"GameManager.SetFollower() | trying to set follower as {follower}");
+
             if (!follower.TryGetComponent<EntityOverworldController>(out _))
             {
                 UnityEngine.Debug.LogWarning("GameManager.SetFollower() | cannot set a game object without EntityOverworldController as follower");

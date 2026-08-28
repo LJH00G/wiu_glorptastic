@@ -40,6 +40,8 @@ public class DialogueManager : MonoBehaviour
         if (hasOngoingConversation)
             return;
 
+        Debug.Log($"started a new conversation, {dialogueConversation.name}", this);
+
         currentConversation = dialogueConversation;
         hasOngoingConversation = true;
         Show = true;
@@ -100,6 +102,8 @@ public class DialogueManager : MonoBehaviour
 
     void OnDialogueEnd()
     {
+        Debug.Log($"ended the current conversation, {currentConversation.name}", this);
+
         hasOngoingConversation = false;
         Show = false;
         animTimer = Mathf.Max(animTime - animTimer, 0);
@@ -124,6 +128,7 @@ public class DialogueManager : MonoBehaviour
         cGroup.alpha = 0;
 
         animTimer = animTime;
+        animTime_inv = 1 / animTime;
 
         Debug.Log($"showPosY: {showPosY}, hidePosY: {hidePosY}", this);
     }

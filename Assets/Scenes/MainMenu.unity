@@ -4674,6 +4674,62 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1044797516}
   m_CullTransparentMesh: 1
+--- !u!1 &1105369103
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1105369105}
+  - component: {fileID: 1105369104}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1105369104
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1105369103}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27f0495eb422c2846ba211dad2af0bd2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CombatBGMusic
+  playMusicEventChannelSO: {fileID: 11400000, guid: 29bc08d3cdf6f4f44b394bf310f101f0, type: 2}
+  playMusicEventContext:
+    music: {fileID: 0}
+    playOrStop: 0
+    restartIfPlay: 0
+    delayToPlay: 0
+    fadeThis: 0
+    fadeThis_Time: 0
+    turnOffOther: 0
+    fadeOffOther: 1
+    fadeOffOther_Time: 2
+    fadeForceSetVolume: 0
+--- !u!4 &1105369105
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1105369103}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -28.20288, y: 1.31901, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1121438832
 GameObject:
   m_ObjectHideFlags: 0
@@ -8790,3 +8846,4 @@ SceneRoots:
   - {fileID: 333391068}
   - {fileID: 495274669}
   - {fileID: 938519192}
+  - {fileID: 1105369105}

@@ -60,6 +60,9 @@ public class UserData
         {
             return;
         }
+
+        Debug.Log($"user data: setting current buddy as {buddyData.name}");
+
         CurrentEquipedBuddy = buddyData;
         EntityOverworldController controller = GameManager.Follower.GetComponent<EntityOverworldController>();
         controller.gameObject.SetActive(true);

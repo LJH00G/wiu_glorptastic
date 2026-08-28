@@ -11,6 +11,7 @@ public class OverworldEntityAppearanceSO : ScriptableObject
 
     public void UpdateAppearance(EntityOverworldController controller)
     {
+        Debug.Log($"{this.name} is setting itself as appearance of {controller.name}");
         controller.Animator.runtimeAnimatorController = AnimCtrller;
         SpriteRenderer spriteRenderer = controller.GetComponentInChildren<SpriteRenderer>();
         if (spriteRenderer)
