@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace Utility.VisualizableDictionary
 {
@@ -12,8 +13,20 @@ namespace Utility.VisualizableDictionary
 
         public V this[K key]
         {
-            get => dict[key];
-            set => dict[key] = value;
+            get
+            {
+                if (dict.Count == 0)
+                    OnValidate();
+
+                return dict[key];
+            }
+            set
+            {
+                if (dict.Count == 0)
+                    OnValidate();
+
+                dict[key] = value;
+            }
         }
 
         public int Count => dict.Count;
@@ -23,20 +36,14 @@ namespace Utility.VisualizableDictionary
         {
             dict = new(other.dict);
 
-#if UNITY_EDITOR
             serializableList.Clear();
             foreach (var entry in other.serializableList)
             {
                 serializableList.Add(new(entry));
             }
-#endif
         }
 
 
-#if UNITY_EDITOR
-        /// <summary>
-        /// this only exists in editor, all uses of this should be within #if UNITY_EDITOR macro
-        /// </summary>
         public List<DictEntry<K, V>> serializableList = new();
 
         /// <summary>
@@ -62,7 +69,6 @@ namespace Utility.VisualizableDictionary
             foreach (var entry in dict)
                 serializableList.Add(new(entry.Key, entry.Value));
         }
-#endif
     }
 }
 

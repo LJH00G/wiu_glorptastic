@@ -11,6 +11,7 @@ namespace Game.GlobalVariable.OverworldNPCMovePoints
 
         void ReconstructGlobalVariable()
         {
+            MovePointsList.OnValidate();
             OverworldNPCMovePointsGlobalVariable.MovePointsDict.Clear();
             OverworldNPCMovePointsGlobalVariable.MovePointsDict = new(MovePointsList.dict);
         }

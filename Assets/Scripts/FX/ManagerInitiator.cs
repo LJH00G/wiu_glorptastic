@@ -11,6 +11,7 @@ public class ManagerInitiator : MonoBehaviour
     
     void Awake()
     {
+        currentInstantiateGroup.OnValidate();
         currentInstantiateGroupSO.Raise(currentInstantiateGroup.dict);
     }
 

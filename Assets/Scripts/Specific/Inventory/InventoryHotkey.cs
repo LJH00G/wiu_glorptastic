@@ -10,7 +10,11 @@ namespace Game.Inventory
     {
         [SerializeField] Key hotkey = Key.I;
         [SerializeField] VisualizableDict<OVERWORLD_STATE, bool> stateDictionary;
-        
+
+        private void Start()
+        {
+            stateDictionary.OnValidate();
+        }
 
         void Update()
         {

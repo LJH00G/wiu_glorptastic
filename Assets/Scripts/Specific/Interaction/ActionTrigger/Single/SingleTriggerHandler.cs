@@ -62,6 +62,8 @@ namespace Game.Interactable.TriggerHandler.Single
 
             GameManager.EnsureFlag(triggerable.flag.key, !triggerable.flag.value);
 
+            flagOverrideTriggerables.OnValidate();
+
             foreach (var entry in flagOverrideTriggerables.dict)
                 GameManager.EnsureFlag(entry.Value.flag.key, !entry.Value.flag.value);
         }

@@ -32,7 +32,7 @@ namespace Game.SO.Data.TextMarkup.Dialogue
                 var dialogue = Dialogues[i];
 
                 if (!TextMarkupOperation.CheckMarkup(dialogue.text))
-                    Debug.LogError($"DialogueSO.OnValidate() | error at Dialogues[{i}].text: " + TextMarkupOperation.ErrorMsg, this);
+                    Debug.LogError($"{this.name} | DialogueSO.OnValidate() | error at Dialogues[{i}].text: " + TextMarkupOperation.ErrorMsg, this);
 
             }
         }

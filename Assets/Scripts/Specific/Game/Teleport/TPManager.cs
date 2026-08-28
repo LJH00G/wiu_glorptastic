@@ -14,7 +14,12 @@ namespace Game.TPManager
         [SerializeField] StringEventChannelSO TPCallChannel;
         [SerializeField] FadeEventChannelSO TPAnimChannel;
 
-        
+
+        private void Start()
+        {
+            TPPointDef.OnValidate();
+        }
+
         void OnEnable()
         {
             TPCallChannel.Subscribe(PerformTeleport);

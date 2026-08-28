@@ -111,6 +111,8 @@ namespace Game.Interactable.TriggerHandler.Mass
             foreach (var triggerable in defaultTriggerSequence.triggerables)
                 GameManager.EnsureFlag(triggerable.flag.key, !triggerable.flag.value);
 
+            flagOverrideTriggerSequences.OnValidate();
+
             foreach (var entry in flagOverrideTriggerSequences.dict)
                 foreach (var triggerable in entry.Value.triggerables)
                     GameManager.EnsureFlag(triggerable.flag.key, !triggerable.flag.value);

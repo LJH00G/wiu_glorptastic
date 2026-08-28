@@ -34,9 +34,7 @@ public class FlagObjectManager : MonoBehaviour
 
     void Awake()
     {
-#if UNITY_EDITOR
         flagObjectDictionary.OnValidate();
-#endif
     }
 
 #if UNITY_EDITOR
