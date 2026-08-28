@@ -20,7 +20,7 @@ public class SceneSwitchController : MonoBehaviour
     {
         Debug.Log($"trying to scene switch to {context}", this);
 
-        FadeEventChannelContext fadeContext = new FadeEventChannelContext(true, 1 * context.delay);
+        FadeEventChannelContext fadeContext = new FadeEventChannelContext(true, context.delay);
         fadeEvent.Raise(fadeContext);
 
         if (context.timePause == SCENE_SWITCH_PAUSE.PAUSE_AT_START)
@@ -48,7 +48,8 @@ public class SceneSwitchController : MonoBehaviour
 
             if (context.setting == SCENE_SWITCH_SETTING.UNLOAD)
             {
-
+                Debug.Log($"unloading old scene: {oldScene.name}, context.setting: {context.setting}");
+                SceneManager.sceneUnloaded += OnSceneUnloaded;
                 SceneManager.UnloadSceneAsync(oldScene);
 
                 Time.timeScale = 1f;
@@ -74,13 +75,13 @@ public class SceneSwitchController : MonoBehaviour
                 }
 
                 fadeContext.isFade = false;
-
                 fadeEvent.Raise(fadeContext);
             }
             else
             {
                 SceneManager.sceneLoaded += OnSceneLoaded;
 
+                Debug.Log($"loading scene: {context.scene}, context.setting: {context.setting}");
                 SceneManager.LoadSceneAsync(context.scene, LoadSceneMode.Additive);
 
                 if (context.timePause == SCENE_SWITCH_PAUSE.PAUSE_DURING_LOAD)
@@ -106,15 +107,17 @@ public class SceneSwitchController : MonoBehaviour
 
             void OnSceneLoaded(Scene scene, LoadSceneMode mode)
             {
-                fadeContext.isFade = false;
-
-                fadeEvent.Raise(fadeContext);
-
                 if (scene.name != context.scene)
                 {
                     return;
                 }
+
+                fadeContext.isFade = false;
+                fadeEvent.Raise(fadeContext);
+
                 SceneManager.sceneLoaded -= OnSceneLoaded;
+
+                Debug.Log($"loaded scene: {context.scene}, context.setting: {context.setting}");
 
                 if (context.setSceneAsMain)
                 {
@@ -130,11 +133,21 @@ public class SceneSwitchController : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log($"unloading old scene: {oldScene}");
+                    Debug.Log($"unloading old scene: {oldScene.name}, context.setting: {context.setting}");
+                    SceneManager.sceneUnloaded += OnSceneUnloaded;
                     SceneManager.UnloadSceneAsync(oldScene);
                 }
+            }
 
-                
+            void OnSceneUnloaded(Scene scene)
+            {
+                if (scene.name != oldScene.name)
+                {
+                    return;
+                }
+
+                SceneManager.sceneUnloaded -= OnSceneUnloaded;
+                Debug.Log($"unloaded old scene {oldScene.name}");
             }
         }
     }

@@ -2,9 +2,7 @@ using System;
 using System.IO;
 using UnityEngine;
 using Game.Inventory;
-using Game.SO.Data.Item;
 using Game.SO.Data.Item.Sellable.Battle;
-using Game.SO.Data.Buddy;
 
 public static class SaveManager
 {
@@ -125,5 +123,10 @@ public static class SaveManager
         {
             userData.Statistics.dict[entry.key] = entry.value;
         }
+    }
+
+    static public void LogSavePath()
+    {
+        Debug.Log(Application.persistentDataPath);
     }
 }

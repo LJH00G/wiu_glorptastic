@@ -1,5 +1,6 @@
 using Game;
 using Game.SO.Data.Buddy;
+using Game.SO.EventChannel;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -7,6 +8,9 @@ using Utility.Math;
 
 public class PartnerSwicherController : MonoBehaviour
 {
+    [Header("event")]
+    [SerializeField] EventChannelSO onNewSaveloadedEvent;
+
     [Header("Btns")]
     [SerializeField] Button noOneBtn;
     [SerializeField] Image noOneImage;
@@ -102,6 +106,19 @@ public class PartnerSwicherController : MonoBehaviour
     }
 
 
+    void EnsureFlags()
+    {
+        GameManager.EnsureFlag(noahLedgeFlagKey);
+        GameManager.EnsureFlag(noahLedgeEquipeFlagKey);
+
+        GameManager.EnsureFlag(dinoMikeFlagKey);
+        GameManager.EnsureFlag(dinoMikeEquipeFlagKey);
+
+        GameManager.EnsureFlag(piaoFuFlagKey);
+        GameManager.EnsureFlag(piaoFuEquipeFlagKey);
+    }
+
+
     private void Awake()
     {
         rectForm = GetComponent<RectTransform>();
@@ -120,14 +137,7 @@ public class PartnerSwicherController : MonoBehaviour
 
     private void Start()
     {
-        GameManager.EnsureFlag(noahLedgeFlagKey);
-        GameManager.EnsureFlag(noahLedgeEquipeFlagKey);
-
-        GameManager.EnsureFlag(dinoMikeFlagKey);
-        GameManager.EnsureFlag(dinoMikeEquipeFlagKey);
-
-        GameManager.EnsureFlag(piaoFuFlagKey);
-        GameManager.EnsureFlag(piaoFuEquipeFlagKey);
+        EnsureFlags();
     }
 
     private void Update()
@@ -171,6 +181,16 @@ public class PartnerSwicherController : MonoBehaviour
         }
 
 
+    }
+
+    private void OnEnable()
+    {
+        onNewSaveloadedEvent.Subscribe(EnsureFlags);
+    }
+
+    private void OnDisable()
+    {
+        onNewSaveloadedEvent.Unsubscribe(EnsureFlags);
     }
 
 

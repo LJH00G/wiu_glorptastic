@@ -1,9 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Game.SO.EventChannel;
 
 public class SaveSlotPanel : MonoBehaviour
 {
+    [SerializeField] IntEventChannelSO startNewSaveEventChannel;
+    [SerializeField] IntEventChannelSO loadSaveEventChannel;
+
     [Header("Slot")]
     [SerializeField] int slotIndex;
 
@@ -12,7 +16,6 @@ public class SaveSlotPanel : MonoBehaviour
     [SerializeField] Button loadButton;
     [SerializeField] Button newGameButton;
 
-    SaveFlowController saveFlow;
     ConfirmationPopup confirmationPopup;
 
     void Awake()
@@ -21,16 +24,15 @@ public class SaveSlotPanel : MonoBehaviour
         newGameButton.onClick.AddListener(OnNewGameClicked);
     }
 
-    public void Setup(SaveFlowController saveFlow, ConfirmationPopup confirmationPopup)
+    public void Setup(ConfirmationPopup confirmationPopup)
     {
-        this.saveFlow = saveFlow;
         this.confirmationPopup = confirmationPopup;
         Refresh();
     }
 
     public void Refresh()
     {
-        bool hasSave = saveFlow.SlotHasSave(slotIndex);
+        bool hasSave = SaveManager.HasSave(slotIndex);
         loadButton.interactable = hasSave;
 
         if (!hasSave)
@@ -45,18 +47,18 @@ public class SaveSlotPanel : MonoBehaviour
 
     void OnLoadClicked()
     {
-        saveFlow.LoadSave(slotIndex);
+        loadSaveEventChannel.Raise(slotIndex);
     }
 
     void OnNewGameClicked()
     {
-        if (saveFlow.SlotHasSave(slotIndex))
+        if (SaveManager.HasSave(slotIndex))
         {
-            confirmationPopup.Show($"Slot {slotIndex + 1} already has a save. Start a new game and overwrite it?", () => saveFlow.StartNewSave(slotIndex));
+            confirmationPopup.Show($"Slot {slotIndex + 1} already has a save. Start a new game and overwrite it?", () => startNewSaveEventChannel.Raise(slotIndex));
         }
         else
         {
-            saveFlow.StartNewSave(slotIndex);
+            startNewSaveEventChannel.Raise(slotIndex);
         }
     }
 

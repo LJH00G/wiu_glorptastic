@@ -6177,6 +6177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ac46bf16f58ec046b0acc2a1def4fa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  onNewSaveloadedEvent: {fileID: 11400000, guid: c07129e8ab919184c91725e0554348a6, type: 2}
   noOneBtn: {fileID: 926290124}
   noOneImage: {fileID: 926290125}
   noOneBuddyData: {fileID: 11400000, guid: 910c9485c734e584ab0441d0b80cc1e0, type: 2}

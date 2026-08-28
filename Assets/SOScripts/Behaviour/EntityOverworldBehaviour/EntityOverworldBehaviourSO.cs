@@ -1,8 +1,6 @@
 
 using System;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.VFX;
 
 namespace Game.SO.Behaviour.EntityOverworld.InstanceData
 {

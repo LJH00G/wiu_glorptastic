@@ -18,6 +18,11 @@ MonoBehaviour:
     <LastCheckpointID>k__BackingField: 
     <LastSceneName>k__BackingField: 
     <CurrentEquipedBuddy>k__BackingField: {fileID: 11400000, guid: 62a1b6e6c4070ec419c2cc7a1fd6b168, type: 2}
+    <PlayerBattleData>k__BackingField:
+      <MaxHP>k__BackingField: 50
+      <MaxCurse>k__BackingField: 30
+      currentHP: 50
+      currentCurse: 30
     <Inventory>k__BackingField:
       <ItemList>k__BackingField: []
       <ShellCurrency>k__BackingField: 0

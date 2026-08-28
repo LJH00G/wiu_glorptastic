@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using Game.SO.EventChannel;
 using Game.SO.EventChannel.Context;
 
 public class ScreenFader : MonoBehaviour
@@ -10,12 +9,14 @@ public class ScreenFader : MonoBehaviour
     [SerializeField] private FadeEventChannelSO onTPChannel;
     public void FadeIn(float timeTaken)
     {
+        Debug.Log("fading in");
         animator.speed = timeTaken;
         animator.SetTrigger("FadeIn");
         BlockRaycast();
     }
     public void FadeOut(float timeTaken)
     {
+        Debug.Log("fading out");
         animator.speed = timeTaken;
         animator.SetTrigger("FadeOut");
         UnblockRaycast();

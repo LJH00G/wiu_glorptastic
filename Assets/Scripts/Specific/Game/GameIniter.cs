@@ -1,8 +1,6 @@
 using Game;
 using Game.Inventory;
-using NUnit.Framework;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using System.Collections.Generic;
 using Game.SO.EventChannel.Context;
 using Game.GlobalVariable;
@@ -21,11 +19,7 @@ public class GameIniter : MonoBehaviour
         GameManager.SetPlayer(player);
         GameManager.SetFollower(follower);
 
-        if (GameManager.CurrentUserData.CurrentEquipedBuddy)
-            GameManager.CurrentUserData.SetCurrentBuddy(GameManager.CurrentUserData.CurrentEquipedBuddy);
-
         InventoryManager.ManageInventory(GameManager.CurrentUserData.Inventory);
-
 
         GameManager.SetGameState(GAME_STATE.OVERWORLD);
         GameManager.SetOverWorldState(OVERWORLD_STATE.GENERAL);
@@ -36,6 +30,8 @@ public class GameIniter : MonoBehaviour
     private void Start()
     {
         StaticGlobalVariable.PlayMusicEventChannel.Raise(playMusicEventContext);
+        if (GameManager.CurrentUserData.CurrentEquipedBuddy)
+            GameManager.CurrentUserData.SetCurrentBuddy(GameManager.CurrentUserData.CurrentEquipedBuddy);
     }
 
 #if UNITY_EDITOR

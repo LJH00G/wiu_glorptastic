@@ -211,6 +211,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6087827aeffebd94ba6f4586594007e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SaveSlotPanel
+  startNewSaveEventChannel: {fileID: 11400000, guid: 570ef629e539f2544b49838fe7629a9d, type: 2}
+  loadSaveEventChannel: {fileID: 11400000, guid: ee1d64263cc847e428ca542510eabd3b, type: 2}
   slotIndex: 1
   statusText: {fileID: 0}
   loadButton: {fileID: 315426117}
@@ -1900,10 +1902,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 706049848966332778, guid: 8f763c3d0b8422e4f86be0ca0a24cd38, type: 3}
-      propertyPath: playMusicEventChannel
-      value: 
-      objectReference: {fileID: 11400000, guid: 29bc08d3cdf6f4f44b394bf310f101f0, type: 2}
     - target: {fileID: 3489570660293557245, guid: 8f763c3d0b8422e4f86be0ca0a24cd38, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1948,10 +1946,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: DontDestroyOnLoad
       objectReference: {fileID: 0}
-    - target: {fileID: 8149752759846515886, guid: 8f763c3d0b8422e4f86be0ca0a24cd38, type: 3}
-      propertyPath: fadeEvent
-      value: 
-      objectReference: {fileID: 11400000, guid: 30369db42a4b3cf40bd0170eee7c4ddb, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3365,7 +3359,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d772fd3f5d474f4f82675f356739852, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SaveSlotMenuController
-  saveFlowController: {fileID: 1876102282}
   confirmationPopup: {fileID: 938519188}
   slotPanels:
   - {fileID: 2035542308}
@@ -3972,8 +3965,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 786552859}
-        m_TargetAssemblyTypeName: UIButtonHandler, Assembly-CSharp
-        m_MethodName: SwitchScene
+        m_TargetAssemblyTypeName: NewGameButtonHandler, Assembly-CSharp
+        m_MethodName: NewGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4030,28 +4023,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 786552854}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 628891172685fb1449a29c4a7c0d73cd, type: 3}
+  m_Script: {fileID: 11500000, guid: dc1cd629eb9456740af55edd4a4df513, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::UIButtonHandler
-  thingalingus: {fileID: 11400000, guid: d99eee56572e0f540b7dc2913fe66e56, type: 2}
-  grongelator:
-    setting: 1
-    scene: Fishnet
-    delay: 1
-    playMusicContext:
-      music: {fileID: 0}
-      playOrStop: 0
-      restartIfPlay: 0
-      delayToPlay: 0
-      fadeThis: 0
-      fadeThis_Time: 0
-      turnOffOther: 0
-      fadeOffOther: 0
-      fadeOffOther_Time: 0
-      fadeForceSetVolume: 0
-    timePause: 0
-    setSceneAsMain: 1
-    ignoreableObjs: []
+  m_EditorClassIdentifier: Assembly-CSharp::NewGameButtonHandler
+  newSaveEventChannel: {fileID: 11400000, guid: 570ef629e539f2544b49838fe7629a9d, type: 2}
 --- !u!1 &846530070
 GameObject:
   m_ObjectHideFlags: 0
@@ -5333,6 +5308,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6087827aeffebd94ba6f4586594007e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SaveSlotPanel
+  startNewSaveEventChannel: {fileID: 11400000, guid: 570ef629e539f2544b49838fe7629a9d, type: 2}
+  loadSaveEventChannel: {fileID: 11400000, guid: ee1d64263cc847e428ca542510eabd3b, type: 2}
   slotIndex: 2
   statusText: {fileID: 0}
   loadButton: {fileID: 700317554}
@@ -7969,99 +7946,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1870949962}
   m_CullTransparentMesh: 1
---- !u!1 &1876102278
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1876102280}
-  - component: {fileID: 1876102279}
-  - component: {fileID: 1876102281}
-  - component: {fileID: 1876102282}
-  - component: {fileID: 1876102283}
-  m_Layer: 0
-  m_Name: GameSavingBoot
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1876102279
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1876102278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a95ab0ba6db483343ba59b97d1b9cb64, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SaveBootstrap
---- !u!4 &1876102280
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1876102278}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1876102281
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1876102278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1013cc5d90534394198913a1e1510e17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::TempSaveTestKey
---- !u!114 &1876102282
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1876102278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1cebbe597dbda84488e343dcda426cc3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SaveFlowController
-  itemDatabase: {fileID: 11400000, guid: 1178fa58270f32e4898baa2237636ae3, type: 2}
-  buddyDatabase: {fileID: 11400000, guid: 9da85eb3271a84543a707f203cdae81b, type: 2}
-  sceneSwitchEventChannel: {fileID: 11400000, guid: d99eee56572e0f540b7dc2913fe66e56, type: 2}
-  newGameSceneName: FishNet
-  newGameCheckpointID: 1236767
-  respawnFadeTime: 1.8
-  screenFader: {fileID: 0}
-  sceneTransitionFadeOutTime: 1.8
-  sceneSwitchTimeoutSeconds: 15
---- !u!114 &1876102283
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1876102278}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b0021eca0b48d647b4416bd921e3475, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameplaySceneTrackerListener
-  gameplaySceneChangedEventChannel: {fileID: 11400000, guid: 681e376678804c23bd7fd3157c981890, type: 2}
 --- !u!1 &1970442268
 GameObject:
   m_ObjectHideFlags: 0
@@ -8536,6 +8420,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6087827aeffebd94ba6f4586594007e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SaveSlotPanel
+  startNewSaveEventChannel: {fileID: 11400000, guid: 570ef629e539f2544b49838fe7629a9d, type: 2}
+  loadSaveEventChannel: {fileID: 11400000, guid: ee1d64263cc847e428ca542510eabd3b, type: 2}
   slotIndex: 0
   statusText: {fileID: 0}
   loadButton: {fileID: 593527236}
@@ -8901,7 +8787,6 @@ SceneRoots:
   - {fileID: 121612496}
   - {fileID: 599185782}
   - {fileID: 438948705}
-  - {fileID: 1876102280}
   - {fileID: 333391068}
   - {fileID: 495274669}
   - {fileID: 938519192}

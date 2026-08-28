@@ -1,9 +1,11 @@
 using Game.Inventory;
 using Game.SO.Data.Item;
+using System;
 using UnityEngine;
 
 namespace Game.Combat.Integration
 {
+    [Serializable]
     public class PlayerBattleData
     {
         [field: SerializeField]
