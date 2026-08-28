@@ -77583,11 +77583,11 @@ MonoBehaviour:
     playOrStop: 1
     restartIfPlay: 0
     delayToPlay: 0
-    fadeThis: 0
-    fadeThis_Time: 0
-    turnOffOther: 1
-    fadeOffOther: 0
-    fadeOffOther_Time: 0
+    fadeThis: 1
+    fadeThis_Time: 2
+    turnOffOther: 0
+    fadeOffOther: 1
+    fadeOffOther_Time: 2
     fadeForceSetVolume: 0
 --- !u!4 &438083891
 Transform:
@@ -128415,7 +128415,6 @@ GameObject:
   m_Component:
   - component: {fileID: 828279313}
   - component: {fileID: 828279312}
-  - component: {fileID: 828279314}
   m_Layer: 0
   m_Name: GameIniter
   m_TagString: Untagged
@@ -128444,11 +128443,11 @@ MonoBehaviour:
     playOrStop: 1
     restartIfPlay: 0
     delayToPlay: 0
-    fadeThis: 0
-    fadeThis_Time: 0
-    turnOffOther: 1
-    fadeOffOther: 0
-    fadeOffOther_Time: 0
+    fadeThis: 1
+    fadeThis_Time: 2
+    turnOffOther: 0
+    fadeOffOther: 1
+    fadeOffOther_Time: 2
     fadeForceSetVolume: 0
 --- !u!4 &828279313
 Transform:
@@ -128465,19 +128464,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1651286639}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &828279314
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 828279311}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c51fe8e16a6c794ea2dab11143e1b40, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameIniter_test
-  buddyData: {fileID: 0}
 --- !u!1 &848349362
 GameObject:
   m_ObjectHideFlags: 0

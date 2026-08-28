@@ -30,7 +30,7 @@ MonoBehaviour:
     text: Can you help me get up there?<input/><end/>
     endAction: {fileID: 0}
   - speaker: {fileID: 11400000, guid: e153e336f1116a845803d4dc545b9924, type: 2}
-    text: <interval time="0.25"/>Hummm<interval time="0.-75"/>, <wait time="0.5"/>if
+    text: <interval time="0.25"/>Hummm<interval time="0.75"/>, <wait time="0.5"/>if
       you help me get a <color value="#88FFD9FF">Chill Grass</color>, <wait time="0.5"/>I
       will help you.<input/><end/>
     endAction: {fileID: 0}

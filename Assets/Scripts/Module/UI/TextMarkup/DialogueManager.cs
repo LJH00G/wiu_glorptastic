@@ -124,6 +124,8 @@ public class DialogueManager : MonoBehaviour
         cGroup.alpha = 0;
 
         animTimer = animTime;
+
+        Debug.Log($"showPosY: {showPosY}, hidePosY: {hidePosY}", this);
     }
 
     private void Update()
@@ -134,18 +136,20 @@ public class DialogueManager : MonoBehaviour
             animTimer += Time.deltaTime;
 
             var rectPos = rectForm.anchoredPosition;
-            rectPos.y = Mathf.Lerp(
-                !Show ? showPosY : hidePosY,
-                Show ? showPosY : hidePosY,
-                Math_Ease.Ease(EASE.IN_OUT_SIN, animTimer * animTime_inv)
-                );
-            rectForm.anchoredPosition = rectPos;
 
-            cGroup.alpha = Mathf.Lerp(
-                !Show ? 1 : 0,
-                Show ? 1 : 0,
-                Math_Ease.Ease(EASE.IN_OUT_SIN, animTimer * animTime_inv)
-                );
+            float startY = Show ? hidePosY : showPosY;
+            float targetY = Show ? showPosY : hidePosY;
+
+            float startAlpha = Show ? 0f : 1f;
+            float targetAlpha = Show ? 1f : 0f;
+
+            float t = Mathf.Clamp01(animTimer * animTime_inv);
+            t = Math_Ease.Ease(EASE.IN_OUT_SIN, t);
+
+            rectPos.y = Mathf.Lerp(startY, targetY, t);
+            cGroup.alpha = Mathf.Lerp(startAlpha, targetAlpha, t);
+
+            rectForm.anchoredPosition = rectPos;
         }
         else if (Show && tryTriggerFirstDialogue)
         {
