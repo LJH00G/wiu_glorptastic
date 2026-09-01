@@ -109,6 +109,9 @@ public class SaveFlowController : MonoBehaviour
 
     void CheckSceneSwitchedIsLoadingSave(string sceneName)
     {
+        if (!isLoadingSave)
+            return;
+
         StartCoroutine(TryRespawnPlayer(sceneName));
     }
 
